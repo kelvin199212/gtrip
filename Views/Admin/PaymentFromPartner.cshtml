@@ -1,0 +1,223 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewData["Title"] = "導遊提款申請管理";
+}
+
+<div class="content-body default-height">
+    <div class="cardClass">
+        <div class="container">
+
+            <!-- 篩選區 -->
+            <div class="filter-section">
+                <label for="status-filter">申請狀態：</label>
+                <select id="status-filter" class="form-control">
+                    <option value="">選擇狀態</option>
+                    <option value="pending">待審核</option>
+                    <option value="approved">已批准</option>
+                    <option value="rejected">已拒絕</option>
+                </select>
+
+                <label for="date-filter">申請日期：</label>
+                <input type="date" id="date-filter" class="form-control">
+            </div>
+
+            <!-- 提款申請資料表 -->
+            <table class="withdrawal-table">
+                <thead>
+                    <tr>
+                        <th>導遊姓名</th>
+                        <th>申請金額</th>
+                        <th>申請日期</th>
+                        <th>申請狀態</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>張大山</td>
+                        <td>NT$5,000</td>
+                        <td>2024-11-05</td>
+                        <td>待審核</td>
+                        <td>
+                            <button class="btn btn-success approve-btn">批准</button>
+                            <button class="btn btn-danger reject-btn">拒絕</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>李美麗</td>
+                        <td>NT$3,000</td>
+                        <td>2024-11-04</td>
+                        <td>已批准</td>
+                        <td>
+                            <button class="btn btn-success approve-btn" disabled>批准</button>
+                            <button class="btn btn-danger reject-btn" disabled>拒絕</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>王小明</td>
+                        <td>NT$2,000</td>
+                        <td>2024-11-03</td>
+                        <td>已拒絕</td>
+                        <td>
+                            <button class="btn btn-success approve-btn" disabled>批准</button>
+                            <button class="btn btn-danger reject-btn" disabled>拒絕</button>
+                        </td>
+                    </tr>
+                    <!-- 其他提款申請 -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Fillow_style
+{
+    <style>
+        .cardClass {
+            background-color: white;
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .filter-section {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+            .filter-section select,
+            .filter-section input {
+                padding: 5px;
+                font-size: 14px;
+                width: 150px;
+            }
+
+        .withdrawal-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+            .withdrawal-table th,
+            .withdrawal-table td {
+                border: 1px solid #ddd;
+                padding: 10px;
+                text-align: center;
+            }
+
+            .withdrawal-table th {
+                background-color: #f8f9fa;
+                font-weight: bold;
+            }
+
+        .btn {
+            padding: 5px 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+            border: none;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+        }
+
+        .btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+}
+
+@section Fillow_script
+{
+    <script src="~/Fillow/vendor/global/global.min.js"></script>
+    <script src="~/Fillow/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+
+
+    <!-- counter -->
+    <script src="~/Fillow/vendor/counter/counter.min.js"></script>
+    <script src="~/Fillow/vendor/counter/waypoint.min.js"></script>
+
+    <!-- Apex Chart -->
+    <script src="~/Fillow/vendor/apexchart/apexchart.js"></script>
+    <script src="~/Fillow/vendor/chart-js/chart.bundle.min.js"></script>
+    <!-- Chart piety plugin files -->
+    <script src="~/Fillow/vendor/peity/jquery.peity.min.js"></script>
+    <!-- Dashboard 1 -->
+    <script src="~/Fillow/js/dashboard/dashboard-1.js"></script>
+
+    <script src="~/Fillow/vendor/owl-carousel/owl.carousel.js"></script>
+
+    <script src="~/Fillow/js/custom.min.js"></script>
+    <script src="~/Fillow/js/dlabnav-init.js"></script>
+    <script src="~/Fillow/js/demo.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Approve Withdrawal
+            $(document).on("click", ".approve-btn", function () {
+                var row = $(this).closest("tr");
+                var statusCell = row.find("td:nth-child(4)");
+                var approveButton = row.find(".approve-btn");
+                var rejectButton = row.find(".reject-btn");
+
+                if (!approveButton.is(":disabled")) {
+                    statusCell.text("已批准");
+                    approveButton.prop("disabled", true);
+                    rejectButton.prop("disabled", true);
+                    alert("提款申請已批准！");
+                }
+            });
+
+            // Reject Withdrawal
+            $(document).on("click", ".reject-btn", function () {
+                var row = $(this).closest("tr");
+                var statusCell = row.find("td:nth-child(4)");
+                var approveButton = row.find(".approve-btn");
+                var rejectButton = row.find(".reject-btn");
+
+                if (!rejectButton.is(":disabled")) {
+                    statusCell.text("已拒絕");
+                    approveButton.prop("disabled", true);
+                    rejectButton.prop("disabled", true);
+                    alert("提款申請已拒絕！");
+                }
+            });
+
+            // Filter Functionality (for status and date)
+            $("#status-filter, #date-filter").on("change", function () {
+                var statusFilter = $("#status-filter").val();
+                var dateFilter = $("#date-filter").val();
+
+                $("tbody tr").each(function () {
+                    var status = $(this).find("td:nth-child(4)").text();
+                    var date = $(this).find("td:nth-child(3)").text();
+
+                    var statusMatch = status.includes(statusFilter) || statusFilter === "";
+                    var dateMatch = date.includes(dateFilter) || dateFilter === "";
+
+                    if (statusMatch && dateMatch) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            });
+        });
+    </script>
+}

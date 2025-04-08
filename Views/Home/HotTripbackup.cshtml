@@ -1,0 +1,485 @@
+﻿@{
+	ViewData["Title"] = "Gtrippro";
+	Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<!-- Required vendors -->
+<link rel="stylesheet" href="~/Fillow/vendor/select2/css/select2.min.css">
+
+<script src="~/Fillow/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+<script src="~/Fillow/vendor/select2/js/select2.full.min.js"></script>
+
+<style>
+	.sidebar-item{
+	margin-top:20px;
+	}
+
+	.sidebar {
+		width: 350px;
+		padding: 20px;
+		background-color: #f8f9fa;
+		border-radius: 8px;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+		margin-bottom: 30px;
+	}
+
+	.search-box {
+		margin-bottom: 20px;
+	}
+
+		.search-box h3 {
+			font-size: 20px;
+			margin-bottom: 10px;
+			color: #333;
+		}
+
+	.search-input {
+		width: 100%;
+		padding: 10px;
+		border-radius: 5px;
+		border: 1px solid #ccc;
+		margin-bottom: 10px;
+		font-size: 16px;
+	}
+
+	.search-btn {
+		width: 100%;
+		padding: 10px;
+		background-color: #007bff;
+		color: white;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+		font-size: 16px;
+	}
+
+		.search-btn:hover {
+			background-color: #0056b3;
+		}
+
+	.rating-filter {
+		font-size: 16px;
+	}
+
+		.rating-filter label {
+			display: block;
+			margin-bottom: 8px;
+			font-size: 16px;
+			position: relative;
+		}
+
+		.rating-filter input[type="checkbox"] {
+			position: relative;
+			width:10%;
+		}
+
+		.rating-filter .stars {
+			font-size: 18px;
+			color: #ffc107; /* Gray color for stars */
+		}
+
+		.rating-filter input[type="checkbox"]:checked + .stars {
+			color: #ffc107; /* Yellow color for checked stars */
+		}
+
+
+	.rating-filter span {
+		margin-right: 8px;
+	}
+
+	.price-range {
+		width: 100%;
+		margin-top: 10px;
+	}
+
+	.price-values {
+		display: flex;
+		justify-content: space-between;
+		font-size: 14px;
+		color: #666;
+		margin-top: 10px;
+	}
+
+	.location-dropdown {
+		width: 100%;
+		padding: 10px;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		font-size: 16px;
+		background-color: #fff;
+		color: #333;
+	}
+
+
+	.category-list, .rating-list {
+		list-style: none;
+		padding-left: 0;
+	}
+
+		.category-list li, .rating-list li {
+			margin-bottom: 10px;
+		}
+
+			.category-list li input, .rating-list li input {
+				margin-right: 8px;
+			}
+
+	/* Main Content Styling */
+	.tour-list-content {
+		padding: 20px;
+	}
+
+	.tour-item {
+		background-color: #fff;
+		padding: 15px;
+		border-radius: 8px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		margin-bottom: 20px;
+		text-align: center;
+	}
+
+		.tour-item img {
+			max-width: 100%;
+			border-radius: 8px;
+			height: auto;
+		}
+
+		.tour-item h4 {
+			margin-top: 15px;
+			font-size: 1.2rem;
+		}
+
+	.meta-info {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 10px;
+	}
+
+	.price span {
+		font-size: 1.5rem;
+		color: #d9534f;
+		margin-top: 10px;
+	}
+
+
+</style>
+<body>
+	<!-- preloader start here -->
+	<div class="preloader">
+		<div class="preloader-inner">
+			<div class="preloader-icon">
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+	</div>
+	<!-- preloader ending here -->
+	<!-- scrollToTop start here -->
+	<a href="#" class="scrollToTop"><i class="fa-solid fa-angle-up"></i></a>
+	<!-- scrollToTop ending here -->
+	<!-- ================> Banner section start here <================== -->
+	<div class="pageheader bg__img" style="background-image: url(assets/images/bg-img/04.jpg);">
+		<div class="container">
+			<div class="pageheader__content text-center">
+				<h2>熱門旅程</h2>
+			</div>
+		</div>
+	</div>
+	<!-- ================> Banner section end here <================== -->
+	<!-- ================> Hotel section start here <================== -->
+	<div class="container-fluid">
+		<div class="row">
+			<!-- Sidebar (left side) -->
+			<div class="col-lg-3 col-md-4">
+				<div class="sidebar">
+					<!-- Search box -->
+					<div class="search-box">
+						<h3>目的地</h3>
+						<input type="text" class="search-input" placeholder="你要去哪裡？">
+						<button class="search-btn">Search</button>
+					</div>
+
+					<!-- Star Rating Filter -->
+					<div class="filter-section">
+						<h4>
+							評論分數
+						</h4>
+						<div class="rating-filter">
+							<label>
+								<span class="stars five-stars">★★★★★</span> 
+								<input type="checkbox" name="rating" value="5">
+							</label>
+							<label>
+								<span class="stars four-stars">★★★★☆</span> 
+								<input type="checkbox" name="rating" value="4">
+							</label>
+							<label>
+								<span class="stars three-stars">★★★☆☆</span> 
+								<input type="checkbox" name="rating" value="3">
+							</label>
+							<label>
+								<span class="stars two-stars">★★☆☆☆</span> 
+								<input type="checkbox" name="rating" value="2">
+							</label>
+							<label>
+								<span class="stars one-star">★☆☆☆☆</span> 
+								<input type="checkbox" name="rating" value="1">
+							</label>
+						</div>
+					</div>
+					<div class="sidebar-item pag st-icheck st-border-radius">
+						<div class="item-title d-flex justify-content-between align-items-center">
+							<h4>代辦服務</h4>
+							<i class="fa fa-angle-up" aria-hidden="true"></i>
+						</div>
+						<div class="item-content">
+							<select multiple id="AgentServiceSelection" title="代辦服務(多個選項)" class="default-select form-control wide mt-3">
+									<option value="375">代辦服務</option>
+									<option value="411">簽證代辦</option>
+									<option value="412">行程安排</option>
+									<option value="414">購買門票</option>
+									<option value="415">預訂特殊活動或體驗</option>
+							</select>
+						</div>
+					</div>
+					<div class="sidebar-item pag st-icheck st-border-radius">
+						<div class="item-title d-flex justify-content-between align-items-center">
+							<h4>團體旅程</h4>
+							<i class="fa fa-angle-up" aria-hidden="true"></i>
+						</div>
+						<div class="item-content">
+							<select multiple id="GroupSelection" title="團體旅程(多個選項)" class="default-select form-control wide mt-3">
+								<option value="373">團體旅程</option>
+								<option value="403">主題活動</option>
+								<option value="400">博物館</option>
+								<option value="405">情侶</option>
+								<option value="395">戶外活動</option>
+								<option value="398">按摩及溫泉</option>
+								<option value="394">文化體驗</option>
+								<option value="393">歷史古蹟</option>
+								<option value="396">水上活動</option>
+								<option value="397">滑雪體驗</option>
+								<option value="392">美食品嚐</option>
+								<option value="402">藝術及表演</option>
+								<option value="404">親子</option>
+								<option value="399">購物</option>
+								<option value="391">遊覽觀光</option>
+								<option value="401">酒莊</option>
+							</select>
+						</div>
+					</div>
+					<div class="sidebar-item pag st-icheck st-border-radius">
+						<div class="item-title d-flex justify-content-between align-items-center">
+							<h4>接送服務</h4>
+							<i class="fa fa-angle-up" aria-hidden="true"></i>
+						</div>
+						<div class="item-content">
+							<select multiple id="PickupSelection" title="接送服務(多個選項)" class="default-select form-control wide mt-3">
+								<option value="374">接送服務</option>
+								<option value="409">城市內交通接送</option>
+								<option value="406">機場接送</option>
+								<option value="410">私人司機服務</option>
+								<option value="407">車站接送</option>
+								<option value="408">飯店接送</option>
+							</select>
+						</div>
+					</div>
+					<div class="sidebar-item pag st-icheck st-border-radius">
+						<div class="item-title d-flex justify-content-between align-items-center">
+							<h4>私人旅程</h4>
+							<i class="fa fa-angle-up" aria-hidden="true"></i>
+						</div>
+						<div class="item-content">
+							<select multiple id="PersonalTripSelection" title="私人旅程(多個選項)" class="default-select form-control wide mt-3">
+								<option value="372">私人旅程</option>
+								<option value="388">主題活動</option>
+								<option value="385">博物館</option>
+								<option value="390">情侶</option>
+								<option value="380">戶外活動</option>
+								<option value="383">按摩及溫泉</option>
+								<option value="379">文化體驗</option>
+								<option value="378">歷史古蹟</option>
+								<option value="381">水上活動</option>
+								<option value="382">滑雪體驗</option>
+								<option value="377">美食品嚐</option>
+								<option value="387">藝術及表演</option>
+								<option value="389">親子</option>
+								<option value="384">購物</option>
+								<option value="376">遊覽觀光</option>
+								<option value="386">酒莊</option>
+							</select>
+						</div>
+					</div>
+					<div class="sidebar-item pag st-icheck st-border-radius">
+						<div class="item-title d-flex justify-content-between align-items-center">
+							<h4>語言</h4>
+							<i class="fa fa-angle-up" aria-hidden="true"></i>
+						</div>
+						<div class="item-content">
+							<select multiple id="LanSelection" title="語言(多個選項)" class="default-select form-control wide mt-3">
+								<option value="372">中文</option>
+								<option value="388">英文</option>
+							</select>
+						</div>
+					</div>
+					<div class="sidebar-item pag st-icheck st-border-radius">
+						<div class="item-title d-flex justify-content-between align-items-center">
+							<h4>旅遊持續時間</h4>
+							<i class="fa fa-angle-up" aria-hidden="true"></i>
+						</div>
+						<div class="item-content">
+							<select multiple id="DaySelection" title="日數(多個選項)" class="default-select form-control wide mt-3">
+								<option value="372">一日</option>
+								<option value="388">半日</option>
+								<option value="388">多日</option>
+							</select>
+						</div>
+					</div>
+					<!-- Price Filter -->
+					<div class="filter-section">
+						<h4>篩選價錢</h4>
+						<input type="range" class="price-range" min="100" max="5000" value="1000">
+						<div class="price-values">
+							<span>$100</span> - <span>$5000</span>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+			<!-- Main Content (right side) -->
+			<div class="col-lg-9 col-md-8">
+				<div class="tour-list-content">
+					<div class="row">
+						<!-- Tour Item 1 -->
+						<div class="col-md-6 col-lg-4">
+							<div class="tour-item">
+								<img src="assets/images/packege/20.jpg" alt="Tour Image">
+								<h4>Explore the Beauty of Bali</h4>
+								<div class="meta-info">
+									<span><i class="fa-solid fa-location-dot"></i> Bali, Indonesia</span>
+									<span><i class="fa-solid fa-star"></i> 4.8 (2.5k Reviews)</span>
+								</div>
+								<div class="meta-info">
+									<span><i class="fa-regular fa-clock"></i> 10 Days</span>
+									<span><i class="fa-regular fa-user"></i> 8 Person</span>
+								</div>
+								<div class="price">
+									<span>$1200</span>
+								</div>
+							</div>
+						</div>
+						<!-- Tour Item 1 -->
+						<div class="col-md-6 col-lg-4">
+							<div class="tour-item">
+								<img src="assets/images/packege/20.jpg" alt="Tour Image">
+								<h4>Explore the Beauty of Bali</h4>
+								<div class="meta-info">
+									<span><i class="fa-solid fa-location-dot"></i> Bali, Indonesia</span>
+									<span><i class="fa-solid fa-star"></i> 4.8 (2.5k Reviews)</span>
+								</div>
+								<div class="meta-info">
+									<span><i class="fa-regular fa-clock"></i> 10 Days</span>
+									<span><i class="fa-regular fa-user"></i> 8 Person</span>
+								</div>
+								<div class="price">
+									<span>$1200</span>
+								</div>
+							</div>
+						</div>
+												<!-- Tour Item 1 -->
+						<div class="col-md-6 col-lg-4">
+							<div class="tour-item">
+								<img src="assets/images/packege/20.jpg" alt="Tour Image">
+								<h4>Explore the Beauty of Bali</h4>
+								<div class="meta-info">
+									<span><i class="fa-solid fa-location-dot"></i> Bali, Indonesia</span>
+									<span><i class="fa-solid fa-star"></i> 4.8 (2.5k Reviews)</span>
+								</div>
+								<div class="meta-info">
+									<span><i class="fa-regular fa-clock"></i> 10 Days</span>
+									<span><i class="fa-regular fa-user"></i> 8 Person</span>
+								</div>
+								<div class="price">
+									<span>$1200</span>
+								</div>
+							</div>
+						</div>
+						<!-- Tour Item 1 -->
+						<div class="col-md-6 col-lg-4">
+							<div class="tour-item">
+								<img src="assets/images/packege/20.jpg" alt="Tour Image">
+								<h4>Explore the Beauty of Bali</h4>
+								<div class="meta-info">
+									<span><i class="fa-solid fa-location-dot"></i> Bali, Indonesia</span>
+									<span><i class="fa-solid fa-star"></i> 4.8 (2.5k Reviews)</span>
+								</div>
+								<div class="meta-info">
+									<span><i class="fa-regular fa-clock"></i> 10 Days</span>
+									<span><i class="fa-regular fa-user"></i> 8 Person</span>
+								</div>
+								<div class="price">
+									<span>$1200</span>
+								</div>
+							</div>
+						</div>
+						<!-- Tour Item 1 -->
+						<div class="col-md-6 col-lg-4">
+							<div class="tour-item">
+								<img src="assets/images/packege/20.jpg" alt="Tour Image">
+								<h4>Explore the Beauty of Bali</h4>
+								<div class="meta-info">
+									<span><i class="fa-solid fa-location-dot"></i> Bali, Indonesia</span>
+									<span><i class="fa-solid fa-star"></i> 4.8 (2.5k Reviews)</span>
+								</div>
+								<div class="meta-info">
+									<span><i class="fa-regular fa-clock"></i> 10 Days</span>
+									<span><i class="fa-regular fa-user"></i> 8 Person</span>
+								</div>
+								<div class="price">
+									<span>$1200</span>
+								</div>
+							</div>
+						</div>
+						<!-- More items like this -->
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+
+	<!-- ================> News Letter section start here <================== -->
+	<div class="newsletter padding--top padding--bottom bg__img" style="background: url(assets/images/bg-img/02.jpg)">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-8 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay=".5s">
+					<div class="section__header text-center">
+						<h2>追蹤旅程</h2>
+					</div>
+					<div class="newsletter__form">
+						<form action="#">
+							<input type="text" placeholder="輸入你的電子郵件">
+							<button type="submit" class="default__btn">訂閱我們</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ================> News Letter section end here <================== -->
+
+		<script>
+		$('.default-select').select2({ closeOnSelect: false });
+
+		$('.tour-item').click(function () {
+			//href="/Home/BecomeOurPartner"
+			window.location.href = "../Home/Tour";
+		});
+		</script>
+
+    
+
+
+
+
+</body>
+

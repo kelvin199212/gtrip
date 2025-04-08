@@ -1,0 +1,173 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewData["Title"] = "PayPal 配置頁面";
+}
+
+<div class="content-body default-height">
+    <div class="cardClass">
+        <div class="container">
+
+            <!-- PayPal API Keys Configuration -->
+            <div class="paypal-config-section">
+                <h4>PayPal API 配置</h4>
+                <form>
+                    <div class="form-group">
+                        <label for="client-id">客戶端 ID</label>
+                        <input type="text" id="client-id" class="form-control" placeholder="輸入 PayPal 客戶端 ID" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client-secret">客戶端秘密金鑰</label>
+                        <input type="text" id="client-secret" class="form-control" placeholder="輸入 PayPal 客戶端秘密金鑰" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="currency">貨幣選擇</label>
+                        <select id="currency" class="form-control">
+                            <option value="usd">美元 (USD)</option>
+                            <option value="eur">歐元 (EUR)</option>
+                            <option value="hkd">港元 (HKD)</option>
+                            <option value="jpy">日元 (JPY)</option>
+                            <option value="gbp">英鎊 (GBP)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="webhook-url">Webhook URL</label>
+                        <input type="url" id="webhook-url" class="form-control" placeholder="輸入 PayPal Webhook URL">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="test-mode">測試模式</label>
+                        <input type="checkbox" id="test-mode"> 啟用測試模式
+                    </div>
+
+                    <div class="form-group">
+                        <label>啟用支付方式</label><br>
+                        <input type="checkbox" id="paypal" checked> PayPal
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">儲存配置</button>
+                    </div>
+                </form>
+            </div>
+
+            <hr>
+
+            <!-- Configuration Status -->
+            <div class="status-section">
+                <h4>當前配置狀態</h4>
+                <div id="status">
+                    <p>API 金鑰: <span class="text-success">已設置</span></p>
+                    <p>測試模式: <span class="text-success">已啟用</span></p>
+                    <p>支付方式: PayPal</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Fillow_style
+{
+    <style>
+        .cardClass {
+            background-color: white;
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        h4 {
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            border: none;
+        }
+
+        .status-section {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .text-success {
+            color: #28a745;
+        }
+    </style>
+}
+
+@section Fillow_script
+{
+    <script src="~/Fillow/vendor/global/global.min.js"></script>
+    <script src="~/Fillow/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+
+
+    <!-- counter -->
+    <script src="~/Fillow/vendor/counter/counter.min.js"></script>
+    <script src="~/Fillow/vendor/counter/waypoint.min.js"></script>
+
+    <!-- Apex Chart -->
+    <script src="~/Fillow/vendor/apexchart/apexchart.js"></script>
+    <script src="~/Fillow/vendor/chart-js/chart.bundle.min.js"></script>
+    <!-- Chart piety plugin files -->
+    <script src="~/Fillow/vendor/peity/jquery.peity.min.js"></script>
+    <!-- Dashboard 1 -->
+    <script src="~/Fillow/js/dashboard/dashboard-1.js"></script>
+
+    <script src="~/Fillow/vendor/owl-carousel/owl.carousel.js"></script>
+
+    <script src="~/Fillow/js/custom.min.js"></script>
+    <script src="~/Fillow/js/dlabnav-init.js"></script>
+    <script src="~/Fillow/js/demo.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Submit PayPal configuration
+            $("form").submit(function (e) {
+                e.preventDefault();
+
+                var clientId = $("#client-id").val();
+                var clientSecret = $("#client-secret").val();
+                var currency = $("#currency").val();
+                var webhookUrl = $("#webhook-url").val();
+                var testMode = $("#test-mode").prop("checked");
+                var enabledPaymentMethods = [];
+                if ($("#paypal").prop("checked")) enabledPaymentMethods.push("PayPal");
+
+                // Here, send data to the backend to save configuration (AJAX or form submission)
+                alert("PayPal 配置已儲存！");
+            });
+        });
+    </script>
+}

@@ -1,0 +1,422 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewData["Title"] = "電郵模版設定";
+}
+
+<div class="content-body default-height">
+    <div class="cardClass">
+        <div class="container">
+
+            <!-- 篩選區 -->
+            <div class="filter-section">
+                <label for="status-filter">狀態：</label>
+                <select id="status-filter" class="form-control filter-select">
+                    <option value="">選擇狀態</option>
+                    <option value="active">啟用</option>
+                    <option value="inactive">禁用</option>
+                </select>
+
+                <label for="template-name-filter">模板名稱：</label>
+                <input type="text" id="template-name-filter" class="form-control filter-input" placeholder="搜索模板名稱">
+            </div>
+
+            <!-- 模板管理區 -->
+            <button class="btn btn-primary create-btn" data-toggle="modal" data-target="#createTemplateModal">新增模板</button>
+
+            <table class="template-table">
+                <thead>
+                    <tr>
+                        <th>模板名稱</th>
+                        <th>標題</th>
+                        <th>內容</th>
+                        <th>狀態</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>註冊確認郵件</td>
+                        <td>歡迎來到我們的網站！</td>
+                        <td>您好，{username}，感謝您註冊我們的服務。</td>
+                        <td>啟用</td>
+                        <td>
+                            <button class="btn btn-info edit-btn" data-toggle="modal" data-target="#editTemplateModal">編輯</button>
+                            <button class="btn btn-danger delete-btn">刪除</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>忘記密碼郵件</td>
+                        <td>重設您的密碼</td>
+                        <td>您好，{username}，請點擊以下鏈接重設您的密碼。</td>
+                        <td>禁用</td>
+                        <td>
+                            <button class="btn btn-info edit-btn" data-toggle="modal" data-target="#editTemplateModal">編輯</button>
+                            <button class="btn btn-danger delete-btn">刪除</button>
+                        </td>
+                    </tr>
+                    <!-- 其他模板 -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- 新增模板 Modal -->
+<div class="modal fade" id="createTemplateModal" tabindex="-1" aria-labelledby="createTemplateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createTemplateModalLabel">新增電郵模板</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="template-name">模板名稱</label>
+                    <input type="text" class="form-control" id="template-name" placeholder="輸入模板名稱">
+                </div>
+                <div class="form-group">
+                    <label for="template-title">標題</label>
+                    <input type="text" class="form-control" id="template-title" placeholder="輸入郵件標題">
+                </div>
+                <div class="form-group">
+                    <label for="template-content">內容</label>
+                    <textarea class="form-control" id="template-content" rows="5" placeholder="輸入郵件內容">{username}將會被替換為使用者名稱。</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="template-status">狀態</label>
+                    <select class="form-control" id="template-status">
+                        <option value="active">啟用</option>
+                        <option value="inactive">禁用</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                <button type="button" class="btn btn-primary" id="saveTemplateBtn">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 編輯模板 Modal -->
+<div class="modal fade" id="editTemplateModal" tabindex="-1" aria-labelledby="editTemplateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editTemplateModalLabel">編輯電郵模板</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="edit-template-name">模板名稱</label>
+                    <input type="text" class="form-control" id="edit-template-name" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="edit-template-title">標題</label>
+                    <input type="text" class="form-control" id="edit-template-title">
+                </div>
+                <div class="form-group">
+                    <label for="edit-template-content">內容</label>
+                    <textarea class="form-control" id="edit-template-content" rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="edit-template-status">狀態</label>
+                    <select class="form-control" id="edit-template-status">
+                        <option value="active">啟用</option>
+                        <option value="inactive">禁用</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                <button type="button" class="btn btn-primary" id="updateTemplateBtn">保存更改</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Fillow_style
+{
+    <style>
+        /* General Layout */
+        .content-body {
+            padding: 20px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .cardClass {
+            background-color: #fff;
+            width: 80%;
+            margin: 30px auto;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Filter Section */
+        .filter-section {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .filter-select,
+        .filter-input {
+            padding: 8px 12px;
+            font-size: 14px;
+            width: 250px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            transition: all 0.3s ease;
+        }
+
+        .filter-select:focus,
+        .filter-input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        /* Table Styling */
+        .template-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .template-table th,
+        .template-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .template-table th {
+            background-color: #f8f9fa;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .template-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .template-table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Button Styling */
+        .btn {
+            padding: 8px 15px;
+            font-size: 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #28a745;
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #218838;
+        }
+
+        .btn-info {
+            background-color: #007bff;
+            color: white;
+            border: none;
+        }
+
+        .btn-info:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        /* Modal Styling */
+        .modal-content {
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .modal-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #ddd;
+            padding: 15px;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .close {
+            font-size: 30px;
+            color: #aaa;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        /* Responsive Styling */
+        @@media (max-width: 768px) {
+            .content-body {
+                padding: 15px;
+            }
+
+            .filter-section {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .filter-select,
+            .filter-input {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .template-table th, .template-table td {
+                font-size: 12px;
+                padding: 8px;
+            }
+
+            .btn {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+}
+
+
+@section Fillow_script
+{
+    <script src="~/Fillow/vendor/global/global.min.js"></script>
+    <script src="~/Fillow/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+
+
+    <!-- counter -->
+    <script src="~/Fillow/vendor/counter/counter.min.js"></script>
+    <script src="~/Fillow/vendor/counter/waypoint.min.js"></script>
+
+    <!-- Apex Chart -->
+    <script src="~/Fillow/vendor/apexchart/apexchart.js"></script>
+    <script src="~/Fillow/vendor/chart-js/chart.bundle.min.js"></script>
+    <!-- Chart piety plugin files -->
+    <script src="~/Fillow/vendor/peity/jquery.peity.min.js"></script>
+    <!-- Dashboard 1 -->
+    <script src="~/Fillow/js/dashboard/dashboard-1.js"></script>
+
+    <script src="~/Fillow/vendor/owl-carousel/owl.carousel.js"></script>
+
+    <script src="~/Fillow/js/custom.min.js"></script>
+    <script src="~/Fillow/js/dlabnav-init.js"></script>
+    <script src="~/Fillow/js/demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // Initialize template data (For demo purposes, this should come from your back-end)
+        let templates = [
+            { name: '註冊確認郵件', title: '歡迎來到我們的網站！', content: '您好，{username}，感謝您註冊我們的服務。', status: 'active' },
+            { name: '忘記密碼郵件', title: '重設您的密碼', content: '您好，{username}，請點擊以下鏈接重設您的密碼。', status: 'inactive' }
+        ];
+
+        // Function to render the template table
+        function renderTemplateTable() {
+            const tbody = document.querySelector('.template-table tbody');
+            tbody.innerHTML = ''; // Clear current rows
+            templates.forEach((template, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                            <td>${template.name}</td>
+                            <td>${template.title}</td>
+                            <td>${template.content}</td>
+                            <td>${template.status === 'active' ? '啟用' : '禁用'}</td>
+                            <td>
+                                <button class="btn btn-info" onclick="editTemplate(${index})">編輯</button>
+                                <button class="btn btn-danger" onclick="deleteTemplate(${index})">刪除</button>
+                            </td>
+                        `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Function to handle template creation
+        function createTemplate() {
+            const name = document.getElementById('template-name').value;
+            const title = document.getElementById('template-title').value;
+            const content = document.getElementById('template-content').value;
+            const status = document.getElementById('template-status').value;
+
+            const newTemplate = { name, title, content, status };
+            templates.push(newTemplate);
+            renderTemplateTable();
+            $('#createTemplateModal').modal('hide');
+        }
+
+        // Function to handle template editing
+        function editTemplate(index) {
+            const template = templates[index];
+            document.getElementById('edit-template-name').value = template.name;
+            document.getElementById('edit-template-title').value = template.title;
+            document.getElementById('edit-template-content').value = template.content;
+            document.getElementById('edit-template-status').value = template.status;
+            document.getElementById('updateTemplateBtn').onclick = () => updateTemplate(index);
+            $('#editTemplateModal').modal('show');
+        }
+
+        // Function to update the template
+        function updateTemplate(index) {
+            const name = document.getElementById('edit-template-name').value;
+            const title = document.getElementById('edit-template-title').value;
+            const content = document.getElementById('edit-template-content').value;
+            const status = document.getElementById('edit-template-status').value;
+
+            templates[index] = { name, title, content, status };
+            renderTemplateTable();
+            $('#editTemplateModal').modal('hide');
+        }
+
+        // Function to handle template deletion
+        function deleteTemplate(index) {
+            Swal.fire({
+                title: '確認刪除?',
+                text: '刪除後將無法恢復!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: '刪除',
+                cancelButtonText: '取消'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    templates.splice(index, 1);
+                    renderTemplateTable();
+                    Swal.fire('已刪除!', '', 'success');
+                }
+            });
+        }
+
+        // Initial render
+        renderTemplateTable();
+
+        // Event listener for creating a template
+        document.getElementById('saveTemplateBtn').addEventListener('click', createTemplate);
+    </script>
+}
+

@@ -1,0 +1,60 @@
+//============================================
+// * Banner sectin start here
+//============================================
+.banner {
+    padding-block: 120px;
+    &__content {
+        h2 {
+            @include font-size(64px);
+            margin-bottom: 20px;
+            @include breakpoint(max-xl) {
+                @include breakpoint(lg) {
+                    font-size: 48px;
+                }
+            }
+            @include breakpoint(xl) {
+                @include breakpoint(max-xxl) {
+                    @include font-size(56px);
+                }
+            }
+        }
+        p {
+            margin-bottom: 30px;
+        }
+        .btn-group {
+            @include breakpoint(max-sm) {
+                display: inline-block;
+            }
+            a {
+                &:first-child {
+                    margin-right: 15px;
+                    @include breakpoint(max-sm) {
+                        margin-bottom: 15px;
+                    }
+                }
+            }
+        }
+    }
+    &__thumb {
+        @include breakpoint(xxl) {
+            margin-right: -150px;
+            text-align: right;
+        }
+    }
+    &--style2 {
+        padding-block: 300px;
+        @include breakpoint(max-lg) {
+            padding-block: 150px;
+        }
+        .banner {
+            &__content {
+                h2 {
+                    color: $white-color;
+                }
+            }
+        }
+        .booking__form {
+            box-shadow: none;
+        }
+    }
+}

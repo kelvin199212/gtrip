@@ -1,0 +1,207 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewData["Title"] = "管理銀行轉賬請求";
+}
+
+<div class="content-body default-height">
+    <div class="cardClass">
+        <h4>銀行轉賬請求管理</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>客戶名稱</th>
+                    <th>銀行名稱</th>
+                    <th>賬戶號</th>
+                    <th>金額</th>
+                    <th>貨幣</th>
+                    <th>轉賬日期</th>
+                    <th>參考號碼</th>
+                    <th>狀態</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @* Example static rows for now *@
+                <tr>
+                    <td>王小明</td>
+                    <td>中國銀行</td>
+                    <td>123456789</td>
+                    <td>10000</td>
+                    <td>CNY</td>
+                    <td>2024-11-01</td>
+                    <td>REF12345</td>
+                    <td><span class="text-warning">待處理</span></td>
+                    <td>
+                        <button class="btn btn-success btn-sm">批准</button>
+                        <button class="btn btn-danger btn-sm">拒絕</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>李小花</td>
+                    <td>匯豐銀行</td>
+                    <td>987654321</td>
+                    <td>2000</td>
+                    <td>USD</td>
+                    <td>2024-10-30</td>
+                    <td>REF67890</td>
+                    <td><span class="text-success">已完成</span></td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" disabled>批准</button>
+                        <button class="btn btn-secondary btn-sm" disabled>拒絕</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Fillow_style
+{
+    <style>
+        .cardClass {
+            background-color: white;
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h4 {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+
+            .table th, .table td {
+                border: 1px solid #ddd;
+                padding: 10px;
+                text-align: left;
+            }
+
+            .table th {
+                background-color: #f8f8f8;
+            }
+
+        .btn {
+            padding: 5px 10px;
+            font-size: 14px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+            border: none;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+        }
+
+        .text-warning {
+            color: #ffc107;
+        }
+
+        .text-success {
+            color: #28a745;
+        }
+    </style>
+}
+
+@section Fillow_script
+{
+    <script src="~/Fillow/vendor/global/global.min.js"></script>
+    <script src="~/Fillow/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+
+
+    <!-- counter -->
+    <script src="~/Fillow/vendor/counter/counter.min.js"></script>
+    <script src="~/Fillow/vendor/counter/waypoint.min.js"></script>
+
+    <!-- Apex Chart -->
+    <script src="~/Fillow/vendor/apexchart/apexchart.js"></script>
+    <script src="~/Fillow/vendor/chart-js/chart.bundle.min.js"></script>
+    <!-- Chart piety plugin files -->
+    <script src="~/Fillow/vendor/peity/jquery.peity.min.js"></script>
+    <!-- Dashboard 1 -->
+    <script src="~/Fillow/js/dashboard/dashboard-1.js"></script>
+
+    <script src="~/Fillow/vendor/owl-carousel/owl.carousel.js"></script>
+
+    <script src="~/Fillow/js/custom.min.js"></script>
+    <script src="~/Fillow/js/dlabnav-init.js"></script>
+    <script src="~/Fillow/js/demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const approveButtons = document.querySelectorAll(".btn-success");
+            const rejectButtons = document.querySelectorAll(".btn-danger");
+
+            // Approve button functionality
+            approveButtons.forEach(button => {
+                button.addEventListener("click", function () {
+                    Swal.fire({
+                        title: '確定要批准這筆轉賬請求嗎？',
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonText: '是的, 批准',
+                        cancelButtonText: '取消'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Simulate approve action
+                            Swal.fire(
+                                '已批准!',
+                                '該轉賬請求已成功批准。',
+                                'success'
+                            );
+                            // Here you can add code to handle the backend action
+                        }
+                    });
+                });
+            });
+
+            // Reject button functionality
+            rejectButtons.forEach(button => {
+                button.addEventListener("click", function () {
+                    Swal.fire({
+                        title: '確定要拒絕這筆轉賬請求嗎？',
+                        text: '此操作無法撤銷。',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: '是的, 拒絕',
+                        cancelButtonText: '取消'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Simulate reject action
+                            Swal.fire(
+                                '已拒絕!',
+                                '該轉賬請求已被拒絕。',
+                                'error'
+                            );
+                            // Here you can add code to handle the backend action
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
+}
+
+

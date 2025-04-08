@@ -1,0 +1,184 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewData["Title"] = "團分類設定";
+}
+
+<div class="content-body default-height">
+    <div class="cardClass">
+        <div class="container">
+            <h2>團分類設定</h2>
+
+            <!-- Add New Category -->
+            <div class="add-category-section">
+                <input type="text" id="newCategoryName" class="form-control" placeholder="新增分類名稱">
+                <button id="addCategoryBtn" class="btn btn-success">新增分類</button>
+            </div>
+
+            <!-- Categories Table -->
+            <table class="category-table">
+                <thead>
+                    <tr>
+                        <th>分類名稱</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>經典旅遊團</td>
+                        <td>
+                            <button class="btn btn-primary edit-btn">編輯</button>
+                            <button class="btn btn-danger delete-btn">刪除</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>高級定制團</td>
+                        <td>
+                            <button class="btn btn-primary edit-btn">編輯</button>
+                            <button class="btn btn-danger delete-btn">刪除</button>
+                        </td>
+                    </tr>
+                    <!-- Additional rows dynamically generated -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Fillow_style
+{
+    <style>
+        .cardClass {
+            background-color: white;
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .add-category-section {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 70%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .btn {
+            padding: 5px 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+            border: none;
+        }
+
+        .category-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+            .category-table th,
+            .category-table td {
+                border: 1px solid #ddd;
+                padding: 10px;
+                text-align: center;
+            }
+
+            .category-table th {
+                background-color: #f8f9fa;
+                font-weight: bold;
+            }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            border: none;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+        }
+    </style>
+}
+
+@section Fillow_script
+{
+    <script src="~/Fillow/vendor/global/global.min.js"></script>
+    <script src="~/Fillow/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+
+
+    <!-- counter -->
+    <script src="~/Fillow/vendor/counter/counter.min.js"></script>
+    <script src="~/Fillow/vendor/counter/waypoint.min.js"></script>
+
+    <!-- Apex Chart -->
+    <script src="~/Fillow/vendor/apexchart/apexchart.js"></script>
+    <script src="~/Fillow/vendor/chart-js/chart.bundle.min.js"></script>
+    <!-- Chart piety plugin files -->
+    <script src="~/Fillow/vendor/peity/jquery.peity.min.js"></script>
+    <!-- Dashboard 1 -->
+    <script src="~/Fillow/js/dashboard/dashboard-1.js"></script>
+
+    <script src="~/Fillow/vendor/owl-carousel/owl.carousel.js"></script>
+
+    <script src="~/Fillow/js/custom.min.js"></script>
+    <script src="~/Fillow/js/dlabnav-init.js"></script>
+    <script src="~/Fillow/js/demo.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Add New Category
+            $("#addCategoryBtn").on("click", function () {
+                const newCategory = $("#newCategoryName").val().trim();
+                if (newCategory) {
+                    const newRow = `
+                                <tr>
+                                    <td>${newCategory}</td>
+                                    <td>
+                                        <button class="btn btn-primary edit-btn">編輯</button>
+                                        <button class="btn btn-danger delete-btn">刪除</button>
+                                    </td>
+                                </tr>`;
+                    $(".category-table tbody").append(newRow);
+                    $("#newCategoryName").val("");
+                } else {
+                    alert("請輸入分類名稱！");
+                }
+            });
+
+            // Edit Category
+            $(document).on("click", ".edit-btn", function () {
+                const currentRow = $(this).closest("tr");
+                const categoryName = currentRow.find("td:first").text();
+                const newCategoryName = prompt("編輯分類名稱：", categoryName);
+                if (newCategoryName) {
+                    currentRow.find("td:first").text(newCategoryName);
+                }
+            });
+
+            // Delete Category
+            $(document).on("click", ".delete-btn", function () {
+                if (confirm("確定要刪除此分類嗎？")) {
+                    $(this).closest("tr").remove();
+                }
+            });
+        });
+    </script>
+}

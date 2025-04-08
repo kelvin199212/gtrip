@@ -1,0 +1,100 @@
+﻿<!--**********************************
+            Sidebar start
+        ***********************************-->
+<div class="dlabnav">
+    <div class="dlabnav-scroll">
+        <ul class="metismenu" id="menu">
+            <li>
+                <a href="@Url.Action("Index","member")" aria-expanded="false">
+                    <i class="fas fa-home"></i>
+                    <span class="nav-text">主頁</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("MyOrder","member")" aria-expanded="false">
+                    <i class="fas fa-user"></i>
+                    <span class="nav-text">我的行程</span>
+                </a>
+
+            </li>
+            <li>
+                <a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                    <i class="fas fa-plane"></i>
+                    <span class="nav-text">我的資料</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="@Url.Action("Profile","member")">旅客資料</a></li>
+                    <li><a href="@Url.Action("Payment","member")">付款方式</a></li>
+                    <li><a href="@Url.Action("Preference","member")">收藏</a></li>
+                </ul>
+
+            </li>
+            <li>
+                <a href="@Url.Action("Coupon","member")" aria-expanded="false">
+                    <i class="fas fa-edit"></i>
+                    <span class="nav-text">
+                        優惠券 
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("message","member")" aria-expanded="false">
+                    <i class="fas fa-comments"></i>
+                    <span class="nav-text">
+                        幫助中心
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("ReportCenter","member")" aria-expanded="false">
+                    <i class="fas fa-yen"></i>
+                    <span class="nav-text">意見 / 投訴中心</span>
+                </a>
+            </li>
+
+            <li>
+                <a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                    <i class="fas fa-yen"></i>
+                    <span class="nav-text">設定</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="@Url.Action("LoginMethod","member")">管理登入方式</a></li>
+                    <li><a href="@Url.Action("PwdChange","member")">密碼更改</a></li>
+                    <li><a href="@Url.Action("NoticePreference","member")">通知設定</a></li>
+                </ul>
+            </li>
+           
+   
+        </ul>
+        <div class="side-bar-profile">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <div class="side-bar-profile-img">
+                    <img src="~/Fillow/images/user.jpg" alt="">
+                </div>
+                <div class="profile-info1">
+                    <h5>Admin</h5>
+                    <span>admin.gtrip.com</span>
+                </div>
+                <div class="profile-button">
+                    <i class="fas fa-caret-downd scale5 text-light"></i>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between mb-2 progress-info">
+                <span class="fs-12"><i class="fas fa-star text-orange me-2"></i>Task Progress</span>
+                <span class="fs-12">20/45</span>
+            </div>
+            <div class="progress default-progress">
+                <div class="progress-bar bg-gradientf progress-animated" style="width: 45%; height:8px;" role="progressbar">
+                    <span class="sr-only">45% Complete</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>Gtrip © 2025 All Rights Reserved</p>
+        </div>
+    </div>
+</div>
+<!--**********************************
+    Sidebar end
+***********************************-->

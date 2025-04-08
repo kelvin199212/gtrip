@@ -1,0 +1,467 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the header of the site/application.
+// -----------------------------------------------------------------------------
+
+.header {
+    background: $white-color;
+    @extend %abs;
+    @extend %w-100;
+    top: 0;
+    z-index: 999;
+    &__transparent {
+        background: transparent;
+    }
+    &.header-fixed {
+        position: fixed;
+        background-color: $body-color;
+        @extend %w-100;
+        top: 0;
+        left: 0;
+        animation: fadeInDown .5s;
+        -webkit-animation: fadeInDown .5s;
+        -moz-animation: fadeInDown .5s;
+        box-shadow: 0 0 10px rgba($color:$black-color, $alpha:.5);
+        border-bottom: 1px solid rgba($white-color, $alpha: .10);
+        z-index: 999;
+
+    }
+    &__wrapper {
+        padding: 19px 0;
+        @extend %w-100;
+        @extend %flex;
+        @extend %justify-between;
+        @extend %align-items-center;
+    
+        @include breakpoint(sm) {
+            position: relative;
+        }
+        @include breakpoint(lg) {
+            width: auto
+        }
+    
+        .logo {
+            a {
+                @extend %d-block;
+    
+                img {
+                    max-width: 100%;
+                }
+            }
+    
+            @include breakpoint(max-sm) {
+                width: 160px;
+            }
+    
+            @include breakpoint(max-xl) {
+                @include breakpoint(lg) {
+                    width: 200px;
+                }
+            }
+        }
+    
+        .menu-area {
+            @extend %flex;
+            @extend %align-items-center;
+            .default__btn {
+                @include breakpoint(max-md) {
+                    display: none;
+                }
+            }
+            @include breakpoint(max-sm) {
+                padding: 15px 0;
+            }
+        }
+    }
+    &__bar {
+        @extend %rel;
+        @extend %pointer;
+        width: 25px;
+        height: 20px;
+        @extend %ml-30;
+        margin-right: 10px;
+    
+        span {
+            @extend %abs;
+            @extend %d-inline-block;
+            @extend %w-100;
+            height: 3px;
+            @include transition($transition);
+            background-color: $theme-color;
+            left: 0;
+    
+            &:first-child {
+                top: 0;
+            }
+    
+            &:nth-child(2) {
+                top: 52%;
+                transform: translateY(-65%);
+            }
+    
+            &:last-child {
+                bottom: 0;
+            }
+        }
+    
+        &.active {
+            span {
+                &:first-child {
+                    @include add-prefix(transform, (rotate(45deg) translate(3px, 9px)));
+                }
+    
+                &:nth-child(2) {
+                    opacity: 0;
+                }
+    
+                &:last-child {
+                    @include add-prefix(transform,(rotate(-45deg)translate(3px, -9px)));
+                }
+            }
+        }
+    
+        @include breakpoint(max-sm) {
+            width: 15px;
+            height: 16px;
+    
+            span {
+                height: 2px;
+                width: 20px;
+            }
+    
+            &.active {
+                span {
+                    &:first-child {
+                        @include add-prefix(transform, (rotate(45deg) translate(4px, 6px)));
+                    }
+    
+                    &:nth-child(2) {
+                        opacity: 0;
+                    }
+    
+                    &:last-child {
+                        @include add-prefix(transform, (rotate(-45deg)translate(4px, -6px)));
+                    }
+                }
+            }
+        }
+    }
+    &--style2 {
+        .logo {
+            a {
+                &:last-child {
+                    display: none;
+                }
+            }
+        }
+        .menu li a {
+            @include breakpoint(max-lg) {
+                border-color: rgba($title-color, $alpha: .1);
+            }
+        }
+        .menu {
+            @include breakpoint(max-lg) {
+                background: $ash-color;
+            }
+            >li {
+                a, a.active {
+                    color: $title-color;
+                    &::after, &::before {
+                        background: $title-color;
+                    }
+                    @include breakpoint(max-lg) {
+                        background: transparent;
+                    }
+                    @include breakpoint(lg) {
+                        color: $white-color;
+                        &::after, &::before {
+                            background: $white-color;
+                        }
+                    }
+                }
+            }
+        }
+        .header__bar {
+            @include breakpoint(max-lg) {
+                span {
+                    background: $white-color;
+                }
+            }
+        }
+        &.header-fixed {
+            .logo {
+                a {
+                    &:last-child {
+                        display: block;
+                    }
+                    &:first-child {
+                        display: none;
+                    }
+                }
+            }
+            .menu {
+                >li {
+                    a {
+                        color: $title-color;
+                        &::after, &::before {
+                            background: $title-color;
+                        }
+                    }
+                }
+            }
+            .header__bar {
+                @include breakpoint(max-lg) {
+                    span {
+                        background: $theme-color;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+.menu {
+    @extend %flex;
+    @include breakpoint(lg) {
+        margin-right: 20px;
+        margin-bottom: 0;
+    }
+
+    >li {
+        >a {
+            color: $title-color;
+            font-size: $fs-base;
+            font-weight: 600;
+            padding: 15px 22px;
+            &.active {
+                color: $theme-color;
+                &::after, &::before {
+                    background: $theme-color;
+                }
+                @include breakpoint(max-lg) {
+                    color: $white-color;
+                    &::after, &::before {
+                        background: $white-color;
+                    }
+                }
+            }
+            i {
+                margin-right: 5px;
+            }
+        }
+    }
+
+    @include breakpoint(lg) {
+        li {
+            position: relative;
+            .submenu {
+                position: absolute;
+                top: calc(100%);
+                left: 0;
+                -webkit-transition: all ease 0.3s;
+                -moz-transition: all ease 0.3s;
+                transition: all ease 0.3s;
+                z-index: 9;
+                background: #ffffff;
+                width: 220px;
+                padding: 0;
+                -webkit-transform: translateY(35px);
+                -ms-transform: translateY(35px);
+                transform: translateY(35px);
+                opacity: 0;
+                visibility: hidden;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.18);
+                li {
+                    padding: 0;
+                    a {
+                        padding: 10px 20px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        font-size: 14px;
+                        color: $black-color;
+                        font-weight: 600;
+                        border-bottom: 1px solid $border-color;
+                        &:hover,
+                        &.active {
+                            background: $theme-color;
+                            padding-left: 22px;
+                            color: $white-color;
+                        }
+                    }
+                    &:last-child {
+                        a {
+                            border-bottom: none;
+                        }
+                    }
+                    .submenu {
+                        left: 100%;
+                        top: 0;
+                    }
+                }
+            }
+            &:hover {
+                >.submenu {
+                    -webkit-transform: translateY(0px);
+                    -ms-transform: translateY(0px);
+                    transform: translateY(0px);
+                    opacity: 1;
+                    visibility: visible;
+                    a {
+                        &::before {
+                            right: 14px;
+                        }
+                        &::after {
+                            right: 10px;
+                        }
+                        &::after, &::before {
+                            background: $black-color;
+                        }
+                        &:hover {
+                            &::after, &::before {
+                                background: $white-color;
+                            }
+                        }
+                    }
+                    .submenu {
+                        transform: translateY(0px);
+                    }
+                }
+            }
+        }
+
+        @include breakpoint(max-xl) {
+            li {
+                a {
+                    padding: 10px 12px;
+                }
+            }
+        }
+    }
+
+    @include breakpoint(max-lg) {
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        overflow: auto;
+        max-height: 400px;
+        -webkit-transition: all ease 0.3s;
+        -moz-transition: all ease 0.3s;
+        transition: all ease 0.3s;
+        -webkit-transform: scaleY(0);
+        -ms-transform: scaleY(0);
+        transform: scaleY(0);
+        transform-origin: top;
+        background: rgba($theme-color, $alpha: .95);
+        backdrop-filter: blur(20.0px);
+        -webkit-backdrop-filter: blur(20.0px);
+
+        li {
+            width: 100%;
+            padding: 0;
+            a {
+                display: block;
+                padding: 10px 25px;
+                font-size: 15px;
+                font-weight: 700;
+                text-transform: capitalize;
+                border-top: 1px solid rgba($white-color, $alpha: .10);
+                color: $white-color;
+                &:hover {
+                    background: rgba($theme-color, $alpha: .60);
+                }
+            }
+            .submenu {
+                padding-left: 20px;
+                display: none;
+                li {
+                    width: 100%;
+                    a {
+                        font-size: 14px;
+                        display: flex;
+                        justify-content: space-between;
+                    }
+                }
+            }
+        }
+        &.active {
+            -webkit-transform: scaleY(1);
+            -ms-transform: scaleY(1);
+            transform: scaleY(1);
+        }
+    }
+}
+
+.menu-item-has-children {
+    >a {
+        @extend %rel;
+        &.active {
+            &::after, &::before {
+                @include breakpoint(lg) {
+                    // background-color: $title-color !important;
+                }
+            }
+        }
+        &::after {
+            @extend %abs;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 25px;
+            width: 10px;
+            height: 2px;
+            background-color: $white-color;
+        }
+
+        &::before {
+            @extend %abs;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 29px;
+            width: 2px;
+            height: 10px;
+            background-color: $white-color;
+            @include transition($transition);
+        }
+        @include breakpoint(lg) {
+            &::after {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                right: 0;
+                width: 10px;
+                height: 2px;
+                background-color: $title-color;
+            }
+            &::before {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                right: 4px;
+                width: 2px;
+                height: 10px;
+                background-color: $title-color;
+                @include transition($transition);
+            }
+        }
+    }
+    &:hover {
+        >a {
+            &:before {
+                transform: rotate(90deg);
+                opacity: 0;
+            }
+        }
+    }
+    &.open {
+        >a {
+
+            &:before {
+                transform: rotate(90deg);
+                opacity: 0;
+            }
+        }
+    }
+}
+
+/*================*** Header Section End Here     ***===================*/

@@ -1,0 +1,269 @@
+﻿@* Views/Shared/_LoginModal.cshtml *@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<style>
+    .account__social media li a {
+        width: 40px;
+        height: 40px;
+        line - height: 40px;
+        -webkit - border - radius: 50 %;
+        -moz - border - radius: 50 %;
+        border - radius: 50 %;
+        font - size: 1.25rem;
+    }
+
+    .account__social li a:hover {
+        color: #fff;
+        -webkit-transform: translateY(-5px);
+        -moz-transform: translateY(-5px);
+        -ms-transform: translateY(-5px);
+        -o- transform: translateY(-5px);
+        transform: translateY(-5px);
+    }
+
+    #showPass {
+        margin-left: -40px;
+        cursor: pointer;
+    }
+
+    #showPass2 {
+        margin-left: -40px;
+        cursor: pointer;
+    }
+</style>
+<script>
+ 
+    $(document).ready(function () {
+        $("#showPass").click(function () {
+            if ($("#myPass").attr("type") == "password") {
+                $("#myPass").attr("type", "text");
+            } else {
+                $("#myPass").attr("type", "password");
+            }
+        });
+        $("#showPass").click(function () {
+            $("#showPass i").toggle();
+        });
+
+        $("#showPass2").click(function () {
+            if ($("#myPass2").attr("type") == "password") {
+                $("#myPass2").attr("type", "text");
+            } else {
+                $("#myPass2").attr("type", "password");
+            }
+        });
+        $("#showPass2").click(function () {
+            $("#showPass2 i").toggle();
+        });
+
+        document.getElementById('partner-user').addEventListener('change', function () {
+            const recommendPerson = document.getElementById('recommendPerson');
+            if (this.checked) {  // Assuming it's a checkbox
+                recommendPerson.style.display = 'block';
+            } 
+        });
+
+        document.getElementById('normal-user').addEventListener('change', function () {
+            const recommendPerson = document.getElementById('recommendPerson');
+            if (this.checked) {  // Assuming it's a checkbox
+                recommendPerson.style.display = 'none';
+            } 
+        });
+
+        // Handle Sign-Up Form Submission
+        $('#signupForm').on('submit', function (e) {
+            e.preventDefault();
+
+            var formData = {
+                Username: $('input[name="Username"]').val(),
+                FullName: $('input[name="FullName"]').val(),
+                Email: $('input[name="Email"]').val(),
+                Password: $('input[name="Password"]').val(),
+                ReferralCode: $('input[name="ReferralCode"]').val(),
+                UserType: $('input[name="register_as"]:checked').val(),
+                AcceptTerms: $('#reg-term').is(':checked')
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/account/signup',
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                success: function (response) {
+                    // Show SweetAlert on successful sign-up
+                    Swal.fire({
+                        icon: 'success',
+                        title: response.message,
+                        timer: 2000, // Auto close after 2 seconds
+                        showConfirmButton: false
+                    });
+                },
+                error: function (xhr) {
+                    var errorMessage = xhr.responseJSON?.message || 'Something went wrong!';
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: errorMessage,
+                        timer: 2000, // Auto close after 2 seconds
+                        showConfirmButton: false
+                    });
+                }
+            });
+        });
+        $('#loginForm').on('submit', function (e) {
+            e.preventDefault(); // Prevent the form from submitting the traditional way
+
+            // Get form data
+            var formData = {
+                Email: $('input[name="LoginEmail"]').val(),
+                Password: $('input[name="LoginPassword"]').val()
+            };
+
+            // AJAX request
+            $.ajax({
+                type: 'POST',
+                url: '/api/account/login', // Adjust this URL to match your backend endpoint
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                success: function (response) {
+                    // Show SweetAlert on successful login
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Login successful!',
+                        text: response.message,
+                        timer: 2000, // Auto close after 2 seconds
+                        showConfirmButton: false
+                    }).then(() => {
+                        // Redirect to another page after the alert is closed
+                        window.location.href = '/Home/Dashboard'; // Replace with your desired URL
+                    });
+                    // Optionally redirect the user or update UI here
+                },
+                error: function (xhr) {
+                    // Show SweetAlert on error
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: xhr.responseJSON.message || 'Something went wrong!',
+                        timer: 2000, // Auto close after 2 seconds
+                        showConfirmButton: false
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+<div id="LoginModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="account__area" style="max-width:680px!important;width:680px!important;">
+            <span class="close"></span>
+            <ul class="nav nav-tabs account__top" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a href="#login" class="active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" role="tab" aria-controls="login" aria-selected="true">Login</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a href="#signup" id="signup-tab" data-bs-toggle="tab" data-bs-target="#signup" role="tab" aria-controls="signup" aria-selected="true">Sign Up</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                    <form id="loginForm">
+                        <div class="account__social">
+                            <ul>
+                                <li><a href="#" class="facebook"><i class="fa-brands fa-facebook-f"></i> <span>Sign Up with Facebook</span></a></li>
+                                <li><a href="#" class="google"><i class="fa-brands fa-google"></i> <span>Sign Up with Google</span></a></li>
+                            </ul>
+                        </div>
+                        <div class="account__divaed text-center">
+                            <p>Or</p>
+                        </div>
+                        <div class="account__lists">
+                            <div class="account__list">
+                                <div class="account__list--icon"><i class="fa-solid fa-envelope"></i></div>
+                                <input type="email" name="LoginEmail" placeholder="Email" required>
+                            </div>
+                            <div class="account__list">
+                                <div class="account__list--icon"><i class="fa-solid fa-lock"></i></div>
+                                <div class="formbox">
+                                <input id="myPass" type="password" name="LoginPassword" placeholder="Password" required>
+                                <span id="showPass">
+                                    <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                    <i class="fa fa-eye" aria-hidden="true" style="display:none;"></i>
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="account__another">
+                            <p>By creating an account you will be up to date on an order's </p>
+                            <button type="submit" class="default__btn">Log In</button>
+                            <div class="text-center"><a href="forgetpassword.html">Forgot Password?</a></div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
+                    <form id="signupForm" action="#">
+                        <!-- Form content -->
+                        <div class="account__social">
+                            <ul>
+                                <li><a href="#" class="facebook"><i class="fa-brands fa-facebook-f"></i> <span>Sign Up with Facebook</span></a></li>
+                                <li><a href="#" class="google"><i class="fa-brands fa-google"></i> <span>Sign Up with Google</span></a></li>
+                            </ul>
+                        </div>
+                        <div class="account__divaed text-center">
+                            <p>Or</p>
+                        </div>
+                        <div class="account__lists">
+                            <div class="account__list">
+                                <div class="account__list--icon"><i class="fa-solid fa-user"></i></div>
+                                <input type="text" name="Username" placeholder="Username">
+                            </div>
+                            <div class="account__list">
+                                <div class="account__list--icon"><i class="fa-solid fa-user"></i></div>
+                                <input type="text" name="FullName" placeholder="Full Name">
+                            </div>
+                            <div class="account__list">
+                                <div class="account__list--icon"><i class="fa-solid fa-envelope"></i></div>
+                                <input type="email" name="Email" placeholder="Email">
+                            </div>
+                            <div class="account__list">
+                                <div class="account__list--icon"><i class="fa-solid fa-lock"></i></div>
+                                <input id="myPass2" type="password" name="Password" placeholder="Password">
+                                <span id="showPass2">
+                                    <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                    <i class="fa fa-eye" aria-hidden="true" style="display:none;"></i>
+                                </span>
+                            </div>
+                            <div id="recommendPerson" style="display:none;" class="account__list">
+                                <div class="account__list--icon"><i class="fa-solid fa-lock"></i></div>
+                                <input type="text" name="ReferralCode" placeholder="推薦人號碼">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <p class="f14 c-grey">選擇用戶類型</p>
+                            <label class="block" for="normal-user">
+                                <input checked="" id="normal-user" type="radio" class="mr5" name="register_as" value="normal"> <span class="c-main" data-bs-toggle="tooltip" data-placement="right" title="" data-bs-original-title="用於預訂服務">普通用戶</span>
+                            </label>
+                            <label class="block" for="partner-user">
+                                <input id="partner-user" type="radio" class="mr5" name="register_as" value="partner">
+                                <span class="c-main" data-bs-toggle="tooltip" data-placement="right" title="" data-bs-original-title="用於上傳和預訂服務">合作夥伴用戶</span>
+                            </label>
+                        </div>
+                        <div class="form-group st-icheck-item" style="margin-top: 10px;">
+                            <label for="reg-term">
+                                <input id="reg-term" style="width:30px;" type="checkbox" name="term" class="mr5"> 我已閱讀並接受<a class="st-link" href="">條款和隱私政策</a>
+                                <span class="checkmark fcheckbox"></span>
+                            </label>
+                        </div>
+                        <div class="account__another">
+                            <button type="submit" class="default__btn">Sign Up</button>
+                            <div class="text-center"><a href="forgetpassword.html">Forgot Password?</a></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

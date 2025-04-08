@@ -1,0 +1,166 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+    ViewData["Title"] = "我的資料";
+}
+<div class="content-body default-height">
+    <div class="card">
+      <div class="container">
+        <h1>管理旅客資料</h1>
+        <p>儲存個人資料，預訂更快捷</p>
+        <button class="add-traveler-btn">+ 新增旅客資料</button>
+        <p>最多儲存30人 (包括自己)</p>
+
+        <div class="traveler-list">
+            <div class="traveler-info">
+                <p>Ho ********</p>
+                <p class="sub-info">852-****5597 bor**gmail.com</p>
+                <p class="sub-info">暫未輸入任何身份證明文件資料</p>
+            </div>
+            <div class="action-links">
+                <a href="#">更改</a>
+                <a href="#">移除</a>
+            </div>
+        </div>
+
+        <div class="traveler-list">
+            <div class="traveler-info">
+                <p>Ho ********</p>
+                <p class="sub-info">852-****9005 opo***gmail.com</p>
+                <p class="sub-info">暫未輸入任何身份證明文件資料</p>
+            </div>
+            <div class="action-links">
+                <a href="#">更改</a>
+                <a href="#">移除</a>
+            </div>
+        </div>
+
+        <div class="traveler-list">
+            <div class="traveler-info">
+                <p>Ho ********</p>
+                <p class="sub-info">暫未輸入任何身份證明文件資料</p>
+            </div>
+            <div class="action-links">
+                <a href="#">更改</a>
+                <a href="#">移除</a>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</div>
+
+@section Fillow_style
+    {
+	<link href="~/Fillow/vendor/bootstrap-datepicker-master/css/bootstrap-datepicker.min.css" rel="stylesheet">
+	<link href="~/Fillow/vendor/lightgallery/css/lightgallery.min.css" rel="stylesheet">
+
+	<style>
+        .content-body .container{
+            margin-bottom: 2.5rem;
+        }
+               .card {
+            background-color: white;
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+
+        h1 {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        p {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        .add-traveler-btn {
+            background-color: #886cc0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .add-traveler-btn:hover {
+                background-color: #907fb2;
+        }
+
+        .traveler-list {
+            border-bottom: 1px solid #e5e5e5;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .traveler-info {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .traveler-info p {
+            margin: 5px 0;
+            color: #333;
+        }
+
+        .traveler-info .sub-info {
+            color: #888;
+            font-size: 12px;
+        }
+
+        .action-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-links a {
+            color: #f60;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .action-links a:hover {
+            text-decoration: underline;
+        }
+
+	</style>
+}
+
+@section Fillow_script
+    {
+	<!-- Required vendors -->
+	<script src="~/Fillow/vendor/global/global.min.js"></script>
+	<script src="~/Fillow/vendor/bootstrap-datepicker-master/js/bootstrap-datepicker.min.js"></script>
+	<script src="~/Fillow/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+	<script src="~/Fillow/vendor/select2/js/select2.full.min.js"></script>
+	<script src="~/Fillow/js/plugins-init/select2-init.js"></script>
+	<script src="~/Fillow/js/custom.min.js"></script>
+	<script src="~/Fillow/js/dlabnav-init.js"></script>
+	<script src="~/Fillow/js/demo.js"></script>
+	<script>
+		$(document).ready(function () {
+			$(".expand.handle").on("click", function () {
+				// Find the .cm-content-body within the same .filter container
+				var content = $(this).closest('.filter').find('.cm-content-body');
+
+				// Toggle the visibility of the content
+				content.slideToggle();
+
+				// Toggle the icon (fa-angle-down and fa-angle-up)
+				$(this).find('i').toggleClass('fa-angle-down fa-angle-up');
+			});
+		});
+	</script>
+}

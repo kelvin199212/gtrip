@@ -1,0 +1,187 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutFillow.cshtml";
+    ViewData["Title"] = "添加旅程訂單";
+}
+@model Fillow.Models.partneradmin.JourneyOrder
+
+<div class="content-body default-height">
+    <div class="container-fluid">
+        <!-- row -->
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card profile-card card-bx m-b30">
+                    <div class="card-header">
+                        <h6 class="title">創建新訂單</h6>
+                    </div>
+                    <form class="profile-form needs-validation" method="post" novalidate>
+                        <div class="card-body">
+                            <h4>個人信息</h4>
+                            <div class="row">
+                                <div class="col-sm-6 m-b30">
+                                    <label class="form-label" for="firstName">名字</label>
+                                    <input type="text" id="firstName" class="form-control" name="FirstName" required>
+                                    <div class="invalid-feedback">請輸入您的名字</div>
+                                </div>
+                                <div class="col-sm-6 m-b30">
+                                    <label class="form-label" for="lastName">姓氏</label>
+                                    <input type="text" id="lastName" class="form-control" name="LastName" required>
+                                    <div class="invalid-feedback">請輸入您的姓氏</div>
+                                </div>
+                                <div class="col-sm-6 m-b30">
+                                    <label class="form-label" for="phoneNumber">電話號碼</label>
+                                    <input type="text" id="phoneNumber" class="form-control" name="PhoneNumber" required>
+                                    <div class="invalid-feedback">請輸入您的電話號碼</div>
+                                </div>
+                                <div class="col-sm-6 m-b30">
+                                    <label class="form-label" for="email">電子郵件</label>
+                                    <input type="email" id="email" class="form-control" name="CustomerEmail" required>
+                                    <div class="invalid-feedback">請輸入您的電子郵件</div>
+                                </div>
+                                <div class="col-sm-6 m-b30">
+                                    <label class="form-label" for="gender">性別</label>
+                                    <select id="gender" class="form-control" name="Gender" required>
+                                        <option value="">選擇性別</option>
+                                        <option value="Male">男</option>
+                                        <option value="Female">女</option>
+                                    </select>
+                                    <div class="invalid-feedback">請選擇您的性別</div>
+                                </div>
+                                <div class="col-sm-6 m-b30">
+                                    <label class="form-label" for="birthDate">出生日期</label>
+                                    <input type="date" id="birthDate" class="form-control" name="BirthDate" required>
+                                    <div class="invalid-feedback">請輸入您的出生日期</div>
+                                </div>
+                                <div class="col-sm-12 m-b30">
+                                    <label class="form-label" for="address">地址</label>
+                                    <input type="text" id="address" class="form-control" name="Address" required>
+                                    <div class="invalid-feedback">請輸入您的地址</div>
+                                </div>
+                                <div class="col-sm-12 m-b30">
+                                    <label class="form-label" for="address2">地址 2</label>
+                                    <input type="text" id="address2" class="form-control" name="Address2">
+                                    <div class="invalid-feedback">如果適用，請輸入第二地址</div>
+                                </div>
+                                <div class="col-sm-6 m-b30">
+                                    <label class="form-label" for="localAirport">本地機場</label>
+                                    <input type="text" id="localAirport" class="form-control" name="LocalAirport" required>
+                                    <div class="invalid-feedback">請輸入您的本地機場</div>
+                                </div>
+                                <div class="col-sm-6 m-b30">
+                                    <label class="form-label" for="city">城市</label>
+                                    <input type="text" id="city" class="form-control" name="City" required>
+                                    <div class="invalid-feedback">請輸入您的城市</div>
+                                </div>
+                                <div class="col-sm-6 m-b30">
+                                    <label class="form-label" for="state">州/省</label>
+                                    <input type="text" id="state" class="form-control" name="State" required>
+                                    <div class="invalid-feedback">請輸入您的州/省</div>
+                                </div>
+                                <div class="col-sm-6 m-b30">
+                                    <label class="form-label" for="postalCode">郵政編碼</label>
+                                    <input type="text" id="postalCode" class="form-control" name="PostalCode" required>
+                                    <div class="invalid-feedback">請輸入您的郵政編碼</div>
+                                </div>
+                                <div class="col-sm-6 m-b30">
+                                    <label class="form-label" for="country">國家</label>
+                                    <input type="text" id="country" class="form-control" name="Country" required>
+                                    <div class="invalid-feedback">請輸入您的國家</div>
+                                </div>
+                                <div class="col-sm-12 m-b30">
+                                    <label class="form-label" for="about">關於</label>
+                                    <textarea id="about" class="form-control" name="About"></textarea>
+                                    <div class="invalid-feedback">請提供您的個人介紹</div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Fillow_script {
+    <!-- Required vendors -->
+    <script src="~/Fillow/vendor/global/global.min.js"></script>
+    <script src="~/Fillow/vendor/bootstrap-datepicker-master/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/Fillow/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <script src="~/Fillow/js/custom.min.js"></script>
+    <script src="~/Fillow/js/dlabnav-init.js"></script>
+    <script src="~/Fillow/js/demo.js"></script>
+
+    <script>
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation');
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        event.preventDefault();
+                        event.stopPropagation();
+
+                        if (!form.checkValidity()) {
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                            form.classList.add('was-validated');
+                        } else {
+                            // If the form is valid, gather form data
+                            var formData = {};
+
+                            // Append form fields
+                            formData['FirstName'] = document.querySelector('#firstName').value;
+                            formData['LastName'] = document.querySelector('#lastName').value;
+                            formData['PhoneNumber'] = document.querySelector('#phoneNumber').value;
+                            formData['CustomerEmail'] = document.querySelector('#email').value;
+                            formData['Gender'] = document.querySelector('#gender').value;
+                            formData['BirthDate'] = document.querySelector('#birthDate').value;
+                            formData['Address'] = document.querySelector('#address').value;
+                            formData['Address2'] = document.querySelector('#address2').value;
+                            formData['LocalAirport'] = document.querySelector('#localAirport').value;
+
+                            formData['City'] = document.querySelector('#city').value;
+                            formData['State'] = document.querySelector('#state').value;
+                            formData['PostalCode'] = document.querySelector('#postalCode').value;
+                            formData['Country'] = document.querySelector('#country').value;
+                            formData['About'] = document.querySelector('#about').value;
+                            // Convert formData to JSON string
+                            var jsonString = JSON.stringify(formData);
+
+                            // AJAX request to submit the form data
+                            $.ajax({
+                                url: '/api/JourneyOrder/create', // Replace with the actual API endpoint
+                                type: 'POST',
+                                contentType: 'application/json',
+                                data: jsonString,
+                                success: function (response) {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: '訂單已創建',
+                                        text: response.message,
+                                        timer: 2000, // Auto close after 2 seconds
+                                        showConfirmButton: false
+                                    }).then(() => {
+                                        // Redirect to another page after the alert is closed
+                                        window.location.href = '/Home/CreateOrder'; // Replace with your desired URL
+                                    });
+                                },
+                                error: function (xhr) {
+                                    var errorMessage = xhr.responseJSON?.message || '發生錯誤！';
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: errorMessage,
+                                        timer: 2000, // Auto close after 2 seconds
+                                        showConfirmButton: false
+                                    });
+                                }
+                            });
+                        }
+                    }, false);
+                });
+        })();
+    </script>
+}

@@ -1,0 +1,108 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutFillow.cshtml";
+    ViewData["Title"] = "我的旅遊";
+}
+@model List<Fillow.Models.partneradmin.TravelPlan>
+
+<div class="content-body default-height">
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Gtrip</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">我的旅遊</a></li>
+            </ol>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card" style="height:auto !important;">
+                    <div class="card-header">
+                        <h4 class="card-title">我的旅遊</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive" style="overflow-x:unset !important;">
+                            <table class="table table-responsive-md">
+                                <thead>
+                                    <tr>
+                                        <th style="width:80px;"></th>
+                                        <th>旅遊名稱</th>
+                                        <th>類型</th>
+                                        <th>價錢</th>
+                                        <th>查看旅遊路線</th>
+                                        <th>建議參與人數</th>
+                                        <th>旅遊天數</th>
+                                        <th>語言</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var plan in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <img src="https://travel-ge.com/wp-content/uploads/2023/11/Chateau-de-Chantilly-450x300.jpeg" alt="Image" style="width: 50px; height: auto;" />
+                                            </td>
+                                            <td>@plan.Name</td>
+                                            <td>@plan.Type</td>
+                                            <td>@plan.Price.ToString("C")</td>
+                                            <td><a href="#">旅遊路線</a></td>
+                                            <td>@plan.RecommendedParticipants</td>
+                                            <td>@plan.DurationInDays</td>
+                                            <td>@plan.Language</td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button type="button" class="btn btn-success light sharp" data-bs-toggle="dropdown">
+                                                        <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1">
+                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                <rect x="0" y="0" width="24" height="24" />
+                                                                <circle fill="#000000" cx="5" cy="12" r="2" />
+                                                                <circle fill="#000000" cx="12" cy="12" r="2" />
+                                                                <circle fill="#000000" cx="19" cy="12" r="2" />
+                                                            </g>
+                                                        </svg>
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="#">Edit</a>
+                                                        <a class="dropdown-item" href="#">Delete</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <div class="d-flex align-items-center justify-content-between flex-wrap">
+                                <p class="mb-2 me-3">頁面 1 / 3</p>
+                                <nav aria-label="Page navigation example mb-2">
+                                    <ul class="pagination mb-2 mb-sm-0">
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);"><i class="fa-solid fa-angle-left"></i></a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+                                        <li class="page-item"><a class="page-link " href="javascript:void(0);"><i class="fa-solid fa-angle-right"></i></a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Fillow_style
+    {
+	
+}
+
+@section Fillow_script
+    {
+    <!-- Required vendors -->
+    <script src="~/Fillow/vendor/global/global.min.js"></script>
+    <script src="~/Fillow/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <script src="~/Fillow/js/custom.min.js"></script>
+    <script src="~/Fillow/js/dlabnav-init.js"></script>
+    <script src="~/Fillow/js/demo.js"></script>
+    
+}

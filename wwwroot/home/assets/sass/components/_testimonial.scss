@@ -1,0 +1,25 @@
+.testimonial {
+    &__slider {
+        .section__header {
+            h2 {
+                @include breakpoint(lg) {
+                    max-width: 400px;
+                }
+            }
+        }
+    }
+    &__thumb {}
+    &__content {
+        h5 {
+            span {
+                @include font-size(16px);
+                font-weight: 400;
+            }
+        }
+        .rating {
+            i {
+                color: $theme-color2;
+            }
+        }
+    }
+}

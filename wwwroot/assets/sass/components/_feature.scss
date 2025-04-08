@@ -1,0 +1,50 @@
+.feature {
+    &__item {}
+    &__inner {
+        @extend %p-rel;
+        @extend %of-hidden;
+        @include add-prefix(border-radius, (14px));
+        &:hover {
+            .feature {
+                &__thumb {
+                    img {
+                        @include add-prefix(transform, (scale(1.2)));
+                    }
+                }
+                &__pakedge {
+                    background: $theme-color;
+                    color: $white-color;
+                }
+            }
+        }
+    }
+    &__thumb {
+        img {
+            @extend %w-100;
+        }
+    }
+    &__content {
+        @extend %p-abs;
+        left: 15px;
+        bottom: 15px;
+        h2 {
+            color: $white-color;
+            margin-bottom: 5px;
+        }
+        p {
+            color: $white-color;
+            margin-bottom: 0;
+        }
+    }
+    &__pakedge {
+        @extend %p-abs;
+        padding: 9px 19px;
+        background: $white-color;
+        color: $theme-color;
+        top: 15px;
+        right: 15px;
+        font-weight: 700;
+        @include add-prefix(border-radius, (4px));
+        @include add-prefix(transition, (all .3s ease));
+    }
+}

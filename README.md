@@ -1,3 +1,0 @@
-# gtrip
-# gtrip
-# gtrip

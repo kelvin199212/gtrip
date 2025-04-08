@@ -1,0 +1,154 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutFillow.cshtml";
+	ViewData["Title"] = "添加旅程訂單";
+}
+<div class="content-body default-height">
+	<div class="container-fluid">
+		<!-- row -->
+		<div class="row">
+			<div class="col-xl-12 col-lg-12">
+				<div class="card profile-card card-bx m-b30">
+					<div class="card-header">
+						<h6 class="title">客戶資訊</h6>
+					</div>
+					<form class="profile-form">
+						
+						<div class="card-body">
+							<h4>個人資訊</h4>
+							<div class="row">
+								<div class="col-sm-12 m-b30">
+									<label class="form-label">使用者郵箱</label>
+									<input type="text" class="form-control" value="">
+								</div>
+								<div class="col-sm-6 m-b30">
+									<label class="form-label">客戶名字 (*):</label>
+									<input type="email" class="form-control" placeholder="">
+								</div>
+								<div class="col-sm-6 m-b30">
+									<label class="form-label">客戶姓氏 (*):</label>
+									<input type="email" class="form-control" value="">
+								</div>
+								<div class="col-sm-6 m-b30">
+									<label class="form-label">顧客電子郵箱 (*):</label>
+									<input type="text" class="form-control" value="">
+								</div>
+																<div class="col-sm-6 m-b30">
+									<label class="form-label">顧客電話 (*):</label>
+									<input type="text" class="form-control" value="">
+								</div>
+								<div class="col-sm-6 m-b30">
+									<label class="form-label">客戶地址:</label>
+									<input type="text" class="form-control" value="">
+								</div>
+								<div class="col-sm-6 m-b30">
+									<label class="form-label">客戶地址2:</label>
+									<input type="text" class="form-control" value="">
+								</div>
+								<div class="col-sm-6 m-b30">
+									<label class="form-label">性別</label>
+									<select class="default-select form-control wide">
+										<option>男</option>
+										<option>女</option>
+									</select>
+
+								</div>
+								<div class="col-sm-6 m-b30">
+									<label class="form-label">出生日期</label>
+									<input type="text" class="form-control mb-3 mb-xl-0" placeholder="XXXX-XX-XX" id="datepicker">
+								</div>
+								<div class="col-sm-6 m-b30">
+									<label class="form-label">關於你自己</label>
+									<textarea type="text" class="form-control" value=""></textarea>
+								</div>
+							</div>
+					
+
+						<hr class="solid">
+
+						<h4>地點</h4>
+						<div class="row">
+						<div class="col-sm-6 m-b30">
+							<label class="form-label">本地機場</label>
+							<input type="text" class="form-control" value="">
+						</div>
+						<div class="col-sm-6 m-b30">
+							<label class="form-label">地址</label>
+							<input type="text" class="form-control" value="">
+						</div>
+						<div class="col-sm-6 m-b30">
+							<label class="form-label">城市</label>
+							<input type="text" class="form-control" value="">
+						</div>
+						<div class="col-sm-6 m-b30">
+							<label class="form-label">
+								州/省/地區
+							</label>
+							<input type="text" class="form-control" value="">
+						</div>
+						<div class="col-sm-6 m-b30">
+							<label class="form-label">郵政編碼/郵政編碼</label>
+							<input type="text" class="form-control" value="">
+						</div>
+						<div class="col-sm-6 m-b30">
+							<label class="form-label">國家</label>
+							<input type="text" class="form-control" value="">
+						</div>
+							</div>
+						<div class="card-footer">
+							<button class="btn btn-primary">更新</button>
+							<a href="@Url.Action("ForgotPassword","Fillow")" class="btn-link">忘記密碼?</a>
+						</div>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+		</div>
+		<!--**********************************
+			Footer start
+		***********************************-->
+		<!--**********************************
+			Footer end
+		***********************************-->
+	</div>
+</div>
+
+
+@section Fillow_style
+    {
+    <link href="~/Fillow/vendor/bootstrap-datepicker-master/css/bootstrap-datepicker.min.css" rel="stylesheet">
+}
+
+@section Fillow_script
+    {
+	<!-- Required vendors -->
+	<script src="~/Fillow/vendor/global/global.min.js"></script>
+	<script src="~/Fillow/vendor/bootstrap-datepicker-master/js/bootstrap-datepicker.min.js"></script>
+	<script src="~/Fillow/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+	<script src="~/Fillow/js/custom.min.js"></script>
+	<script src="~/Fillow/js/dlabnav-init.js"></script>
+	<script src="~/Fillow/js/demo.js"></script>
+	<script>
+
+		$(document).ready(function () {
+			// Trigger the file input when the "上載個人介紹短片" link is clicked
+			$('#upload-video-link').on('click', function () {
+				$('#video-upload').click();
+			});
+
+			// Handle video file selection and preview
+			$('#video-upload').on('change', function (event) {
+				var file = event.target.files[0];
+				if (file) {
+					// Create a URL for the selected video
+					var videoURL = URL.createObjectURL(file);
+
+					// Set the video source and show the preview section
+					$('#video-player').attr('src', videoURL);
+					$('.video-preview').show();
+				}
+			});
+		});
+
+	</script>
+}

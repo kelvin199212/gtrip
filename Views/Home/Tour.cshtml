@@ -1,0 +1,1406 @@
+﻿@{
+	ViewData["Title"] = "Gtrippro";
+	Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #000000 !important;
+        background-color: #f9f9f9;
+    }
+
+    .main-content{
+        margin-top: 10%;
+    }
+
+    .tour-images {
+        width: 70%;
+        margin: 0 auto;
+        overflow: hidden; /* To contain floated elements */
+    }
+
+    .large-image {
+        float: left;
+        width: 47%; /* Adjust width of the large image section */
+        margin-right: 0.5%; /* Add some space between the large image and the small images */
+    }
+
+        .large-image img {
+            width: 100%;
+            height: auto;
+        }
+
+    .small-images-container {
+        float: left;
+        width: 48%; /* This will make the small images section take up 33% of the container */
+
+    }
+
+    .small-image {
+        width: 48%; /* Each small image takes about half of the container width (with margins) */
+        float: left;
+        margin-right: 1%;
+        margin-bottom: 1%;
+    }
+
+        .small-image:nth-child(2n) {
+            margin-right: 0; /* Removes margin for the last image in each row */
+        }
+
+        .small-image img {
+            width: 100%;
+            height: auto;
+            object-fit: cover; /* Ensure images don't get stretched */
+        }
+
+    .col-md-10 {
+        max-width: 100%;
+    }
+
+    .product-title__name {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .product-action .btn-wish {
+        cursor: pointer;
+    }
+
+    .layout-list {
+        display: flex;
+        gap: 10px;
+    }
+
+    .critical-info {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+    }
+
+    .product-score {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .text-primary {
+        color: #007bff;
+    }
+
+    .text-grey-light {
+        color: #6c757d;
+    }
+
+    .text-grey {
+        color: #999;
+    }
+
+    .product-benefit .critical-info-text {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .kk-icon {
+        margin-right: 5px;
+    }
+
+    hr {
+        margin: 20px 0;
+        border: 1px solid #ddd;
+    }
+
+    #prodInfo > ul {
+        margin: 20px !important;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .text-muted {
+        color: #6c757d;
+    }
+
+    .review-item {
+        padding: 15px;
+        margin-bottom: 10px;
+    }
+
+    .review-info {
+        display: flex;
+        font-size: 15px;
+    }
+
+    .review-content{
+        border: 1px solid #e3e3e3;
+        background-color: #f6f6f6;
+        border-radius: 6px;
+        margin-top: 15px;
+        padding: 15px;
+        position: relative;
+    }
+    .review-content h4 {
+        margin-top: 10px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .photo-group {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .photo-item img {
+        width: 140px;
+        height: 105px;
+        object-fit: cover;
+    }
+
+    .product-benefit{
+        display: flex;
+    }
+
+    #section1{
+        width: 70%;
+        position: relative;
+        margin: auto;
+        display: flex;
+    }
+
+    .tour-details{
+        position: relative;
+        width: 75%;
+    }
+
+    .booking-section{
+        position: relative;
+        width: 20%;
+    }
+
+    #option-sec{
+        background-color: #f5f5f5;
+        padding: 40px 20%;
+        margin: 0;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    #prodInfo > ul li {
+        list-style: disc !important;
+        margin-top: 10px;
+    }
+
+    .container {
+        position: relative;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .info-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .option-item {
+        padding: 20px;
+        border: 1px solid #ddd;
+        margin-bottom: 20px;
+        background-color: #f9f9f9;
+    }
+
+    .option-content h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .option-content ul {
+        margin: 10px 0;
+        padding-left: 20px;
+    }
+
+        .option-content ul li {
+            font-size: 14px;
+        }
+
+    .label-danger {
+        color: #d9534f;
+    }
+
+    .product-pricing {
+        margin-bottom: 10px;
+    }
+
+    .kk-price-local {
+        font-size: 20px;
+    }
+
+    .kk-price-sale {
+        font-size: 16px;
+        text-decoration: line-through;
+        color: #888;
+    }
+
+    .kk-button {
+        padding: 10px 20px;
+        background-color: #5cb85c;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+        .kk-button:hover {
+            background-color: #4cae4c;
+        }
+
+    .tip {
+        font-size: 14px;
+        color: #337ab7;
+    }
+
+    #booking-bar {
+        padding: 20px;
+    }
+
+    .price-bar {
+        background-color: #f9f9f9;
+        padding: 15px;
+        border-radius: 5px;
+    }
+
+    .product-pricing {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .kk-price-local {
+        font-size: 24px;
+        display: flex;
+        align-items: baseline;
+    }
+
+    .kk-price-base {
+        display: flex;
+        align-items: center;
+    }
+
+    .kk-price-origin {
+        display: flex;
+        align-items: center;
+    }
+
+    .kk-price-local__currency--symbol {
+        font-weight: bold;
+    }
+
+    .kk-price-local__normal {
+        font-size: 32px;
+        margin-left: 5px;
+    }
+
+    .kk-price-local__from {
+        margin-left: 10px;
+        font-size: 16px;
+        color: #888;
+    }
+
+    .kk-price-sale .kk-price-local__normal {
+        text-decoration: line-through;
+        color: #888;
+    }
+
+    .kk-button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .kk-button:hover {
+            background-color: #0056b3;
+        }
+
+    .label-warning {
+        font-size: 14px;
+        color: #856404;
+        background-color: #fff3cd;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    #product-desc-module-scroll-spy{
+        border-radius: 6px;
+        padding-left: 30px;
+        padding-top: 45px;
+        top:105px;
+    }
+
+    .navbar {
+        width: 100%;
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #ddd;
+        position: relative; /* Initial position */
+        z-index: 1; /* Ensure it stays above other content */
+        padding: 10px; /* Optional padding */
+    }
+
+        /* Style applied when navbar is fixed */
+        .navbar.fixed {
+            position: fixed;
+            top: 0;
+            width: inherit; /* Keep it the same width as the container */
+        }
+
+    .nav{
+    display:block !important;
+    }
+
+    #product-desc-module-scroll-spy .nav > li > a {
+        color: #666;
+        padding: 5px 0;
+    }
+
+    .scheduler-container {
+        width: 60%;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+        .scheduler-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+    #calendar {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .price-label {
+        font-size: 16px;
+        color: #007bff;
+        text-align: center;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+
+    .btn-group {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+        .btn-group button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        color: #fff;
+    }
+
+    .input-section{
+        width: 30%;
+    }
+
+    #datepicker{
+    width:50%;
+    }
+
+    #datepicker> div{
+        width: 80%;
+    height: 100%;
+    }
+
+    .calendar-section{
+    display:flex;
+
+    }
+</style>
+
+<body>
+
+    <!-- Main Content Section -->
+    <div class="main-content">
+
+        <!-- Image Carousel or Tour Image Section -->
+        <!-- Tour Image Section with 1 large image and 4 smaller images -->
+        <!-- Tour Image Section with 1 large image on the left and 4 images in a 2x2 grid on the right -->
+        <div class="tour-images">
+            <div class="large-image">
+                <img src="assets/images/packege/11.jpg" alt="Large Tour Image">
+            </div>
+            <div class="small-images-container">
+                <div class="small-image">
+                    <img src="assets/images/packege/11.jpg" alt="Small Tour Image 1">
+                </div>
+                <div class="small-image">
+                    <img src="assets/images/packege/11.jpg" alt="Small Tour Image 2">
+                </div>
+                <div class="small-image">
+                    <img src="assets/images/packege/11.jpg" alt="Small Tour Image 3">
+                </div>
+                <div class="small-image">
+                    <img src="assets/images/packege/11.jpg" alt="Small Tour Image 4">
+                </div>
+            </div>
+        </div>
+        <!-- Tour Details Section -->
+        <div id="section1" style="">
+        <div class="tour-details">
+                <div class="col-md-10">
+                    <div id="prodInfo">
+                        <div class="product-name">
+                            <div class="product-title">
+                                <h1 class="product-title__name">【一人成團】北九州・山口｜山口多元魅力一日遊｜門司港＆唐戶市場＆角島大橋＆元乃隅神社（含關門海峽跨海渡輪體驗）｜福岡出發</h1>
+                            </div>@* 
+                            <ul class="product-action list-unstyled">
+                                <li><div class="btn-wish"><i class="fa fa-heart-o"></i></div></li>
+                            </ul> *@
+                        </div>
+
+                        <div class="layout-list">
+                            <div class="critical-info">
+                                <i class="icons icon-location-pin"></i>
+                                <a href="https://www.kkday.com/zh-hk/product/productlist/A01-003" target="_blank">日本</a> -
+                                <a href="https://www.kkday.com/zh-hk/product/productlist/A01-003?city=A01-003-00053" target="_blank">山口</a>,
+                                <a href="https://www.kkday.com/zh-hk/product/productlist/A01-003?city=A01-003-00047" target="_blank">九州</a>,
+                                <a href="https://www.kkday.com/zh-hk/product/productlist/A01-003?city=A01-003-00040" target="_blank">福岡</a>
+                            </div>
+
+                            <div class="product-score">
+                                <b class="text-primary">4.7</b>
+                                ★★★★★
+                                <span class="text-grey-light">(337)</span> | <span class="text-grey">已售出 1K+</span>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="product-benefit">
+                            <div class="critical-info-text">
+                                <i class="kk-icon kk-icon--sm"><use href="#ic_paperPlane_line"></use></i> 1個工作日內確認
+                            </div>
+                            <div class="critical-info-text">
+                                <i class="kk-icon kk-icon--sm"><use href="#ic_clock_line"></use></i> 行程時間 11 小時
+                            </div>
+                            <div class="critical-info-text">
+                                <i class="kk-icon kk-icon--sm"><use href="#ic_earth_line"></use></i> 日本語/中文 導覽
+                            </div>
+                            <div class="critical-info-text">
+                                <i class="kk-icon kk-icon--sm"><use href="#ic_currencyRelaod_line"></use></i> 12天前可免費取消
+                            </div>
+                            <div class="critical-info-text">
+                                <i class="kk-icon kk-icon--sm"><use href="#ic_deviceMobile_line"></use></i> 現場請出示電子憑證
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <ul>
+                            <li>此行程配有領隊，服務語言為中文及日文</li>
+                            <li>搭乘舒適旅遊專車，體驗11個小時的大自然行程</li>
+                            <li>行程多元而魅力十足</li>
+                        </ul>
+                    </div>
+
+                    <div class="recent-review">
+                        <h3>旅客評價 <a class="text-muted pull-right" style="font-size: 15px;">更多評價 <i class="fa fa-angle-right"></i></a></h3>
+                        <div class="review-item">
+                            <div class="review-detail">
+                                <div class="review-info">
+                                    <span class="member-name">Gtrip會員</span>
+                                    <div class="product-star" style="margin-left: 10px;">
+                                        ★★★★★
+                                    </div>
+                                    <span style="margin-left:10px;">2024/09/30 · 單人旅遊</span>
+                                </div>
+                                <div class="review-content">
+                                    <h4>好開心，物有所值，讚</h4>
+                                    <p>我係第一次參加本地遊，導遊石橋好專業資料預備充足，熱情又細心，玩得好開心。</p>
+
+                                    <ul class="photo-group">
+                                        <li class="photo-item"><img src="assets/images/packege/11.jpg" alt="Review Photo 1"></li>
+                                        <li class="photo-item"><img src="assets/images/packege/11.jpg" alt="Review Photo 2"></li>
+                                        <li class="photo-item"><img src="assets/images/packege/11.jpg" alt="Review Photo 3"></li>
+                                        <li class="photo-item"><img src="assets/images/packege/11.jpg" alt="Review Photo 4"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+
+        <!-- Booking Section -->
+        <div class="booking-section">
+                <div class="layout-list product-bar-content" id="booking-bar">
+                    <div class="price-bar">
+                        <div class="container">
+                            <div class="price-info">
+                                <div class="product-pricing">
+                                    <div class="kk-price-local">
+                                        <div class="kk-price-base">
+                                            <div class="kk-price-origin">
+                                                <span class="kk-price-local__currency--symbol">HK$</span>
+                                                <span class="kk-price-local__normal">428</span>
+                                            </div>
+                                            <div class="kk-price-local__from">起</div>
+                                        </div>
+                                        <div class="kk-price-sale">
+                                            <div class="kk-price-origin">
+                                                <span class="kk-price-local__currency--symbol">HK$</span>
+                                                <span class="kk-price-local__normal">535</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="kk-button btn-not-alone">
+                                    選擇方案
+                                </button>
+                            </div>
+                            <div class="label label-warning">
+                                首次使用APP訂購，輸入優惠碼「APP15HK」即減$15
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+        </div>
+
+        <div id="option-sec" class="option-section container">
+            <h3 class="info-title">選擇方案</h3>
+            <div class="option-item" id="optionItem462541">
+                <div class="option-head">
+                    <div class="option-content">
+                        <h3><span>【限量20%折扣】山口多元魅力一日遊</span> <span class="label label-danger">12天前可免費取消</span></h3>
+                        <ul>
+                            <li>未滿 3 歲的嬰幼兒可免費參加（無座位），預約時請備註。</li>
+                        </ul>
+                    </div>
+                    <div class="option-action">
+                        <div class="product-pricing">
+                            <div class="kk-price-local">
+                                <div class="kk-price-base">HK$ 428</div>
+                                <div class="kk-price-sale">HK$ 535</div>
+                            </div>
+                        </div>
+                        <button type="button" class="kk-button select-option">選擇</button>
+                        <div class="tip">最早可預訂日：2024-10-05</div>
+                    </div>
+                </div>
+                <div class="booking-container">
+                    <h2>Book Your Trip</h2>
+
+                    <div class="calendar-section">
+                        <!-- Calendar -->
+                        <div id="datepicker"></div>
+
+                        <!-- Input for selecting time, group size, and price display -->
+                        <div class="input-section">
+                            <div class="quantity-picker">
+                                <label>Adults</label>
+                                <div>
+                                    <button id="adult-minus">-</button>
+                                    <span id="adult-count">1</span>
+                                    <button id="adult-plus">+</button>
+                                </div>
+                            </div>
+
+                            <div class="quantity-picker">
+                                <label>Children</label>
+                                <div>
+                                    <button id="children-minus">-</button>
+                                    <span id="children-count">0</span>
+                                    <button id="children-plus">+</button>
+                                </div>
+                            </div>
+
+                            <div class="time-picker">
+                                <label for="time-select">Start Time</label>
+                                <select id="time-select">
+                                    <option value="08:00">08:00</option>
+                                    <option value="09:00">09:00</option>
+                                    <option value="10:00">10:00</option>
+                                    <option value="11:00">11:00</option>
+                                </select>
+                            </div>
+
+                            <div class="price-label">Selected Price: HK$ <span id="selectedPrice">0</span></div>
+
+                            <!-- Action Buttons -->
+                            <div class="btn-group">
+                                <button class="btn-primary">Add to Cart</button>
+                                <button class="btn-success">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-section">
+                        <p><strong>Selected Date:</strong> <span id="selectedDate">None</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="option-item" id="optionItem456838">
+                <div class="option-head">
+                    <div class="option-content">
+                        <h3><span>山口多元魅力一日遊</span> <span class="label label-danger">12天前可免費取消</span></h3>
+                        <ul>
+                            <li>未滿 3 歲的嬰幼兒可免費參加（無座位），預約時請備註。</li>
+                        </ul>
+                    </div>
+                    <div class="option-action">
+                        <div class="product-pricing">
+                            <div class="kk-price-local">HK$ 535</div>
+                        </div>
+                        <button type="button" class="kk-button select-option">選擇</button>
+                        <div class="tip">最早可預訂日：2024-10-05</div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+     
+
+            <div id="fixed-container" class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div id="product-info-sec" class="info-section">
+                            <h3 class="info-title">
+                                商品說明
+                            </h3> <div data-v-653d6ca8="" class="info-sec-collapsable expand">
+                                <div data-v-653d6ca8=""><p>－ 行程介紹 －<br></p><ul><li>門司港</li></ul><p>門司港是日本福岡縣的一個歷史悠久的港口城市。這裡有保存完好的古老碼頭建築和倉庫，可以感受到濃厚的港口氛圍。另外，還有一些博物館和文化遺產，可以深入了解門司港的歷史和文化。</p><ul><li>渡輪體驗-關門連絡船</li></ul><p>關門連絡船的特色之一是它的運營時間很短，僅需幾分鐘即可穿越關門海峽，因此是連接福岡與山口之間的最快交通方式之一。乘坐關門連絡船，你可以欣賞到壯觀的海景和兩岸的美景。</p><ul><li>唐戶市場</li></ul><p>唐戶市場1樓將全面變身為海鮮屋台街「活力馬關街」。 用新鮮的食材製作的握壽司、味噌湯、油炸等美食不勝枚舉，當然也會有河豚生魚片，喜歡海鮮或者日式料理的遊客，這裡必然不能錯過。</p><ul><li>角島大橋</li></ul><p>角島大橋連接著山口縣本州與角島，是一座壯麗的橋樑。你可以欣賞到壯麗的海景和橋樑的建築美。站在橋上，可以俯瞰到蔚藍的海洋和周圍的風景，絕對是一個難忘的觀光點。</p><ul><li>元乃隅神社</li></ul><p>遵從白狐帶來的神諭，於1955年從島根縣津和野町太鼓谷稻成神社分靈（求取神明的靈力）建成的神社。&nbsp; 從龍宮潮吹景點到神社的途中，有123座紅色的鳥居，十分令人印象深刻。仔細觀察神社高臺上的鳥居……功德箱居然在頭頂上方！ 據說把香火錢投進去，願望就能實現。</p><p><br></p><p>九州推薦行程：</p><p><a href="https://www.kkday.com/zh-tw/product/32511">【一人成團】日本九州一日遊｜高千穗峽＆上色見熊野座神社＆天岩戸神社｜福岡出發</a></p><p><a href="https://www.kkday.com/zh-tw/product/21811">【一人成團】日本熊本一日遊｜熊本城＆阿蘇山火山口＆黑川溫泉｜福岡出發</a></p></div>  <div data-v-653d6ca8="" class="overlap">
+                                  
+                                </div>
+                            </div> <!----> <!----> <!----><div data-v-653d6ca8="" class="info-sec-collapsable" style="position: absolute; visibility: hidden; width: 750px;"><div data-v-653d6ca8=""><p>－ 行程介紹 －<br></p><ul><li>門司港</li></ul><p>門司港是日本福岡縣的一個歷史悠久的港口城市。這裡有保存完好的古老碼頭建築和倉庫，可以感受到濃厚的港口氛圍。另外，還有一些博物館和文化遺產，可以深入了解門司港的歷史和文化。</p><ul><li>渡輪體驗-關門連絡船</li></ul><p>關門連絡船的特色之一是它的運營時間很短，僅需幾分鐘即可穿越關門海峽，因此是連接福岡與山口之間的最快交通方式之一。乘坐關門連絡船，你可以欣賞到壯觀的海景和兩岸的美景。</p><ul><li>唐戶市場</li></ul><p>唐戶市場1樓將全面變身為海鮮屋台街「活力馬關街」。 用新鮮的食材製作的握壽司、味噌湯、油炸等美食不勝枚舉，當然也會有河豚生魚片，喜歡海鮮或者日式料理的遊客，這裡必然不能錯過。</p><ul><li>角島大橋</li></ul><p>角島大橋連接著山口縣本州與角島，是一座壯麗的橋樑。你可以欣賞到壯麗的海景和橋樑的建築美。站在橋上，可以俯瞰到蔚藍的海洋和周圍的風景，絕對是一個難忘的觀光點。</p><ul><li>元乃隅神社</li></ul><p>遵從白狐帶來的神諭，於1955年從島根縣津和野町太鼓谷稻成神社分靈（求取神明的靈力）建成的神社。&nbsp; 從龍宮潮吹景點到神社的途中，有123座紅色的鳥居，十分令人印象深刻。仔細觀察神社高臺上的鳥居……功德箱居然在頭頂上方！ 據說把香火錢投進去，願望就能實現。</p><p><br></p><p>九州推薦行程：</p><p><a href="https://www.kkday.com/zh-tw/product/32511">【一人成團】日本九州一日遊｜高千穗峽＆上色見熊野座神社＆天岩戸神社｜福岡出發</a></p><p><a href="https://www.kkday.com/zh-tw/product/21811">【一人成團】日本熊本一日遊｜熊本城＆阿蘇山火山口＆黑川溫泉｜福岡出發</a></p></div>  <!----></div>
+                        </div>
+
+                        <hr>
+                        
+                        <div id="schedule-sec" class="info-section">
+                            <h3 class="info-title">
+                                行程介紹
+                            </h3> <div class="info-sec-collapsable expand">
+                                <div class="critical-info"><i class="icons icon-clock"></i><span>行程時間：11 小時</span></div> <div>
+                                    <h4 class="info-subtitle">
+                                        第1天
+                                    </h4> <!----> <ul class="time-info">
+                                        <li class="time-info-spot">
+                                            <div class="time-info-title">
+                                                <!----> <div class="txt">
+                                                    認拿有“Easy Go”牌子的工作人員
+                                                </div>
+                                            </div> <div class="pd-info-img" style="height: 435px;">
+                                                <img data-target="#sche-modal-0-0-0" alt="" data-toggle="modal" data-src="https://image.kkday.com/v2/image/get/w_960%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230529062513_4szz4/jpg" src="https://image.kkday.com/v2/image/get/w_960%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230529062513_4szz4/jpg" lazy="loaded"> <div id="sche-modal-0-0-0" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade modal-fullscreen modal-lightbox">
+                                                    <div class="modal-dialog" style="max-width: none;">
+                                                        <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.6);">
+                                                            <div class="modal-header">
+                                                                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">
+                                                                    ×
+                                                                </button>
+                                                            </div> <div class="modal-body"><div class="owl-theme fade"><!----> <div class="item"><img data-src="https://image.kkday.com/v2/image/get/w_1920%2Ch_1080%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230529062513_4szz4/jpg" alt="" class="owl-lazy" style="display: none;"> <div class="loading"><i class="fa fa-circle-o-notch fa-spin"></i></div> <div class="photo-by"><p><!----> <!----></p></div></div></div></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="time-info-spot">
+                                            <div class="time-info-title">
+                                                <!----> <div class="txt">
+                                                    工作人員背心
+                                                </div>
+                                            </div> <div class="pd-info-img" style="height: 510.75px;">
+                                                <img data-target="#sche-modal-0-1-0" alt="" data-toggle="modal" data-src="https://image.kkday.com/v2/image/get/w_960%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230529062515_7Z1nJ/jpg" src="https://image.kkday.com/v2/image/get/w_960%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230529062515_7Z1nJ/jpg" lazy="loaded"> <div id="sche-modal-0-1-0" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade modal-fullscreen modal-lightbox">
+                                                    <div class="modal-dialog" style="max-width: none;">
+                                                        <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.6);">
+                                                            <div class="modal-header">
+                                                                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">
+                                                                    ×
+                                                                </button>
+                                                            </div> <div class="modal-body"><div class="owl-theme fade"><!----> <div class="item"><img data-src="https://image.kkday.com/v2/image/get/w_1920%2Ch_1080%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230529062515_7Z1nJ/jpg" alt="" class="owl-lazy" style="display: none;"> <div class="loading"><i class="fa fa-circle-o-notch fa-spin"></i></div> <div class="photo-by"><p><!----> <!----></p></div></div></div></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="time-info-spot">
+                                            <div class="time-info-title">
+                                                <div class="time">
+                                                    08:20
+                                                </div> <div class="txt">
+                                                    請於 Oriental Hotel 中的便利商店 LAWSON 前等候
+                                                </div>
+                                            </div> <div class="pd-info-img" style="height: 405px;">
+                                                <img data-target="#sche-modal-0-2-0" alt="" data-toggle="modal" data-src="https://image.kkday.com/v2/image/get/w_960%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230529062514_eKihX/jpg" src="https://image.kkday.com/v2/image/get/w_960%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230529062514_eKihX/jpg" lazy="loaded"> <div id="sche-modal-0-2-0" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade modal-fullscreen modal-lightbox">
+                                                    <div class="modal-dialog" style="max-width: none;">
+                                                        <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.6);">
+                                                            <div class="modal-header">
+                                                                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">
+                                                                    ×
+                                                                </button>
+                                                            </div> <div class="modal-body"><div class="owl-theme fade"><!----> <div class="item"><img data-src="https://image.kkday.com/v2/image/get/w_1920%2Ch_1080%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230529062514_eKihX/jpg" alt="" class="owl-lazy" style="display: none;"> <div class="loading"><i class="fa fa-circle-o-notch fa-spin"></i></div> <div class="photo-by"><p><!----> <!----></p></div></div></div></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="time-info-spot">
+                                            <div class="time-info-title">
+                                                <div class="time">
+                                                    08:30
+                                                </div> <div class="txt">
+                                                    福岡 JR 博多站筑紫口出發（逾時不候）
+                                                </div>
+                                            </div> <div class="pd-info-img" style="height: 540px;">
+                                                <img data-target="#sche-modal-0-3-0" alt="" data-toggle="modal" data-src="https://image.kkday.com/v2/image/get/w_960%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230529062520_LRA1B/jpg" src="https://image.kkday.com/v2/image/get/w_960%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230529062520_LRA1B/jpg" lazy="loaded"> <div id="sche-modal-0-3-0" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade modal-fullscreen modal-lightbox">
+                                                    <div class="modal-dialog" style="max-width: none;">
+                                                        <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.6);">
+                                                            <div class="modal-header">
+                                                                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">
+                                                                    ×
+                                                                </button>
+                                                            </div> <div class="modal-body"><div class="owl-theme fade"><!----> <div class="item"><img data-src="https://image.kkday.com/v2/image/get/w_1920%2Ch_1080%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230529062520_LRA1B/jpg" alt="" class="owl-lazy" style="display: none;"> <div class="loading"><i class="fa fa-circle-o-notch fa-spin"></i></div> <div class="photo-by"><p><!----> <!----></p></div></div></div></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="time-info-spot">
+                                            <div class="time-info-title">
+                                                <!----> <div class="txt">
+                                                    門司港 風景
+                                                </div>
+                                            </div> <div class="pd-info-img" style="height: 478.5px;">
+                                                <img data-target="#sche-modal-0-4-0" alt="" data-toggle="modal" data-src="https://image.kkday.com/v2/image/get/w_960%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230530011055_VUSJF/jpg" src="https://image.kkday.com/v2/image/get/w_960%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230530011055_VUSJF/jpg" lazy="loaded"> <div id="sche-modal-0-4-0" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade modal-fullscreen modal-lightbox">
+                                                    <div class="modal-dialog" style="max-width: none;">
+                                                        <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.6);">
+                                                            <div class="modal-header">
+                                                                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">
+                                                                    ×
+                                                                </button>
+                                                            </div> <div class="modal-body"><div class="owl-theme fade"><!----> <div class="item"><img data-src="https://image.kkday.com/v2/image/get/w_1920%2Ch_1080%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230530011055_VUSJF/jpg" alt="" class="owl-lazy" style="display: none;"> <div class="loading"><i class="fa fa-circle-o-notch fa-spin"></i></div> <div class="photo-by"><p><!----> <!----></p></div></div></div></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="time-info-spot">
+                                            <div class="time-info-title">
+                                                <div class="time">
+                                                    09:50
+                                                </div> <div class="txt">
+                                                    門司港懷舊區+跨海渡輪+唐戶市場（停留時間 150 分鐘）
+                                                </div>
+                                            </div> <div class="pd-info-img" style="height: 479.25px;">
+                                                <img data-target="#sche-modal-0-5-0" alt="" data-toggle="modal" data-src="https://image.kkday.com/v2/image/get/w_960%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230530011106_lwxLR/jpg" src="https://cdn.kkday.com/pc-web/assets/img/bg_default.svg" lazy="loading"> <div id="sche-modal-0-5-0" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade modal-fullscreen modal-lightbox">
+                                                    <div class="modal-dialog" style="max-width: none;">
+                                                        <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.6);">
+                                                            <div class="modal-header">
+                                                                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">
+                                                                    ×
+                                                                </button>
+                                                            </div> <div class="modal-body"><div class="owl-theme fade"><!----> <div class="item"><img data-src="https://image.kkday.com/v2/image/get/w_1920%2Ch_1080%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230530011106_lwxLR/jpg" alt="" class="owl-lazy" style="display: none;"> <div class="loading"><i class="fa fa-circle-o-notch fa-spin"></i></div> <div class="photo-by"><p><!----> <!----></p></div></div></div></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="time-info-spot">
+                                            <div class="time-info-title">
+                                                <!----> <div class="txt">
+                                                    ※發放跨海渡輪船票後解散，請自行登船，在海對岸的唐戶市場集合後前往下一個目的地
+                                                </div>
+                                            </div> <div class="pd-info-img" style="height: 540px;">
+                                                <img data-target="#sche-modal-0-6-0" alt="" data-toggle="modal" data-src="https://image.kkday.com/v2/image/get/w_960%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230628021341_TRtZu/jpg" src="https://cdn.kkday.com/pc-web/assets/img/bg_default.svg" lazy="loading"> <div id="sche-modal-0-6-0" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade modal-fullscreen modal-lightbox">
+                                                    <div class="modal-dialog" style="max-width: none;">
+                                                        <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.6);">
+                                                            <div class="modal-header">
+                                                                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">
+                                                                    ×
+                                                                </button>
+                                                            </div> <div class="modal-body"><div class="owl-theme fade"><!----> <div class="item"><img data-src="https://image.kkday.com/v2/image/get/w_1920%2Ch_1080%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230628021341_TRtZu/jpg" alt="" class="owl-lazy" style="display: none;"> <div class="loading"><i class="fa fa-circle-o-notch fa-spin"></i></div> <div class="photo-by"><p><!----> <!----></p></div></div></div></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="time-info-spot">
+                                            <div class="time-info-title">
+                                                <!----> <div class="txt">
+                                                    ※跨海渡輪每 20 分一班，請自行掌握好時間
+                                                </div>
+                                            </div> <!---->
+                                        </li>
+                                        <li class="time-info-spot">
+                                            <div class="time-info-title">
+                                                <!----> <div class="txt">
+                                                    抵達唐戶市場（午餐自理）
+                                                </div>
+                                            </div> <div class="pd-info-img" style="height: 540px;">
+                                                <img data-target="#sche-modal-0-8-0" alt="" data-toggle="modal" data-src="https://image.kkday.com/v2/image/get/w_960%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230530011108_EHwEW/jpg" src="https://cdn.kkday.com/pc-web/assets/img/bg_default.svg" lazy="loading"> <div id="sche-modal-0-8-0" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade modal-fullscreen modal-lightbox">
+                                                    <div class="modal-dialog" style="max-width: none;">
+                                                        <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.6);">
+                                                            <div class="modal-header">
+                                                                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">
+                                                                    ×
+                                                                </button>
+                                                            </div> <div class="modal-body"><div class="owl-theme fade"><!----> <div class="item"><img data-src="https://image.kkday.com/v2/image/get/w_1920%2Ch_1080%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230530011108_EHwEW/jpg" alt="" class="owl-lazy" style="display: none;"> <div class="loading"><i class="fa fa-circle-o-notch fa-spin"></i></div> <div class="photo-by"><p><!----> <!----></p></div></div></div></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="time-info-spot">
+                                            <div class="time-info-title">
+                                                <!----> <div class="txt">
+                                                    唐戶市場
+                                                </div>
+                                            </div> <div class="pd-info-img" style="height: 482.25px;">
+                                                <img data-target="#sche-modal-0-9-0" alt="" data-toggle="modal" data-src="https://image.kkday.com/v2/image/get/w_960%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230530011107_ccZwC/jpg" src="https://cdn.kkday.com/pc-web/assets/img/bg_default.svg" lazy="loading"> <div id="sche-modal-0-9-0" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade modal-fullscreen modal-lightbox">
+                                                    <div class="modal-dialog" style="max-width: none;">
+                                                        <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.6);">
+                                                            <div class="modal-header">
+                                                                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">
+                                                                    ×
+                                                                </button>
+                                                            </div> <div class="modal-body"><div class="owl-theme fade"><!----> <div class="item"><img data-src="https://image.kkday.com/v2/image/get/w_1920%2Ch_1080%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230530011107_ccZwC/jpg" alt="" class="owl-lazy" style="display: none;"> <div class="loading"><i class="fa fa-circle-o-notch fa-spin"></i></div> <div class="photo-by"><p><!----> <!----></p></div></div></div></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="time-info-spot">
+                                            <div class="time-info-title">
+                                                <div class="time">
+                                                    13:50
+                                                </div> <div class="txt">
+                                                    抵達角島大橋（停留時間 30 分鐘）
+                                                </div>
+                                            </div> <div class="pd-info-img" style="height: 477.75px;">
+                                                <img data-target="#sche-modal-0-10-0" alt="" data-toggle="modal" data-src="https://image.kkday.com/v2/image/get/w_960%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230530011057_VVUJ9/jpg" src="https://cdn.kkday.com/pc-web/assets/img/bg_default.svg" lazy="loading"> <div id="sche-modal-0-10-0" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade modal-fullscreen modal-lightbox">
+                                                    <div class="modal-dialog" style="max-width: none;">
+                                                        <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.6);">
+                                                            <div class="modal-header">
+                                                                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">
+                                                                    ×
+                                                                </button>
+                                                            </div> <div class="modal-body"><div class="owl-theme fade"><!----> <div class="item"><img data-src="https://image.kkday.com/v2/image/get/w_1920%2Ch_1080%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230530011057_VVUJ9/jpg" alt="" class="owl-lazy" style="display: none;"> <div class="loading"><i class="fa fa-circle-o-notch fa-spin"></i></div> <div class="photo-by"><p><!----> <!----></p></div></div></div></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="time-info-spot">
+                                            <div class="time-info-title">
+                                                <!----> <div class="txt">
+                                                    角島大橋
+                                                </div>
+                                            </div> <div class="pd-info-img" style="height: 480px;">
+                                                <img data-target="#sche-modal-0-11-0" alt="" data-toggle="modal" data-src="https://image.kkday.com/v2/image/get/w_960%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230530011403_qZrOp/jpg" src="https://cdn.kkday.com/pc-web/assets/img/bg_default.svg" lazy="loading"> <div id="sche-modal-0-11-0" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade modal-fullscreen modal-lightbox">
+                                                    <div class="modal-dialog" style="max-width: none;">
+                                                        <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.6);">
+                                                            <div class="modal-header">
+                                                                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">
+                                                                    ×
+                                                                </button>
+                                                            </div> <div class="modal-body"><div class="owl-theme fade"><!----> <div class="item"><img data-src="https://image.kkday.com/v2/image/get/w_1920%2Ch_1080%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230530011403_qZrOp/jpg" alt="" class="owl-lazy" style="display: none;"> <div class="loading"><i class="fa fa-circle-o-notch fa-spin"></i></div> <div class="photo-by"><p><!----> <!----></p></div></div></div></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="time-info-spot">
+                                            <div class="time-info-title">
+                                                <div class="time">
+                                                    15:00
+                                                </div> <div class="txt">
+                                                    抵達元乃隅神社（停留時間30~40分鐘）
+                                                </div>
+                                            </div> <div class="pd-info-img" style="height: 480px;">
+                                                <img data-target="#sche-modal-0-12-0" alt="" data-toggle="modal" data-src="https://image.kkday.com/v2/image/get/w_960%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230530011106_x7Eid/jpg" src="https://cdn.kkday.com/pc-web/assets/img/bg_default.svg" lazy="loading"> <div id="sche-modal-0-12-0" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade modal-fullscreen modal-lightbox">
+                                                    <div class="modal-dialog" style="max-width: none;">
+                                                        <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.6);">
+                                                            <div class="modal-header">
+                                                                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">
+                                                                    ×
+                                                                </button>
+                                                            </div> <div class="modal-body"><div class="owl-theme fade"><!----> <div class="item"><img data-src="https://image.kkday.com/v2/image/get/w_1920%2Ch_1080%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230530011106_x7Eid/jpg" alt="" class="owl-lazy" style="display: none;"> <div class="loading"><i class="fa fa-circle-o-notch fa-spin"></i></div> <div class="photo-by"><p><!----> <!----></p></div></div></div></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="time-info-spot">
+                                            <div class="time-info-title">
+                                                <!----> <div class="txt">
+                                                    元乃隅神社 鳥居
+                                                </div>
+                                            </div> <div class="pd-info-img" style="height: 480.75px;">
+                                                <img data-target="#sche-modal-0-13-0" alt="" data-toggle="modal" data-src="https://image.kkday.com/v2/image/get/w_960%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230530011101_sucPw/jpg" src="https://cdn.kkday.com/pc-web/assets/img/bg_default.svg" lazy="loading"> <div id="sche-modal-0-13-0" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade modal-fullscreen modal-lightbox">
+                                                    <div class="modal-dialog" style="max-width: none;">
+                                                        <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.6);">
+                                                            <div class="modal-header">
+                                                                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">
+                                                                    ×
+                                                                </button>
+                                                            </div> <div class="modal-body"><div class="owl-theme fade"><!----> <div class="item"><img data-src="https://image.kkday.com/v2/image/get/w_1920%2Ch_1080%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230530011101_sucPw/jpg" alt="" class="owl-lazy" style="display: none;"> <div class="loading"><i class="fa fa-circle-o-notch fa-spin"></i></div> <div class="photo-by"><p><!----> <!----></p></div></div></div></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="time-info-spot">
+                                            <div class="time-info-title">
+                                                <div class="time">
+                                                    18:30
+                                                </div> <div class="txt">
+                                                    抵達福岡 JR 博多站
+                                                </div>
+                                            </div> <!---->
+                                        </li>
+                                        <li class="time-info-spot">
+                                            <div class="time-info-title">
+                                                <!----> <div class="txt">
+                                                    以上行程及停留時間根據當天的交通狀況會有變化和調整
+                                                </div>
+                                            </div> <!---->
+                                        </li>
+                                    </ul>
+                                </div> <div class="overlap"><a href="javascript:;" class="link-secondary text-md">收起行程表 <i class="fa fa-angle-up"></i></a></div>
+                            </div>
+                        </div><div id="notice-sec" class="info-section">
+                            <h3 class="info-title">
+                                購買須知
+                            </h3> <div><p>【旅遊條件】</p><p>旅行出發地・目的地：福岡・山口</p><p>旅行天數：當日往返</p><p>交通工具：包租巴士</p><p>巴士公司名：天瀬観光</p><p>餐食：早餐　0回　午餐　0回　晚餐　0回</p><p>住宿設施：無</p><p>最少成團人數：1</p><p>領隊：1</p><p>導遊：0</p><p>【旅行企畫/實施】</p><p>運行公司名稱：(株)ジャパンホリデートラベル</p><p>地址：〒810-0001 福岡市 中央区 天神 1-14-4 天神平和ビル８F</p><p>執照編號：大阪府知事登録旅行業第2-2181号</p><p>旅行業協會名：一般社団法人全国旅行業協会（大阪府支部）正会員　一般社団法人全旅（大阪府旅行業協会）正会員　JATAは協力会員</p></div> <!----> <h4 class="info-subtitle">
+                                費用包含/不包含
+                            </h4> <div class="row">
+                                <div class="col-md-6">
+                                    <ul class="price-include">
+                                        <li>
+                                            <img src="https://cdn.kkday.com/pc-web/assets/img/ic_include.svg">消費稅
+                                        </li>
+                                        <li>
+                                            <img src="https://cdn.kkday.com/pc-web/assets/img/ic_include.svg">服務稅
+                                        </li>
+                                        <li>
+                                            <img src="https://cdn.kkday.com/pc-web/assets/img/ic_include.svg">車資
+                                        </li>
+                                        <li>
+                                            <img src="https://cdn.kkday.com/pc-web/assets/img/ic_include.svg">導遊
+                                        </li>
+                                        <li>
+                                            <img src="https://cdn.kkday.com/pc-web/assets/img/ic_include.svg">保險
+                                        </li>
+                                        <li>
+                                            <img src="https://cdn.kkday.com/pc-web/assets/img/ic_include.svg">停車費
+                                        </li>
+                                        <li>
+                                            <img src="https://cdn.kkday.com/pc-web/assets/img/ic_include.svg">關門連絡船 體驗費
+                                        </li>
+                                    </ul>
+                                </div> <div class="col-md-6">
+                                    <ul class="price-not">
+                                        <li>
+                                            <img src="https://cdn.kkday.com/pc-web/assets/img/ic_notinclude.svg">個人消費
+                                        </li>
+                                        <li>
+                                            <img src="https://cdn.kkday.com/pc-web/assets/img/ic_notinclude.svg">餐費
+                                        </li>
+                                        <li>
+                                            <img src="https://cdn.kkday.com/pc-web/assets/img/ic_notinclude.svg">以上未提及消費
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div> <!----> <div data-v-0efe7760="" class="board bg-highlihgt mt-20">
+                                <h4 data-v-0efe7760="" class="info-subtitle mt-0">
+                                    注意事項
+                                </h4> <!----> <div data-v-0efe7760="" class="mt-10">
+                                    <ul data-v-0efe7760="">
+                                        <li data-v-0efe7760="">
+                                            <!----> <p data-v-0efe7760="">
+                                                若遇颱風、暴風雪等天候不佳的情況，將於出發前 1 天（當地時間 12:00 ）決定此團是否取消出發，之後將隨時以電子郵件形式通知。
+                                            </p>
+                                        </li>
+                                        <li data-v-0efe7760="">
+                                            <!----> <p data-v-0efe7760="">
+                                                請務必於 10 分鐘前抵達指定地點，為避免耽誤之後行程，逾時不候。
+                                            </p>
+                                        </li>
+                                        <li data-v-0efe7760="">
+                                            <!----> <p data-v-0efe7760="">
+                                                建議乘坐巴士時配戴口罩、發燒達到 37.5℃ 以上或身體不適者，請斟酌不要參團，敬請諒解。
+                                            </p>
+                                        </li>
+                                        <li data-v-0efe7760="">
+                                            <!----> <p data-v-0efe7760="">
+                                                觀光巴士為團體行程，請務必遵守每個集合地點的集合時間，以免耽擱其他乘客的行程。
+                                            </p>
+                                        </li>
+                                        <li data-v-0efe7760="">
+                                            <!----> <p data-v-0efe7760="">
+                                                行程結束後可選擇不跟隨巴士回出發地點，但請事先在備註欄告知；若當場臨時決定，請在中文／英文切結書上簽字再行離團。
+                                            </p>
+                                        </li>
+                                        <li data-v-0efe7760="">
+                                            <!----> <p data-v-0efe7760="">
+                                                巴士上沒有廁所，但抵達各個景點後工作人員會導引廁所的方向，請不用擔心。
+                                            </p>
+                                        </li>
+                                        <li data-v-0efe7760="">
+                                            <!----> <p data-v-0efe7760="">
+                                                預訂成功後，使用日期7天前如欲更改出發日，請另外聯繫客服。（可能會有無法更改的狀況，敬請諒解）
+                                            </p>
+                                        </li>
+                                        <li data-v-0efe7760="">
+                                            <!----> <p data-v-0efe7760="">
+                                                請著輕便的服裝、鞋子參加旅遊。個人貴重品請自行妥善保管，若旅途中發生遺失貴重品事故恕無法賠償。
+                                            </p>
+                                        </li>
+                                        <li data-v-0efe7760="">
+                                            <!----> <p data-v-0efe7760="">
+                                                在人數較少情況下，將採用司機兼領隊的小車運行，請知曉。此產品為拼車服務，會有其他客人一同搭乘，景點以外不可停車。
+                                            </p>
+                                        </li>
+                                        <li data-v-0efe7760="">
+                                            <!----> <p data-v-0efe7760="">
+                                                根據當天的交通狀況，結束時間有可能會有所延遲等突發狀況，當天乘坐飛機的客人，不建議安排參加此行程，如導致客人延誤乘機，我司不承擔任何責任。
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </div> <!---->
+                            </div>
+                        </div><div id="usage-sec" class="info-section">
+                            <h3 class="info-title">
+                                如何使用
+                            </h3> <!----> <h4 class="info-subtitle">
+                                憑證使用方式
+                            </h4> <ul>
+                                <li>
+                                    現場請出示電子憑證
+                                </li>
+                            </ul> <!----> <!----> <h4 class="info-subtitle">
+                                使用期限
+                            </h4> <ul>
+                                <li>
+                                    需要按照預訂日期及當天開放時間內使用，逾期失效
+                                </li>
+                            </ul>
+                        </div><div id="meeting-sec" class="info-section">
+                            <h3 class="info-title">
+                                集合地點
+                            </h3> <div>
+                                <!----> <div class="board map-board">
+                                    <div class="board-title">
+                                        <h4>
+                                            地點名稱：JR 博多站筑紫口 Oriental Hotel 一樓的 LAWSON 便利商店前
+                                        </h4> <div class="text-grey break-word">
+                                            地址：福岡県福岡市博多区博多駅中央街４−２３ ローソン
+                                        </div>
+                                    </div> <hr> <div class="con">
+                                        <div class="row"><div class="col-md-3"><b>集合時間</b></div> <div class="col-md-6"><b class="text-lg bg-highlihgt pd-10">08:20</b></div></div> <hr> <div class="row"><div class="col-md-3"><b>出發時間</b></div> <div class="col-md-6"><b class="text-md">08:30</b></div></div> <div class="pd-info-map"><div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD_ncUVLw0kJwbHqd4OTiualgb9dcHsJkw&amp;q=place_id:ChIJS3hZYciRQTURtQAjGww0cog&amp;zoom=16&amp;language=zh-hk" frameborder="0" allowfullscreen="allowfullscreen" style="border: 0px;"></iframe></div></div> <ul class="photo-group"><li class="photo-item"><div data-target="#venue-photo-modal-0" data-toggle="modal" class="img-bg" style="background-image: url(&quot;https://image.kkday.com/v2/image/get/w_140%2Ch_105%2Cc_fill%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230529062514_eKihX/jpg&quot;);"></div></li> <!----> <li class="clearfix"></li></ul> <div class="row">
+                                            <div class="col-md-3"><b>如何抵達</b></div> <div class="col-md-9 pre-line break-word">
+                                                博多站下車後築紫出口步行約2分鐘。請於JR 博多站筑紫口的LAWSON便利商店前集合，並認拿有“Easy Go”牌子的工作人員。
+                                            </div>
+                                        </div>
+                                    </div> <div id="venue-photo-modal-0" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade modal-fullscreen modal-lightbox">
+                                        <div class="modal-dialog" style="max-width: none;">
+                                            <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.6);">
+                                                <div class="modal-header">
+                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">
+                                                        ×
+                                                    </button>
+                                                </div> <div class="modal-body"><div class="owl-theme fade"><!----> <div class="item"><img data-src="https://image.kkday.com/v2/image/get/w_1920%2Ch_1080%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_144659/20230529062514_eKihX/jpg" alt="" class="owl-lazy" style="display: none;"> <div class="loading"><i class="fa fa-circle-o-notch fa-spin"></i></div> <div class="photo-by"><p><!----> <!----></p></div></div></div></div>
+                                            </div>
+                                        </div>
+                                    </div> <div id="venue-video-modal-0" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade modal-fullscreen modal-lightbox">
+                                        <div class="modal-dialog" style="max-width: none;">
+                                            <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.6);">
+                                                <div class="modal-header">
+                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">
+                                                        ×
+                                                    </button>
+                                                </div> <div class="modal-body"><div class="owl-theme fade"><!----> </div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><div id="map-sec" class="info-section">
+                            <h3 class="info-title">
+                                體驗地點
+                            </h3> <div>
+                                <!----> <div class="board map-board">
+                                    <div class="board-title">
+                                        <h4 class="break-word">
+                                            地點名稱：門司港
+                                        </h4> <div class="text-grey break-word">
+                                            地址：福岡県北九州市門司区港町　門司港
+                                        </div>
+                                    </div> <hr> <div class="con"><div class="pd-info-map"><div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD_ncUVLw0kJwbHqd4OTiualgb9dcHsJkw&amp;q=place_id:ChIJ2W-aPimWQzURtAmKbRfMEvA&amp;zoom=17&amp;language=zh-hk" frameborder="0" allowfullscreen="allowfullscreen" style="border: 0px;"></iframe></div></div> <ul class="photo-group"><!----> <!----> <li class="clearfix"></li></ul> <!----> <hr style="display: none;"> <!----></div> <div id="exp-photo-modal-0" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade modal-fullscreen modal-lightbox">
+                                        <div class="modal-dialog" style="max-width: none;">
+                                            <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.6);">
+                                                <div class="modal-header">
+                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">
+                                                        ×
+                                                    </button>
+                                                </div> <div class="modal-body"><div class="owl-theme fade"><!----> </div></div>
+                                            </div>
+                                        </div>
+                                    </div> <div id="exp-video-modal-0" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade modal-fullscreen modal-lightbox">
+                                        <div class="modal-dialog" style="max-width: none;">
+                                            <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.6);">
+                                                <div class="modal-header">
+                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">
+                                                        ×
+                                                    </button>
+                                                </div> <div class="modal-body"><div class="owl-theme fade"><!----> </div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><div class="board map-board">
+                                    <div class="board-title">
+                                        <h4 class="break-word">
+                                            地點名稱：元乃隅神社
+                                        </h4> <div class="text-grey break-word">
+                                            地址：山口県長門市油谷津黄498　元乃隅神社
+                                        </div>
+                                    </div> <hr> <div class="con"><div class="pd-info-map"><div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD_ncUVLw0kJwbHqd4OTiualgb9dcHsJkw&amp;q=place_id:ChIJE8Q_JEZCQzURQDuCKMCQUj0&amp;zoom=17&amp;language=zh-hk" frameborder="0" allowfullscreen="allowfullscreen" style="border: 0px;"></iframe></div></div> <ul class="photo-group"><!----> <!----> <li class="clearfix"></li></ul> <!----> <hr style="display: none;"> <!----></div> <div id="exp-photo-modal-1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade modal-fullscreen modal-lightbox">
+                                        <div class="modal-dialog" style="max-width: none;">
+                                            <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.6);">
+                                                <div class="modal-header">
+                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">
+                                                        ×
+                                                    </button>
+                                                </div> <div class="modal-body"><div class="owl-theme fade"><!----> </div></div>
+                                            </div>
+                                        </div>
+                                    </div> <div id="exp-video-modal-1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade modal-fullscreen modal-lightbox">
+                                        <div class="modal-dialog" style="max-width: none;">
+                                            <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.6);">
+                                                <div class="modal-header">
+                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">
+                                                        ×
+                                                    </button>
+                                                </div> <div class="modal-body"><div class="owl-theme fade"><!----> </div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><div id="policy-sec" class="info-section">
+                            <h3 class="info-title">
+                                取消政策
+                            </h3> <div class="layout-list layout-list--gap-4 layout-list--horizontal-align-default">
+                                <ul class="kk-u-pl-6">
+                                    <li>
+                                        所選日期 12 天（含）之前取消，未使用可免費取消
+                                    </li>
+                                    <li>
+                                        所選日期 9 ~ 11 天之間取消，收取手續費 20%
+                                    </li>
+                                    <li>
+                                        所選日期 3 ~ 8 天之間取消，收取手續費 30%
+                                    </li>
+                                    <li>
+                                        所選日期 2 ~ 2 天之間取消，收取手續費 40%
+                                    </li>
+                                    <li>
+                                        所選日期 0 ~ 1 天之間取消，不可取消、更改訂單，亦不得請求退款
+                                    </li>
+                                </ul> <div class="kk-u-text-medium">
+                                    <i class="icons icon-info"></i>
+                                    注意：由於站內商品來自全球各地，訂單取消時間將依該供應商所在時區判定。供應商需 2-5 個工作天進行取消流程，依照您購買的商品取消政策收取手續費，並於取消流程完成後14 個工作天內退款。
+                                </div>
+                            </div>
+                        </div> <div id="review-sec" data-spy="review" class="info-section review-section">
+                            <h3 class="info-title">
+                                旅客評價
+                            </h3> <div class="review-section__top">
+                                <div class="review-score">
+                                    <div class="review-badge">
+                                        4.7
+                                    </div> <div class="product-star">
+                                        <!----> <svg class="custom-kk-icon star star-100"><use xlink:href="#ic_star"></use></svg><svg class="custom-kk-icon star star-100"><use xlink:href="#ic_star"></use></svg><svg class="custom-kk-icon star star-100"><use xlink:href="#ic_star"></use></svg><svg class="custom-kk-icon star star-100"><use xlink:href="#ic_star"></use></svg><svg class="custom-kk-icon star star-75"><use xlink:href="#ic_star"></use></svg> <div class="review-num">
+                                            337 則旅客評價
+                                        </div>
+                                    </div>
+                                </div> <div class="dropdown review-section__select">
+                                    <button data-toggle="dropdown" class="form-control input-dropdown">
+                                        <span>
+                                            <!---->
+                                            評分：高到低
+                                        </span>
+                                    </button> <ul class="dropdown-menu input-dropdown-menu">
+                                        <li class="active">
+                                            <a>
+                                                <!---->
+                                                評分：高到低
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a>
+                                                <!---->
+                                                評分：低到高
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a>
+                                                <!---->
+                                                最新
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div> <div class="review-list-header"></div> <div data-recommend-oid="2387490" class="review-item">
+                                <div class="editor"><div class="editor-logo" style="background-image: url(&quot;https://image.kkday.com/v2/image/get/w_120%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/member/default_image/png&quot;);"></div></div> <div class="review-detail">
+                                    <div class="review-info">
+                                        <div class="review-info-item"><span class="member-name text-heavy">KKday會員</span> <!----></div> <div class="review-info-item">
+                                            <div class="product-star"><!----> <svg class="custom-kk-icon star star-100"><use xlink:href="#ic_star"></use></svg><svg class="custom-kk-icon star star-100"><use xlink:href="#ic_star"></use></svg><svg class="custom-kk-icon star star-100"><use xlink:href="#ic_star"></use></svg><svg class="custom-kk-icon star star-100"><use xlink:href="#ic_star"></use></svg><svg class="custom-kk-icon star star-100"><use xlink:href="#ic_star"></use></svg> </div> <span>
+                                                2024/09/30 · 單人旅遊
+                                            </span>
+                                        </div> <!---->
+                                    </div> <div class="review-content">
+                                        <div class="txt">
+                                            <h4>
+                                                好開心， 物有所值，讚
+                                            </h4> <p>我係第一次參加本地遊， 導遊石橋好專業資料預備充足， 而且熱情又細心， 所以玩得好開心， 景點風景好靚，影左好多相。司機師傅開車又快又穩， 值得一讚</p> <!---->
+                                        </div> <ul class="photo-group"><li data-target="#review-2387490-photo-modal" data-toggle="modal" class="photo-item"><div data-target="#review-photo-modal-2" data-toggle="modal" class="img-bg" style="background-image: url(&quot;https://image.kkday.com/v2/image/get/w_140%2Ch_105%2Cc_fill%2Cq_55%2Ct_webp/s1.kkday.com/recommend_2387490/20240930224953_edgAZ/jpg&quot;);"></div></li><li data-target="#review-2387490-photo-modal" data-toggle="modal" class="photo-item"><div data-target="#review-photo-modal-2" data-toggle="modal" class="img-bg" style="background-image: url(&quot;https://image.kkday.com/v2/image/get/w_140%2Ch_105%2Cc_fill%2Cq_55%2Ct_webp/s1.kkday.com/recommend_2387490/20240930224953_5RFTA/jpg&quot;);"></div></li><li data-target="#review-2387490-photo-modal" data-toggle="modal" class="photo-item"><div data-target="#review-photo-modal-2" data-toggle="modal" class="img-bg" style="background-image: url(&quot;https://image.kkday.com/v2/image/get/w_140%2Ch_105%2Cc_fill%2Cq_55%2Ct_webp/s1.kkday.com/recommend_2387490/20240930224954_A44sp/jpg&quot;);"></div></li><li data-target="#review-2387490-photo-modal" data-toggle="modal" class="photo-item"><div data-target="#review-photo-modal-2" data-toggle="modal" class="img-bg" style="background-image: url(&quot;https://image.kkday.com/v2/image/get/w_140%2Ch_105%2Cc_fill%2Cq_55%2Ct_webp/s1.kkday.com/recommend_2387490/20240930224955_2pcha/jpg&quot;);"></div></li> <li class="clearfix"></li></ul> <div id="review-photo-modal-2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade modal-fullscreen modal-lightbox">
+                                            <div class="modal-dialog" style="max-width: none;">
+                                                <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.6);">
+                                                    <div class="modal-header">
+                                                        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">
+                                                            ×
+                                                        </button> <div class="editor editor-inline">
+                                                            <div class="editor-logo" style="background-image: url(&quot;https://image.kkday.com/v2/image/get/w_120%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/member/default_image/png&quot;);"></div> <div class="title text-white">
+                                                                KKday會員
+                                                            </div>
+                                                        </div>
+                                                    </div> <div class="modal-body"><div class="owl-theme fade"><!----> <div class="item"><img data-src="https://image.kkday.com/v2/image/get/w_1920%2Ch_1080%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/recommend_2387490/20240930224953_edgAZ/jpg" class="owl-lazy" style="display: none;"> <div class="loading"><i class="fa fa-circle-o-notch fa-spin"></i></div> <div class="photo-by"><p><!----> <!----></p></div></div><div class="item"><img data-src="https://image.kkday.com/v2/image/get/w_1920%2Ch_1080%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/recommend_2387490/20240930224953_5RFTA/jpg" class="owl-lazy" style="display: none;"> <div class="loading"><i class="fa fa-circle-o-notch fa-spin"></i></div> <div class="photo-by"><p><!----> <!----></p></div></div><div class="item"><img data-src="https://image.kkday.com/v2/image/get/w_1920%2Ch_1080%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/recommend_2387490/20240930224954_A44sp/jpg" class="owl-lazy" style="display: none;"> <div class="loading"><i class="fa fa-circle-o-notch fa-spin"></i></div> <div class="photo-by"><p><!----> <!----></p></div></div><div class="item"><img data-src="https://image.kkday.com/v2/image/get/w_1920%2Ch_1080%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/recommend_2387490/20240930224955_2pcha/jpg" class="owl-lazy" style="display: none;"> <div class="loading"><i class="fa fa-circle-o-notch fa-spin"></i></div> <div class="photo-by"><p><!----> <!----></p></div></div></div></div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>  <hr>
+                                </div>
+                            </div>
+
+                    </div> 
+                </div>
+
+                    <div class="col-md-3 col-md-offset-1">
+                        <div id="product-desc-module-scroll-spy" class="vue-affix affix navbar" style="top: 105px;">
+                            <ul class="nav">
+                                <li class="">
+                                    <a>
+                                        商品說明
+                                    </a>
+                                </li>
+                                <li class="active">
+                                    <a>
+                                        行程介紹
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a>
+                                        購買須知
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a>
+                                        如何使用
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a>
+                                        集合地點
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a>
+                                        體驗地點
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a>
+                                        取消政策
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a>
+                                        旅客評價(337)
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <!-- Additional Information Section -->
+@*         <div class="additional-info">
+            <h2>About This Tour</h2>
+            <p>This tour takes you to the famous Karato Market, where you can experience fresh seafood, as well as the stunning Motonosumi Shrine with its iconic red torii gates.</p>
+            <p>The tour starts from Fukuoka and includes a visit to Mojiko Port.</p>
+        </div>
+
+        <!-- Location/Map Section -->
+        <div class="map-section">
+            <h2>Tour Location</h2>
+            <img src="map.jpg" alt="Map of Tour Locations">
+        </div> *@
+
+    </div>
+
+</body>
+
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+     
+        const navbar = document.getElementById('product-desc-module-scroll-spy');
+        const container = document.getElementById('fixed-container');
+        const containerTop = container.offsetTop;
+        const containerHeight = container.offsetHeight;
+
+        window.addEventListener('scroll', function () {
+            const scrollPosition = window.scrollY;
+
+            if (scrollPosition >= containerTop && scrollPosition < containerTop + containerHeight) {
+                navbar.classList.add('fixed');
+            } else {
+                navbar.classList.remove('fixed');
+            }
+        });
+    });
+
+    $("#datepicker").datepicker({ firstDay: 1 });
+    </script>

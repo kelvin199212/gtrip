@@ -1,0 +1,49 @@
+.about {
+    &__thumb {}
+    &__content {
+        .section__header {
+            @extend %mb-30;
+        }
+        .section__wrapper {
+            p {
+                @include breakpoint(lg) {
+                    max-width: 85%;
+                }
+            }
+        }
+        ul {
+            @extend %mb-30;
+            li {
+                padding-block: 5px;
+                i {
+                    @extend %mr-5;
+                }
+            }
+        }
+    }
+    &__project {
+        @extend %flex;
+        @extend %justify-between;
+        @include breakpoint(xxl) {
+            max-width: 85%;
+        }
+        li {
+            @include breakpoint(max-sm) {
+                margin-block: 15px;
+            }
+            @include breakpoint(xl) {
+                @include breakpoint(max-xxl) {
+                    width: calc(100% / 3);
+                }
+            }
+            h2 {
+                color: $theme-color;
+            }
+            p {
+                @extend %mb-0;
+                max-width: 75%;
+            }
+        }
+        &--count {}
+    }
+}

@@ -1,0 +1,1960 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutFillow.cshtml";
+    ViewData["Title"] = "建立旅程";
+}
+
+<style>
+    #calendar, .fc-view-container, .fc-view , .fc-view>table{
+    height:100%;
+    }
+    .m-b30{
+        margin-bottom: 30px;
+    }
+    .img-thumbs {
+        background: #eee;
+        border: 1px solid #ccc;
+        border-radius: 0.25rem;
+        margin: 1.5rem 0;
+        padding: 0.75rem;
+    }
+
+    .img-thumbs-hidden {
+        display: none;
+    }
+
+    .wrapper-thumb {
+        position: relative;
+        display: inline-block;
+        margin: 1rem 0;
+        justify-content: space-around;
+    }
+
+    .img-preview-thumb {
+        background: #fff;
+        border: 1px solid none;
+        border-radius: 0.25rem;
+        box-shadow: 0.125rem 0.125rem 0.0625rem rgba(0, 0, 0, 0.12);
+        margin-right: 1rem;
+        max-width: 140px;
+        padding: 0.25rem;
+    }
+
+    .remove-btn, .remove-btn2 {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: .7rem;
+        top: -5px;
+        right: 10px;
+        width: 20px;
+        height: 20px;
+        background: white;
+        border-radius: 10px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+        .remove-btn:hover, .remove-btn2:hover {
+            box-shadow: 0px 0px 3px grey;
+            transition: all .3s ease-in-out;
+        }
+
+    .faq-container {
+        width: 100%;
+        max-width: 800px;
+        margin: 20px auto;
+        font-family: Arial, sans-serif;
+        background: #fff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        padding: 20px;
+    }
+
+    .faq-container2 {
+        width: 100%;
+        max-width: 800px;
+        margin: 20px auto;
+        font-family: Arial, sans-serif;
+        background: #fff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        padding: 20px;
+    }
+
+    .faq-item {
+        border: 1px solid #e1e1e1;
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #f8f9fb;
+        border-radius: 6px;
+        position: relative;
+        transition: box-shadow 0.3s ease;
+    }
+
+        .faq-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+    .faq-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
+        font-size: 16px;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #e1e1e1;
+    }
+
+        .faq-header span {
+            color: #333;
+        }
+
+        .faq-header .delete-btn {
+            cursor: pointer;
+            color: #888;
+            font-size: 18px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+            .faq-header .delete-btn:hover {
+                color: #e74c3c;
+            }
+
+    .faq-body .form-group {
+        margin-bottom: 20px;
+    }
+
+        .faq-body .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .faq-body .form-group input,
+        .faq-body .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease;
+        }
+
+            .faq-body .form-group input:focus,
+            .faq-body .form-group textarea:focus {
+                border-color: #6c63ff;
+                background-color: #fff;
+            }
+
+    .faq-add-btn, .faq-add-btn2, .faq-add-btn3, .faq-add-btn4, .faq-add-btn5 {
+        text-align: center;
+        padding: 20px 0;
+        margin-top: 20px;
+    }
+
+        .faq-add-btn .add-btn, .faq-add-btn2 .add-btn2, .faq-add-btn3 .add-btn3, .faq-add-btn4 .add-btn4, .faq-add-btn5 .add-btn5 {
+        background-color: #886CC0;
+        border: 1px solid #886CC0;
+            padding: 10px 40px;
+            font-size: 16px;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+
+            .faq-add-btn .add-btn:hover, .faq-add-btn2 .add-btn2:hover, .faq-add-btn3 .add-btn3:hover, .faq-add-btn4 .add-btn4:hover,, .faq-add-btn5 .add-btn4:hover {
+                background-color: #5349d3;
+                box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3);
+            }
+
+
+
+    /* Icon Styling (Font Awesome) */
+    .fas.fa-trash-alt {
+        font-size: 18px;
+    }
+</style>
+
+<div class="content-body default-height">
+    <div class="container-fluid">
+        <!-- Row -->
+        <div class="row">
+            <div class="col-xl-12">
+                <div class=" row page-titles">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Gtrip</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">建立旅程</a></li>
+                    </ol>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-xl-8">
+                        <div class="card h-auto">
+                            <div class="card-body">
+                                <form>
+                                    <div class="cpa">
+                                        <h4>旅程資訊</h4>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label required">旅程名稱</label>
+                                        <input type="text" class="form-control" placeholder="旅程名稱">
+                                    </div>
+                                </form>
+                                <label class="form-label required">描述</label>
+                                <textarea class="form-control" rows="3" placeholder="描述"></textarea>
+                            </div>
+                        </div>
+
+
+                        <div class="filter cm-content-box box-primary">
+                            <div class="content-title SlideToolHeader">
+                                <div class="cpa">
+                                    詳細資料
+                                </div>
+                                <div class="tools">
+                                    <a href="javascript:void(0);" class="expand handle"><i class="fal fa-angle-down"></i></a>
+                                </div>
+                            </div>
+                            <div class="cm-content-body publish-content form excerpt">
+                                <div class="col-xl-12 col-lg-12">
+                                    <div class="card-body" style="margin-bottom: -2rem !important;">
+                                        <div class="basic-form">
+                                            <form action="#">
+                                                <div class="input-group mb-3">
+                                                    <label class="input-group-text mb-0">旅遊類別</label>
+                                                    <select id="travel-type-select" class="default-select  form-control wide">
+                                                        <option selected>選擇...</option>
+                                                        <option value="1">代辦服務</option>
+                                                        <option value="2">團體旅程</option>
+                                                        <option value="3">接送服務</option>
+                                                        <option value="4">私人旅程</option>
+                                                    </select>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="card-body travelType1" style="display: none;">
+                                        <div class="row">
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox1" required>
+                                                    <label class="form-check-label" for="customCheckBox1">簽證代辦</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox2" required>
+                                                    <label class="form-check-label" for="customCheckBox2">行程安排</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-6 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox3" required>
+                                                    <label class="form-check-label" for="customCheckBox3">購買門票</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox4" required>
+                                                    <label class="form-check-label" for="customCheckBox4">預訂特殊活動或體驗</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox5" required>
+                                                    <label class="form-check-label" for="customCheckBox5">預訂餐廳</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body travelType2" style="display: none;">
+                                        <div class="row">
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox6" required>
+                                                    <label class="form-check-label" for="customCheckBox6">主題活動</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox7" required>
+                                                    <label class="form-check-label" for="customCheckBox7">博物館</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-6 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox8" required>
+                                                    <label class="form-check-label" for="customCheckBox8">情侶</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox9" required>
+                                                    <label class="form-check-label" for="customCheckBox9">戶外活動</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox10" required>
+                                                    <label class="form-check-label" for="customCheckBox10">按摩及溫泉</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox11" required>
+                                                    <label class="form-check-label" for="customCheckBox11">文化體驗</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox12" required>
+                                                    <label class="form-check-label" for="customCheckBox12">歷史古蹟</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox13" required>
+                                                    <label class="form-check-label" for="customCheckBox13">水上活動</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox14" required>
+                                                    <label class="form-check-label" for="customCheckBox14">滑雪體驗</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox15" required>
+                                                    <label class="form-check-label" for="customCheckBox15">美食品嚐</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox16" required>
+                                                    <label class="form-check-label" for="customCheckBox16">藝術及表演</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox17" required>
+                                                    <label class="form-check-label" for="customCheckBox17">親子</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox18" required>
+                                                    <label class="form-check-label" for="customCheckBox18">購物</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox19" required>
+                                                    <label class="form-check-label" for="customCheckBox19">遊覽觀光</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox20" required>
+                                                    <label class="form-check-label" for="customCheckBox20">酒莊</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body travelType3" style="display: none;">
+                                        <div class="row">
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox21" required>
+                                                    <label class="form-check-label" for="customCheckBox21">城市內交通接送</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox22" required>
+                                                    <label class="form-check-label" for="customCheckBox22">機場接送</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-6 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox23" required>
+                                                    <label class="form-check-label" for="customCheckBox23">私人司機服務</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox24" required>
+                                                    <label class="form-check-label" for="customCheckBox24">車站接送</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox25" required>
+                                                    <label class="form-check-label" for="customCheckBox25">
+                                                        飯店接送
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body travelType4" style="display: none;">
+                                        <div class="row">
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox26" required>
+                                                    <label class="form-check-label" for="customCheckBox26">主題活動</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox27" required>
+                                                    <label class="form-check-label" for="customCheckBox27">博物館</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-6 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox28" required>
+                                                    <label class="form-check-label" for="customCheckBox28">情侶</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox29" required>
+                                                    <label class="form-check-label" for="customCheckBox29">戶外活動</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox30" required>
+                                                    <label class="form-check-label" for="customCheckBox30">按摩及溫泉</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox31" required>
+                                                    <label class="form-check-label" for="customCheckBox31">文化體驗</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox32" required>
+                                                    <label class="form-check-label" for="customCheckBox32">歷史古蹟</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox33" required>
+                                                    <label class="form-check-label" for="customCheckBox33">水上活動</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox34" required>
+                                                    <label class="form-check-label" for="customCheckBox34">滑雪體驗</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox35" required>
+                                                    <label class="form-check-label" for="customCheckBox35">美食品嚐</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox36" required>
+                                                    <label class="form-check-label" for="customCheckBox36">藝術及表演</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox37" required>
+                                                    <label class="form-check-label" for="customCheckBox37">親子</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox38" required>
+                                                    <label class="form-check-label" for="customCheckBox38">購物</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox39" required>
+                                                    <label class="form-check-label" for="customCheckBox39">遊覽觀光</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-xxl-4 col-6">
+                                                <div class="form-check custom-checkbox mb-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox40" required>
+                                                    <label class="form-check-label" for="customCheckBox40">酒莊</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="solid">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="input-group mb-3">
+                                                <label class="input-group-text mb-0">持續時間</label>
+                                                <select class="default-select  form-control wide" title="選擇...">
+                                                    <option value="1">一日</option>
+                                                    <option value="2">半日</option>
+                                                    <option value="3">多日</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <select multiple id="languageSelection" title="選擇語言(多個選項)" class="default-select form-control wide mt-3">
+                                                <option>中文 （普通話）</option>
+                                                <option>中文 （粵語）</option>
+                                                <option>德語</option>
+                                                <option>意大利語</option>
+                                                <option>日本語</option>
+                                                <option>法語</option>
+                                                <option>泰語</option>
+                                                <option>英語</option>
+                                                <option>葡萄牙語</option>
+                                                <option>西班牙語</option>
+                                                <option>越南語</option>
+                                                <option>韓語</option>
+                                                <option>其他</option>
+                                            </select>
+                                        </div>
+                                        <div id="otherLanguageInputContainer"></div>
+                                        <div class="input-group mb-3">
+                                            <select multiple id="transportationSelection" title="選擇交通(多個選項)" class="default-select form-control wide mt-3">
+                                                <option>步行</option>
+                                                <option>自行車</option>
+                                                <option>巴士/火車</option>
+                                                <option>汽車接送</option>
+                                                <option>其他</option>
+                                            </select>
+                                        </div>
+                                        <div id="otherTransportationContainer"></div>
+                                    </div>
+                                    <hr class="solid">
+                                    <div class="card-body">
+                                        <div class="row mb-3">
+                                            <div class="col-12">
+                                                <div class="input-group mb-3">
+                                                    <div class="col-12">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <label class="form-label">日程安排</label>
+                                                        <div>
+                                                            <button class="btn btn-primary btn-sm me-2" type="button"  data-toggle="modal" data-target="#createModal">
+                                                                添加日程
+                                                            </button>
+                                                            <button class="btn btn-secondary btn-sm" type="button" data-toggle="modal" data-target="#scheduleModal">
+                                                                编辑日程
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+@*                                             <div class="col-md-4">
+                                                <label class="form-label">預訂選項</label>
+                                                <select class="form-select">
+                                                    <option value="0">即時預訂</option>
+                                                    <option value="1">查詢預訂</option>
+                                                </select>
+                                            </div> *@
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-4">
+                                                <label class="form-label">最少人數</label>
+                                                <input type="number" class="form-control">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="form-label">人數上限</label>
+                                                <input type="number" class="form-control">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="form-label">最遲預訂天數</label>
+                                                <select class="form-select">
+                                                    <option value="0">0天前</option>
+                                                    <option value="1">1天前</option>
+                                                    <option value="2">2天前</option>
+                                                    <option value="3">3天前</option>
+                                                    <option value="4">4天前</option>
+                                                    <option value="5">5天前</option>
+                                                    <option value="6">6天前</option>
+                                                    <option value="7">7天前</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4" id="mobileHide">
+                        <div class="right-sidebar-sticky">
+                            <div class="filter cm-content-box box-primary">
+                                <div class="content-title SlideToolHeader">
+                                    <div class="cpa">
+                                        概述
+                                    </div>
+                                    <div class="tools">
+                                        <a href="javascript:void(0);" class="expand handle"><i class="fal fa-angle-down"></i></a>
+                                    </div>
+                                </div>
+                                <div class="cm-content-body publish-content form excerpt">
+                                    <div class="card-body py-3">
+                                        <ul class="list-style-1 block">
+                                            <li>
+                                                <div>
+                                                    <label class="form-label mb-0 me-2">
+                                                        <i class="fa-solid fa-key"></i>
+                                                        Status:
+                                                    </label>
+                                                    <span class="font-w500">Published</span>
+                                                    <a href="javascript:void(0);" class="badge badge-primary light ms-3" id="headingOne" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-controls="collapseOne" aria-expanded="true" role="button">Edit</a>
+                                                </div>
+                                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordion-one">
+                                                    <div class=" border rounded p-3 mt-3">
+                                                        <div class="mb-2">
+                                                            <label class="form-label w-100">Content Type</label>
+                                                            <select class="form-control solid default-select">
+                                                                <option selected>Select Status</option>
+                                                                <option value="1">Published</option>
+                                                                <option value="2">Draft</option>
+                                                                <option value="3">Trash</option>
+                                                                <option value="4">Private</option>
+                                                                <option value="5">Pending</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="mt-3">
+                                                            <button class="btn btn-primary btn-sm me-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                                                Ok
+                                                            </button>
+                                                            <button class="btn btn-danger light btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                                                Cancel
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div>
+                                                    <label class="form-label mb-0 me-2">
+                                                        <i class="fa-solid fa-eye"></i>
+                                                        Visible:
+                                                    </label>
+                                                    <span class="font-w500">Public</span>
+                                                    <a href="javascript:void(0);" class="badge badge-primary light ms-3" id="headingtwo" data-bs-toggle="collapse" data-bs-target="#collapsetwo" aria-controls="collapsetwo" aria-expanded="true" role="button">Edit</a>
+                                                </div>
+                                                <div id="collapsetwo" class="collapse" aria-labelledby="headingtwo" data-bs-parent="#accordion-one">
+                                                    <div class="p-3 mt-3 border rounded">
+                                                        <div class="basic-form">
+                                                            <form>
+                                                                <div class="mb-3 mb-0">
+                                                                    <div class="radio">
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                                                Public
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="radio">
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                                                            <label class="form-check-label" for="flexRadioDefault2">
+                                                                                Password Protected
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="radio disabled">
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+                                                                            <label class="form-check-label" for="flexRadioDefault3">
+                                                                                Private
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                        <div>
+                                                            <button class="btn btn-primary btn-sm me-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapsetwo" aria-expanded="false" aria-controls="collapsetwo">
+                                                                Ok
+                                                            </button>
+                                                            <button class="btn btn-danger light btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapsetwo" aria-expanded="false" aria-controls="collapsetwo">
+                                                                Cancel
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="border-bottom-0">
+                                                <div>
+                                                    <label class="form-label mb-0 me-2">
+                                                        <i class="fa-solid fa-calendar-days"></i>
+                                                        Published
+                                                    </label>
+                                                    <span class="font-w500">on :24-09-2023 16:22:52</span>
+                                                    <a href="javascript:void(0);" class="badge badge-primary light ms-3" id="headingthree" data-bs-toggle="collapse" data-bs-target="#collapsethree" aria-controls="collapsethree" aria-expanded="true" role="button">Edit</a>
+                                                </div>
+                                                <div id="collapsethree" class="collapse" aria-labelledby="headingthree" data-bs-parent="#accordion-one">
+                                                    <div class="p-3 mt-3 border rounded">
+                                                        <div class="input-hasicon">
+                                                            <input name="datepicker" class="form-control bt-datepicker solid">
+                                                            <div class="icon"><i class="far fa-calendar"></i></div>
+                                                        </div>
+                                                        <div class="mt-3">
+                                                            <button class="btn btn-primary btn-sm me-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapsethree" aria-expanded="false" aria-controls="collapsethree">
+                                                                Ok
+                                                            </button>
+                                                            <button class="btn btn-danger light btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapsethree" aria-expanded="false" aria-controls="collapsethree">
+                                                                Cancel
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-footer border-top text-end py-3 ">
+                                        <a href="javascript:void(0);" class="btn btn-primary btn-sm">Publish</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="filter cm-content-box box-primary">
+                                <div class="content-title SlideToolHeader">
+                                    <div class="cpa">
+                                        Categories
+                                    </div>
+                                    <div class="tools">
+                                        <a href="javascript:void(0);" class="expand handle"><i class="fal fa-angle-down"></i></a>
+                                    </div>
+                                </div>
+                                <div class="cm-content-body publish-content form excerpt">
+                                    <div class="card-body">
+                                        <div class="border rounded p-3 mb-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault-10">
+                                                <label class="form-check-label" for="flexCheckDefault-10">
+                                                    Beauty
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault-11">
+                                                <label class="form-check-label" for="flexCheckDefault-11">
+                                                    Fashion
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault-12">
+                                                <label class="form-check-label" for="flexCheckDefault-12">
+                                                    Lifestyle
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault-13">
+                                                <label class="form-check-label" for="flexCheckDefault-13">
+                                                    Food
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault-14">
+                                                <label class="form-check-label" for="flexCheckDefault-14">
+                                                    Beauty
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <a href="javascript:void(0);"><i class="fa-solid fa-plus"></i> Add New Categories</a>
+                                        <div class="input-group mt-3">
+                                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                            <span class="input-group-text" id="basic-addon1"><a href="javascript:void(0);">Add New</a></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="filter cm-content-box box-primary">
+                                <div class="content-title SlideToolHeader">
+                                    <div class="cpa">
+                                        Tag
+                                    </div>
+                                    <div class="tools">
+                                        <a href="javascript:void(0);" class="expand handle"><i class="fal fa-angle-down"></i></a>
+                                    </div>
+                                </div>
+                                <div class="cm-content-body  form excerpt">
+                                    <div class="card-body">
+                                        <select id="multi-value-select" multiple="multiple">
+                                            <option selected="selected">orange</option>
+                                            <option>white</option>
+                                            <option selected="selected">purple</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="filter cm-content-box box-primary">
+                                <div class="content-title SlideToolHeader">
+                                    <div class="cpa">
+                                        Featured Image
+                                    </div>
+                                    <div class="tools">
+                                        <a href="javascript:void(0);" class="expand handle"><i class="fal fa-angle-down"></i></a>
+                                    </div>
+                                </div>
+                                <div class="cm-content-body publish-content form excerpt">
+                                    <div class="card-body">
+                                        <div class="avatar-upload d-flex align-items-center">
+                                            <div class=" position-relative ">
+                                                <div class="avatar-preview">
+                                                    <div id="imagePreview" style="background-image: url(../Fillow/images/no-img-avatar.png);">
+                                                    </div>
+                                                </div>
+                                                <div class="change-btn d-flex align-items-center flex-wrap">
+                                                    <input type='file' class="form-control d-none" id="imageUpload" accept=".png, .jpg, .jpeg">
+                                                    <label for="imageUpload" class="btn btn-primary light btn-sm ms-0">Select Image</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter cm-content-box box-primary">
+                        <div class="content-title SlideToolHeader">
+                            <div class="cpa">
+                                提供旅客資訊
+                            </div>
+                            <div class="tools">
+                                <a href="javascript:void(0);" class="expand handle"><i class="fal fa-angle-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="cm-content-body form excerpt">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-xl-6 col-sm-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">旅遊常見問題</label>
+                                            <div class="faq-container">
+                                                <div class="faq-add-btn">
+                                                    <button type="button" class="add-btn">新增</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-sm-6">
+                                        <label class="form-label">旅遊項目</label>
+                                        <div class="faq-container2">
+                                            <div class="faq-add-btn2">
+                                                <button type="button" class="add-btn2">新增</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12 col-sm-12">
+                                        <label class="form-label required">旅遊說明</label>
+                                        <textarea class="form-control" rows="3" placeholder="旅遊說明"></textarea>
+                                    </div>
+                                   <div class="col-xl-6 col-sm-6" style="margin-top:15px;">
+                                        <div class="mb-3">
+                                            <label class="form-label">旅遊包含</label>
+                                            <div class="faq-container3">
+                                                <div class="faq-add-btn3">
+                                                    <button type="button" class="add-btn3" id="tripDesCreateBtn">新增</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-sm-6" style="margin-top:15px;">
+                                        <div class="mb-3">
+                                            <label class="form-label">旅遊不含</label>
+                                            <div class="faq-container4">
+                                                <div class="faq-add-btn4">
+                                                    <button type="button" class="add-btn4" id="tripDesCreateBtn2">新增</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter cm-content-box box-primary">
+                        <div class="content-title SlideToolHeader">
+                            <div class="cpa">
+                                相片
+                            </div>
+                            <div class="tools">
+                                <a href="javascript:void(0);" class="expand handle"><i class="fal fa-angle-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="cm-content-body form excerpt">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-xl-6 col-sm-6" style="margin-top:15px;">
+                                        <label class="form-label">精選圖片</label>
+                                        <div class="container my-5">
+                                            <div class="col">
+                                                <form action="" method="post" enctype="multipart/form-data" id="form-upload">
+                                                    <div class="form-group mt-5">
+                                                        <input type="file" class="form-control" name="images[]" multiple id="upload-img" />
+                                                    </div>
+                                                    <div class="img-thumbs img-thumbs-hidden" id="img-preview"></div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-sm-6" style="margin-top:15px;">
+                                        <label class="form-label">圖庫</label>
+                                        <div class="container my-5">
+                                            <div class="col">
+                                                <form action="" method="post" enctype="multipart/form-data" id="form-upload2">
+                                                    <div class="form-group mt-5">
+                                                        <input type="file" class="form-control" name="images2[]" multiple id="upload-img2" />
+                                                    </div>
+                                                    <div class="img-thumbs img-thumbs-hidden" id="img-preview2"></div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    <div class="filter cm-content-box box-primary">
+                        <div class="content-title SlideToolHeader">
+                            <div class="cpa">
+                                影片介紹
+                            </div>
+                            <div class="tools">
+                                <a href="javascript:void(0);" class="expand handle"><i class="fal fa-angle-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="cm-content-body form excerpt">
+                            <div class="card-body">
+                                <!-- Video Preview Section -->
+
+                                <div class="info-list">
+                                    <ul>
+                                        <!-- Trigger for video upload -->
+                                        <li>
+                                            <div class="faq-add-btn3">
+                                                <button type="button" id="upload-video-link" class="add-btn3">上載旅遊介紹短片</button>
+                                            </div>
+                                            <input type="file" id="video-upload" accept="video/*" style="display: none;">
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="video-preview" style="display: none; margin-top: 20px;text-align:-webkit-center;">
+                                    <video id="video-player" controls style="width: 100%; max-width: 500px;">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+
+                            </div>
+                            <div class="card h-auto">
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label class="form-label">影片URL</label>
+                                        <input type="text" class="form-control" placeholder="影片URL">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                    <div class="filter cm-content-box box-primary">
+                        <div class="content-title SlideToolHeader">
+                            <div class="cpa">
+                                價錢
+                            </div>
+                            <div class="tools">
+                                <a href="javascript:void(0);" class="expand handle"><i class="fal fa-angle-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="cm-content-body form excerpt">
+                            
+						<div class="card-body">
+						<div class="row">
+						<div class="col-sm-4 m-b30">
+                                <label class="form-label">顯示價格</label>
+                                <select class="form-control default-select h-auto wide">
+                                    <option value="person">每人價格</option>
+                                    <option value="fixed">價格固定</option>
+                                    <option value="fixed_depart">固定出發</option>
+                                </select>
+						</div>
+						<div class="col-sm-4 m-b30">
+                                <label class="form-label">成人價</label>
+							<input type="number" class="form-control" value="">
+						</div>
+						<div class="col-sm-4 m-b30">
+                                <label class="form-label">兒童價格</label>
+                                <input type="number" class="form-control" value="">
+						</div>
+						<div class="col-sm-4 m-b30">
+							<label class="form-label">
+                                    在預訂表格隱藏成人
+							</label>
+                                <select class="form-control default-select h-auto wide">
+                                    <option value="off">否</option>
+                                    <option value="on">是</option>
+                                </select>
+						</div>
+						<div class="col-sm-4 m-b30">
+                                <label class="form-label">在預訂表格上隱藏小孩</label>
+                                <select class="form-control default-select h-auto wide">
+                                    <option value="off">否</option>
+                                    <option value="on">是</option>
+                                </select>
+						</div>
+						<div class="col-sm-4 m-b30">
+                                <label class="form-label">允許取消</label>
+                                <select class="form-control default-select h-auto wide">
+                                    <option value="off">否</option>
+                                    <option value="on">是</option>
+                                </select>
+						</div>
+                       <div class="col-sm-4 m-b30">
+                                <label class="form-label">禁用“需要成人姓名”</label>
+                                <select class="form-control default-select h-auto wide">
+                                    <option value="off">關</option>
+                                    <option value="on">開</option>
+                                </select>
+						</div>
+                            <div class="col-sm-4 m-b30">
+                                <label class="form-label">禁用“需要兒童姓名”</label>
+                                <select class="form-control default-select h-auto wide">
+                                    <option value="off">關</option>
+                                    <option value="on">開</option>
+                                </select>
+                            </div>
+							</div>
+                        </div>
+                    </div>
+                </div>
+                                    <div class="filter cm-content-box box-primary">
+                        <div class="content-title SlideToolHeader">
+                            <div class="cpa">
+                        地點
+                            </div>
+                            <div class="tools">
+                                <a href="javascript:void(0);" class="expand handle"><i class="fal fa-angle-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="cm-content-body form excerpt">
+                            <div class="card-body">
+                        <div class="col-sm-12 m-b30">
+                                <label class="form-label">選擇城市</label>
+                                <select class="form-control default-select h-auto wide">
+                                    <option value="AL">Hong Kong</option>
+                                </select>
+                        </div>
+                            <div class="col-sm-12 m-b30">
+                                <label class="form-label">集合地點</label>
+                                <input type="text" class="form-control" value="">
+                            </div>
+                        <div class="col-xl-6 col-sm-12" style="margin-top:15px;">
+                            <div class="mb-3">
+                                <label class="form-label">附近的物業</label>
+                                <div class="faq-container5">
+                                    <div class="faq-add-btn5">
+                                        <button type="button" class="add-btn5" id="tripAreaCreateBtn">+新增</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+<div class="content-body default-height" style="
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    padding: 0;
+    box-sizing: border-box;
+  ">
+    <div class="container-fluid">
+        <div class="row" style="
+        width: 100%; /* Ensure the row takes up full width */
+        height: 100%; /* Ensure the row takes up full height */
+        padding: 0;
+      ">
+            <div class="col-xl-12" style="
+          padding: 0;
+        ">
+                <div class="card" style="
+            border: 1px solid #e3e6f0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            background-color: #f8f9fc; /* Light background color */
+          ">
+                    <div class="card-body" style="
+              padding: 0;
+            ">
+                        <div id="calendar" style="width: 100%;background-color: #ffffff;border-radius: 8px;padding:5px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="scheduleModal" tabindex="-1" aria-labelledby="scheduleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="scheduleModalLabel">Upcoming Sessions</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="list-group">
+                                <!-- Sample Data -->
+                                <div class="list-group-item">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">Monday</h5>
+                                        <small>5:00 PM (1hr)</small>
+                                    </div>
+                                    <p class="mb-1">Weekly · Aug 17, 2024 – Nov 17, 2024</p>
+                                    <div class="d-flex justify-content-end">
+                                        <button class="btn btn-primary btn-sm mr-2" data-toggle="modal" data-target="#editModal">修改</button>
+                                        <button class="btn btn-danger btn-sm">🗑️</button>
+                                    </div>
+                                </div>
+                                <!-- Add more items here as needed -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal for create Schedule -->
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createModalLabel">Create Schedule</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="form-group">
+                        <label for="location">地點</label>
+                        <input type="text" class="form-control" id="createLocation" placeholder="地點" value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="startTime">開始時間</label>
+                        <div class="d-flex">
+                            <input type="date" class="form-control" id="createStartDate" value="2024-08-19">
+                            <input type="checkbox" class="ml-2" id="createEnableStartTime">
+                            <input type="time" class="form-control ml-2" id="createStartTime" value="" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="duration">持續時間 (日子)</label>
+                    <input type="number" class="form-control" id="createDuration" value="1">
+                </div>
+                <div class="form-group">
+                    <label for="repeat">開團行程規劃</label>
+                    <select class="form-control" id="createRepeat">
+                        <option value="nothing">沒有</option>
+                        <option value="daily">每日</option>
+                        <option value="weekly">每星期</option>
+                        <option value="biweekly">每兩星期</option>
+                        <option value="triweekly">每三星期</option>
+                        <option value="quadweekly">每四星期</option>
+                        <!-- Add more options as needed -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="days">Days</label>
+                    <div class="btn-group btn-group-toggle d-flex" data-toggle="buttons">
+                        <label class="btn btn-outline-primary">
+                            <input type="checkbox" id="createDays_SAT" class="createDay-checkbox"> S
+                        </label>
+                        <label class="btn btn-outline-primary">
+                            <input type="checkbox" id="createDays_M" class="createDay-checkbox"> M
+                        </label>
+                        <label class="btn btn-outline-primary">
+                            <input type="checkbox" id="createDays_TUE" class="createDay-checkbox"> T
+                        </label>
+                        <label class="btn btn-outline-primary">
+                            <input type="checkbox" id="createDays_W" class="createDay-checkbox"> W
+                        </label>
+                        <label class="btn btn-outline-primary">
+                            <input type="checkbox" id="createDays_THU" class="createDay-checkbox"> T
+                        </label>
+                        <label class="btn btn-outline-primary">
+                            <input type="checkbox" id="createDays_F" class="createDay-checkbox"> F
+                        </label>
+                        <label class="btn btn-outline-primary">
+                            <input type="checkbox" id="createDays_SUN" class="createDay-checkbox"> S
+                        </label>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="until">Until</label>
+                    <input type="date" class="form-control" id="createUntil" value="">
+                </div>
+               @*  <p class="text-muted">Takes place every week on Monday from 5:00 PM to 6:00 PM, starting on Aug 19, 2024, ending on Nov 17, 2024.</p> *@
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="createmodalcloseBtn" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal for Editing Schedule -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Edit All Monday 5:00 PM Sessions</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="form-group">
+                        <label for="location">地點</label>
+                        <input type="text" class="form-control" id="location" value="Location 1">
+                    </div>
+                    <div class="form-group">
+                        <label for="startTime">開始時間</label>
+                        <div class="d-flex">
+                            <input type="date" class="form-control" id="startDate" value="2024-08-19">
+                            <input type="checkbox" class="ml-2" id="enableStartTime">
+                            <input type="time" class="form-control ml-2" id="startTime" value="" disabled>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="duration">持續時間 (日子)</label>
+                        <input type="number" class="form-control" id="Duration" value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="repeat">開團行程規劃</label>
+                        <select class="form-control" id="repeat">
+                            <option value="nothing">沒有</option>
+                            <option value="daily">每日</option>
+                            <option value="weekly">每星期</option>
+                            <option value="biweekly">每兩星期</option>
+                            <option value="triweekly">每三星期</option>
+                            <option value="quadweekly">每四星期</option>
+                            <!-- Add more options as needed -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="days">Days</label>
+                        <div class="btn-group btn-group-toggle d-flex" data-toggle="buttons">
+                            <label class="btn btn-outline-primary">
+                                <input type="checkbox" class="day-checkbox"> S
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="checkbox" class="day-checkbox"> M
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="checkbox" class="day-checkbox"> T
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="checkbox" class="day-checkbox"> W
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="checkbox" class="day-checkbox"> T
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="checkbox" class="day-checkbox"> F
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="checkbox" class="day-checkbox"> S
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="until">Until</label>
+                        <input type="date" class="form-control" id="until" value="2024-11-17">
+                    </div>
+@*                     <p class="text-muted">Takes place every week on Monday from 5:00 PM to 6:00 PM, starting on Aug 19, 2024, ending on Nov 17, 2024.</p>
+ *@                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+
+@section Fillow_style
+{
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="vendor/select2/css/select2.min.css">
+    <link href="~/Fillow/vendor/bootstrap-datepicker-master/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/@@fullcalendar/core@4.3.0/main.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/@@fullcalendar/daygrid@4.3.0/main.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/@@fullcalendar/timegrid@4.3.0/main.min.css" rel="stylesheet" />
+    
+}
+
+@section Fillow_script
+{
+    <!-- Required vendors -->
+    <script src="~/Fillow/vendor/global/global.min.js"></script>
+    <script src="~/Fillow/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <script src="~/Fillow/vendor/select2/js/select2.full.min.js"></script>
+    <script src="~/Fillow/vendor/bootstrap-datepicker-master/js/bootstrap-datepicker.min.js"></script>
+
+    <!-- Apex Chart -->
+
+    <script src="https://cdn.jsdelivr.net/npm/rrule@2.6.3/dist/es5/rrule.min.js"></script>
+    <script src="https://unpkg.com/@@fullcalendar/core@4.3.0/main.min.js"></script>
+    <script src="https://unpkg.com/@@fullcalendar/daygrid@4.3.0/main.min.js"></script>
+    <script src="https://unpkg.com/@@fullcalendar/interaction@4.3.0/main.min.js"></script>
+    <script src="https://unpkg.com/@@fullcalendar/rrule@4.3.0/main.min.js"></script>
+    <script src="https://unpkg.com/@@fullcalendar/timegrid@4.3.0/main.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+    <script src="~/Fillow/js/plugins-init/select2-init.js"></script>
+    <script src="~/Fillow/js/custom.min.js"></script>
+    <script src="~/Fillow/js/dlabnav-init.js"></script>
+    <script src="~/Fillow/js/demo.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            const today = new Date().toISOString().split('T')[0];
+
+            // Set the value of the input field to today's date
+            document.getElementById('createStartDate').value = today;
+            document.getElementById('createUntil').value = today;
+
+            $(".expand.handle").on("click", function () {
+                // Find the .cm-content-body within the same .filter container
+                var content = $(this).closest('.filter').find('.cm-content-body');
+
+                // Toggle the visibility of the content
+                content.slideToggle();
+
+                // Toggle the icon (fa-angle-down and fa-angle-up)
+                $(this).find('i').toggleClass('fa-angle-down fa-angle-up');
+            });
+
+            let itemIndex = 0; // Track the index for each dynamically added item
+            let itemIndex2 = 0; // Track the index for each dynamically added item
+            let itemIndex3 = 0; // Track the index for each dynamically added item
+            let itemIndex4 = 0; // Track the index for each dynamically added item
+            let itemIndex5 = 0; // Track the index for each dynamically added item
+
+
+
+            // Toggle FAQ body visibility
+            $(document).on('click', '.faq-header', function () {
+                $(this).next('.faq-body').slideToggle();
+            });
+
+            // Remove FAQ item
+            $(document).on('click', '.delete-btn', function () {
+                $(this).closest('.faq-item').remove();
+            });
+
+            // Add new FAQ item
+                $('.add-btn').on('click', function () {
+                itemIndex++; // Increment the index each time a new item is added
+                var newItem = `
+                    <div class="faq-item">
+                        <div class="faq-header">
+                            <a href="javascript:void(0);" class="delete-btn"><i class="fas fa-trash-alt"></i></a>
+                        </div>
+                        <div class="faq-body">
+                            <div class="form-group">
+                                <label for="title-${itemIndex}">標題</label>
+                                        <input type="text" id="title-${itemIndex}" name="title-${itemIndex}" class="form-control" placeholder="請輸入標題">
+                            </div>
+                            <div class="form-group">
+                                <label for="description-${itemIndex}">描述</label>
+                                <textarea id="description-${itemIndex}" name="description-${itemIndex}" class="form-control" rows="3" placeholder="请输入描述"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                $('.faq-container').prepend(newItem);
+            });
+
+                $('.add-btn2').on('click', function () {
+                itemIndex2++; // Increment the index for unique IDs and names
+                var newItem = `
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <a href="javascript:void(0);" class="delete-btn"><i class="fas fa-trash-alt"></i></a>
+                    </div>
+                    <div class="faq-body">
+                        <div class="form-group">
+                            <label for="field-title-${itemIndex2}">標題</label>
+                                            <input type="text" id="field-title-${itemIndex2}" name="field-title-${itemIndex2}" class="form-control" placeholder="請輸入標題">
+                        </div>
+                        <div class="form-group">
+                            <label for="field-image-${itemIndex2}">圖片</label>
+                    <div class="image-upload">
+                                <input type="file" id="field-image-${itemIndex2}" name="field-image-${itemIndex2}" class="image-file-input">
+                    </div>
+                            <div class="image-preview">
+                                        <img id="preview-image-${itemIndex2}" src="" alt="Image Preview" style="display: none; width: 300px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="field-description-${itemIndex2}">描述</label>
+                                    <textarea id="field-description-${itemIndex2}" name="field-description-${itemIndex2}" class="form-control" rows="3" placeholder="请输入描述"></textarea>
+                        </div>
+                    </div>
+                </div>
+            `;
+                $('.faq-container2').prepend(newItem);
+                $(`#field-image-${itemIndex2}`).on('change', function (event) {
+                    console.log('File input changed'); // Debugging line
+                    var file = event.target.files[0];
+                    if (file) {
+                        console.log('File selected:', file.name); // Debugging line
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            console.log('File loaded'); // Debugging line
+                            $(`#preview-image-${itemIndex2}`).attr('src', e.target.result).show();
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            });
+                // Add new FAQ item
+                $('#tripDesCreateBtn').on('click', function () {
+                    itemIndex3++; // Increment the index each time a new item is added
+                    var newItem = `
+                            <div class="faq-item">
+                                <div class="faq-header">
+                                    <a href="javascript:void(0);" class="delete-btn"><i class="fas fa-trash-alt"></i></a>
+                                </div>
+                                <div class="faq-body">
+                                    <div class="form-group">
+                                        <label for="title-${itemIndex3}">標題</label>
+                                                                <input type="text" id="title-${itemIndex3}" name="title-${itemIndex3}" class="form-control" placeholder="請輸入標題">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description-${itemIndex3}">描述</label>
+                                                        <textarea id="description-${itemIndex3}" name="description-${itemIndex3}" class="form-control" rows="3" placeholder="请输入描述"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    $('.faq-container3').prepend(newItem);
+                });
+
+                // Add new FAQ item
+                $('#tripDesCreateBtn2').on('click', function () {
+                    itemIndex4++; // Increment the index each time a new item is added
+                    var newItem = `
+                            <div class="faq-item">
+                                <div class="faq-header">
+                                    <a href="javascript:void(0);" class="delete-btn"><i class="fas fa-trash-alt"></i></a>
+                                </div>
+                                <div class="faq-body">
+                                    <div class="form-group">
+                                                <label for="title-${itemIndex4}">標題</label>
+                                                                <input type="text" id="title-${itemIndex4}" name="title-${itemIndex4}" class="form-control" placeholder="請輸入標題">
+                                    </div>
+                                    <div class="form-group">
+                                                <label for="description-${itemIndex4}">描述</label>
+                                                        <textarea id="description-${itemIndex4}" name="description-${itemIndex4}" class="form-control" rows="3" placeholder="请输入描述"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    $('.faq-container4').prepend(newItem);
+                });
+           // tripAreaCreateBtn
+            $('#tripAreaCreateBtn').on('click', function () {
+                itemIndex5++; // Increment the index each time a new item is added
+                var newItem = `
+                        <div class="faq-item">
+                            <div class="faq-header">
+                                <a href="javascript:void(0);" class="delete-btn"><i class="fas fa-trash-alt"></i></a>
+                            </div>
+                            <div class="faq-body">
+                                <div class="form-group">
+                                            <label for="field-title-${itemIndex5}">標題</label>
+                                                                    <input type="text" id="field-title-${itemIndex5}" name="field-title-${itemIndex5}" class="form-control" placeholder="請輸入標題">
+                                </div>
+                                <div class="form-group">
+                                                    <label for="field-image2-${itemIndex5}">精選圖片</label>
+                            <div class="image-upload">
+                                                <input type="file" id="field-image2-${itemIndex5}" name="field-image2-${itemIndex5}" class="image-file-input">
+                            </div>
+                                    <div class="image-preview">
+                                                <img id="preview-image2-${itemIndex5}" src="" alt="Image Preview" style="display: none; width: 300px; height: auto;">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                            <label for="field-description-${itemIndex5}">描述</label>
+                                                            <textarea id="field-description-${itemIndex5}" name="field-description-${itemIndex5}" class="form-control" rows="3" placeholder="请输入描述"></textarea>
+                                </div>
+                                        <div class="form-group">
+                                                                    <label for="field-image3-${itemIndex5}">圖標地圖</label>
+                                    <div class="image-upload">
+                                                        <input type="file" id="field-image3-${itemIndex5}" name="field-image3-${itemIndex5}" class="image-file-input">
+                                    </div>
+                                            <div class="image-preview">
+                                                        <img id="preview-image3-${itemIndex5}" src="" alt="Image Preview" style="display: none; width: 300px; height: auto;">
+                                            </div>
+                                        </div>
+                                                                                <div class="form-group">
+                                                    <label for="field-title-${itemIndex5}">緯度</label>
+                                                                            <input type="text" id="field-title-${itemIndex5}" name="field-title-${itemIndex5}" class="form-control" placeholder="請輸入標題">
+                                        </div>
+                                                                                <div class="form-group">
+                                                            <label for="field-title-${itemIndex5}">經度</label>
+                                                                            <input type="text" id="field-title-${itemIndex5}" name="field-title-${itemIndex5}" class="form-control" placeholder="請輸入標題">
+                                        </div>
+                            </div>
+                        </div>                                `;
+
+                $('.faq-container5').prepend(newItem);
+                $(`#field-image2-${itemIndex5}`).on('change', function (event) {
+                    console.log('File input changed'); // Debugging line
+                    var file = event.target.files[0];
+                    if (file) {
+                        console.log('File selected:', file.name); // Debugging line
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            console.log('File loaded'); // Debugging line
+                            $(`#preview-image2-${itemIndex5}`).attr('src', e.target.result).show();
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+                $(`#field-image3-${itemIndex5}`).on('change', function (event) {
+                    console.log('File input changed'); // Debugging line
+                    var file = event.target.files[0];
+                    if (file) {
+                        console.log('File selected:', file.name); // Debugging line
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            console.log('File loaded'); // Debugging line
+                            $(`#preview-image3-${itemIndex5}`).attr('src', e.target.result).show();
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            });
+
+         
+            $('#travel-type-select').on('change', function () {
+                var selectedValue = $(this).val();
+
+                // Hide all elements with class names starting with "travelType"
+                $('div[class*="travelType"]').hide();
+
+                $('div[class*="travelType"] input[type="checkbox"]').prop('checked', false);
+
+                // Show the relevant element based on the selected option
+                if (selectedValue !== "選擇..." && selectedValue) {
+                   // $('.travelType' + selectedValue).show();
+                    $('.travelType' + selectedValue).slideDown(600);
+                }
+            });
+            //language selector
+            $('#languageSelection').on('change', function () {
+                // Get the selected options
+                const selectedOptions = $(this).find('option:selected');
+
+                // Check if "其他" is selected by checking the text of the option
+                const isOtherSelected = selectedOptions.filter(function () {
+                    return $(this).text() === "其他";
+                }).length > 0;
+
+                if (isOtherSelected) {
+                    // If the input field for "其他" doesn't exist, create it
+                    if ($('#otherLanguageInput').length === 0) {
+                        $('#otherLanguageInputContainer').append(`
+                            <div class="form-group mt-3" id="otherLanguageInput">
+                                <label for="otherLanguage">請輸入其他語言</label>
+                                <input type="text" class="form-control" id="otherLanguage" placeholder="請輸入語言">
+                            </div>
+                        `);
+                    }
+                } else {
+                    // If "其他" is deselected, remove the input field
+                    $('#otherLanguageInput').remove();
+                }
+            });
+            //transportataion selector
+            $('#transportationSelection').on('change', function () {
+                // Get the selected options
+                const selectedOptions = $(this).find('option:selected');
+
+                // Check if "其他" is selected by checking the text of the option
+                const isOtherSelected = selectedOptions.filter(function () {
+                    return $(this).text() === "其他";
+                }).length > 0;
+
+                if (isOtherSelected) {
+                    // If the input field for "其他" doesn't exist, create it
+                    if ($('#otherTransportationInput').length === 0) {
+                        $('#otherTransportationContainer').append(`
+                                            <div class="form-group mt-3" id="otherTransportationInput">
+                                                <label for="otherTransportationInput">請輸入其他交通工具</label>
+                                                        <input type="text" class="form-control" id="otherTransportation" placeholder="請輸入其他交通工具">
+                                    </div>
+                                `);
+                    }
+                } else {
+                    // If "其他" is deselected, remove the input field
+                    $('#otherLanguageInput').remove();
+                }
+            });
+            //#repeat
+            $('#repeat').change(function () {
+                var repeatValue = $(this).val();
+                if (repeatValue === 'daily') {
+                    $('.day-checkbox').prop('checked', true).parent().addClass('active');
+                } else {
+                    $('.day-checkbox').prop('checked', false).parent().removeClass('active');
+                }
+            });
+
+            $('#createRepeat').change(function () {
+                var repeatValue = $(this).val();
+                if (repeatValue === 'daily') {
+                    $('.createDay-checkbox').prop('checked', true).parent().addClass('active');
+                } else {
+                    $('.createDay-checkbox').prop('checked', false).parent().removeClass('active');
+                }
+            });
+
+            $('.createDay-checkbox').change(function () {
+                var allChecked = $('.createDay-checkbox').length === $('.createDay-checkbox:checked').length;
+                if (allChecked) {
+                    $('#createRepeat').val('daily');
+                }
+            });
+
+            $('.day-checkbox').change(function () {
+                var allChecked = $('.day-checkbox').length === $('.day-checkbox:checked').length;
+                if (allChecked) {
+                    $('#repeat').val('daily');
+                }
+            });
+            //createEnableStartTime
+            $('#createEnableStartTime').change(function () {
+                if ($(this).is(':checked')) {
+                    $('#createStartTime').prop('disabled', false);
+                } else {
+                    $('#createStartTime').prop('disabled', true);
+                }
+            });
+            //control start time
+            $('#enableStartTime').change(function () {
+                if ($(this).is(':checked')) {
+                    $('#startTime').prop('disabled', false);
+                } else {
+                    $('#startTime').prop('disabled', true);
+                }
+            });
+
+            // upload相片
+
+            var imgUpload = document.getElementById('upload-img'),
+                imgPreview = document.getElementById('img-preview'),
+                imgUploadForm = document.getElementById('form-upload'),
+                fileArray = [];
+
+            imgUpload.addEventListener('change', previewImgs, true);
+
+            function previewImgs(event) {
+                const totalFiles = imgUpload.files.length;
+
+                if (totalFiles > 0) {
+                    imgPreview.classList.remove('img-thumbs-hidden');
+                }
+
+                for (let i = 0; i < totalFiles; i++) {
+                    fileArray.push(imgUpload.files[i]);
+
+                    const wrapper = document.createElement('div');
+                    wrapper.classList.add('wrapper-thumb');
+                    const removeBtn = document.createElement("span");
+                    const nodeRemove = document.createTextNode('x');
+                    removeBtn.classList.add('remove-btn');
+                    removeBtn.appendChild(nodeRemove);
+                    const img = document.createElement('img');
+                    img.src = URL.createObjectURL(imgUpload.files[i]);
+                    img.classList.add('img-preview-thumb');
+                    wrapper.appendChild(img);
+                    wrapper.appendChild(removeBtn);
+                    imgPreview.appendChild(wrapper);
+
+                    $(removeBtn).click(function () {
+                        const index = Array.from(imgPreview.children).indexOf(wrapper);
+                        fileArray.splice(index, 1);
+                        $(this).parent('.wrapper-thumb').remove();
+                        updateFileInput(imgUpload, fileArray);
+                    });
+                }
+            }
+
+            // Image upload and preview for the second form
+            var imgUpload2 = document.getElementById('upload-img2'),
+                imgPreview2 = document.getElementById('img-preview2'),
+                imgUploadForm2 = document.getElementById('form-upload2'),
+                fileArray2 = [];
+
+            imgUpload2.addEventListener('change', previewImgs2, true);
+
+            function previewImgs2(event) {
+                const totalFiles2 = imgUpload2.files.length;
+
+                if (totalFiles2 > 0) {
+                    imgPreview2.classList.remove('img-thumbs-hidden');
+                }
+
+                for (let i = 0; i < totalFiles2; i++) {
+                    fileArray2.push(imgUpload2.files[i]);
+
+                    const wrapper = document.createElement('div');
+                    wrapper.classList.add('wrapper-thumb');
+                    const removeBtn = document.createElement("span");
+                    const nodeRemove = document.createTextNode('x');
+                    removeBtn.classList.add('remove-btn2');
+                    removeBtn.appendChild(nodeRemove);
+                    const img2 = document.createElement('img');
+                    img2.src = URL.createObjectURL(imgUpload2.files[i]);
+                    img2.classList.add('img-preview-thumb');
+                    wrapper.appendChild(img2); // Append img2 instead of img
+                    wrapper.appendChild(removeBtn);
+                    imgPreview2.appendChild(wrapper);
+
+                    $(removeBtn).click(function () {
+                        const index = Array.from(imgPreview2.children).indexOf(wrapper);
+                        fileArray2.splice(index, 1);
+                        $(this).parent('.wrapper-thumb').remove();
+                        updateFileInput(imgUpload2, fileArray2);
+                    });
+                }
+            }
+
+            function updateFileInput(inputElement, fileArray) {
+                const dataTransfer = new DataTransfer();
+                fileArray.forEach(file => dataTransfer.items.add(file));
+                inputElement.files = dataTransfer.files;
+            }
+
+            //upload video
+            $('#upload-video-link').on('click', function () {
+                $('#video-upload').click();
+            });
+
+            // Handle video file selection and preview
+            $('#video-upload').on('change', function (event) {
+                var file = event.target.files[0];
+                if (file) {
+                    // Create a URL for the selected video
+                    var videoURL = URL.createObjectURL(file);
+
+                    // Set the video source and show the preview section
+                    $('#video-player').attr('src', videoURL);
+                    $('.video-preview').show();
+                }
+            });
+
+            //scheduler
+            // Initialize FullCalendar
+
+// $('#createmodalcloseBtn').trigger("click");
+            // Initialize FullCalendar
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth', // Set initial view to month view
+                plugins: ["interaction", "dayGrid", "timeGrid", "resourceTimeline", "rrule"],
+                header: {
+                    right: "prev,next today",
+                    center: "title",
+                    left: "dayGridMonth,timeGridWeek,timeGridDay"
+                },
+                editable: true,
+                selectable: true,
+                timeZone: 'UTC',
+                height: 'auto',
+                events: [], // Initially empty, events will be added dynamically
+                eventContent: function (arg) {
+                    let content = document.createElement('div');
+                    content.innerHTML = `
+                    <div><strong>${arg.event.title}</strong></div>
+                    <div>${arg.event.extendedProps.details}</div>
+                `;
+                    return { domNodes: [content] };
+                }
+            });
+
+            calendar.render();
+
+            // Handle the "Save" button click to add events
+            document.querySelector('#createModal .btn-primary').addEventListener('click', function () {
+                calendar.removeAllEvents();
+                calendar.refetchEvents();
+                calendar.changeView('dayGridMonth');
+                const location = document.getElementById('createLocation').value;
+                const startDate = document.getElementById('createStartDate').value;
+                const enableStartTime = document.getElementById('createEnableStartTime').checked;
+                const startTime = enableStartTime ? document.getElementById('createStartTime').value : '00:00:00';
+                const repeat = document.getElementById('createRepeat').value;
+                const untilDate = document.getElementById('createUntil').value;
+                let duration = document.getElementById('createDuration').value;
+
+                // Capture selected days
+                const selectedDays = [];
+                document.querySelectorAll('.createDay-checkbox:checked').forEach((checkbox) => {
+                    selectedDays.push(checkbox.id.replace('createDays_', '').toUpperCase());
+                });
+
+                // Map day initials to RRule constants (MO, TU, etc.)
+                const dayMap = {
+                    SUN: 'SU',
+                    M: 'MO',
+                    TUE: 'TU',
+                    W: 'WE',
+                    THU: 'TH',
+                    F: 'FR',
+                    SAT: 'SA'
+                };
+                const byweekday = selectedDays.map(day => dayMap[day]);
+                const eventColors = {};
+                var event = {};
+                // Determine the recurrence rule
+                                function getRandomColor() {
+                    const letters = '0123456789ABCDEF';
+                    let color = '#';
+                    for (let i = 0; i < 6; i++) {
+                        color += letters[Math.floor(Math.random() * 16)];
+                    }
+                    return color;
+                }
+
+                let rrule = null;
+                duration = parseInt(duration, 10);
+                if (repeat !== 'nothing' && byweekday.length > 0) {
+                    if (enableStartTime) {
+                        rrule = {
+                            freq: repeat === 'daily' ? 'DAILY' : 'WEEKLY',
+                            interval: repeat === 'biweekly' ? 2 :
+                                repeat === 'triweekly' ? 3 :
+                                    repeat === 'quadweekly' ? 4 : 1,
+                            byweekday: byweekday,
+                            dtstart: `${startDate}T${startTime}`,
+                            until: untilDate ? new Date(untilDate).toISOString() : null
+                        };
+                    } else {
+                        rrule = {
+                            freq: repeat === 'daily' ? 'DAILY' : 'WEEKLY',
+                            interval: repeat === 'biweekly' ? 2 :
+                                repeat === 'triweekly' ? 3 :
+                                    repeat === 'quadweekly' ? 4 : 1,
+                            byweekday: byweekday,
+                            dtstart: `${startDate}`,
+                            until: untilDate ? new Date(untilDate).toISOString() : null
+                        };
+                    }
+                    // Generate the event data
+                    event = {
+                        title: location,
+                        rrule: rrule,
+                        duration: { days: duration },
+                        color: eventColors[location] || (eventColors[location] = getRandomColor()),
+                        extendedProps: {
+                            details: `Repeats: ${repeat}, Until: ${untilDate}`
+                        }
+                    };
+                }else{
+                    // Generate the event data
+                    if (enableStartTime) {
+                    event = {
+                        title: location,
+                        start: `${startDate}T${startTime}`,
+                        duration: { days: duration },
+                        color: eventColors[location] || (eventColors[location] = getRandomColor())
+                    };
+                    }else{
+                        let endDate = addDays(startDate, duration);
+                        let endDateString = endDate.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+                        event = {
+                            title: location,
+                            start: `${startDate}`,
+                            end: endDateString,
+                            color: eventColors[location] || (eventColors[location] = getRandomColor())
+                        };
+                    }
+                }
+
+                // Add event to the calendar
+                calendar.addEvent(event);
+
+                // Close the modal
+                $('#createmodalcloseBtn').trigger("click");
+            });
+
+        });
+
+        function addDays(startDate, days) {
+            let date = new Date(startDate);
+            date.setDate(date.getDate() + days);
+            return date;
+        }
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                    $('#imagePreview').hide();
+                    $('#imagePreview').fadeIn(650);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#imageUpload").change(function () {
+            readURL(this);
+        });
+
+    </script>
+}

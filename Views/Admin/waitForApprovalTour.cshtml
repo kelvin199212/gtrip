@@ -1,0 +1,195 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewData["Title"] = "待審批旅行團";
+}
+
+<div class="content-body default-height">
+    <div class="cardClass">
+        <div class="container">
+            <h2>待審批旅行團</h2>
+
+            <!-- Search and Filter Section -->
+            <div class="search-filter-bar">
+                <input type="text" id="searchPending" class="form-control" placeholder="搜尋客人名稱或聯絡資訊...">
+                <select id="tourFilter" class="form-control">
+                    <option value="">篩選旅遊團</option>
+                    <option value="tour1">旅遊團 A</option>
+                    <option value="tour2">旅遊團 B</option>
+                    <option value="tour3">旅遊團 C</option>
+                </select>
+                <button id="searchBtn" class="btn btn-primary">搜尋</button>
+            </div>
+
+            <!-- Pending Approval Table -->
+            <table class="pending-table">
+                <thead>
+                    <tr>
+                        <th>客人名稱</th>
+                        <th>聯絡資訊</th>
+                        <th>旅遊團名稱</th>
+                        <th>預約日期</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>李大明</td>
+                        <td>damien@example.com / 0911222333</td>
+                        <td>旅遊團 A</td>
+                        <td>2024-11-18</td>
+                        <td>
+                            <button class="btn btn-success approve-btn">審批通過</button>
+                            <button class="btn btn-danger reject-btn">拒絕</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>王小美</td>
+                        <td>xiaomei@example.com / 0933444555</td>
+                        <td>旅遊團 B</td>
+                        <td>2024-11-22</td>
+                        <td>
+                            <button class="btn btn-success approve-btn">審批通過</button>
+                            <button class="btn btn-danger reject-btn">拒絕</button>
+                        </td>
+                    </tr>
+                    <!-- Additional rows can be dynamically added -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Fillow_style
+{
+    <style>
+        .cardClass {
+            background-color: white;
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .search-filter-bar {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 30%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .btn {
+            padding: 5px 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            border: none;
+        }
+
+        .pending-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+            .pending-table th,
+            .pending-table td {
+                border: 1px solid #ddd;
+                padding: 10px;
+                text-align: center;
+            }
+
+            .pending-table th {
+                background-color: #f8f9fa;
+                font-weight: bold;
+            }
+
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+            border: none;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+        }
+    </style>
+}
+
+@section Fillow_script
+{
+    <script src="~/Fillow/vendor/global/global.min.js"></script>
+    <script src="~/Fillow/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+
+
+    <!-- counter -->
+    <script src="~/Fillow/vendor/counter/counter.min.js"></script>
+    <script src="~/Fillow/vendor/counter/waypoint.min.js"></script>
+
+    <!-- Apex Chart -->
+    <script src="~/Fillow/vendor/apexchart/apexchart.js"></script>
+    <script src="~/Fillow/vendor/chart-js/chart.bundle.min.js"></script>
+    <!-- Chart piety plugin files -->
+    <script src="~/Fillow/vendor/peity/jquery.peity.min.js"></script>
+    <!-- Dashboard 1 -->
+    <script src="~/Fillow/js/dashboard/dashboard-1.js"></script>
+
+    <script src="~/Fillow/vendor/owl-carousel/owl.carousel.js"></script>
+
+    <script src="~/Fillow/js/custom.min.js"></script>
+    <script src="~/Fillow/js/dlabnav-init.js"></script>
+    <script src="~/Fillow/js/demo.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Search and Filter Logic
+            $("#searchBtn").on("click", function () {
+                const searchValue = $("#searchPending").val().toLowerCase();
+                const tourValue = $("#tourFilter").val();
+
+                $(".pending-table tbody tr").each(function () {
+                    const rowText = $(this).text().toLowerCase();
+                    const tourName = $(this).find("td:nth-child(3)").text();
+
+                    if (rowText.includes(searchValue) &&
+                        (tourValue === "" || tourName === tourValue)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            });
+
+            // Approve Booking
+            $(document).on("click", ".approve-btn", function () {
+                alert("預約已審批通過！");
+                $(this).closest("tr").remove();  // Simulate approving by removing from table
+            });
+
+            // Reject Booking
+            $(document).on("click", ".reject-btn", function () {
+                if (confirm("確定要拒絕此預約嗎？")) {
+                    $(this).closest("tr").remove();
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,179 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+	ViewData["Title"] = "優惠券";
+}
+<div class="content-body default-height">
+    <div class="container">
+        <h1>意見 / 投訴中心</h1>
+        <form action="#" method="post">
+            <!-- 意見種類 -->
+            <div class="form-group">
+                <label for="opinion-type">意見種類</label>
+                <select id="opinion-type" name="opinion-type">
+                    <option value="" disabled selected>請選擇意見種類</option>
+                    <option value="feedback">意見</option>
+                    <option value="complaint">投訴</option>
+                </select>
+            </div>
+
+            <!-- 內容 -->
+            <div class="form-group">
+                <label for="content">內容</label>
+                <textarea id="content" name="content" placeholder="請輸入您的意見或投訴內容"></textarea>
+            </div>
+
+            <!-- 提供相片 -->
+            <div class="form-group file-upload">
+                <label for="photo-upload">需要提供相片</label>
+                <input type="file" id="photo-upload" name="photo">
+                <p>點擊以上傳相片</p>
+            </div>
+
+            <!-- 客人名稱 -->
+            <div class="form-group">
+                <label for="customer-name">客人名稱</label>
+                <input type="text" id="customer-name" name="customer-name" placeholder="請輸入您的姓名">
+            </div>
+
+            <!-- 電郵 -->
+            <div class="form-group">
+                <label for="email">電郵</label>
+                <input type="email" id="email" name="email" placeholder="請輸入您的電郵">
+            </div>
+
+            <!-- 電話 -->
+            <div class="form-group">
+                <label for="phone">電話</label>
+                <input type="tel" id="phone" name="phone" placeholder="請輸入您的電話號碼">
+            </div>
+
+            <!-- 提交按鈕 -->
+            <div class="form-group">
+                <button type="submit" class="submit-btn">提交</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+@section Fillow_style
+{
+	<link href="~/Fillow/vendor/bootstrap-datepicker-master/css/bootstrap-datepicker.min.css" rel="stylesheet">
+	<link href="~/Fillow/vendor/lightgallery/css/lightgallery.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4A148C;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        label {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+            input[type="text"]:focus,
+            input[type="email"]:focus,
+            input[type="tel"]:focus,
+            textarea:focus,
+            select:focus {
+                border-color: #6A0DAD;
+            }
+
+        textarea {
+            resize: vertical;
+            height: 150px;
+        }
+
+        .file-upload {
+            background-color: #f4f4f9;
+            border: 2px dashed #ccc;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .file-upload:hover {
+                background-color: #f0e1ff;
+            }
+
+            .file-upload input {
+                display: none;
+            }
+
+        .submit-btn {
+            background-color: #6A0DAD;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+            .submit-btn:hover {
+                background-color: #4A148C;
+            }
+    </style>
+}
+
+@section Fillow_script
+    {
+	<!-- Required vendors -->
+	<script src="~/Fillow/vendor/global/global.min.js"></script>
+	<script src="~/Fillow/vendor/bootstrap-datepicker-master/js/bootstrap-datepicker.min.js"></script>
+	<script src="~/Fillow/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+	<script src="~/Fillow/vendor/select2/js/select2.full.min.js"></script>
+	<script src="~/Fillow/js/plugins-init/select2-init.js"></script>
+	<script src="~/Fillow/js/custom.min.js"></script>
+	<script src="~/Fillow/js/dlabnav-init.js"></script>
+	<script src="~/Fillow/js/demo.js"></script>
+	<script>
+		$(document).ready(function () {
+			$(".expand.handle").on("click", function () {
+				// Find the .cm-content-body within the same .filter container
+				var content = $(this).closest('.filter').find('.cm-content-body');
+
+				// Toggle the visibility of the content
+				content.slideToggle();
+
+				// Toggle the icon (fa-angle-down and fa-angle-up)
+				$(this).find('i').toggleClass('fa-angle-down fa-angle-up');
+			});
+		});
+	</script>
+}

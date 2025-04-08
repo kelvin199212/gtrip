@@ -1,0 +1,51 @@
+.service {
+    &__thumb {
+        img {
+            @include add-prefix(border-radius, (14px));
+        }
+    }
+    &__content {
+        .section__header {
+            h2 {
+                @include breakpoint(xxl) {
+                    max-width: 75%;
+                }
+            }
+        }
+    }
+    &__item {
+        @extend %mb-15;
+        &:hover {
+            .service {
+                &__icon {
+                    @include add-prefix(border-radius, (100px));
+                    @include add-prefix(transform, (scale(1.2)));
+                }
+                &__text {
+                    h4 {
+                        color: $theme-color;
+                    }
+                }
+            }
+        }
+    }
+    &__icon {
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        @extend %text-center;
+        box-shadow: 0px 6px 24px #E4E2EE;
+        background: $white-color;
+        @include add-prefix(border-radius, (4px));
+        @include add-prefix(transition, (all .5s ease));
+        @extend %mb-20;
+    }
+    &__text {
+        h4 {
+            font-weight: 600;
+        }
+        p {
+            @extend %mb-0;
+        }
+    }
+}

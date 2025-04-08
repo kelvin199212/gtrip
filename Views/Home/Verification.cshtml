@@ -1,0 +1,253 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutFillow.cshtml";
+    ViewData["Title"] = "驗證身份";
+}
+
+<form id="verificationForm" class="form-valide-with-icon needs-validation" method="post" enctype="multipart/form-data" novalidate>
+    <div class="content-body default-height">
+        <div class="container-fluid">
+            <div class="row page-titles">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Gtrip</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">驗證身份</a> <span class="badge badge-xs badge-danger ms-2">未驗證</span></li>
+                </ol>
+            </div>
+            <!-- row -->
+            <div class="row">
+                <!-- Verification Information Section -->
+                <div class="col-xl-6 col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">驗證資料 (*提交文件與填寫資料必須一致)</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="basic-form">
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label class="text-label form-label required" for="email" required>電子郵件</label>
+                                        <span class="text-danger">*</span>
+                                        <input type="email" class="form-control" id="PersonalEmail" name="Email" placeholder="電子郵件" required>
+                                        <div class="invalid-feedback">
+                                            請輸入電子郵件
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label" for="phoneNumber" required>電話號碼</label>
+                                        <span class="text-danger">*</span>
+                                        <input type="tel" class="form-control" id="phoneNumber" name="PhoneNumber" placeholder="電話號碼" required>
+                                        <div class="invalid-feedback">
+                                            請輸入電話號碼
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Personal ID Section -->
+                <div class="col-xl-6 col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">個人身分證或護照</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="basic-form">
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label" for="fullName" required>姓名</label>
+                                        <span class="text-danger">*</span>
+                                        <input type="text" class="form-control" id="fullName" name="FullName" placeholder="姓名" required>
+                                        <div class="invalid-feedback">
+                                            請輸入姓名
+                                        </div>
+
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label" for="birthDate" required>出生日期</label>
+                                        <span class="text-danger">*</span>
+                                        <input type="date" class="form-control" id="birthDate" name="BirthDate" placeholder="出生日期" required>
+                                        <div class="invalid-feedback">
+                                            請輸入出生日期
+                                        </div>
+
+                                    </div>
+                                    <div class="mb-3 col-md-12">
+                                        <label class="form-label" for="address" required>營業地址</label>
+                                        <span class="text-danger">*</span>
+                                        <input type="text" class="form-control" id="address" name="Address" placeholder="營業地址" required>
+                                        <div class="invalid-feedback">
+                                            請輸入營業地址
+                                        </div>
+
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="idPhoto" class="form-label" for="idPhoto" required>個人身分證或護照相片</label>
+                                        <input class="form-control" type="file" id="idPhoto" name="IdPhoto" required>
+                                        <img id="idPhotoPreview" style="width: 100%; max-width: 200px;" />
+                                        <div class="invalid-feedback">
+                                            請提供個人身分證或護照相片
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="guidePhoto" class="form-label">導遊或領隊証件(如有)</label>
+                                        <input class="form-control" type="file" id="guidePhoto" name="GuidePhoto">
+                                        <img id="guidePhotoPreview" style="width: 100%; max-width: 200px;" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-primary" type="submit" id="submitButton">提交</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Fillow_style
+{
+}
+
+@section Fillow_script
+{
+    <!-- Required vendors -->
+    <script src="~/Fillow/vendor/global/global.min.js"></script>
+    <script src="~/Fillow/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <script src="~/Fillow/js/custom.min.js"></script>
+    <script src="~/Fillow/js/dlabnav-init.js"></script>
+    <script src="~/Fillow/js/demo.js"></script>
+    <script>
+            (function () {
+                'use strict'
+
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.needs-validation')
+
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms)
+                    .forEach(function (form) {
+                        form.addEventListener('submit', function (event) {
+                        event.preventDefault()
+                        event.stopPropagation()
+
+                            if (!form.checkValidity()) {
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                                    form.classList.add('was-validated')
+                            } else {
+                                // If the form is valid, submit the form data
+                                var formData = new FormData($('#verificationForm')[0]);
+
+                                $.ajax({
+                                    url: '/api/UserProfile/SubmitVerification',
+                                    method: 'POST',
+                                    data: formData,
+                                    processData: false,
+                                    contentType: false,
+                                    success: function (response) {
+                                        Swal.fire({
+                                            icon: 'success',
+                                        title: '提交成功，︀請等待批核',
+                                            text: response.message,
+                                            timer: 2000, // Auto close after 2 seconds
+                                            showConfirmButton: false
+                                        }).then(() => {
+                                            // Redirect to another page after the alert is closed
+                                            window.location.href = '/Home/Verification'; // Replace with your desired URL
+                                        });
+                                    },
+                                    error: function (xhr) {
+                                        var errorMessage = xhr.responseJSON?.message || 'Something went wrong!';
+
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: errorMessage,
+                                            timer: 2000, // Auto close after 2 seconds
+                                            showConfirmButton: false
+                                        });
+                                    }
+                                });
+                            }
+
+                            
+                        }, false)
+                    })
+            })();
+
+
+        $(document).ready(function () {
+            // Handle form submission
+           
+
+            // Function to preview image
+            function previewImage(input, previewElementId) {
+                const file = input.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        $(previewElementId).attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+
+            // Event listeners for file input change
+            $('#idPhoto').on('change', function (event) {
+                previewImage(event.target, '#idPhotoPreview');
+            });
+
+            $('#guidePhoto').on('change', function (event) {
+                previewImage(event.target, '#guidePhotoPreview');
+            });
+
+
+            // Function to fetch existing data and populate the form
+            function fetchVerificationData() {
+                $.ajax({
+                    url: '/api/UserProfile/GetVerificationData', // Ensure this endpoint is available in your backend
+                    method: 'GET',
+                    success: function (data) {
+                        if (data) {
+                            $('#PersonalEmail').val(data.email);
+                            $('#phoneNumber').val(data.phoneNumber);
+                            $('#fullName').val(data.fullName);
+                            if (data.birthDate) {
+                                $('#birthDate').val(data.birthDate.split('T')[0]);
+                            }
+                            $('#address').val(data.address);
+
+                            if (data.idPhotoPath) {
+                                $('#idPhotoPreview').attr('src', '../' + data.idPhotoPath).show();
+                                // Select the input element by its ID
+                                var inputElement = document.getElementById('idPhoto');
+
+                                // Remove the 'required' attribute
+                                inputElement.removeAttribute('required');
+                            }
+
+                            if (data.guidePhotoPath) {
+                                $('#guidePhotoPreview').attr('src', '../' + data.guidePhotoPath).show();
+                            }
+
+                      
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+
+
+                        Swal.fire({
+                            icon: 'warning',
+                            title: "請驗證你的身份",
+                            timer: 2000, // Auto close after 2 seconds
+                            showConfirmButton: false
+                        });
+                    }
+                });
+            }
+
+            // Fetch existing data when the page loads
+            fetchVerificationData();
+        });
+    </script>
+}

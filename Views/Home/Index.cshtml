@@ -1,0 +1,528 @@
+﻿@{
+    ViewData["Title"] = "Gtrippro";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<style>
+
+    .header__transparent{
+        background:#fff !important;
+        padding:5px;
+    }
+
+    .header--style2 .menu > li a{
+        color: #000000 !important;
+    }
+    .default__btn.reverse{
+        color: white !important;
+        background: #6347F9 !important;
+    }
+
+    .default__btn.reverse:hover{
+            color: #6347F9 !important;
+            background: white !important;
+    }
+
+    .header--style2 .header__bar span{
+        background: #000 !important;
+    }
+
+    .booking__form{
+    background: #FFFFFF;
+    border: 1px solid #DEDEDE;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.08), 0px 4px 12px rgba(0, 0, 0, 0.05);
+    border-radius: 70px;
+        padding: 5px;
+    }
+
+   #searchBtn{
+        background: var(--main-color, #3B71FE);
+        color: #fff;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        border-radius: 70px;
+        display: flex;
+        align-items: center;
+        height: 60px;
+        transition: all 0.2s;
+        margin-top: 0px;
+        justify-content: center;
+    }
+
+    .booking__form>form>.row {
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+    }
+
+    .col {
+        align-content: center;
+    }
+
+    .service-add-wishlist{
+        position: absolute;
+        top: 18px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+        color: #fff;
+        font-size: 21px;
+        z-index: 8;
+        cursor: pointer;
+    }
+
+    .fa-heart {
+        cursor: pointer;
+        transition: color 0.3s;
+    }
+
+    .fa-heart.red {
+        color: red;
+    }
+
+    .rating {
+        display: inline-block;
+        margin-bottom: 5px;
+    }
+
+    .fa-star {
+        color: gold;
+    }
+
+    .fa-star-o {
+        color: lightgray;
+    }
+</style>
+
+
+<body>
+
+    <!-- preloader start here -->
+    <div class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-icon">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <!-- preloader ending here -->
+    <!-- scrollToTop start here -->
+    <a href="#" class="scrollToTop"><i class="fa-solid fa-angle-up"></i></a>
+    <!-- scrollToTop ending here -->
+    <!-- ================> Banner section start here <================== -->
+    <div id="divBanner" style="position: relative;height: 650px;">
+        <div class="container" style="position: absolute;z-index:100;inset:0px;">
+        <div class="banner__content text-center mb-5">
+                <h2 style="color:#ffffff";>踏出這一步，世界就在你腳下。</h2>
+                <h6 style="color:#ffffff">立即預訂獨特的旅程</h6>
+        </div>
+        <div class="booking__form bg-white">
+            <form action="#">
+                <div class="row g-4 g-sm-5 row-cols-xl-4 row-cols-sm-4 row-cols-1">
+                        <div class="col" style="padding-left: 70px;">
+                        <label class="form-label">地點</label>
+                            <select style="padding: 0;box-shadow: none;">
+                            <option value="Zambia">Zambia</option>
+                            <option value="Zimbabwe">Zimbabwe</option>
+                        </select>
+                    </div>
+                        <div class="col" style="padding-left: 70px;">
+                        <label class="form-label">出發日期</label>
+                            <input type="text" style="padding: 0;box-shadow: none;" placeholder="03/28/2022" class="datepicker">
+                    </div>
+                        <div class="col" style="padding-left: 70px;">
+                        <label class="form-label">完結日期</label>
+                        <input type="text" style="padding: 0;box-shadow: none;" placeholder="04/15/2022" class="datepicker">
+                    </div>
+                    <div class="col">
+                            <button type="submit" id="searchBtn" class="default__btn" style="width: 100%;">
+                                <span>搜尋</span>
+                            </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        </div>
+        <div class="banner banner--style2 bg__img" style="height: -webkit-fill-available;">
+    </div>
+    </div>
+    <!-- ================> Banner section end here <================== -->
+    <!-- ================> About section start here <================== -->
+    <!-- ================> Service section start here <================== -->
+    <div class="service padding--top padding--bottom position-relative">
+        <div class="travel__shape">Travel</div>
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-6 wow fadeInLeft" data-wow-duration="1.5s" data-wow-delay=".5s">
+                    <div class="service__content">
+                        <div class="section__header">
+                            <span>為什麼你應該在集遊預訂旅程？</span>
+                            <h2>最方便和可靠的服務</h2>
+                        </div>
+                        <div class="section__wrapper">
+                            <div class="row g-4 row-cols-sm-2 row-cols-1">
+                                <div class="col">
+                                    <div class="service__item">
+                                        <div class="service__icon">
+                                            <img src="assets/images/service/icon/01.png" alt="travel thumb">
+                                        </div>
+                                        <div class="service__text">
+                                            <h4>全球多國旅遊選項</h4>
+                                            <p>挑選與您的興趣和偏好相匹配的完美行程。 </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="service__item">
+                                        <div class="service__icon">
+                                            <img src="assets/images/service/icon/02.png" alt="travel thumb">
+                                        </div>
+                                        <div class="service__text">
+                                            <h4>個人化的私人旅遊</h4>
+                                            <p>由當地導遊量身定制的旅程，無需與陌生人一起旅行。 </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="service__item">
+                                        <div class="service__icon">
+                                            <img src="assets/images/service/icon/03.png" alt="travel thumb">
+                                        </div>
+                                        <div class="service__text">
+                                            <h4>提供優質的旅遊團</h4>
+                                            <p>相對在旅行社上更多優惠和選擇。 </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="service__item">
+                                        <div class="service__icon">
+                                            <img src="assets/images/service/icon/04.png" alt="travel thumb">
+                                        </div>
+                                        <div class="service__text">
+                                            <h4>周到的旅行咨詢服務</h4>
+                                            <p>我們提供最新和最受歡迎的旅遊資訊，隨時回答您的旅遊問題。</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 wow fadeInRight" data-wow-duration="1.5s" data-wow-delay=".5s">
+                    <div class="service__thumb">
+                        <img src="assets/images/service/01.jpg" alt="travel thumb">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ================> Service section end here <================== -->
+    <!-- ================> About section end here <================== -->
+    <!-- ================> Packege section start here <================== -->
+    <div class="packege packege--style3">
+        <div class="container">
+            <div class="section__header text-center wow fadeInUp" data-wow-duration="1.5s" data-wow-delay=".5s">
+                <span>旅遊精選</span>
+                <h2>熱門旅遊行程</h2>
+            </div>
+            <div class="section__wrapper wow fadeInUp" data-wow-duration="1.5s" data-wow-delay=".5s">
+                <div class="row g-4 row-cols-xl-4 row-cols-sm-2 row-cols-1">
+                    <div class="col">
+                        <div class="packege__item">
+                            <div class="packege__inner">
+                                <div class="packege__thumb">
+                                    <div class="service-add-wishlist login " data-id="11288" data-type="st_tours" title="加入願望清單">
+                                        <i class="fa fa-heart"></i>
+                                        <div class="lds-dual-ring"></div>
+                                    </div>
+                                    <a href="tour-single.html"><img src="assets/images/packege/11.jpg" alt="Travel Thumb"></a>
+                                </div>
+                                <div class="packege__content">
+                                    <div class="packege__content--title">
+                                        <div class="left">
+                                            <a href="tour-single.html"><h5>Nika Resort Maldive</h5></a>
+                                        </div>
+                                        <div class="right">
+                                            <h4>$750</h4>
+                                        </div>
+                                       
+                                    </div>
+
+                                    <div class="packege__rivew">
+                                        <span class="area"><img src="assets/images/packege/flag/01.png" alt="travel thumb">Maldive,  4 Day’s 3 Night</span>
+                                        <span class="person">1 - 2 Person</span>
+                                    </div>
+                                    <div class="rating" style="margin-top:10px;" data-rating="3"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="packege__item">
+                            <div class="packege__inner">
+                                <div class="packege__thumb">
+                                    <div class="service-add-wishlist login " data-id="11288" data-type="st_tours" title="加入願望清單">
+                                        <i class="fa fa-heart"></i>
+                                        <div class="lds-dual-ring"></div>
+                                    </div>
+                                    <a href="tour-single.html"><img src="assets/images/packege/12.jpg" alt="Travel Thumb"></a>
+                                </div>
+                                <div class="packege__content">
+                                    <div class="packege__content--title">
+                                        <div class="left">
+                                            <a href="tour-single.html"><h5>I Fell Tower Paris City</h5></a>
+                                        </div>
+                                        <div class="right">
+                                            <h4>$750</h4>
+                                        </div>
+                                    </div>
+
+                                    <div class="packege__rivew">
+                                        <span class="area"><img src="assets/images/packege/flag/02.png" alt="travel thumb">France,  4 Day’s 3 Night</span>
+                                        <span class="person">4 - 6 Person</span>
+                                    </div>
+                                    <div class="rating" style="margin-top:10px;" data-rating="5"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="packege__item">
+                            <div class="packege__inner">
+                                <div class="packege__thumb">
+                                    <div class="service-add-wishlist login " data-id="11288" data-type="st_tours" title="加入願望清單">
+                                        <i class="fa fa-heart"></i>
+                                        <div class="lds-dual-ring"></div>
+                                    </div>
+                                    <a href="tour-single.html"><img src="assets/images/packege/13.jpg" alt="Travel Thumb"></a>
+                                </div>
+                                <div class="packege__content">
+                                    <div class="packege__content--title">
+                                        <div class="left">
+                                            <a href="tour-single.html"><h5>Rome Tower Italy City</h5></a>
+                                        </div>
+                                        <div class="right">
+                                            <h4>$750</h4>
+                                        </div>
+                                    </div>
+
+                                    <div class="packege__rivew">
+                                        <span class="area"><img src="assets/images/packege/flag/03.png" alt="travel thumb">Italy,  4 Day’s 3 Night</span>
+                                        <span class="person">1 - 2 Person</span>
+                                    </div>
+                                    <div class="rating" style="margin-top:10px;" data-rating="1"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ================> Packege section end here <================== -->
+    <!-- ================> Blog section start here <================== -->
+    <div class="blog">
+        <div class="container">
+            <div class="section__header text-center wow fadeInUp" data-wow-duration="1.5s" data-wow-delay=".5s">
+                <span>Blog Post</span>
+                <h2>最新日誌</h2>
+            </div>
+            <div class="section__wrapper wow fadeInUp" data-wow-duration="1.5s" data-wow-delay=".5s">
+                <div class="row g-4 row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 row-cols-1">
+                    <div class="col">
+                        <div class="blog__item">
+                            <div class="blog__inner">
+                                <div class="blog__thumb">
+                                    <a href="blog-single.html"><img src="assets/images/blog/01.jpg" alt="travel thumb"></a>
+                                </div>
+                                <div class="blog__content">
+                                    <span>Travel</span>
+                                    <a href="blog-single.html"><h5>Beauty place in Greece</h5></a>
+                                    <div class="blog__footer">
+                                        <a href="#" class="blog__footer--comment"><i class="fa-solid fa-comments"></i> 45</a>
+                                        <a href="#" class="blog__footer--view"><i class="fa-solid fa-eye"></i> 23k+ view</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="blog__item">
+                            <div class="blog__inner">
+                                <div class="blog__thumb">
+                                    <a href="blog-single.html"><img src="assets/images/blog/02.jpg" alt="travel thumb"></a>
+                                </div>
+                                <div class="blog__content">
+                                    <span>Travel</span>
+                                    <a href="blog-single.html"><h5>Beauty place in Maldivs</h5></a>
+                                    <div class="blog__footer">
+                                        <a href="#" class="blog__footer--comment"><i class="fa-solid fa-comments"></i> 45</a>
+                                        <a href="#" class="blog__footer--view"><i class="fa-solid fa-eye"></i> 23k+ view</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="blog__item">
+                            <div class="blog__inner">
+                                <div class="blog__thumb">
+                                    <a href="blog-single.html"><img src="assets/images/blog/03.jpg" alt="travel thumb"></a>
+                                </div>
+                                <div class="blog__content">
+                                    <span>Travel</span>
+                                    <a href="blog-single.html"><h5>Beauty place in Thailnd</h5></a>
+                                    <div class="blog__footer">
+                                        <a href="#" class="blog__footer--comment"><i class="fa-solid fa-comments"></i> 45</a>
+                                        <a href="#" class="blog__footer--view"><i class="fa-solid fa-eye"></i> 23k+ view</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="blog__item">
+                            <div class="blog__inner">
+                                <div class="blog__thumb">
+                                    <a href="blog-single.html"><img src="assets/images/blog/04.jpg" alt="travel thumb"></a>
+                                </div>
+                                <div class="blog__content">
+                                    <span>Travel</span>
+                                    <a href="blog-single.html"><h5>Beauty place in Greece</h5></a>
+                                    <div class="blog__footer">
+                                        <a href="#" class="blog__footer--comment"><i class="fa-solid fa-comments"></i> 45</a>
+                                        <a href="#" class="blog__footer--view"><i class="fa-solid fa-eye"></i> 23k+ view</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================> News Letter section start here <================== -->
+    <div class="newsletter padding--top padding--bottom bg__img" style="background: url(assets/images/bg-img/02.jpg)">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay=".5s">
+                    <div class="section__header text-center">
+                        <h2>追蹤旅程</h2>
+                    </div>
+                    <div class="newsletter__form">
+                        <form action="#">
+                            <input type="text" placeholder="輸入你的電子郵件">
+                            <button type="submit" class="default__btn">訂閱我們</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ================> News Letter section end here <================== -->
+    <!-- ================> Blog section end here <================== -->
+    <!-- ================> Sponsor section start here <================== -->
+@*     <div class="sponsor">
+        <div class="container">
+            <div class="sponsor__slider overflow-hidden wow fadeInUp" data-wow-duration="1.5s" data-wow-delay=".5s">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="sponsor__item">
+                            <div class="sponsor__thumb">
+                                <img src="assets/images/sponsor/01.jpg" alt="travel thumb">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="sponsor__item">
+                            <div class="sponsor__thumb">
+                                <img src="assets/images/sponsor/02.jpg" alt="travel thumb">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="sponsor__item">
+                            <div class="sponsor__thumb">
+                                <img src="assets/images/sponsor/03.jpg" alt="travel thumb">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="sponsor__item">
+                            <div class="sponsor__thumb">
+                                <img src="assets/images/sponsor/04.jpg" alt="travel thumb">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> *@
+    <!-- ================> Sponsor section end here <================== -->
+    <!-- ================> Footer section start here <================== -->
+ 
+    <!-- ================> Footer section end here <================== -->
+
+
+    <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+    <script>
+            $(document).ready(function () {
+                // Array of image URLs
+                var images = [
+                    'assets/images/banner/gtrippro_banner1.jpeg',
+                    'assets/images/banner/gtrippro_banner2.jpeg',
+                    'assets/images/banner/gtrippro_banner3.jpeg',
+                    'assets/images/banner/gtrippro_banner4.jpg',
+                    'assets/images/banner/gtrippro_banner5.jpg',
+                    'assets/images/banner/gtrippro_banner6.jpg',
+                    'assets/images/banner/gtrippro_banner7.jpg',
+                    'assets/images/banner/gtrippro_banner8.jpg',
+                    'assets/images/banner/gtrippro_banner9.jpeg',
+                    // Add more image URLs as needed
+                ];
+
+            var $banner = $('.banner');
+            var index = 0;
+
+            function showNextImage() {
+                index = (index + 1) % images.length;
+                var newImageUrl = images[index];
+
+                $banner.fadeOut(100, function () {
+                    $banner.css('background-image', 'url(' + newImageUrl + ')');
+                    $banner.fadeIn(300);
+                });
+            }
+
+            // Change background image every 5 seconds (5000 milliseconds)
+            setInterval(showNextImage, 10000);
+
+            // Initial image
+            $banner.css('background-image', 'url(' + images[index] + ')');
+            });
+
+
+        document.querySelectorAll('.service-add-wishlist').forEach(function (element) {
+            element.addEventListener('click', function () {
+                const heartIcon = this.querySelector('.fa-heart');
+                heartIcon.classList.toggle('red');
+            });
+        });
+
+        document.querySelectorAll('.rating').forEach(function (ratingDiv) {
+            const rating = parseInt(ratingDiv.getAttribute('data-rating'));
+
+            for (let i = 1; i <= 5; i++) {
+                const star = document.createElement('i');
+                star.classList.add('fa', i <= rating ? 'fa-star' : 'fa-star-o');
+                ratingDiv.appendChild(star);
+            }
+        });
+    </script>
+
+
+</body>
+
+

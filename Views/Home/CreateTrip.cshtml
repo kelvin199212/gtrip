@@ -1,0 +1,2075 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutFillow.cshtml";
+    ViewData["Title"] = "建立旅程";
+}
+@model List<TravelType>
+
+<style>
+    .dropdown-menu{
+    z-index:999;
+    }
+    #calendar, .fc-view-container, .fc-view , .fc-view>table{
+    height:100%;
+    overflow:hidden;
+    }
+    .m-b30{
+        margin-bottom: 30px;
+    }
+    .img-thumbs {
+        background: #eee;
+        border: 1px solid #ccc;
+        border-radius: 0.25rem;
+        margin: 1.5rem 0;
+        padding: 0.75rem;
+    }
+
+    .img-thumbs-hidden {
+        display: none;
+    }
+
+    .wrapper-thumb {
+        position: relative;
+        display: inline-block;
+        margin: 1rem 0;
+        justify-content: space-around;
+    }
+
+    .img-preview-thumb {
+        background: #fff;
+        border: 1px solid none;
+        border-radius: 0.25rem;
+        box-shadow: 0.125rem 0.125rem 0.0625rem rgba(0, 0, 0, 0.12);
+        margin-right: 1rem;
+        max-width: 140px;
+        padding: 0.25rem;
+    }
+
+    .remove-btn, .remove-btn2 {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: .7rem;
+        top: -5px;
+        right: 10px;
+        width: 20px;
+        height: 20px;
+        background: white;
+        border-radius: 10px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+        .remove-btn:hover, .remove-btn2:hover {
+            box-shadow: 0px 0px 3px grey;
+            transition: all .3s ease-in-out;
+        }
+
+    .faq-container {
+        width: 100%;
+        max-width: 800px;
+        margin: 20px auto;
+        font-family: Arial, sans-serif;
+        background: #fff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        padding: 20px;
+    }
+
+    .faq-container2 {
+        width: 100%;
+        max-width: 800px;
+        margin: 20px auto;
+        font-family: Arial, sans-serif;
+        background: #fff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        padding: 20px;
+    }
+
+    .faq-item {
+        border: 1px solid #e1e1e1;
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #f8f9fb;
+        border-radius: 6px;
+        position: relative;
+        transition: box-shadow 0.3s ease;
+    }
+
+        .faq-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+    .faq-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
+        font-size: 16px;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #e1e1e1;
+    }
+
+        .faq-header span {
+            color: #333;
+        }
+
+        .faq-header .delete-btn {
+            cursor: pointer;
+            color: #888;
+            font-size: 18px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+            .faq-header .delete-btn:hover {
+                color: #e74c3c;
+            }
+
+    .faq-body .form-group {
+        margin-bottom: 20px;
+    }
+
+        .faq-body .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .faq-body .form-group input,
+        .faq-body .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease;
+        }
+
+            .faq-body .form-group input:focus,
+            .faq-body .form-group textarea:focus {
+                border-color: #6c63ff;
+                background-color: #fff;
+            }
+
+    .faq-add-btn, .faq-add-btn2, .faq-add-btn3, .faq-add-btn4, .faq-add-btn5, .faq-add-btn6 {
+        text-align: center;
+        padding: 20px 0;
+        margin-top: 20px;
+    }
+
+        .faq-add-btn .add-btn, .faq-add-btn2 .add-btn2, .faq-add-btn3 .add-btn3, .faq-add-btn4 .add-btn4, .faq-add-btn5 .add-btn5 , .faq-add-btn6 .add-btn6 {
+        background-color: #886CC0;
+        border: 1px solid #886CC0;
+            padding: 10px 40px;
+            font-size: 16px;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+
+            .faq-add-btn .add-btn:hover, .faq-add-btn2 .add-btn2:hover, .faq-add-btn3 .add-btn3:hover, .faq-add-btn4 .add-btn4:hover,, .faq-add-btn5 .add-btn4:hover {
+                background-color: #5349d3;
+                box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3);
+            }
+
+
+
+    /* Icon Styling (Font Awesome) */
+    .fas.fa-trash-alt {
+        font-size: 18px;
+    }
+</style>
+
+<div class="content-body default-height" id="mainContainer">
+    <div class="container-fluid">
+        <!-- Row -->
+        <div class="row">
+            <div class="col-xl-12">
+                <div class=" row page-titles">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Gtrip</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">建立旅程</a></li>
+                    </ol>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card h-auto">
+                            <div class="card-body">
+                                <div class="cpa">
+                                    <h4>旅程資訊</h4>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="journeyName" class="form-label required">旅程名稱</label>
+                                    <input type="text" class="form-control" id="journeyName" name="JourneyName" placeholder="旅程名稱" required>
+                                    <input type="hidden" id="allEvents" name="allEvents" value="" />
+                                    <div class="invalid-feedback">請輸入旅程名稱。</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="journeyDescription" class="form-label required">描述</label>
+                                    <textarea class="form-control" id="journeyDescription" name="JourneyDescription" rows="3" placeholder="描述" required></textarea>
+                                    <div class="invalid-feedback">請輸入描述。</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="filter cm-content-box box-primary">
+                            <div class="content-title SlideToolHeader">
+                                <div class="cpa">
+                                    詳細資料
+                                </div>
+                                <div class="tools">
+                                    <a href="javascript:void(0);" class="expand handle"><i class="fal fa-angle-down"></i></a>
+                                </div>
+                            </div>
+                            <div class="cm-content-body publish-content form excerpt">
+                                <div class="col-xl-12 col-lg-12">
+                                    <div class="card-body" style="margin-bottom: -2rem !important;">
+                                        <div class="basic-form">
+                                            <div class="input-group mb-3">
+                                                <label class="input-group-text mb-0">旅遊類別</label>
+                                                <select id="travel-type-select" class="default-select form-control wide" title="選擇..."  id="travelType" name="travelType" required>
+                                                  
+                                                    @foreach (var travelType in Model)
+                                                    {
+                                                        <option value="@travelType.Id">@travelType.TypeName</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @foreach (var travelType in Model)
+                                    {
+
+                                        string travelTypeClass = "card-body travelType" + travelType.Id.ToString();
+
+                                        <div class="@travelTypeClass" style="display: none;">
+                                            <div class="row">
+                                                @foreach (var activity in travelType.Activities)
+                                                {
+                                                    var name = "activities_" + activity._id;
+                                                    <div class="col-xl-4 col-xxl-4 col-6">
+                                                        <div class="form-check custom-checkbox mb-3">
+                                                            <input type="checkbox" class="form-check-input" id="@name" name="@name" required>
+                                                            <label class="form-check-label" for="customCheckBox@activity.Name">@activity.Name</label>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    }
+                                    <hr class="solid">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="input-group mb-3">
+                                                <label class="input-group-text mb-0">持續時間</label>
+                                                <select class="default-select form-control wide" title="選擇..." id="durationSelection" name="durationSelection" value="">
+                                                    <option value="一日">一日</option>
+                                                    <option value="半日">半日</option>
+                                                    <option value="多日">多日</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group mb-3">
+                                            <select multiple id="languageSelection" name="languageSelection" title="選擇語言(多個選項)" class="default-select form-control wide mt-3">
+                                                <option>中文 （普通話）</option>
+                                                <option>中文 （粵語）</option>
+                                                <option>德語</option>
+                                                <option>意大利語</option>
+                                                <option>日本語</option>
+                                                <option>法語</option>
+                                                <option>泰語</option>
+                                                <option>英語</option>
+                                                <option>葡萄牙語</option>
+                                                <option>西班牙語</option>
+                                                <option>越南語</option>
+                                                <option>韓語</option>
+                                                <option>其他</option>
+                                            </select>
+                                        </div>
+                                        <div id="otherLanguageInputContainer"></div>
+                                        <div class="input-group mb-3">
+                                            <select multiple id="transportationSelection" name="transportationSelection" title="選擇交通(多個選項)" class="default-select form-control wide mt-3">
+                                                <option>步行</option>
+                                                <option>自行車</option>
+                                                <option>巴士/火車</option>
+                                                <option>汽車接送</option>
+                                                <option>其他</option>
+                                            </select>
+                                        </div>
+                                        <div id="otherTransportationContainer" name="otherTransportation"></div>
+                                    </div>
+                                    <hr class="solid">
+                                    <div class="card-body">
+                                        <div class="row mb-3">
+                                            <div class="col-12">
+                                                <div class="input-group mb-3">
+                                                    <div class="col-12">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <label class="form-label">日程安排</label>
+                                                        <div>
+                                                            <button class="btn btn-primary btn-sm me-2" type="button"  data-toggle="modal" data-target="#createModal">
+                                                                添加日程
+                                                            </button>
+                                                            <button class="btn btn-secondary btn-sm" type="button" data-toggle="modal" data-target="#scheduleModal">
+                                                                编辑日程
+                                                            </button>
+                                                                <input type="hidden" id="scheduleList" name="scheduleList" value="" />
+                                                           
+                                                                
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+@*                                             <div class="col-md-4">
+                                                <label class="form-label">預訂選項</label>
+                                                <select class="form-select">
+                                                    <option value="0">即時預訂</option>
+                                                    <option value="1">查詢預訂</option>
+                                                </select>
+                                            </div> *@
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-4">
+                                                <label class="form-label">最少人數</label>
+                                                <input type="number" name="minPeople" class="form-control">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="form-label">人數上限</label>
+                                                <input type="number" name="maxPeople" class="form-control">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="form-label">最遲預訂天數</label>
+                                                <select class="form-select" name="delayBookDay">
+                                                    <option value="0">0天前</option>
+                                                    <option value="1">1天前</option>
+                                                    <option value="2">2天前</option>
+                                                    <option value="3">3天前</option>
+                                                    <option value="4">4天前</option>
+                                                    <option value="5">5天前</option>
+                                                    <option value="6">6天前</option>
+                                                    <option value="7">7天前</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter cm-content-box box-primary">
+                        <div class="content-title SlideToolHeader">
+                            <div class="cpa">
+                                提供旅客資訊
+                            </div>
+                            <div class="tools">
+                                <a href="javascript:void(0);" class="expand handle"><i class="fal fa-angle-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="cm-content-body form excerpt">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-xl-6 col-sm-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">旅遊常見問題</label>
+                                            <div class="faq-container">
+                                                <div class="faq-add-btn">
+                                                    <button type="button" class="add-btn">新增</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-sm-6">
+                                        <label class="form-label">旅遊項目</label>
+                                        <div class="faq-container2">
+                                            <div class="faq-add-btn2">
+                                                <button type="button" class="add-btn2">新增</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12 col-sm-12">
+                                        <label class="form-label required">旅遊說明</label>
+                                        <textarea class="form-control" id="tripDescription" name="tripDescription" rows="3" placeholder="旅遊說明"></textarea>
+                                    </div>
+                                   <div class="col-xl-6 col-sm-6" style="margin-top:15px;">
+                                        <div class="mb-3">
+                                            <label class="form-label">旅遊包含</label>
+                                            <div class="faq-container3">
+                                                <div class="faq-add-btn3">
+                                                    <button type="button" class="add-btn3" id="tripDesCreateBtn">新增</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-sm-6" style="margin-top:15px;">
+                                        <div class="mb-3">
+                                            <label class="form-label">旅遊不含</label>
+                                            <div class="faq-container4">
+                                                <div class="faq-add-btn4">
+                                                    <button type="button" class="add-btn4" id="tripDesCreateBtn2">新增</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter cm-content-box box-primary">
+                        <div class="content-title SlideToolHeader">
+                            <div class="cpa">
+                                相片
+                            </div>
+                            <div class="tools">
+                                <a href="javascript:void(0);" class="expand handle"><i class="fal fa-angle-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="cm-content-body form excerpt">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-xl-6 col-sm-6" style="margin-top:15px;">
+                                        <label class="form-label">精選圖片</label>
+                                        <div class="container my-5">
+                                            <div class="col">
+                                                <form action="" method="post" enctype="multipart/form-data" id="form-upload">
+                                                    <div class="form-group mt-5">
+                                                        <input type="file" class="form-control" name="hotimage[]" multiple id="upload-img" />
+                                                    </div>
+                                                    <div class="img-thumbs img-thumbs-hidden" id="img-preview"></div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-sm-6" style="margin-top:15px;">
+                                        <label class="form-label">圖庫</label>
+                                        <div class="container my-5">
+                                            <div class="col">
+                                                <form action="" method="post" enctype="multipart/form-data" id="form-upload2">
+                                                    <div class="form-group mt-5">
+                                                        <input type="file" class="form-control" name="image[]" multiple id="upload-img2" />
+                                                    </div>
+                                                    <div class="img-thumbs img-thumbs-hidden" id="img-preview2"></div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    <div class="filter cm-content-box box-primary">
+                        <div class="content-title SlideToolHeader">
+                            <div class="cpa">
+                                影片介紹
+                            </div>
+                            <div class="tools">
+                                <a href="javascript:void(0);" class="expand handle"><i class="fal fa-angle-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="cm-content-body form excerpt">
+                            <div class="card-body">
+                                <!-- Video Preview Section -->
+
+                                <div class="info-list">
+                                    <ul>
+                                        <!-- Trigger for video upload -->
+                                        <li>
+                                            <div class="faq-add-btn6">
+                                                <button type="button" id="upload-video-link" class="add-btn6">上載旅遊介紹短片</button>
+                                            </div>
+                                            <input type="file" id="video-upload" name="video-upload" accept="video/*" style="display: none;">
+                                        </li>
+                                    </ul>
+                                    <div class="video-preview" style="display: none; margin-top: 20px;text-align:-webkit-center;">
+                                        <video id="video-player" controls style="width: 100%; max-width: 500px;">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="card h-auto">
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label class="form-label">影片URL</label>
+                                        <input type="text" class="form-control" id="videoUrl" name="videoUrl" placeholder="影片URL">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                 
+                <div class="filter cm-content-box box-primary">
+                        <div class="content-title SlideToolHeader">
+                            <div class="cpa">
+                                價錢
+                            </div>
+                            <div class="tools">
+                                <a href="javascript:void(0);" class="expand handle"><i class="fal fa-angle-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="cm-content-body form excerpt">
+                            
+						<div class="card-body">
+						<div class="row">
+						<div class="col-sm-4 m-b30">
+                                <label class="form-label">顯示價格</label>
+                                <select class="form-control default-select h-auto wide" name="showPrice" id="showPrice">
+                                    <option value="person">每人價格</option>
+                                    <option value="fixed">價格固定</option>
+                                    <option value="fixed_depart">固定出發</option>
+                                </select>
+						</div>
+						<div class="col-sm-4 m-b30">
+                                <label class="form-label">成人價</label>
+                                <input type="number" id="auditPrice" name="auditPrice" class="form-control" value="">
+						</div>
+						<div class="col-sm-4 m-b30">
+                                <label class="form-label">兒童價格</label>
+                                <input type="number" id="childPrice" name="childPrice" class="form-control" value="">
+						</div>
+						<div class="col-sm-4 m-b30">
+							<label class="form-label">
+                                    在預訂表格隱藏成人
+							</label>
+                                <select class="form-control default-select h-auto wide" id="hiddenAudit" name="hiddenAudit">
+                                    <option value="off">否</option>
+                                    <option value="on">是</option>
+                                </select>
+						</div>
+						<div class="col-sm-4 m-b30">
+                                <label class="form-label">在預訂表格上隱藏小孩</label>
+                                <select class="form-control default-select h-auto wide" id="hiddenChild" name="hiddenChild">
+                                    <option value="off">否</option>
+                                    <option value="on">是</option>
+                                </select>
+						</div>
+						<div class="col-sm-4 m-b30">
+                                <label class="form-label">允許取消</label>
+                                <select class="form-control default-select h-auto wide" id="cancelAllow" name="cancelAllow">
+                                    <option value="off">否</option>
+                                    <option value="on">是</option>
+                                </select>
+						</div>
+                       <div class="col-sm-4 m-b30">
+                                <label class="form-label">禁用“需要成人姓名”</label>
+                                <select class="form-control default-select h-auto wide" id="AuditNameRequire" name="AuditNameRequire">
+                                    <option value="off">關</option>
+                                    <option value="on">開</option>
+                                </select>
+						</div>
+                            <div class="col-sm-4 m-b30">
+                                <label class="form-label">禁用“需要兒童姓名”</label>
+                                <select class="form-control default-select h-auto wide" id="childNameRequire" name="childNameRequire">
+                                    <option value="off">關</option>
+                                    <option value="on">開</option>
+                                </select>
+                            </div>
+							</div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="filter cm-content-box box-primary">
+                        <div class="content-title SlideToolHeader">
+                            <div class="cpa">
+                        地點
+                            </div>
+                            <div class="tools">
+                                <a href="javascript:void(0);" class="expand handle"><i class="fal fa-angle-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="cm-content-body form excerpt">
+                            <div class="card-body">
+                        <div class="col-sm-12 m-b30">
+                                <label class="form-label">選擇城市</label>
+                                <select class="form-control default-select h-auto wide" id="city" name="city">
+                                    <option value="HK">Hong Kong</option>
+                                </select>
+                        </div>
+                            <div class="col-sm-12 m-b30">
+                                <label class="form-label">集合地點</label>
+                            <input type="text" class="form-control" value="" id="locationStart" name="locationStart">
+                            </div>
+                        <div class="col-xl-12 col-sm-12" style="margin-top:15px;">
+                            <div class="mb-3">
+                                <label class="form-label">附近的物業</label>
+                                <div class="faq-container5">
+                                    <div class="faq-add-btn5">
+                                        <button type="button" class="add-btn5" id="tripAreaCreateBtn">+新增</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            </div>
+                        </div>
+                    </div>
+            <div class="card-footer">
+                <button id="NextStep" class="btn btn-primary" style="float:right;font-size: 16px;">預覽旅程</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+<div class="content-body default-height" id="calendarContainer" style="
+    display: none;
+    height:140vh;
+    box-sizing: border-box;
+  ">
+    <div id="calendar" style="width: 100%;background-color: #ffffff;border-radius: 8px;padding:5px;"></div>
+    <div class="card-footer" style="margin-top:50px;">
+        <button id="FinalStep" class="btn btn-primary" style="float:right;font-size: 16px;">提交旅程</button>
+        <button id="GoBackStep" class="btn btn-primary" style="float:right;font-size: 16px;">返回</button>
+ 
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="scheduleModal" tabindex="-1" aria-labelledby="scheduleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="scheduleModalLabel">時間表</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="list-group" id="editScheduleList">
+                                <!-- Schedule items will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="schedulemodalcloseBtn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for displaying event details -->
+<div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header" id="eventModalHeader">
+        <h5 class="modal-title" id="eventModalLabel">旅程詳細資訊</h5>
+      </div>
+      <div class="modal-body">
+        <p><strong>旅程名稱:</strong> <span id="eventTitle"></span></p>
+        <p><strong>開始時間:</strong> <span id="eventStart"></span></p>
+        <p><strong>結束時間:</strong> <span id="eventEnd"></span></p>
+        <p><strong>詳情:</strong> <span id="eventDetails"></span></p>
+      </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+            </div>
+    </div>
+  </div>
+</div>
+<!-- Modal for create Schedule -->
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createModalLabel">建立行程</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="form-group">
+                        <label for="location">地點</label>
+                        <input type="text" class="form-control" id="createLocation" placeholder="地點" value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="startTime">開始時間</label>
+                        <div class="d-flex">
+                            <input type="date" class="form-control" id="createStartDate" value="">
+                            <input type="checkbox" class="ml-2" id="createEnableStartTime">
+                            <input type="time" class="form-control ml-2" id="createStartTime" value="" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="duration">持續時間 (日子)</label>
+                    <input type="number" class="form-control" id="createDuration" value="1">
+                </div>
+                <div class="form-group">
+                    <label for="repeat">開團行程規劃</label>
+                    <select class="form-control" id="createRepeat">
+                        <option value="nothing">沒有</option>
+                        <option value="daily">每日</option>
+                        <option value="weekly">每星期</option>
+                        <option value="biweekly">每兩星期</option>
+                        <option value="triweekly">每三星期</option>
+                        <option value="quadweekly">每四星期</option>
+                        <!-- Add more options as needed -->
+                    </select>
+                </div>
+                <div class="form-group" id="createDayDiv" style="display:none;">
+                    <label for="days">日期</label>
+                    <div class="btn-group btn-group-toggle d-flex" data-toggle="buttons">
+                        <label class="btn btn-outline-primary">
+                            <input type="checkbox" id="createDays_SAT" class="createDay-checkbox"> S
+                        </label>
+                        <label class="btn btn-outline-primary">
+                            <input type="checkbox" id="createDays_M" class="createDay-checkbox"> M
+                        </label>
+                        <label class="btn btn-outline-primary">
+                            <input type="checkbox" id="createDays_TUE" class="createDay-checkbox"> T
+                        </label>
+                        <label class="btn btn-outline-primary">
+                            <input type="checkbox" id="createDays_W" class="createDay-checkbox"> W
+                        </label>
+                        <label class="btn btn-outline-primary">
+                            <input type="checkbox" id="createDays_THU" class="createDay-checkbox"> T
+                        </label>
+                        <label class="btn btn-outline-primary">
+                            <input type="checkbox" id="createDays_F" class="createDay-checkbox"> F
+                        </label>
+                        <label class="btn btn-outline-primary">
+                            <input type="checkbox" id="createDays_SUN" class="createDay-checkbox"> S
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="until">結束日期</label>
+                    <input type="date" class="form-control" id="createUntil" value="">
+                </div>
+                @*  <p class="text-muted">Takes place every week on Monday from 5:00 PM to 6:00 PM, starting on Aug 19, 2024, ending on Nov 17, 2024.</p> *@
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="createmodalcloseBtn" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary">儲存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal for Editing Schedule -->
+<!-- Edit Session Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">修改行程</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="form-group">
+                        <label for="editLocation">地點</label>
+                        <input type="text" class="form-control" id="editLocation" placeholder="地點" value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="editStartTime">開始時間</label>
+                        <div class="d-flex">
+                            <input type="date" class="form-control" id="editStartDate"  value="">
+                            <input type="checkbox" class="ml-2" id="editEnableStartTime" >
+                            <input type="time" class="form-control ml-2" id="editStartTime"  value="" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="editDuration">持續時間 (日子)</label>
+                    <input type="number" class="form-control" id="editDuration"  value="1">
+                </div>
+                <div class="form-group">
+                    <label for="editRepeat">開團行程規劃</label>
+                    <select class="form-control" id="editRepeat">
+                        <option value="nothing">沒有</option>
+                        <option value="daily">每日</option>
+                        <option value="weekly">每星期</option>
+                        <option value="biweekly">每兩星期</option>
+                        <option value="triweekly">每三星期</option>
+                        <option value="quadweekly">每四星期</option>
+                        <!-- Add more options as needed -->
+                    </select>
+                </div>
+                <div class="form-group" id="editDayDiv">
+                    <label for="editDays">日期</label>
+                    <div class="btn-group btn-group-toggle d-flex" data-toggle="buttons">
+                        <label class="btn btn-outline-primary">
+                            <input type="checkbox" id="editDays_SAT"  class="editDay-checkbox"> S
+                        </label>
+                        <label class="btn btn-outline-primary">
+                            <input type="checkbox" id="editDays_M"  class="editDay-checkbox"> M
+                        </label>
+                        <label class="btn btn-outline-primary">
+                            <input type="checkbox" id="editDays_TUE" class="editDay-checkbox"> T
+                        </label>
+                        <label class="btn btn-outline-primary">
+                            <input type="checkbox" id="editDays_W"  class="editDay-checkbox"> W
+                        </label>
+                        <label class="btn btn-outline-primary">
+                            <input type="checkbox" id="editDays_THU" class="editDay-checkbox"> T
+                        </label>
+                        <label class="btn btn-outline-primary">
+                            <input type="checkbox" id="editDays_F" class="editDay-checkbox"> F
+                        </label>
+                        <label class="btn btn-outline-primary">
+                            <input type="checkbox" id="editDays_SUN"  class="editDay-checkbox"> S
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="editUntil">結束日期</label>
+                    <input type="date" class="form-control" id="editUntil"  value="">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="editModalCloseBtn" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="button" id="saveEditButton" class="btn btn-primary">儲存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Fillow_style
+{
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="~/Fillow/vendor/select2/css/select2.min.css">
+    <link href="~/Fillow/vendor/bootstrap-datepicker-master/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/@@fullcalendar/core@4.3.0/main.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/@@fullcalendar/daygrid@4.3.0/main.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/@@fullcalendar/timegrid@4.3.0/main.min.css" rel="stylesheet" />
+    
+}
+
+@section Fillow_script
+{
+    <!-- Required vendors -->
+    <script src="~/Fillow/vendor/global/global.min.js"></script>
+    <script src="~/Fillow/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <script src="~/Fillow/vendor/select2/js/select2.full.min.js"></script>
+    <script src="~/Fillow/vendor/bootstrap-datepicker-master/js/bootstrap-datepicker.min.js"></script>
+
+    <!-- Apex Chart -->
+
+    <script src="https://cdn.jsdelivr.net/npm/rrule@2.6.3/dist/es5/rrule.min.js"></script>
+    <script src="https://unpkg.com/@@fullcalendar/core@4.3.0/main.min.js"></script>
+    <script src="https://unpkg.com/@@fullcalendar/daygrid@4.3.0/main.min.js"></script>
+    <script src="https://unpkg.com/@@fullcalendar/interaction@4.3.0/main.min.js"></script>
+    <script src="https://unpkg.com/@@fullcalendar/rrule@4.3.0/main.min.js"></script>
+    <script src="https://unpkg.com/@@fullcalendar/timegrid@4.3.0/main.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+    <script src="~/Fillow/js/plugins-init/select2-init.js"></script>
+    <script src="~/Fillow/js/custom.min.js"></script>
+    <script src="~/Fillow/js/dlabnav-init.js"></script>
+    <script src="~/Fillow/js/demo.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        let sessionData = [];
+        var calendarEl;
+        var calendar;
+
+        const dayLabels = {
+            'SAT': '星期六',
+            'SUN': '星期日',
+            'M': '星期一',
+            'TUE': '星期二',
+            'W': '星期三',
+            'THU': '星期四',
+            'F': '星期五'
+        };
+
+        const repeatLabels = {
+            nothing: '不重複',
+            daily: '每日',
+            weekly: '每星期',
+            biweekly: '每兩星期',
+            triweekly: '每三星期',
+            quadweekly: '每四星期',
+        };
+
+        const formatDateOnly = (dateString) => {
+            const date = new Date(dateString);
+            return date.toISOString().split('T')[0]; // Extract the date part (YYYY-MM-DD)
+        }
+
+        
+
+
+        $(document).ready(function () {
+         
+            const today = new Date().toISOString().split('T')[0];
+
+            // Set the value of the input field to today's date
+            document.getElementById('createStartDate').value = today;
+            document.getElementById('createUntil').value = today;
+
+            $(".expand.handle").on("click", function () {
+                // Find the .cm-content-body within the same .filter container
+                var content = $(this).closest('.filter').find('.cm-content-body');
+
+                // Toggle the visibility of the content
+                content.slideToggle();
+
+                // Toggle the icon (fa-angle-down and fa-angle-up)
+                $(this).find('i').toggleClass('fa-angle-down fa-angle-up');
+            });
+
+
+
+            $("#FinalStep").click(function () {
+
+                var selectElement = document.getElementById('travel-type-select');
+                if (!selectElement.value) { // Check if the value is empty (not selected)
+                    Swal.fire({
+                        icon: 'alert',
+                        title: '請旅程旅遊項目',
+                        timer: 2000, // Auto close after 2 seconds
+                        showConfirmButton: false
+                    })
+                    return;
+                }
+
+                if (validateAndSubmitForm()==false) { 
+                    return;
+                }
+              
+                $("#scheduleList").val(JSON.stringify(sessionData));
+
+                var formData = new FormData();  // Create FormData object to handle file uploads
+
+                var formElements = document.querySelectorAll('input, select, textarea');
+
+                formElements.forEach(function (element) {
+                    // For checkboxes (whether selected or not)
+                    if (element.type === 'checkbox' || element.type === 'radio') {
+                        formData.append(element.name, element.checked);
+                    }
+
+                    // For multi-select dropdowns (multiple="true")
+                    else if (element.type === 'select-multiple') {
+                        var selectedOptions = element.selectedOptions;
+                        for (var i = 0; i < selectedOptions.length; i++) {
+                            formData.append(element.name, selectedOptions[i].value);  // Append the value of selected options
+                        }
+                    }
+
+                    // For other input types like text, email, etc.
+                    else if (element.type !== 'button' && element.type !== 'submit' && element.type !== 'file') {
+                        formData.append(element.name, element.value);
+                    }
+
+                    // For file inputs (dynamically handle multiple files)
+                    else if (element.type === 'file') {
+                        if (element.files.length > 0) {
+                            for (let file of element.files) {
+                                formData.append(element.name, file);  // Append file to FormData object
+                            }
+                        }
+                    }
+                });
+
+                // Send AJAX request to the server with the collected data
+                $.ajax({
+                    url: '/api/travel/',  // Your API endpoint in C# .NET Core
+                    type: 'POST',
+                    data: formData,  // Send collected form data as JSON
+                    processData: false,  // Prevent jQuery from processing the data
+                    contentType: false,  // Let jQuery set the correct content-type header for FormData
+                    success: function (response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: '旅程成功建立',
+                            text: response.message,
+                            timer: 2000, // Auto close after 2 seconds
+                            showConfirmButton: false
+                        }).then(() => {
+                            window.location.href = '/Home/CreateTrip'; // Replace with your desired URL$('#editModal').modal('hide');
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error sending data:', error);
+                    }
+                });
+
+            })
+
+
+            // Toggle FAQ body visibility
+            $(document).on('click', '.faq-header', function () {
+                $(this).next('.faq-body').slideToggle();
+            });
+
+            // Remove FAQ item
+            $(document).on('click', '.delete-btn', function () {
+                $(this).closest('.faq-item').remove();
+            });
+
+            // Add new FAQ item
+                $('.add-btn').on('click', function () {
+                let highestIndex = 0;
+                $('[id^="faq-title-"]').each(function () {
+                    const id = $(this).attr('id');
+                    const currentIndex = parseInt(id.split('-').pop(), 10); // Extract the numeric part
+                    if (!isNaN(currentIndex) && currentIndex > highestIndex) {
+                        highestIndex = currentIndex;
+                    }
+                });
+
+                const itemIndex = highestIndex + 1; // Set the next unique index
+                var newItem = `
+                    <div class="faq-item ls01">
+                        <div class="faq-header">
+                            <a href="javascript:void(0);" class="delete-btn"><i class="fas fa-trash-alt"></i></a>
+                        </div>
+                        <div class="faq-body">
+                            <div class="form-group">
+                                <label for="title-${itemIndex}">標題</label>
+                                        <input type="text" id="faq-title-${itemIndex}" name="faq-title-${itemIndex}" class="form-control" placeholder="請輸入標題">
+                            </div>
+                            <div class="form-group">
+                                <label for="description-${itemIndex}">描述</label>
+                                                <textarea id="faq-description-${itemIndex}" name="faq-description-${itemIndex}" class="form-control" rows="3" placeholder="请输入描述"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                $('.faq-container').append(newItem);
+                $('.faq-add-btn').appendTo('.faq-container');
+            });
+
+                $('.add-btn2').on('click', function () {
+                let highestIndex = 0;
+                $('[id^="trip-title-"]').each(function () {
+                    const id = $(this).attr('id');
+                    const currentIndex = parseInt(id.split('-').pop(), 10); // Extract the numeric part
+                    if (!isNaN(currentIndex) && currentIndex > highestIndex) {
+                        highestIndex = currentIndex;
+                    }
+                });
+
+                const itemIndex2 = highestIndex + 1; // Set the next unique index
+                var newItem = `
+                        <div class="faq-item ls02">
+                    <div class="faq-header">
+                        <a href="javascript:void(0);" class="delete-btn"><i class="fas fa-trash-alt"></i></a>
+                    </div>
+                    <div class="faq-body">
+                        <div class="form-group">
+                                    <label for="trip-title-${itemIndex2}">標題</label>
+                                                    <input type="text" id="trip-title-${itemIndex2}" name="trip-title-${itemIndex2}" class="form-control" placeholder="請輸入標題">
+                        </div>
+                        <div class="form-group">
+                                    <label for="trip-image-${itemIndex2}">圖片</label>
+                    <div class="image-upload">
+                                                <input type="file" id="trip-image-${itemIndex2}" name="trip-image-${itemIndex2}" class="image-file-input">
+                    </div>
+                            <div class="image-preview">
+                                        <img id="preview-image-${itemIndex2}" src="" alt="Image Preview" style="display: none; width: 300px; height: auto;">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                                    <label for="trip-description-${itemIndex2}">描述</label>
+                                                    <textarea id="trip-description-${itemIndex2}" name="trip-description-${itemIndex2}" class="form-control" rows="3" placeholder="请输入描述"></textarea>
+                        </div>
+                    </div>
+                </div>
+            `;
+                $('.faq-container2').append(newItem);
+                $('.faq-add-btn2').appendTo('.faq-container2');
+                $(`#trip-image-${itemIndex2}`).on('change', function (event) {
+                    console.log('File input changed'); // Debugging line
+                    var file = event.target.files[0];
+                    if (file) {
+                        console.log('File selected:', file.name); // Debugging line
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            console.log('File loaded'); // Debugging line
+                            $(`#preview-image-${itemIndex2}`).attr('src', e.target.result).show();
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            });
+                // Add new FAQ item
+                $('#tripDesCreateBtn').on('click', function () {
+                let highestIndex = 0;
+                $('[id^="include-title-"]').each(function () {
+                    const id = $(this).attr('id');
+                    const currentIndex = parseInt(id.split('-').pop(), 10); // Extract the numeric part
+                    if (!isNaN(currentIndex) && currentIndex > highestIndex) {
+                        highestIndex = currentIndex;
+                    }
+                });
+
+                const itemIndex3 = highestIndex + 1; // Set the next unique index
+                    var newItem = `
+                            <div class="faq-item">
+                                <div class="faq-header">
+                                    <a href="javascript:void(0);" class="delete-btn"><i class="fas fa-trash-alt"></i></a>
+                                </div>
+                                <div class="faq-body">
+                                    <div class="form-group">
+                                        <label for="include-title-${itemIndex3}">標題</label>
+                                                                                <input type="text" id="include-title-${itemIndex3}" name="include-title-${itemIndex3}" class="form-control" placeholder="請輸入標題">
+                                    </div>
+                                    <div class="form-group">
+                                                <label for="include-description-${itemIndex3}">描述</label>
+                                                                        <textarea id="include-description-${itemIndex3}" name="include-description-${itemIndex3}" class="form-control" rows="3" placeholder="请输入描述"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                $('.faq-container3').append(newItem);
+                $('.faq-add-btn3').appendTo('.faq-container3');
+                });
+
+                // Add new FAQ item
+                $('#tripDesCreateBtn2').on('click', function () {
+                let highestIndex = 0;
+                $('[id^="exclude-title-"]').each(function () {
+                    const id = $(this).attr('id');
+                    const currentIndex = parseInt(id.split('-').pop(), 10); // Extract the numeric part
+                    if (!isNaN(currentIndex) && currentIndex > highestIndex) {
+                        highestIndex = currentIndex;
+                    }
+                });
+
+                const itemIndex4 = highestIndex + 1; // Set the next unique index
+                    var newItem = `
+                            <div class="faq-item">
+                                <div class="faq-header">
+                                    <a href="javascript:void(0);" class="delete-btn"><i class="fas fa-trash-alt"></i></a>
+                                </div>
+                                <div class="faq-body">
+                                    <div class="form-group">
+                                                        <label for="exclude-title-${itemIndex4}">標題</label>
+                                                                                <input type="text" id="exclude-title-${itemIndex4}" name="exclude-title-${itemIndex4}" class="form-control" placeholder="請輸入標題">
+                                    </div>
+                                    <div class="form-group">
+                                                        <label for="exclude-description-${itemIndex4}">描述</label>
+                                                                        <textarea id="exclude-description-${itemIndex4}" name="exclude-description-${itemIndex4}" class="form-control" rows="3" placeholder="请输入描述"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    $('.faq-container4').append(newItem);
+                $('.faq-add-btn4').appendTo('.faq-container4');
+                });
+           // tripAreaCreateBtn
+            $('#tripAreaCreateBtn').on('click', function () {
+                let highestIndex = 0;
+                $('[id^="property-title-"]').each(function () {
+                    const id = $(this).attr('id');
+                    const currentIndex = parseInt(id.split('-').pop(), 10); // Extract the numeric part
+                    if (!isNaN(currentIndex) && currentIndex > highestIndex) {
+                        highestIndex = currentIndex;
+                    }
+                });
+
+                const itemIndex5 = highestIndex + 1; // Set the next unique index
+                var newItem = ` 
+                        <div class="faq-item">
+                            <div class="faq-header">
+                                <a href="javascript:void(0);" class="delete-btn"><i class="fas fa-trash-alt"></i></a>
+                            </div>
+                            <div class="faq-body">
+                                <div class="form-group">
+                                                            <label for="property-title-${itemIndex5}">標題</label>
+                                                                                            <input type="text" id="property-title-${itemIndex5}" name="property-title-${itemIndex5}" class="form-control" placeholder="請輸入標題">
+                                </div>
+                                <div class="form-group">
+                                                                    <label for="property-image2-${itemIndex5}">精選圖片</label>
+                            <div class="image-upload">
+                                                                <input type="file" id="property-image2-${itemIndex5}" name="property-image2-${itemIndex5}" class="image-file-input">
+                            </div>
+                                    <div class="image-preview">
+                                                <img id="preview-image2-${itemIndex5}" src="" alt="Image Preview" style="display: none; width: 300px; height: auto;">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                                    <label for="property-description-${itemIndex5}">描述</label>
+                                                                            <textarea id="property-description-${itemIndex5}" name="property-description-${itemIndex5}" class="form-control" rows="3" placeholder="请输入描述"></textarea>
+                                </div>
+                                        <div class="form-group">
+                                                                            <label for="property-image3-${itemIndex5}">圖標地圖</label>
+                                    <div class="image-upload">
+                                                                        <input type="file" id="property-image3-${itemIndex5}" name="property-image3-${itemIndex5}" class="image-file-input">
+                                    </div>
+                                            <div class="image-preview">
+                                                        <img id="preview-image3-${itemIndex5}" src="" alt="Image Preview" style="display: none; width: 300px; height: auto;">
+                                            </div>
+                                        </div>
+                                                                                <div class="form-group">
+                                                            <label for="property-lat-${itemIndex5}">緯度</label>
+                                                                                                                    <input type="text" id="property-lat-${itemIndex5}" name="property-lat-${itemIndex5}" class="form-control" placeholder="請輸入緯度">
+                                        </div>
+                                                                                <div class="form-group">
+                                                                    <label for="property-long-${itemIndex5}">經度</label>
+                                                                                                                    <input type="text" id="property-long-${itemIndex5}" name="property-long-${itemIndex5}" class="form-control" placeholder="請輸入經度">
+                                        </div>
+                            </div>
+                        </div>                                `;
+
+                $('.faq-container5').append(newItem);
+                $('.faq-add-btn5').appendTo('.faq-container5');
+                $(`#property-image2-${itemIndex5}`).on('change', function (event) {
+                    console.log('File input changed'); // Debugging line
+                    var file = event.target.files[0];
+                    if (file) {
+                        console.log('File selected:', file.name); // Debugging line
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            console.log('File loaded'); // Debugging line
+                            $(`#preview-image2-${itemIndex5}`).attr('src', e.target.result).show();
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+                $(`#property-image3-${itemIndex5}`).on('change', function (event) {
+                    console.log('File input changed'); // Debugging line
+                    var file = event.target.files[0];
+                    if (file) {
+                        console.log('File selected:', file.name); // Debugging line
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            console.log('File loaded'); // Debugging line
+                            $(`#preview-image3-${itemIndex5}`).attr('src', e.target.result).show();
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            });
+
+
+            $('#travel-type-select').on('change', function () {
+                var selectedValue = $(this).val();
+
+                // Hide all elements with class names starting with "travelType"
+                $('div[class*="travelType"]').hide();
+
+                $('div[class*="travelType"] input[type="checkbox"]').prop('checked', false);
+
+                // Show the relevant element based on the selected option
+                if (selectedValue !== "選擇..." && selectedValue) {
+                    // $('.travelType' + selectedValue).show();
+                    $('.travelType' + selectedValue).slideDown(600);
+                }
+            });
+            //language selector
+            $('#languageSelection').on('change', function () {
+                // Get the selected options
+                const selectedOptions = $(this).find('option:selected');
+
+                // Check if "其他" is selected by checking the text of the option
+                const isOtherSelected = selectedOptions.filter(function () {
+                    return $(this).text() === "其他";
+                }).length > 0;
+
+                if (isOtherSelected) {
+                    // If the input field for "其他" doesn't exist, create it
+                    if ($('#otherLanguageInput').length === 0) {
+                        $('#otherLanguageInputContainer').append(`
+                            <div class="form-group mt-3" id="otherLanguageInput">
+                                <label for="otherLanguage">請輸入其他語言</label>
+                                <input type="text" class="form-control" id="otherLanguage" placeholder="請輸入語言">
+                            </div>
+                        `);
+                    }
+                } else {
+                    // If "其他" is deselected, remove the input field
+                    $('#otherLanguageInput').remove();
+                }
+            });
+            //transportataion selector
+            $('#transportationSelection').on('change', function () {
+                // Get the selected options
+                const selectedOptions = $(this).find('option:selected');
+
+                // Check if "其他" is selected by checking the text of the option
+                const isOtherSelected = selectedOptions.filter(function () {
+                    return $(this).text() === "其他";
+                }).length > 0;
+
+                if (isOtherSelected) {
+                    // If the input field for "其他" doesn't exist, create it
+                    if ($('#otherTransportationInput').length === 0) {
+                        $('#otherTransportationContainer').append(`
+                                            <div class="form-group mt-3" id="otherTransportationInput">
+                                                <label for="otherTransportationInput">請輸入其他交通工具</label>
+                                                        <input type="text" class="form-control" id="otherTransportation" placeholder="請輸入其他交通工具">
+                                    </div>
+                                `);
+                    }
+                } else {
+                    // If "其他" is deselected, remove the input field
+                    $('#otherLanguageInput').remove();
+                }
+            });
+            //#repeat
+            $('#editRepeat').change(function () {
+                var repeatValue = $(this).val();
+                if (repeatValue === 'daily') {
+                    $('.editDay-checkbox').prop('checked', true).parent().addClass('active');
+                } 
+
+                if (repeatValue === 'nothing') {
+                    $("#editDayDiv").css("display", "none")
+                    $('.editDay-checkbox').prop('checked', false).parent().removeClass('active');
+                }else{
+                    $("#editDayDiv").css("display", "block")
+                }
+            });
+
+            $('#createRepeat').change(function () {
+                var repeatValue = $(this).val();
+                if (repeatValue === 'daily') {
+                    $('.createDay-checkbox').prop('checked', true).parent().addClass('active');
+                } 
+
+                if (repeatValue ==='nothing'){
+                    $("#createDayDiv").css("display","none")
+                    $('.createDay-checkbox').prop('checked', false).parent().removeClass('active');
+                }else{
+                    $("#createDayDiv").css("display","block")
+                }
+            });
+
+
+            $('.createDay-checkbox').change(function () {
+                var allChecked = $('.createDay-checkbox').length === $('.createDay-checkbox:checked').length;
+                if (allChecked) {
+                    $('#createRepeat').val('daily');
+                }
+            });
+
+            $('.editDay-checkbox').change(function () {
+                var allChecked = $('.editDay-checkbox').length === $('.editDay-checkbox:checked').length;
+                if (allChecked) {
+                    $('#editRepeat').val('daily');
+                }
+            });
+            //createEnableStartTime
+            $('#createEnableStartTime').change(function () {
+                if ($(this).is(':checked')) {
+                    $('#createStartTime').prop('disabled', false);
+                } else {
+                    $('#createStartTime').prop('disabled', true);
+                }
+            });
+
+            $('#editEnableStartTime').change(function () {
+                if ($(this).is(':checked')) {
+                    $('#editStartTime').prop('disabled', false);
+                } else {
+                    $('#editStartTime').prop('disabled', true);
+                }
+            });
+
+            // upload相片
+
+            var imgUpload = document.getElementById('upload-img'),
+                imgPreview = document.getElementById('img-preview'),
+                imgUploadForm = document.getElementById('form-upload'),
+                fileArray = [];
+
+            imgUpload.addEventListener('change', previewImgs, true);
+
+            function previewImgs(event) {
+                const totalFiles = imgUpload.files.length;
+
+                if (totalFiles > 0) {
+                    imgPreview.classList.remove('img-thumbs-hidden');
+                }
+
+                for (let i = 0; i < totalFiles; i++) {
+                    fileArray.push(imgUpload.files[i]);
+
+                    const wrapper = document.createElement('div');
+                    wrapper.classList.add('wrapper-thumb');
+                    const removeBtn = document.createElement("span");
+                    const nodeRemove = document.createTextNode('x');
+                    removeBtn.classList.add('remove-btn');
+                    removeBtn.appendChild(nodeRemove);
+                    const img = document.createElement('img');
+                    img.src = URL.createObjectURL(imgUpload.files[i]);
+                    img.classList.add('img-preview-thumb');
+                    wrapper.appendChild(img);
+                    wrapper.appendChild(removeBtn);
+                    imgPreview.appendChild(wrapper);
+
+                    $(removeBtn).click(function () {
+                        const index = Array.from(imgPreview.children).indexOf(wrapper);
+                        fileArray.splice(index, 1);
+                        $(this).parent('.wrapper-thumb').remove();
+                        updateFileInput(imgUpload, fileArray);
+                    });
+                }
+            }
+
+            // Image upload and preview for the second form
+            var imgUpload2 = document.getElementById('upload-img2'),
+                imgPreview2 = document.getElementById('img-preview2'),
+                imgUploadForm2 = document.getElementById('form-upload2'),
+                fileArray2 = [];
+
+            imgUpload2.addEventListener('change', previewImgs2, true);
+
+            function previewImgs2(event) {
+                const totalFiles2 = imgUpload2.files.length;
+
+                if (totalFiles2 > 0) {
+                    imgPreview2.classList.remove('img-thumbs-hidden');
+                }
+
+                for (let i = 0; i < totalFiles2; i++) {
+                    fileArray2.push(imgUpload2.files[i]);
+
+                    const wrapper = document.createElement('div');
+                    wrapper.classList.add('wrapper-thumb');
+                    const removeBtn = document.createElement("span");
+                    const nodeRemove = document.createTextNode('x');
+                    removeBtn.classList.add('remove-btn2');
+                    removeBtn.appendChild(nodeRemove);
+                    const img2 = document.createElement('img');
+                    img2.src = URL.createObjectURL(imgUpload2.files[i]);
+                    img2.classList.add('img-preview-thumb');
+                    wrapper.appendChild(img2); // Append img2 instead of img
+                    wrapper.appendChild(removeBtn);
+                    imgPreview2.appendChild(wrapper);
+
+                    $(removeBtn).click(function () {
+                        const index = Array.from(imgPreview2.children).indexOf(wrapper);
+                        fileArray2.splice(index, 1);
+                        $(this).parent('.wrapper-thumb').remove();
+                        updateFileInput(imgUpload2, fileArray2);
+                    });
+                }
+            }
+
+            function updateFileInput(inputElement, fileArray) {
+                const dataTransfer = new DataTransfer();
+                fileArray.forEach(file => dataTransfer.items.add(file));
+                inputElement.files = dataTransfer.files;
+            }
+
+            //upload video
+            $('#upload-video-link').on('click', function () {
+                $('#video-upload').click();
+            });
+
+            // Handle video file selection and preview
+            $('#video-upload').on('change', function (event) {
+                var file = event.target.files[0];
+                if (file) {
+                    // Create a URL for the selected video
+                    var videoURL = URL.createObjectURL(file);
+
+                    // Set the video source and show the preview section
+                    $('#video-player').attr('src', videoURL);
+                    $('.video-preview').show();
+                }
+            });
+
+            //scheduler
+            // Initialize FullCalendar
+
+// $('#createmodalcloseBtn').trigger("click");
+            // Initialize FullCalendar
+            calendarEl = document.getElementById('calendar');
+             calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth', // Set initial view to month view
+                plugins: ["interaction", "dayGrid", "timeGrid", "resourceTimeline", "rrule"],
+                header: {
+                    right: "prev,next today",
+                    center: "title",
+                    left: "dayGridMonth,timeGridWeek,timeGridDay"
+                },
+                editable: true,
+                selectable: true,
+                timeZone: 'UTC',
+                height: 'auto',
+                events: [], // Initially empty, events will be added dynamically
+                eventClick: function (info) {
+                    // Prevent the default behavior
+                    info.jsEvent.preventDefault();
+
+                    // Get event data
+                    const eventTitle = info.event.title;
+                    const eventStart = info.event.start;
+                    const eventEnd = info.event.end;
+                    const eventDetails = info.event.extendedProps.details || 'No details available';
+                    const eventColor = info.event.backgroundColor || '#000';
+
+                    // Populate modal with event information
+                    document.getElementById('eventTitle').innerText = eventTitle;
+                    document.getElementById('eventStart').innerText = eventStart ? eventStart.toLocaleString() : 'N/A';
+                    document.getElementById('eventEnd').innerText = eventEnd ? eventEnd.toLocaleString() : 'N/A';
+                    document.getElementById('eventDetails').innerText = eventDetails;
+
+                    // Optionally, set the modal background color based on the event
+
+                    // Show the modal
+                    $('#eventModal').modal('show');
+                },
+                eventContent: function (arg) {
+                    let content = document.createElement('div');
+                    content.innerHTML = `
+                    <div><strong>${arg.event.title}</strong></div>
+                    <div>${arg.event.extendedProps.details}</div>
+                `;
+                    return { domNodes: [content] };
+                }
+            });
+
+            calendar.render();
+
+            
+            // Handle the "Save" button click to add events
+            document.querySelector('#createModal .btn-primary').addEventListener('click', function () {
+                // Collect form data
+                          // const location = document.getElementById('createLocation').value;
+                // const startDate = document.getElementById('createStartDate').value;
+                // const enableStartTime = document.getElementById('createEnableStartTime').checked;
+                // const startTime = enableStartTime ? document.getElementById('createStartTime').value : '00:00:00';
+                // const repeat = document.getElementById('createRepeat').value;
+                // const untilDate = document.getElementById('createUntil').value;
+                // let duration = document.getElementById('createDuration').value;
+                var tempId = Date.now().toString(); // Temporary unique ID
+                var location = document.getElementById('createLocation').value;
+                var startDate = document.getElementById('createStartDate').value;
+                var enableStartTime = document.getElementById('createEnableStartTime').checked;
+                var startTime = enableStartTime ? document.getElementById('createStartTime').value : null;
+                var duration = document.getElementById('createDuration').value;
+                var repeat = document.getElementById('createRepeat').value;
+                var until = document.getElementById('createUntil').value;
+
+                // Get selected days
+                const days = [];
+                document.querySelectorAll('.createDay-checkbox:checked').forEach((checkbox) => {
+                    days.push(checkbox.id.replace('createDays_', '')); // Extract day from checkbox ID
+                });
+
+                // Create a session object
+                var newSession = {
+                    id: tempId, // Temporary unique ID
+                    location,
+                    startDate,
+                    enableStartTime,
+                    startTime,
+                    duration,
+                    repeat,
+                    until,
+                    days,
+                };
+
+                // Add session to the temporary array
+                sessionData.push(newSession);
+
+                // Reload the session list
+                loadSessionList();
+
+                Swal.fire({
+                    icon: 'success',
+                    title: '行程已成功建立',
+                    timer: 2000, // Auto close after 2 seconds
+                    showConfirmButton: false
+                }).then(() => {
+                    $("#createmodalcloseBtn").click();
+                });
+                // calendar.removeAllEvents();
+                // calendar.refetchEvents();
+                calendar.changeView('dayGridMonth');
+
+                // Capture selected days
+                var selectedDays = [];
+                document.querySelectorAll('.createDay-checkbox:checked').forEach((checkbox) => {
+                    selectedDays.push(checkbox.id.replace('createDays_', '').toUpperCase());
+                });
+
+                // Map day initials to RRule constants (MO, TU, etc.)
+                var dayMap = {
+                    SUN: 'SU',
+                    M: 'MO',
+                    TUE: 'TU',
+                    W: 'WE',
+                    THU: 'TH',
+                    F: 'FR',
+                    SAT: 'SA'
+                };
+                var byweekday = selectedDays.map(day => dayMap[day]);
+                var eventColors = {};
+                var event = {};
+                // Determine the recurrence rule
+                                function getRandomColor() {
+                    var letters = '0123456789ABCDEF';
+                    let color = '#';
+                    for (let i = 0; i < 6; i++) {
+                        color += letters[Math.floor(Math.random() * 16)];
+                    }
+                    return color;
+                }
+
+                let rrule = null;
+                duration = parseInt(duration, 10);
+                if (repeat !== 'nothing' && byweekday.length > 0) {
+                    if (enableStartTime) {
+                        rrule = {
+                            freq: repeat === 'daily' ? 'DAILY' : 'WEEKLY',
+                            interval: repeat === 'biweekly' ? 2 :
+                                repeat === 'triweekly' ? 3 :
+                                    repeat === 'quadweekly' ? 4 : 1,
+                            byweekday: byweekday,
+                            dtstart: `${startDate}T${startTime}`,
+                            until: until ? new Date(until).toISOString() : null
+                        };
+                    } else {
+                        rrule = {
+                            freq: repeat === 'daily' ? 'DAILY' : 'WEEKLY',
+                            interval: repeat === 'biweekly' ? 2 :
+                                repeat === 'triweekly' ? 3 :
+                                    repeat === 'quadweekly' ? 4 : 1,
+                            byweekday: byweekday,
+                            dtstart: `${startDate}`,
+                            until: until ? new Date(until).toISOString() : null
+                        };
+                    }
+                    // Generate the event data
+                    event = {
+                        id: tempId, // Temporary unique ID
+                        title: location,
+                        rrule: rrule,
+                        duration: { days: duration },
+                        color: eventColors[location] || (eventColors[location] = getRandomColor()),
+                        extendedProps: {
+                            details: `Repeats: ${repeat}, Until: ${until}`
+                        }
+                    };
+                }else{
+                    // Generate the event data
+                    if (enableStartTime) {
+                    event = {
+                            id: tempId,
+                        title: location,
+                        start: `${startDate}T${startTime}`,
+                        duration: { days: duration },
+                        color: eventColors[location] || (eventColors[location] = getRandomColor())
+                    };
+                    }else{
+                        let endDate = addDays(startDate, duration);
+                        let endDateString = endDate.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+                        event = {
+                            id: tempId,
+                            title: location,
+                            start: `${startDate}`,
+                            end: endDateString,
+                            color: eventColors[location] || (eventColors[location] = getRandomColor())
+                        };
+                    }
+                }
+
+                // Add event to the calendar
+                calendar.addEvent(event);
+
+                // Close the modal
+                $('#createmodalcloseBtn').trigger("click");
+            });
+
+
+
+            $('#createModal').on('hidden.bs.modal', function () {
+                const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
+                $(this).find('#createStartDate').val(today);
+                $(this).find('#createUntil').val(today);
+                $(this).find('#createLocation').val(''); // Clear text input fields
+                $(this).find('#createStartTime').val(''); // Clear text input fields
+                $(this).find('#createDuration').val(1); // Reset dropdowns
+                $(this).find('#createRepeat').prop('selectedIndex', 0);
+                $(this).find('input[type="checkbox"]').prop('checked', false);
+            });
+            $('#editModalCloseBtn').click(function () {
+                $('#editModal').modal('hide');
+                $("#scheduleModal").modal('show');
+            })
+
+            $('#saveEditButton').click(function () {
+                const sessionId = $('#editModal').data('sessionId'); // Retrieve session ID stored in modal
+
+                const editdays = [];
+                document.querySelectorAll('.editDay-checkbox:checked').forEach((checkbox) => {
+                    editdays.push(checkbox.id.replace('editDays_', '')); // Extract day from checkbox ID
+                });
+
+                var tempId = sessionId; // Temporary unique ID
+                var location = $('#editLocation').val();
+                var startDate = $('#editStartDate').val();
+                var enableStartTime = document.getElementById('editEnableStartTime').checked;
+                var startTime = enableStartTime ? document.getElementById('editStartTime').value : null;
+                var duration = $('#editDuration').val();
+                var repeat = $('#editRepeat').val();
+                var until = $('#editUntil').val();
+
+                const updatedSession = {
+                    id: sessionId, // Keep the same ID
+                    location: $('#editLocation').val(),
+                    startDate: $('#editStartDate').val(),
+                    duration: $('#editDuration').val(),
+                    repeat: $('#editRepeat').val(),
+                    until: $('#editUntil').val(),
+                    startTime: $('#editStartTime').val(),
+                    days: editdays
+                };
+
+                const existingEvent = calendar.getEventById(sessionId);
+
+                if (existingEvent) {
+                    // Remove the existing event
+                    existingEvent.remove();
+                    console.log(`Event with ID ${sessionId} removed.`);
+
+                    // Add the new event
+                    var selectedDays = [];
+                    document.querySelectorAll('.createDay-checkbox:checked').forEach((checkbox) => {
+                        selectedDays.push(checkbox.id.replace('createDays_', '').toUpperCase());
+                    });
+
+                    // Map day initials to RRule constants (MO, TU, etc.)
+                    var dayMap = {
+                        SUN: 'SU',
+                        M: 'MO',
+                        TUE: 'TU',
+                        W: 'WE',
+                        THU: 'TH',
+                        F: 'FR',
+                        SAT: 'SA'
+                    };
+                    var byweekday = selectedDays.map(day => dayMap[day]);
+                    var eventColors = {};
+                    var event = {};
+                    // Determine the recurrence rule
+                    function getRandomColor() {
+                        var letters = '0123456789ABCDEF';
+                        let color = '#';
+                        for (let i = 0; i < 6; i++) {
+                            color += letters[Math.floor(Math.random() * 16)];
+                        }
+                        return color;
+                    }
+
+                    let rrule = null;
+                    duration = parseInt(duration, 10);
+                    if (repeat !== 'nothing' && byweekday.length > 0) {
+                        if (enableStartTime) {
+                            rrule = {
+                                freq: repeat === 'daily' ? 'DAILY' : 'WEEKLY',
+                                interval: repeat === 'biweekly' ? 2 :
+                                    repeat === 'triweekly' ? 3 :
+                                        repeat === 'quadweekly' ? 4 : 1,
+                                byweekday: byweekday,
+                                dtstart: `${startDate}T${startTime}`,
+                                until: until ? new Date(until).toISOString() : null
+                            };
+                        } else {
+                            rrule = {
+                                freq: repeat === 'daily' ? 'DAILY' : 'WEEKLY',
+                                interval: repeat === 'biweekly' ? 2 :
+                                    repeat === 'triweekly' ? 3 :
+                                        repeat === 'quadweekly' ? 4 : 1,
+                                byweekday: byweekday,
+                                dtstart: `${startDate}`,
+                                until: until ? new Date(until).toISOString() : null
+                            };
+                        }
+                        // Generate the event data
+                        event = {
+                            id: tempId, // Temporary unique ID
+                            title: location,
+                            rrule: rrule,
+                            duration: { days: duration },
+                            color: eventColors[location] || (eventColors[location] = getRandomColor()),
+                            extendedProps: {
+                                details: `Repeats: ${repeat}, Until: ${until}`
+                            }
+                        };
+                    } else {
+                        // Generate the event data
+                        if (enableStartTime) {
+                            event = {
+                                id: tempId,
+                                title: location,
+                                start: `${startDate}T${startTime}`,
+                                duration: { days: duration },
+                                color: eventColors[location] || (eventColors[location] = getRandomColor())
+                            };
+                        } else {
+                            let endDate = addDays(startDate, duration);
+                            let endDateString = endDate.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+                            event = {
+                                id: tempId,
+                                title: location,
+                                start: `${startDate}`,
+                                end: endDateString,
+                                color: eventColors[location] || (eventColors[location] = getRandomColor())
+                            };
+                        }
+                    }
+
+                    // Add event to the calendar
+                    calendar.addEvent(event);
+
+                } else {
+                    console.log(`Event with ID ${sessionId} not found.`);
+                }
+
+                // Find and remove the old session
+                const sessionIndex = sessionData.findIndex(s => s.id === sessionId);
+                if (sessionIndex !== -1) {
+                    sessionData.splice(sessionIndex, 1, updatedSession); // Replace with updated session
+                }
+
+
+                // Optionally, re-render the session list
+                renderSessionList();
+                console.log(sessionData);
+                Swal.fire({
+                    icon: 'success',
+                    title: '行程已成功修改',
+                    timer: 2000, // Auto close after 2 seconds
+                    showConfirmButton: false
+                }).then(() => {
+                    $('#editModal').modal('hide');
+                });
+                // Hide the modal
+    
+            });
+
+            function validateAndSubmitForm() {
+                let allFilled = true; // Flag to check if all fields are filled
+                let emptyFields = []; // Collect empty field names for better feedback
+                const excludedIds = [
+                    "",
+                    "createLocation",
+                    "createStartTime",
+                    "editLocation",
+                    "editStartDate",
+                    "editStartTime",
+                    "editUntil"
+                ];
+
+                // Iterate through all input and textarea elements inside the form
+                document.querySelectorAll('input:not([type="hidden"]):not([type="file"]), textarea').forEach((field) => {
+                    const fieldId = field.id || ""; // Use empty string if id is not set
+
+                    if (excludedIds.includes(fieldId)) {
+                        return; // Skip fields with excluded IDs or without an ID
+                    }
+                    if (!field.value.trim()) {
+                        allFilled = false;
+                        emptyFields.push(field.name || field.placeholder); // Add field name or placeholder to emptyFields
+                    }
+                });
+
+                // If there are empty fields, show an alert
+                if (!allFilled) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '請填好表格',
+                        confirmButtonText: 'OK',
+                    });
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            function renderSessionList() {
+                const scheduleList = $('#editScheduleList'); // Assuming this is the container for session items
+                scheduleList.empty();
+
+                sessionData.forEach(session => {
+                    const days = session.days.map(day => dayLabels[day] || day).join(', ');
+                    const startDate = formatDateOnly(session.startDate);
+                    const endDate = formatDateOnly(session.until);
+                    const duration = session.duration;
+                    const location = session.location || 'N/A';
+                    const repeat = repeatLabels[session.repeat] || '不重複';
+                    const startTime = session.startTime ? ` : ${session.startTime}` : '';
+
+                    const item = `
+                    <div class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">日子: ${days}</h5>
+                            <small>${startDate}${startTime}</small>
+                        </div>
+                        <p class="mb-1">地點: ${location}</p>
+                        <p class="mb-1">持續時間: ${duration} 天</p>
+                        <p class="mb-1">結束日期: ${endDate}</p>
+                        <p class="mb-1">重複規則: ${repeat}</p>
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btn-primary btn-sm mr-2" onclick="editSession('${session.id}')">修改</button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteSession('${session.id}')">🗑️</button>
+                        </div>
+                    </div>
+                `;
+                    scheduleList.append(item);
+                });
+            }
+
+
+            $("#NextStep").on("click", function () {
+                window.scrollTo(0, 0);
+                $("#mainContainer").css("display","none");
+                $("#calendarContainer").css("display", "grid");
+                calendar.render();
+            });
+
+            $("#GoBackStep").on("click", function () {
+                window.scrollTo(0, 0);
+                $("#mainContainer").css("display", "block");
+                $("#calendarContainer").css("display", "none");
+            });
+
+        });
+
+   
+        function loadSessionList() {
+            const scheduleList = document.querySelector('.list-group');
+            scheduleList.innerHTML = ''; // Clear the current list
+
+            sessionData.forEach((session) => {
+                // Map and join days for display
+
+                const days = session.days.map((day) => dayLabels[day] || day).join(', ');
+
+                // Format start and end dates
+                const startDate = formatDateOnly(session.startDate);
+                const endDate = formatDateOnly(session.until);
+
+                // Format startTime
+                let startTime = session.startTime;
+                startTime = startTime ? ` : ${startTime}` : '';
+
+                // Get other session details
+                const duration = session.duration || 'N/A';
+                const location = session.location || 'N/A';
+                const repeat = repeatLabels[session.repeat] || '不重複';
+
+                // Create the list item
+                const item = `
+                            <div class="list-group-item">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">日子: ${days}</h5>
+                                    <small>${startDate}${startTime}</small>
+                                </div>
+                                <p class="mb-1">地點: ${location}</p>
+                                <p class="mb-1">持續時間: ${duration} 天</p>
+                                <p class="mb-1">結束日期: ${endDate}</p>
+                                <p class="mb-1">重複規則: ${repeat}</p>
+                                <div class="d-flex justify-content-end">
+                                    <button class="btn btn-primary btn-sm mr-2" onclick="editSession('${session.id}')">修改</button>
+                                    <button class="btn btn-danger btn-sm" onclick="deleteSession('${session.id}')">🗑️</button>
+                                </div>
+                            </div>
+                        `;
+
+                // Append the item to the list
+                scheduleList.insertAdjacentHTML('beforeend', item);
+            });
+        }
+
+        function editSession(sessionId) {
+            $('#schedulemodalcloseBtn').click();
+
+           
+            const session = sessionData.find(s => s.id === sessionId); // Find session by ID
+
+            if (!session) {
+                console.error('Session not found!');
+                return;
+            }
+
+            // Populate form fields
+            $('#editLocation').val(session.location || '');
+            $('#editStartDate').val(formatDateOnly(session.startDate));
+            $('#editEnableStartTime').prop('checked', session.enableStartTime);
+            $('#editStartTime').val(session.startTime || '').prop('disabled', !session.enableStartTime);
+            $('#editDuration').val(session.duration || 1);
+            $('#editRepeat').val(session.repeat || 'nothing');
+            $('#editUntil').val(formatDateOnly(session.until));
+
+            // Populate days checkboxes
+            $('.editDay-checkbox').prop('checked', false); // Clear previous selection
+            $('.editDay-checkbox').parent().removeClass('active');
+            (session.days || []).forEach(day => {
+                $(`#editDays_${day}`).prop('checked', true);
+                $(`#editDays_${day}`).prop('checked', true).parent().addClass('active');
+            });
+
+            if (session.repeat ==="nothing"){
+            $("#editDayDiv").css("display","none")
+            }
+
+
+            $('#editModal').data('sessionId', sessionId);
+            // Show the edit modal
+            $('#editModal').modal('show');
+        }
+
+
+
+                    // Function to delete a session
+         function deleteSession(id) {
+                sessionData = sessionData.filter((session) => session.id !== id);
+                loadSessionList(); // Reload the session list
+
+            const event = calendar.getEventById(id);
+            if (event) {
+                event.remove();
+            }
+        }
+
+
+
+        function addDays(startDate, days) {
+            let date = new Date(startDate);
+            date.setDate(date.getDate() + days);
+            return date;
+        }
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                    $('#imagePreview').hide();
+                    $('#imagePreview').fadeIn(650);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#imageUpload").change(function () {
+            readURL(this);
+        });
+
+    </script>
+}

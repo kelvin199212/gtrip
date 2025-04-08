@@ -1,0 +1,262 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutFillow.cshtml";
+	ViewData["Title"] = "統計版面";
+}
+<div class="content-body default-height">
+	<!-- row -->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="row">
+					<div class="col-xl-6">
+						<div class="row">
+							<div class="col-xl-12">
+								<div class="card">
+									<div class="card-header border-0 pb-0 flex-wrap">
+										<h4 class="card-title">旅遊統計</h4>
+										<div class="d-flex align-items-center mt-3 project-tab">
+											<div class="card-tabs mt-sm-0 me-3">
+												<ul class="nav nav-tabs" role="tablist">
+													<li class="nav-item">
+														<a class="nav-link active" data-bs-toggle="tab" href="#monthly" role="tab">Monthly</a>
+													</li>
+													<li class="nav-item">
+														<a class="nav-link" data-bs-toggle="tab" href="#weekly" role="tab">Weekly</a>
+													</li>
+													<li class="nav-item">
+														<a class="nav-link" data-bs-toggle="tab" href="#today" role="tab">Today</a>
+													</li>
+												</ul>
+											</div>
+											<div class="dropdown ms-2">
+												<div class="btn-link" data-bs-toggle="dropdown">
+													<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<circle cx="12.4999" cy="3.5" r="2.5" fill="#A5A5A5" />
+														<circle cx="12.4999" cy="11.5" r="2.5" fill="#A5A5A5" />
+														<circle cx="12.4999" cy="19.5" r="2.5" fill="#A5A5A5" />
+													</svg>
+												</div>
+												<div class="dropdown-menu dropdown-menu-right">
+													<a class="dropdown-item" href="javascript:void(0)">Delete</a>
+													<a class="dropdown-item" href="javascript:void(0)">Edit</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="card-body">
+										<div class="d-flex justify-content-between align-items-center flex-wrap">
+											<div class="d-flex">
+												<div class="d-inline-block position-relative donut-chart-sale mb-3">
+													<span class="donut1" data-peity='{ "fill": ["rgba(136,108,192,1)", "rgba(241, 234, 255, 1)"],   "innerRadius": 20, "radius": 15}'>5/8</span>
+												</div>
+												<div class="ms-3">
+													<h4 class="fs-24 mb-0">246</h4>
+													<p class="mb-0">Total Projects</p>
+												</div>
+											</div>
+											<div class="d-flex">
+												<div class="d-flex me-5">
+													<div class="mt-2">
+														<svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+															<circle cx="6.5" cy="6.5" r="6.5" fill="#FFCF6D" />
+														</svg>
+													</div>
+													<div class="ms-3">
+														<h4 class="fs-24 mb-0 ">246</h4>
+														<p class="mb-0">出團數目</p>
+													</div>
+												</div>
+												<div class="d-flex">
+													<div class="mt-2">
+														<svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+															<circle cx="6.5" cy="6.5" r="6.5" fill="#FFA7D7" />
+														</svg>
+
+													</div>
+													<div class="ms-3">
+														<h4 class="fs-24 mb-0">28</h4>
+														<p class="mb-0">開團數目</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div id="chartBar" class="chartBar"></div>
+										<div class="d-flex align-items-center">
+											<label class="form-check-label form-label mb-0" for="flexSwitchCheckChecked1">Number</label>
+											<div class="form-check form-switch toggle-switch">
+												<input class="form-check-input custome" type="checkbox" id="flexSwitchCheckChecked1" checked>
+
+											</div>
+											<label class="form-check-label form-label mb-0 ms-3" for="flexSwitchCheckChecked2">Analytics</label>
+											<div class="form-check form-switch toggle-switch">
+												<input class="form-check-input custome" type="checkbox" id="flexSwitchCheckChecked2" checked>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="col-xl-6">
+						<div class="row">
+							<div class="col-xl-12">
+								<div class="row">
+									<div class="col-xl-6 col-sm-6">
+										<div class="card">
+											<div class="card-body card-padding d-flex align-items-center justify-content-between">
+												<div>
+													<h4 class="mb-3 text-nowrap">本月淨收益</h4>
+													<div class="d-flex align-items-center">
+														<h2 class="fs-32 font-w700 mb-0 counter">68</h2>
+														<div class="ms-4 d-flex align-items-center">
+															<svg width="16" height="11" viewBox="0 0 21 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+																<path d="M1.49217 11C0.590508 11 0.149368 9.9006 0.800944 9.27736L9.80878 0.66117C10.1954 0.29136 10.8046 0.291359 11.1912 0.661169L20.1991 9.27736C20.8506 9.9006 20.4095 11 19.5078 11H1.49217Z" fill="#09BD3C" />
+															</svg>
+															<strong class="text-success">+0,5%</strong>
+														</div>
+													</div>
+												</div>
+												<div id="columnChart"></div>
+											</div>
+										</div>
+									</div>
+									<div class="col-xl-6 col-sm-6">
+										<div class="card">
+											<div class="card-body card-padding d-flex align-items-center justify-content-between">
+												<div class="w-75">
+													<h4 class="mb-3 text-nowrap">您的餘額</h4>
+@* 													<div class="progress default-progress">
+														<div class="progress-bar bg-gradient1 progress-animated" style="width: 40%; height:8px;" role="progressbar">
+															<span class="sr-only">45% Complete</span>
+														</div>
+													</div> *@
+@* 													<div class="mt-2">
+														<p class="mb-0"><strong class="text-danger me-2">76000</strong>left from target</p>
+
+													</div> *@
+												</div>
+												<div>
+													<h2 class="fs-32 font-w700 mb-0">42000</h2>
+												</div>
+
+											</div>
+										</div>
+									</div>
+									<div class="col-xl-6 col-sm-6">
+										<div class="card">
+											<div class="card-body d-flex px-4  justify-content-between">
+												<div>
+													<div class="">
+														<h2 class="fs-32 font-w700 counter">562</h2>
+														<h4 class="mb-0 text-nowrap">淨收益</h4>
+														<p class="mb-0"><strong class="text-danger">-2%</strong> than last month</p>
+													</div>
+												</div>
+												<div id="NewCustomers"></div>
+											</div>
+										</div>
+									</div>
+									<div class="col-xl-6 col-sm-6">
+										<div class="card">
+											<div class="card-body d-flex px-4  justify-content-between">
+												<div>
+													<div class="">
+														<h2 class="fs-32 font-w700 counter">892</h2>
+														<h4 class="mb-0 text-nowrap">本月開團數目</h4>
+														<p class="mb-0"><strong class="text-success">+2%</strong> than last month</p>
+													</div>
+												</div>
+												<div id="NewCustomers1"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Fillow_style
+    {
+	<link href="~/Fillow/vendor/owl-carousel/owl.carousel.css" rel="stylesheet">
+	<link rel="stylesheet" href="~/Fillow/vendor/nouislider/nouislider.min.css">
+}
+
+@section Fillow_script
+    {
+	<!--**********************************
+		Scripts
+	***********************************-->
+	<!-- Required vendors -->
+	<script src="~/Fillow/vendor/global/global.min.js"></script>
+	<script src="~/Fillow/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+
+
+	<!-- counter -->
+	<script src="~/Fillow/vendor/counter/counter.min.js"></script>
+	<script src="~/Fillow/vendor/counter/waypoint.min.js"></script>
+
+	<!-- Apex Chart -->
+	<script src="~/Fillow/vendor/apexchart/apexchart.js"></script>
+	<script src="~/Fillow/vendor/chart-js/chart.bundle.min.js"></script>
+	<!-- Chart piety plugin files -->
+	<script src="~/Fillow/vendor/peity/jquery.peity.min.js"></script>
+	<!-- Dashboard 1 -->
+	<script src="~/Fillow/js/dashboard/dashboard-1.js"></script>
+
+	<script src="~/Fillow/vendor/owl-carousel/owl.carousel.js"></script>
+
+	<script src="~/Fillow/js/custom.min.js"></script>
+	<script src="~/Fillow/js/dlabnav-init.js"></script>
+	<script src="~/Fillow/js/demo.js"></script>
+	
+	<script>
+		function cardsCenter()
+		{
+			/*  testimonial one function by = owl.carousel.js */
+			jQuery('.card-slider').owlCarousel({
+				loop:true,
+				margin:0,
+				nav:true,
+				//center:true,
+				slideSpeed: 3000,
+				paginationSpeed: 3000,
+				dots: true,
+				navText: ['<i class="fas fa-arrow-left"></i>', '<i class="fas fa-arrow-right"></i>'],
+				responsive:{
+					0:{
+						items:1
+					},
+					576:{
+						items:1
+					},
+					800:{
+						items:1
+					},
+					991:{
+						items:1
+					},
+					1200:{
+						items:1
+					},
+					1600:{
+						items:1
+					}
+				}
+			})
+		}
+
+		jQuery(window).on('load',function(){
+			setTimeout(function(){
+				cardsCenter();
+			}, 1000);
+		});
+	</script>
+}

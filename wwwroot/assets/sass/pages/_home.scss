@@ -1,0 +1,26 @@
+// -----------------------------------------------------------------------------
+// This file contains styles that are specific to the home page.
+// -----------------------------------------------------------------------------
+
+
+// fourzero
+.fourzero {
+    @extend %of-hidden;
+    @extend %p-rel;
+    height: 100vh;
+    @extend %flex;
+    align-items: center;
+    .shape {
+        @extend %center;
+        @extend %w-100;
+        @extend %h-100;
+        @extend %text-center;
+        @extend %flex;
+        @extend %justify-center;
+        @extend %align-items-center;
+    }
+    &__item {
+        @extend %p-rel;
+        @extend %z-index-1;
+    }
+}

@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <title>Travel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- site favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <!-- Place favicon.ico in the root directory -->
+    <!-- All stylesheet and icons css  -->
+    <style>
+        
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 20px;
+	}
+
+        .header__transparent {
+            background: #fff !important;
+            padding: 5px;
+        }
+
+        .header--style2 .menu > li a {
+            color: #000000 !important;
+        }
+
+        .default__btn.reverse {
+            color: white !important;
+            background: #6347F9 !important;
+        }
+
+            .default__btn.reverse:hover {
+                color: #6347F9 !important;
+                background: white !important;
+            }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- All Needed JS -->
+    <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="assets/js/vendor/datepiker.js"></script>
+    <script src="assets/js/vendor/modernizr-3.11.2.min.js"></script>
+    <script src="assets/js/isotope.pkgd.min.js"></script>
+    <script src="assets/js/swiper.min.js"></script>
+    <script src="assets/js/wow.js"></script>
+    <script src="assets/js/lightcase.js"></script>
+    <script src="assets/js/jquery.countdown.min.js"></script>
+    <script src="assets/js/counterup.js"></script>
+    <script src="assets/js/waypoints.min.js"></script>
+    <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/plugins.js"></script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="assets/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/datepiker.css">
+    <link rel="stylesheet" href="assets/css/swiper.min.css">
+    <link rel="stylesheet" href="assets/css/lightcase.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 999; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 2% auto; /* 15% from the top and centered */
+            border: 1px solid #888;
+            width: fit-content; /* Could be more or less, depending on screen size */
+            zoom: 78%;
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+            /* Mobile devices */
+@@media only screen and (max-width: 768px) {
+
+}
+
+/* Non-mobile (desktop/tablet) devices */
+@@media only screen and (min-width: 769px) {
+            .booking__form{
+                position: absolute !important;
+                bottom: 100px !important;
+                left: 0;
+                right: 0;
+                margin-inline: auto;
+                 max-width: 860px !important;
+            }
+
+            .banner__content{
+                position: absolute !important;
+                bottom: 250px !important;
+                left: 50px;
+                right: 0;
+                margin-inline: auto;
+            }
+  
+
+}
+
+
+    </style>
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+        <main role="main" class="pb-3">
+        @Html.Partial("~/Views/Shared/Fillow/_ClientMenu.cshtml")
+            @RenderBody()
+
+            @await Html.PartialAsync("_LoginModal")
+        @Html.Partial("~/Views/Shared/Fillow/_ClientFooter.cshtml")
+        </main>
+
+
+  
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+                // Get the modal
+        var modal = document.getElementById("LoginModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("LoginBtn");
+
+        var body = document.body;
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal
+        btn.onclick = function () {
+            body.style.overflow = "hidden";
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+            body.style.overflow = "auto";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                body.style.overflow = "auto";
+            }
+        }
+
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
