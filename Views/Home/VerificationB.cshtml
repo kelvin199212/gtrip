@@ -1,0 +1,252 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutFillow.cshtml";
+    ViewData["Title"] = "驗證身份";
+}
+
+<form id="verificationForm" class="form-valide-with-icon needs-validation" method="post" enctype="multipart/form-data" novalidate>
+    <div class="content-body default-height">
+        <div class="container-fluid">
+            <div class="row page-titles">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Gtrip</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">驗證身份</a> <span class="badge badge-xs badge-danger ms-2">未驗證</span></li>
+                </ol>
+            </div>
+            <!-- row -->
+            <div class="row">
+
+                <!-- Business License Section -->
+                <div class="col-xl-12 col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">營業執照</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="basic-form">
+                                <div class="row">
+                                    <div class="mb-3 col-md-12">
+                                        <label class="form-label">公司名稱</label>
+                                        <input type="text" class="form-control" id="companyName" name="CompanyName" placeholder="公司名稱" required>
+                                        <div class="invalid-feedback">
+                                            請輸入公司名稱
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-md-12">
+                                        <label class="form-label">公司位址</label>
+                                        <input type="text" class="form-control" id="companyAddress" name="CompanyAddress" placeholder="公司位址" required>
+                                        <div class="invalid-feedback">
+                                            請輸入公司位址
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="businessLicense" class="form-label">公司營業執照</label>
+                                        <input class="form-control" type="file" id="businessLicense" name="BusinessLicense" required>
+                                        <img id="businessLicensePreview" style="width: 100%; max-width: 200px;" />
+                                        <div class="invalid-feedback">
+                                            請提供公司營業執照
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">電子郵件</label>
+                                        <input type="email" class="form-control" id="companyEmail" name="CompanyEmail" placeholder="電子郵件" required>
+                                        <div class="invalid-feedback">
+                                            請輸入電子郵件
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">電話號碼</label>
+                                        <input type="tel" class="form-control" id="companyPhoneNumber" name="CompanyPhoneNumber" placeholder="電話號碼" required>
+                                        <div class="invalid-feedback">
+                                            請輸入電話號碼
+                                        </div>
+                                    </div>
+                                    <h4>代表</h4>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">姓名</label>
+                                        <input type="text" class="form-control" id="representativeName" name="RepresentativeName" placeholder="姓名" required>
+                                        <div class="invalid-feedback">
+                                            請輸入姓名
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">職位</label>
+                                        <input type="text" class="form-control" id="representativePosition" name="RepresentativePosition" placeholder="職位" required>
+                                        <div class="invalid-feedback">
+                                            請輸入職位
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">個人身分證或護照號碼</label>
+                                        <input type="text" class="form-control" id="passportId" name="PassportId" placeholder="個人身分證或護照號碼" required>
+                                        <div class="invalid-feedback">
+                                            請輸入個人身分證或護照號碼
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">發行日期</label>
+                                        <input type="date" class="form-control" id="issueDate" name="IssueDate" placeholder="發行日期" required>
+                                        <div class="invalid-feedback">
+                                            請輸入發行日期
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="personalIdPhoto" class="form-label">個人身分證或護照相片</label>
+                                        <input class="form-control" type="file" id="personalIdPhoto" name="personalIdPhoto" required>
+                                        <img id="personalIdPhotoPreview" style="width: 100%; max-width: 200px;" />
+                                        <div class="invalid-feedback">
+                                            請提供個人身分證或護照相片
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-primary" type="submit" id="submitButton">提交</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Fillow_style
+{
+}
+
+@section Fillow_script
+{
+    <!-- Required vendors -->
+    <script src="~/Fillow/vendor/global/global.min.js"></script>
+    <script src="~/Fillow/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <script src="~/Fillow/js/custom.min.js"></script>
+    <script src="~/Fillow/js/dlabnav-init.js"></script>
+    <script src="~/Fillow/js/demo.js"></script>
+    <script>
+            (function () {
+                'use strict'
+
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.needs-validation')
+
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms)
+                    .forEach(function (form) {
+                        form.addEventListener('submit', function (event) {
+                        event.preventDefault()
+                        event.stopPropagation()
+
+                            if (!form.checkValidity()) {
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                                    form.classList.add('was-validated')
+                            } else {
+                                // If the form is valid, submit the form data
+                                var formData = new FormData($('#verificationForm')[0]);
+
+                                $.ajax({
+                                    url: '/api/UserProfile/SubmitVerification',
+                                    method: 'POST',
+                                    data: formData,
+                                    processData: false,
+                                    contentType: false,
+                                    success: function (response) {
+                                        Swal.fire({
+                                            icon: 'success',
+                                        title: '提交成功，︀請等待批核',
+                                            text: response.message,
+                                            timer: 2000, // Auto close after 2 seconds
+                                            showConfirmButton: false
+                                        }).then(() => {
+                                            // Redirect to another page after the alert is closed
+                                            window.location.href = '/Home/VerificationB'; // Replace with your desired URL
+                                        });
+                                    },
+                                    error: function (xhr) {
+                                        var errorMessage = xhr.responseJSON?.message || 'Something went wrong!';
+
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: errorMessage,
+                                            timer: 2000, // Auto close after 2 seconds
+                                            showConfirmButton: false
+                                        });
+                                    }
+                                });
+                            }
+
+                            
+                        }, false)
+                    })
+            })();
+
+
+        $(document).ready(function () {
+            // Handle form submission
+           
+
+            // Function to preview image
+            function previewImage(input, previewElementId) {
+                const file = input.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        $(previewElementId).attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+
+       
+            $('#businessLicense').on('change', function (event) {
+                previewImage(event.target, '#businessLicensePreview');
+            });
+
+            $('#personalIdPhoto').on('change', function (event) {
+                previewImage(event.target, '#personalIdPhotoPreview');
+            });
+
+            // Function to fetch existing data and populate the form
+            function fetchVerificationData() {
+                $.ajax({
+                    url: '/api/UserProfile/GetVerificationData', // Ensure this endpoint is available in your backend
+                    method: 'GET',
+                    success: function (data) {
+                        if (data) {
+                            $('#companyName').val(data.companyName);
+                            $('#companyAddress').val(data.companyAddress);
+                            $('#companyEmail').val(data.companyEmail);
+                            $('#companyPhoneNumber').val(data.companyPhoneNumber);
+                            $('#representativeName').val(data.representativeName);
+                            $('#representativePosition').val(data.representativePosition);
+                            $('#passportId').val(data.passportId);
+                            $('#issueDate').val(data.issueDate.split('T')[0]);
+
+
+                            if (data.businessLicensePath) {
+                                $('#businessLicensePreview').attr('src', '../' + data.businessLicensePath).show();
+                            }
+
+                            if (data.personalIdPhotoPath) {
+                                $('#personalIdPhotoPreview').attr('src', '../' + data.personalIdPhotoPath).show();
+                         
+                            }
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+
+
+                        Swal.fire({
+                            icon: 'warning',
+                            title: "請驗證你的公司",
+                            timer: 2000, // Auto close after 2 seconds
+                            showConfirmButton: false
+                        });
+                    }
+                });
+            }
+
+            // Fetch existing data when the page loads
+            fetchVerificationData();
+        });
+    </script>
+}

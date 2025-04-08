@@ -1,0 +1,138 @@
+.tour {
+    &__slider {}
+    &__info {
+        @extend %p-30;
+        box-shadow: 0px 6px 24px #E4E2EE;
+        @include add-prefix(border-radius, (0 0 14px 14px));
+        &--title {
+            @extend %mb-30;
+            h2 {
+                font-weight: 600;
+            }
+        }
+        &--list {
+            @extend %flex;
+            @extend %align-items-center;
+            .left {
+                @extend %mr-15;
+                i {
+                    color: $theme-color;
+                    @include font-size(24px);
+                }
+            }
+            .right {
+                p {
+                    @extend %mb-0;
+                    span {
+                        @extend %d-block;
+                    }
+                }
+            }
+        }
+    }
+    &__content {
+        h3 {
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        &--info {
+            margin-block: 40px
+        }
+        &--accordion {
+            @extend %mb-20;
+            @extend %of-hidden;
+
+        }
+        &--details {
+            ul {
+                li {
+                    padding-block: 10px;
+                    i {
+                        @extend %mr-5;
+                        &.fa-circle-check {
+                            color: $theme-color;
+                        }
+                        &.fa-circle-xmark {
+                            color: $desc-color;
+                        }
+                    }
+                }
+            }
+            .accordion {
+                .accordion-item {
+                    @extend %p-20;
+                    background: $ash-color;
+                    @extend %mb-30;
+                    @include add-prefix(border-radius, (14px));
+                    @extend %border-none;
+                }
+                .accordion-button {
+                    @extend %border-none;
+                    box-shadow: none;
+                    font-weight: 700;
+                    @include font-size(22px);
+                    @extend %p-0;
+                    background: transparent;
+                    &::after {
+                        @extend %d-none;
+                    }
+                }
+                .accordion-body {
+                    @extend %p-0;
+                    padding-top: 15px;
+                    p {
+                        @extend %mb-0;
+                    }
+                }
+            }
+        }
+    }
+    &__thumb {
+        @extend %p-rel;
+        &--reverse {
+            .tour__content--details {
+                @include breakpoint(lg) {
+                    left: auto !important;
+                    right: 0;
+                }
+            }
+        }
+        .thumb {
+            @include add-prefix(border-radius, (14px));
+            @extend %of-hidden;
+            margin-block: 40px;
+            img {
+                @extend %w-100;
+            }
+        }
+        .tour__content--details {
+            @extend %p-30;
+            box-shadow: 0px 2px 8px rgba(202, 205, 219, 0.42);
+            @include add-prefix(border-radius, (14px));
+            background: $white-color;
+            @include breakpoint(lg) {
+                position: absolute;
+                left: 0;
+                top: 50%;
+                width: 40%;
+                transform: translateY(-50%);
+            }
+        }
+    }
+    &__location {
+        &--title {
+            @extend %mb-30;
+            h3 {
+                @extend %mb-0;
+            }
+        }
+        &--details {
+            iframe {
+                @extend %w-100;
+                height: 450px;
+                @extend %d-block;
+                @include add-prefix(border-radius, (14px));
+            }
+        }
+    }
+}

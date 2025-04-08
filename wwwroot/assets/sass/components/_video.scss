@@ -1,0 +1,30 @@
+.video {
+    &__thumb {
+        @extend %p-rel;
+        @extend %of-hidden;
+        @include add-prefix(border-radius, (14px));
+        &:hover {
+            img {
+                @include add-prefix(transform, (scale(1.2)));
+            }
+            .video {
+                &__icon {
+                    background: $theme-color;
+                    color: $white-color;
+                }
+            }
+        }
+    }
+    &__icon {
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        color: $title-color;
+        background: $white-color;
+        @extend %pos-center;
+        @include font-size(30px);
+        @extend %text-center;
+        @include add-prefix(border-radius, (100%));
+        @include add-prefix(transition, (all .3s ease));
+    }
+}

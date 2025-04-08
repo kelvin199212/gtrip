@@ -1,0 +1,158 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutFillow.cshtml";
+    ViewData["Title"] = "驗證身份";
+}
+<div class="content-body default-height">
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Gtrip</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">驗證身份</a> <span class="badge badge-xs badge-danger ms-2">未驗證</span></li>
+            </ol>
+        </div>
+        <!-- row -->
+        <div class="row">
+            <div class="col-xl-6 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">驗證資料 (*提交文件與填寫資料必須一致)</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="basic-form">
+                           
+
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">電子郵件</label>
+                                        <input type="email" class="form-control" placeholder="電子郵件">
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">電話號碼</label>
+                                        <input type="tel" class="form-control" placeholder="電話號碼">
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">個人身分證或護照</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="basic-form">
+
+
+                            <div class="row">
+                                <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">姓名</label>
+                                        <input type="email" class="form-control" placeholder="姓名">
+                                </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">出生日期</label>
+                                        <input type="tel" class="form-control" placeholder="出生日期">
+                                    </div>
+                                <div class="mb-3 col-md-12">
+                                        <label class="form-label">營業地址</label>
+                                        <input type="email" class="form-control" placeholder="營業地址">
+                                </div>
+                                    <div class="mb-3">
+                                        <label for="formFileMultiple" class="form-label">個人身分證或護照相片</label>
+                                        <input class="form-control" type="file" id="formFileMultiple" multiple="">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="formFile2" class="form-label">導遊或領隊証件(如有)</label>
+                                        <input class="form-control" type="file" id="formFile2">
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <div class="col-xl-6 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">營業執照</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="basic-form">
+
+
+                            <div class="row">
+                                <div class="row">
+                                    <div class="mb-3 col-md-12">
+                                        <label class="form-label">公司名稱</label>
+                                        <input type="text" class="form-control" placeholder="公司名稱">
+                                    </div>
+                                    <div class="mb-3 col-md-12">
+                                        <label class="form-label">公司位址</label>
+                                        <input type="text" class="form-control" placeholder="公司位址">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="formFile" class="form-label">公司營業執照</label>
+                                        <input class="form-control" type="file" id="formFile">
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">電子郵件</label>
+                                        <input type="email" class="form-control" placeholder="電子郵件">
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">電話號碼</label>
+                                        <input type="tel" class="form-control" placeholder="電話號碼">
+                                    </div>
+                                    <h4>代表</h4>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">姓名</label>
+                                        <input type="text" class="form-control" placeholder="姓名">
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">職位</label>
+                                        <input type="text" class="form-control" placeholder="職位">
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">個人身分證或護照號碼</label>
+                                        <input type="text" class="form-control" placeholder="個人身分證或護照號碼">
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">發行日期</label>
+                                        <input type="date" class="form-control" placeholder="發行日期">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="formFileMultiple" class="form-label">個人身分證或護照相片</label>
+                                        <input class="form-control" type="file" id="formFileMultiple" multiple="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+
+    <div class="card-footer">
+        <button class="btn btn-primary">提交</button>
+    </div>
+</div>
+
+
+@section Fillow_style
+{
+
+}
+
+@section Fillow_script
+{
+    <!-- Required vendors -->
+    <script src="~/Fillow/vendor/global/global.min.js"></script>
+    <script src="~/Fillow/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <script src="~/Fillow/js/custom.min.js"></script>
+    <script src="~/Fillow/js/dlabnav-init.js"></script>
+    <script src="~/Fillow/js/demo.js"></script>
+
+}

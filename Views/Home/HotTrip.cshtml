@@ -1,0 +1,650 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    ViewData["Title"] = "Product Grid";
+}
+
+<style>
+
+	.card {
+		background-color: white;
+		border-radius: 8px;
+		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+		padding: 20px;
+		height: 100%;
+	}
+
+	#main {
+		display: flex;
+		padding: 5% 10% 5% 10%;
+	}
+
+	label {
+		padding: 10px;
+		cursor: pointer;
+	}
+
+	label:hover {
+		background-color: #f1f1f1;
+	}
+
+	.k-checkbox:checked {
+		background-color: #6347f9 !important;
+		border-color: #6347f9 !important;
+	}
+
+	@@media (max-width: 768px) {
+		.card {
+			width: 100%;
+		}
+	}
+
+	.list-group-item {
+		position: relative;
+		padding-right: 25px; /* Adjust to create space for the icons on the right */
+	}
+
+	.expand-icon, .collapse-icon {
+		position: absolute;
+		right: 10px; /* Aligns the icon to the right */
+		top: 50%;
+		transform: translateY(-50%); /* Centers the icon vertically */
+	}
+
+	#dateSelector, #priceRange {
+		padding: 0;
+		box-shadow: none;
+		align-items: center;
+		background-color: #fff;
+		border: 1px solid #e6e6e6;
+		border-radius: 12px;
+		color: #212121;
+		display: inline-flex;
+		cursor: pointer;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		text-align: -webkit-center;
+	}
+
+	.wrapper {
+		position: absolute;
+		background-color: #ffffff;
+		/* padding: 50px 40px 20px 40px; */
+		border-radius: 10px;
+		left: 33%;
+		bottom: 10%;
+	}
+
+
+	.container2 {
+		position: relative;
+		width: 100%;
+		margin-top: 20px;
+		margin-left: 20px;
+	}
+
+	input[type="range"] {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		width: 100%;
+		outline: none;
+		position: absolute;
+		margin: auto;
+		top: 0;
+		bottom: 0;
+		background-color: transparent;
+		pointer-events: none;
+	}
+
+	.slider-track {
+		width: 90%;
+		height: 5px;
+		position: absolute;
+		margin: auto;
+		top: 0;
+		bottom: 0;
+		border-radius: 5px;
+	}
+
+	#slider-1{
+	left:-10px;
+		border: none;
+	}
+
+	#slider-2 {
+		border: none;
+	}
+	#range1{
+	left:0;
+	}
+
+	#range2{
+	right:0;
+	}
+
+	input[type="range"]::-webkit-slider-runnable-track {
+		-webkit-appearance: none;
+		height: 5px;
+	}
+
+	input[type="range"]::-moz-range-track {
+		-moz-appearance: none;
+		height: 5px;
+	}
+
+	input[type="range"]::-ms-track {
+		appearance: none;
+		height: 5px;
+	}
+
+	input[type="range"]::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		height: 1.7em;
+		width: 1.7em;
+		background-color: #3264fe;
+		cursor: pointer;
+		margin-top: -9px;
+		pointer-events: auto;
+		border-radius: 50%;
+	}
+
+	input[type="range"]::-moz-range-thumb {
+		-webkit-appearance: none;
+		height: 1.7em;
+		width: 1.7em;
+		cursor: pointer;
+		border-radius: 50%;
+		background-color: #3264fe;
+		pointer-events: auto;
+		border: none;
+	}
+
+	input[type="range"]::-ms-thumb {
+		appearance: none;
+		height: 1.7em;
+		width: 1.7em;
+		cursor: pointer;
+		border-radius: 50%;
+		background-color: #3264fe;
+		pointer-events: auto;
+	}
+
+	input[type="range"]:active::-webkit-slider-thumb {
+		background-color: #ffffff;
+		border: 1px solid #3264fe;
+	}
+
+	.values {
+		background-color: #3264fe;
+		position: relative;
+		margin: auto;
+		/* padding: 10px 0; */
+		border-radius: 5px;
+		text-align: center;
+		font-weight: 300;
+		font-size: 20px;
+		color: #ffffff;
+		margin-top: -60px;
+	}
+
+		.values:before {
+			content: "";
+			position: absolute;
+			height: 0;
+			width: 0;
+			border-top: 15px solid #3264fe;
+			border-left: 15px solid transparent;
+			border-right: 15px solid transparent;
+			margin: auto;
+			bottom: -14px;
+			left: 0;
+			right: 0;
+		}
+		select{
+		border: 1px solid #e6e6e6;
+		border-radius: 12px;
+		color: #212121;
+		}
+
+		.search-btn {
+			width: 100%;
+			padding: 10px;
+			background-color: #007bff;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			font-size: 16px;
+		}
+
+		.search-btn:hover {
+			background-color: #0056b3;
+		}
+
+		.filterClass{
+			display: block;
+			position: absolute;
+			right: 9%;
+			margin-top: -2%;
+		}
+</style>
+
+<!-- scrollToTop start here -->
+<a href="#" class="scrollToTop"><i class="fa-solid fa-angle-up"></i></a>
+<!-- scrollToTop ending here -->
+
+<body>
+	<div id="main" style="position:relative;">
+		<div class="card" style="width:25%;margin-top: 135px;">
+			<div class="search-box">
+				<h3>目的地</h3>
+				<input type="text" class="search-input" placeholder="你要去哪裡？">
+				<button class="search-btn">Search</button>
+			</div>
+			<div id="tree"></div>
+		
+		</div>
+
+
+		<div style="width:75%;" class="packege hotel padding--top padding--bottom">
+			<div class="filterClass">
+			<button class="search-btn" id="filterbtn">篩選器</button>
+			</div>
+			<div class="container2">
+				<div class="card" style="margin-bottom:20px;">
+				<div class="row g-4 row-cols-xl-3 row-cols-sm-3 row-cols-1">
+						<input type="text" style="padding: 0;box-shadow: none;" placeholder="價錢範圍" id="priceRange">
+						<div id="wrapper" class="wrapper" style="display:none;">
+							<div class="values">
+								<span id="range1">
+									0 HKD
+								</span>
+								<span> &dash; </span>
+								<span id="range2">
+									100 HKD
+								</span>
+							</div>
+							<div>
+								<div class="slider-track"></div>
+								<input type="range" min="0" max="100" value="0" id="slider-1" oninput="slideOne()">
+								<input type="range" min="0" max="100" value="100" id="slider-2" oninput="slideTwo()">
+							</div>
+						</div> 
+
+						<select style="padding: 0;box-shadow: none;">
+							<option value="" disabled selected>排序方式</option>
+							<option value="推薦">推薦</option>
+							<option value="最低價格">最低價格</option>
+							<option value="最多預訂">最多預訂</option>
+							<option value="最新加入">最新加入</option>
+							<option value="最高評分">最高評分</option>
+						</select>
+
+
+
+
+				</div>
+				</div>
+				<div class="section__wrapper">
+						<div class="col">
+							<div class="packege__item">
+								<div class="packege__inner">
+									<div class="packege__thumb">
+										<a href="tour-single.html"><img src="assets/images/packege/14.jpg" alt="Travel Thumb"></a>
+									</div>
+									<div class="packege__content">
+										<a href="tour-single.html"><h4>Enjoy Beauty place in Bali City</h4></a>
+										<div class="packege__meta">
+											<span class="packege__meta--day"><i class="fa-regular fa-clock"></i> 10 Days</span>
+											<span class="packege__meta--persion"><i class="fa-regular fa-user"></i> 8 Person</span>
+											<span class="packege__meta--rating"><i class="fa-solid fa-star"></i> 4.8 (2.5k Review)</span>
+										</div>
+										<div class="packege__rivew">
+											<div class="left">
+												<p><i class="fa-solid fa-location-dot"></i> Bali, Indonesia</p>
+											</div>
+											<div class="right">
+												<span class="packege__price">$1200</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Repeated Package Items End -->
+
+						<!-- Add more items here following the above structure -->
+					</div>
+
+					<ul class="default-pagination justify-content-center mt-5">
+						<li>
+							<a href="#"><i class="fa-solid fa-angle-left"></i></a>
+						</li>
+						<li>
+							<a href="#">01</a>
+						</li>
+						<li>
+							<a href="#" class="active">02</a>
+						</li>
+						<li>
+							<a href="#">03</a>
+						</li>
+						<li>
+							<a href="#"><i class="fa-solid fa-angle-right"></i></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- News Letter Section Start -->
+	<div class="newsletter padding--top padding--bottom bg__img" style="background: url(assets/images/bg-img/02.jpg);">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-8">
+					<div class="section__header text-center">
+						<h2>Sign Up For Our Newsletter</h2>
+					</div>
+					<div class="newsletter__form">
+						<form action="#">
+							<input type="text" placeholder="Enter your e-mail here">
+							<button type="submit" class="default__btn">Subscribe Now</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- News Letter Section End -->
+
+	<!-- Footer Section Start -->
+</body>
+@section Styles {
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+	<link href="https://rawgit.com/jonmiles/bootstrap-treeview/master/dist/bootstrap-treeview.min.css" rel="stylesheet" />
+}
+
+@section Scripts {
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+	<script src="assets/js/vendor/datepiker.js"></script>
+	<script src="https://rawgit.com/jonmiles/bootstrap-treeview/master/public/js/bootstrap-treeview.js"></script>
+
+	<script>
+		function _getChildren(node) {	
+			if (node.nodes === undefined) return [];
+			var childrenNodes = node.nodes;
+			node.nodes.forEach(function (n) {
+				childrenNodes = childrenNodes.concat(_getChildren(n));
+			});
+			return childrenNodes;
+		}
+
+		function _getParent(parentNodes, node) {
+			if (node === undefined) return [];
+			if (node.parentId !== undefined) {
+				node = $('#tree').treeview('getParent', node);
+				parentNodes.push(node);
+				return _getParent(parentNodes, node);
+			}
+
+			parentNodes.push(node);
+			return parentNodes;
+		}
+
+		var selected = [];
+		$('#tree').treeview({
+			selectable: true,
+			multiSelect: true,
+			highlightSelected: false,
+			showBorder: false,
+			showCheckbox: true,
+			levels: 1,
+			checkedIcon: 'fa fa-check-square-o',
+			uncheckedIcon: 'fa fa-square-o',
+			expandIcon: 'fa fa-chevron-up',
+			collapseIcon: 'fa fa-chevron-down',
+			data: [
+				{
+					"id": "1",
+					"text": "評論分數",
+					"nodes": [
+						{ "id": "1;1", "text": "★★★★★" },
+						{ "id": "1;2", "text": "★★★★☆" },
+						{ "id": "1;3", "text": "★★★☆☆" },
+						{ "id": "1;4", "text": "★★☆☆☆" },
+						{ "id": "1;5", "text": "★☆☆☆☆" }
+					]
+				},
+				{
+					"id": "5",
+					"text": "私人旅程",
+					"nodes": [
+						{ "id": "2;1", "text": "主題活動" },
+						{ "id": "2;1", "text": "博物館" },
+						{ "id": "2;1", "text": "情侶" },
+						{ "id": "2;1", "text": "戶外活動" },
+						{ "id": "2;1", "text": "按摩及溫泉" },
+						{ "id": "2;1", "text": "文化體驗" },
+						{ "id": "2;1", "text": "歷史古蹟" },
+						{ "id": "2;1", "text": "水上活動" },
+						{ "id": "2;1", "text": "滑雪體驗" },
+						{ "id": "2;1", "text": "美食品嚐" },
+						{ "id": "2;1", "text": "藝術及表演" },
+						{ "id": "2;1", "text": "親子" },
+						{ "id": "2;1", "text": "購物" },
+						{ "id": "2;1", "text": "遊覽觀光" },
+						{ "id": "2;1", "text": "酒莊" }
+
+					]
+				},
+				{
+					"id": "2",
+					"text": "代辦服務",
+					"nodes": [
+						{ "id": "2;1", "text": "簽證代辦" },
+						{ "id": "2;1", "text": "行程安排" },
+						{ "id": "2;1", "text": "購買門票" },
+						{ "id": "2;1", "text": "預訂特殊活動或體驗" }
+
+					]
+				},
+				{
+					"id": "3",
+					"text": "團體旅程",
+					"nodes": [
+						{ "id": "2;1", "text": "主題活動" },
+						{ "id": "2;1", "text": "博物館" },
+						{ "id": "2;1", "text": "情侶" },
+						{ "id": "2;1", "text": "戶外活動" },
+						{ "id": "2;1", "text": "按摩及溫泉" },
+						{ "id": "2;1", "text": "文化體驗" },
+						{ "id": "2;1", "text": "歷史古蹟" },
+						{ "id": "2;1", "text": "水上活動" },
+						{ "id": "2;1", "text": "滑雪體驗" },
+						{ "id": "2;1", "text": "美食品嚐" },
+						{ "id": "2;1", "text": "藝術及表演" },
+						{ "id": "2;1", "text": "親子" },
+						{ "id": "2;1", "text": "購物" },
+						{ "id": "2;1", "text": "遊覽觀光" },
+						{ "id": "2;1", "text": "酒莊" }
+
+					]
+				},
+				{
+					"id": "4",
+					"text": "接送服務",
+					"nodes": [
+						{ "id": "2;1", "text": "城市內交通接送" },
+						{ "id": "2;1", "text": "機場接送" },
+						{ "id": "2;1", "text": "私人司機服務" },
+						{ "id": "2;1", "text": "車站接送" },
+						{ "id": "2;1", "text": "飯店接送" }
+
+					]
+				},
+				{
+					"id": "4",
+					"text": "語言",
+					"nodes": [
+						{ "id": "2;1", "text": "中文" },
+						{ "id": "2;1", "text": "英文" }
+
+					]
+				},
+			]
+		}).on('nodeChecked', function (event, node) {
+			selected.push(node.id);
+			var parentNodes = _getParent([], node);
+			$(parentNodes).each(function () {
+				$('#tree').treeview('checkNode', [this.nodeId, { silent: true }]);
+			});
+
+			var childrenNodes = _getChildren(node);
+			$(childrenNodes).each(function () {
+				$('#tree').treeview('checkNode', [this.nodeId, { silent: true }]);
+			});
+
+			getList(selected);
+			$('#selected').html(selected);
+		}).on('nodeUnchecked', function (event, node) {
+			var parentNodes = _getParent([], node);
+			$(parentNodes).each(function () {
+				$('#tree').treeview('uncheckNode', [this.nodeId, { silent: true }]);
+			});
+
+			var childrenNodes = _getChildren(node);
+			$(childrenNodes).each(function () {
+				$('#tree').treeview('uncheckNode', [this.nodeId, { silent: true }]);
+			});
+
+			selected = selected.filter(function (id) {
+				return id !== node.id;
+			});
+			getList(selected);
+			$('#selected').html(selected);
+		});
+
+		$('#tree').on('click', '.check-icon', function (e) {
+			e.stopPropagation(); // 阻止事件冒泡
+			var nodeId = $(this).closest('.list-group-item').data('nodeid');
+			var node = $('#tree').treeview('getNode', nodeId);
+
+			// 直接切换复选框的选中状态
+			if (node.state.checked) {
+				$('#tree').treeview('uncheckNode', [node.nodeId, { silent: false }]);
+			} else {
+				$('#tree').treeview('checkNode', [node.nodeId, { silent: false }]);
+			}
+		});
+
+		// Bind a click event to top-level LI elements to toggle expand/collapse
+		$('#tree').on('click', '.list-group-item', function (e) {
+			var nodeId = $(this).data('nodeid');
+			var node = $('#tree').treeview('getNode', nodeId);
+
+			// Check if the clicked node has children (meaning it's not a top-level node)
+			if (node.nodes && node.nodes.length > 0) {
+				// Toggle expand/collapse for parent nodes
+				if (node.state.expanded) {
+					$('#tree').treeview('collapseNode', [nodeId, { silent: true }]);
+				} else {
+					$('#tree').treeview('expandNode', [nodeId, { silent: true }]);
+				}
+			} else {
+				// This part toggles the checkbox for child nodes
+				if (node.state.checked) {
+					$('#tree').treeview('uncheckNode', [node.nodeId, { silent: false }]);
+				} else {
+					$('#tree').treeview('checkNode', [node.nodeId, { silent: false }]);
+				}
+			}
+		});
+		function getList(selected) {
+			console.log(selected); // You can replace this with AJAX to send selected data to the backend
+		}
+
+		function updateRange() {
+			const minRange = document.getElementById('minRange');
+			const maxRange = document.getElementById('maxRange');
+			const minPriceValue = document.getElementById('minPriceValue');
+			const maxPriceValue = document.getElementById('maxPriceValue');
+
+			// Ensure the minimum range is always less than or equal to the maximum range
+			if (parseInt(minRange.value) > parseInt(maxRange.value)) {
+				minRange.value = maxRange.value;
+			}
+
+			// Update the displayed values
+			minPriceValue.textContent = minRange.value;
+			maxPriceValue.textContent = maxRange.value;
+
+			// Set the range of the sliders
+			maxRange.min = minRange.value;
+		}
+
+		window.onload = function () {
+			slideOne();
+			slideTwo();
+		};
+
+		let sliderOne = document.getElementById("slider-1");
+		let sliderTwo = document.getElementById("slider-2");
+		let displayValOne = document.getElementById("range1");
+		let displayValTwo = document.getElementById("range2");
+		let minGap = 0;
+		let sliderTrack = document.querySelector(".slider-track");
+		let sliderMaxValue = document.getElementById("slider-1").max;
+
+		function slideOne() {
+			if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
+				sliderOne.value = parseInt(sliderTwo.value) - minGap;
+			}
+			displayValOne.textContent = "HK$" + sliderOne.value;
+			fillColor();
+		}
+		function slideTwo() {
+			if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
+				sliderTwo.value = parseInt(sliderOne.value) + minGap;
+			}
+			displayValTwo.textContent = "HK$" + sliderTwo.value;
+			fillColor();
+		}
+		function fillColor() {
+			percent1 = (sliderOne.value / sliderMaxValue) * 100;
+			percent2 = (sliderTwo.value / sliderMaxValue) * 100;
+			sliderTrack.style.background = `linear-gradient(to right, #dadae5 ${percent1}% , #3264fe ${percent1}% , #3264fe ${percent2}%, #dadae5 ${percent2}%)`;
+		}
+
+		document.addEventListener("click", function (event) {
+			var wrapper = document.getElementById("wrapper");
+			var priceRange = document.getElementById("priceRange");
+			var slider1 = document.getElementById("slider-1");
+			var slider2 = document.getElementById("slider-2");
+
+			// Check if the clicked element is priceRange, inside wrapper, slider1, or slider2
+			if (priceRange.contains(event.target) || wrapper.contains(event.target) ||
+				slider1.contains(event.target) || slider2.contains(event.target)) {
+
+				// Toggle the visibility of the wrapper only when priceRange is clicked
+				if (priceRange.contains(event.target)) {
+					if (wrapper.style.display === "none" || wrapper.style.display === "") {
+						wrapper.style.display = "block";
+					} else {
+						wrapper.style.display = "none";
+					}
+				}
+			} else {
+				// Hide the wrapper if clicked outside of priceRange, wrapper, slider1, and slider2
+				wrapper.style.display = "none";
+			}
+		});
+
+		$(function () {
+			$(".datepicker").datepicker();
+
+		});
+	</script>
+}
+

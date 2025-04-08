@@ -1,0 +1,36 @@
+.shape {
+    @extend %d-none;
+    @include breakpoint(xxl) {
+        display: block;
+    }
+    &__one {
+        @extend %p-abs;
+        right: 0;
+        bottom: 0;
+    }
+    &__two {
+        @extend %p-abs;
+        left: 0;
+        bottom: 0;
+    }
+    &__three {
+        @extend %p-abs;
+        right: 300px;
+        bottom: 0;
+    }
+    &__four {
+        @extend %p-abs;
+        left: 0;
+        bottom: -80px;
+    }
+    &__five {
+        @extend %p-abs;
+        left: 0;
+        top: -70px;
+    }
+    &__six {
+        @extend %p-abs;
+        left: 0;
+        top: 20px;
+    }
+}

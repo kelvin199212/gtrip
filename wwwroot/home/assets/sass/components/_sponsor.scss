@@ -1,0 +1,11 @@
+.sponsor {
+    padding-block: 85px;
+    &__slider {}
+    &__item {}
+    &__thumb {
+        @extend %text-center;
+        img {
+            max-width: 100%;
+        }
+    }
+}

@@ -1,0 +1,233 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewData["Title"] = "自動通知管理";
+}
+
+<div class="content-body default-height">
+    <div class="cardClass">
+        <div class="container">
+
+            <!-- 新增自動通知 -->
+            <div class="create-notification-section">
+                <h4>新增自動通知</h4>
+                <form>
+                    <div class="form-group">
+                        <label for="notification-name">通知名稱</label>
+                        <input type="text" id="notification-name" class="form-control" placeholder="輸入通知名稱">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="notification-message">通知內容</label>
+                        <textarea id="notification-message" class="form-control" rows="5" placeholder="輸入通知內容"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="notification-trigger">觸發條件</label>
+                        <select id="notification-trigger" class="form-control">
+                            <option value="time">根據時間</option>
+                            <option value="event">根據事件</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="time-trigger" style="display:none;">
+                        <label for="trigger-time">設置時間</label>
+                        <input type="datetime-local" id="trigger-time" class="form-control">
+                    </div>
+
+                    <div class="form-group" id="event-trigger" style="display:none;">
+                        <label for="trigger-event">選擇事件</label>
+                        <select id="trigger-event" class="form-control">
+                            <option value="new_booking">新預約</option>
+                            <option value="reminder">提醒</option>
+                            <!-- Add more events here -->
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client-selection">選擇客戶</label>
+                        <input type="text" id="client-selection" class="form-control" placeholder="輸入客戶名稱或選擇群組">
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">創建通知</button>
+                    </div>
+                </form>
+            </div>
+
+            <hr>
+
+            <!-- 已設置的自動通知列表 -->
+            <h4>已設置的自動通知</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>通知名稱</th>
+                        <th>觸發條件</th>
+                        <th>通知內容</th>
+                        <th>設定時間</th>
+                        <th>狀態</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="notifications-list">
+                    <!-- Existing notifications will be rendered here dynamically -->
+                    <tr>
+                        <td>促銷提醒</td>
+                        <td>根據時間</td>
+                        <td>來自我們的限時促銷活動</td>
+                        <td>2024-12-01 10:00</td>
+                        <td>
+                            <button class="btn btn-success">啟用</button>
+                            <button class="btn btn-danger">禁用</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-info">編輯</button>
+                            <button class="btn btn-danger">刪除</button>
+                        </td>
+                    </tr>
+                    <!-- Add more rows for other notifications -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Fillow_style
+{
+    <style>
+        .cardClass {
+            background-color: white;
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        h4 {
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .create-notification-section {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            border: none;
+        }
+
+        .btn-info {
+            background-color: #17a2b8;
+            color: white;
+            border: none;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+            border: none;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            text-align: center;
+            padding: 12px;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+        }
+    </style>
+}
+
+@section Fillow_script
+{
+    <script src="~/Fillow/vendor/global/global.min.js"></script>
+    <script src="~/Fillow/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+
+
+    <!-- counter -->
+    <script src="~/Fillow/vendor/counter/counter.min.js"></script>
+    <script src="~/Fillow/vendor/counter/waypoint.min.js"></script>
+
+    <!-- Apex Chart -->
+    <script src="~/Fillow/vendor/apexchart/apexchart.js"></script>
+    <script src="~/Fillow/vendor/chart-js/chart.bundle.min.js"></script>
+    <!-- Chart piety plugin files -->
+    <script src="~/Fillow/vendor/peity/jquery.peity.min.js"></script>
+    <!-- Dashboard 1 -->
+    <script src="~/Fillow/js/dashboard/dashboard-1.js"></script>
+
+    <script src="~/Fillow/vendor/owl-carousel/owl.carousel.js"></script>
+
+    <script src="~/Fillow/js/custom.min.js"></script>
+    <script src="~/Fillow/js/dlabnav-init.js"></script>
+    <script src="~/Fillow/js/demo.js"></script>
+    <script>
+        $(document).ready(function () {
+            // 切換觸發條件
+            $("#notification-trigger").change(function () {
+                var triggerType = $(this).val();
+                if (triggerType === "time") {
+                    $("#time-trigger").show();
+                    $("#event-trigger").hide();
+                } else {
+                    $("#time-trigger").hide();
+                    $("#event-trigger").show();
+                }
+            });
+
+            // 提交通知創建表單
+            $("form").submit(function (e) {
+                e.preventDefault();
+
+                var name = $("#notification-name").val();
+                var message = $("#notification-message").val();
+                var trigger = $("#notification-trigger").val();
+                var time = $("#trigger-time").val();
+                var event = $("#trigger-event").val();
+                var client = $("#client-selection").val();
+
+                // 將新創建的通知資料提交到後端 (可以用AJAX來處理)
+                alert("自動通知已創建！");
+            });
+        });
+    </script>
+}

@@ -1,0 +1,477 @@
+﻿@{
+	ViewData["Title"] = "Gtrippro";
+	Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+	.pageheader {
+		position: relative;
+	}
+
+		.pageheader::before {
+			content: "";
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-image: linear-gradient(to right, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('../assets/images/banner/become-our-partner-banner.jpeg');
+			background-repeat: no-repeat;
+			background-size: cover;
+			z-index: 0;
+			background-position: center center;
+		}
+
+	.container {
+		position: relative;
+		z-index: 1;
+	}
+
+	.cooperation-mode {
+		text-align: center;
+		padding: 50px 0;
+		background-color: #fff;
+	}
+
+		.cooperation-mode h2 {
+			font-size: 2em;
+			margin-bottom: 30px;
+		}
+
+	.cooperation-container {
+		gap: 20px;
+		padding: 0 23%;
+	}
+
+	.cooperation-item {
+		flex: 1;
+		max-width: 300px;
+		padding: 20px;
+	}
+
+	.cooperationDiv{
+		display: flex;
+		justify-content: center;
+		background-color: #f7f7f7;
+		border-radius: 10px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	}
+
+		.cooperation-item .icon {
+			margin-bottom: 20px;
+		}
+
+			.cooperation-item .icon img {
+				width: 50px;
+				height: 50px;
+			}
+
+		.cooperation-item h3 {
+			font-size: 1.5em;
+			margin-bottom: 15px;
+		}
+
+		.cooperation-item p {
+			font-size: 1em;
+			color: #666;
+			line-height: 1.6em;
+		text-align: left;
+		}
+
+	.cta-section {
+		text-align: center;
+		padding: 100px 0;
+		background-color: #f0f0f0;
+	}
+
+		.cta-section h2 {
+			font-size: 3em;
+			color: #f9a825;
+		}
+
+	.video-container {
+		padding:10px;
+		border-radius: 4px;
+		margin: 0 auto;
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		box-shadow: 0px 8px 20px rgba(black, 0.4);
+	.video-wrapper
+
+	{
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	video {
+		width: 100%;
+		height: 100%;
+		border-radius: 4px;
+	}
+
+	}
+
+	.play-button-wrapper {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: auto;
+		pointer-events: none;
+		#circle-play-b
+
+	{
+		cursor: pointer;
+		pointer-events: auto;
+		svg
+
+	{
+		width: 100px;
+		height: 100px;
+		fill: #fff;
+		stroke: #fff;
+		cursor: pointer;
+		background-color: rgba(black, 0.2);
+		border-radius: 50%;
+		opacity: 0.9;
+	}
+
+	}
+	}
+	.section-title {
+		text-align: center;
+		font-size: 28px;
+		font-weight: bold;
+		margin-bottom: 40px;
+	}
+
+	.card-wrapper {
+		display: flex;
+		justify-content: space-around;
+		flex-wrap: wrap;
+	}
+
+	.card {
+		background-color: #fff;
+		border-radius: 10px;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		text-align: center;
+		padding: 20px;
+		margin: 10px;
+		flex: 1;
+		max-width: 30%;
+		transition: transform 0.3s ease;
+	}
+
+		.card:hover {
+			transform: translateY(-10px);
+		}
+
+		.card i {
+			font-size: 48px;
+			color: #5a67d8;
+			margin-bottom: 20px;
+		}
+
+		.card h3 {
+			font-size: 20px;
+			margin-bottom: 15px;
+		}
+
+		.card p {
+			font-size: 16px;
+			line-height: 1.5;
+			color: #666;
+		}
+
+	/* FAQ Section */
+	.faq-section {
+		margin-top: 60px;
+	}
+
+	.faq {
+		display: flex;
+		margin-top: 30px;
+	}
+
+	.faq-item {
+		background-color: #fff;
+		border-radius: 10px;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		width: 50%;
+		max-width: 800px;
+		padding: 20px;
+		margin-bottom: 20px;
+	}
+
+		.faq-item i {
+			font-size: 24px;
+			color: #6c63ff;
+			margin-right: 15px;
+		}
+
+		.faq-item h4 {
+			font-size: 18px;
+			margin-bottom: 10px;
+		}
+
+		.faq-item p {
+			font-size: 16px;
+			line-height: 1.5;
+			color: #666;
+		}
+
+	.faq-item-header {
+		display: flex;
+		align-items: center;
+		margin-bottom: 10px;
+	}
+
+	.more-info-button {
+		display: inline-block;
+		background-color: #6c63ff;
+		color: #fff;
+		padding: 10px 20px;
+		border-radius: 5px;
+		text-align: center;
+		text-decoration: none;
+		font-size: 16px;
+		margin-top: 20px;
+		margin-left: 45%;
+		margin-bottom: 20px;
+		transition: background-color 0.3s ease;
+	}
+
+		.more-info-button:hover {
+			background-color: #4f46e5;
+		}
+</style>
+
+<body>
+	<!-- preloader start here -->
+	<div class="preloader">
+		<div class="preloader-inner">
+			<div class="preloader-icon">
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+	</div>
+	<!-- preloader ending here -->
+	<!-- scrollToTop start here -->
+	<a href="#" class="scrollToTop"><i class="fa-solid fa-angle-up"></i></a>
+	<!-- scrollToTop ending here -->
+	<!-- ================> Banner section start here <================== -->
+	<div class="pageheader bg__img">
+		<div class="container">
+			<div class="pageheader__content text-center">
+				<h2 style="color:white;">透過與旅客分享您對城市的熱情，賺取收入</h2>
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb justify-content-center">
+						<li class="breadcrumb-item active" aria-current="page"><h6 style="color:white;">加入我們成為 集遊 合作夥伴</h6></li>
+					</ol>
+				</nav>
+				<button class="default__btn" style="border: none;">註冊並立即加入</button>
+			</div>
+		</div>
+	</div>
+	<!-- ================> Banner section end here <================== -->
+	<!-- ================> first section start here <================== -->
+	<section class="cooperation-mode">
+		<h2>合作模式</h2>
+		<div class="cooperation-container">
+			<div class="cooperationDiv">
+			<div class="cooperation-item">
+				<div class="icon">
+					<i class="fas fa-user fa-3x"></i>
+				</div>
+				<h3>私人導遊</h3>
+				<p>這種模式歡迎當地的國際學生、長期居民或多語言人士參與，作為私人導遊合作夥伴。您可以在集遊平台上提供個性化的旅遊服務。您可以接受客戶的預訂請求，為他們計劃具體的行程，例如導覽、口譯和行程安排。您可以管理自己的行程和價格。</p>
+			</div>
+			<div class="cooperation-item">
+				<div class="icon">
+					<i class="fas fa-suitcase fa-3x"></i>
+				</div>
+				<h3>旅行社</h3>
+				<p>這項服務僅限於小型旅行團，通常由一到八個人組成，作為旅行社的合作夥伴。您可以在集遊平台上提供各類旅行套餐，您需要通過平台的商業身份驗證過程，以確保您具備相關的旅遊業資格或證書。您可以提供旅行團的服務，包括交通、住宿、導覽等。</p>
+			</div>
+			<div class="cooperation-item">
+				<div class="icon">
+					<i class="fas fa-home fa-3x"></i>
+				</div>
+				<h3>集遊平台聯盟項目成員</h3>
+				<p>這種模式專要集中在旅行平台上推廣旅行產品和行程，並以佣金形式收入深厚。作為聯盟計劃成員，您可以在本社區上發佈旅行平台的鏈接，並推廣旅行產品。當客戶通過您的鏈接進入旅行平台並成功預訂旅行時，您將獲得相應的佣金。</p>
+			</div>
+			</div>
+		</div>
+	</section>
+
+	<div class="video-wrapper" style="margin-top: 20px;">
+		<div class="video-container" id="video-container">
+			<video controls id="video" preload="metadata" poster="../assets/images/banner/become-our-partner.png">
+				<source src="/assets/video/become-our-partner.mp4" type="video/mp4">
+			</video>
+
+			<div class="play-button-wrapper">
+				<div title="Play video" class="play-gif" id="circle-play-b">
+					<!-- SVG Play Button -->
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+						<path d="M40 0a40 40 0 1040 40A40 40 0 0040 0zM26 61.56V18.44L64 40z" />
+					</svg>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ================> About section end here <================== -->
+	<div class="container">
+		<!-- Section Title -->
+		<div class="section-title">加入我們團隊的理由?</div>
+
+		<!-- Card Section -->
+		<div class="card-wrapper">
+			<!-- Card 1 -->
+			<div class="card">
+				<i class="fas fa-globe"></i>
+				<h3>全球用戶基礎</h3>
+				<p>吸引來自世界各地的旅行者加入平台，合作共生并增強用户體驗，並借助平台推廣鏈接上傳後可随时查閱最新動态。</p>
+			</div>
+			<!-- Card 2 -->
+			<div class="card">
+				<i class="fas fa-users"></i>
+				<h3>無盡</h3>
+				<p>我們的商家管理後台系統全面，能夠幫助商家管理旅遊產品，實現需求及整合服務功能，并將其提供給用户。</p>
+			</div>
+			<!-- Card 3 -->
+			<div class="card">
+				<i class="fas fa-wifi"></i>
+				<h3>全力支持</h3>
+				<p>提供99%的客戶支持和技術咨詢，為您提供平台相关服務，幫助您在平台上进行交易和交流。</p>
+			</div>
+		</div>
+
+		<!-- FAQ Section -->
+		<div class="faq-section">
+			<div class="section-title">常見問題</div>
+
+			<div class="faq">
+				<!-- FAQ Item 1 -->
+				<div class="faq-item">
+					<div class="faq-item-header">
+						<i class="fas fa-question-circle"></i>
+						<h4>透過PayPal或銀行轉帳收款是否需要額外費用？</h4>
+					</div>
+					<p>在使用PayPal進行支付時，您不需要支付任何額外費用。在某些情況下，如果您選擇銀行轉帳，您的本地銀行可能會收取轉帳費用（例如匯率轉換費用）。請向您的本地銀行查詢更多信息。</p>
+				</div>
+				<!-- FAQ Item 1 -->
+				<div class="faq-item">
+					<div class="faq-item-header">
+						<i class="fas fa-question-circle"></i>
+						<h4>即使我沒有導遊執照，我可以注冊嗎？</h4>
+					</div>
+					<p>這取決於您在當地法律是否允許：您不需要支付任何的注冊費用；如果您不需要營業執照，任何人都可以申請；然而，如您在當地法律需要營業執照，請申請後再進行個人導遊服務。</p>
+				</div>
+		</div>
+
+			<div class="faq">
+				<!-- FAQ Item 2 -->
+				<div class="faq-item">
+					<div class="faq-item-header">
+						<i class="fas fa-question-circle"></i>
+						<h4>在注冊時，我需要支付任何的注冊費用或會員費用嗎？</h4>
+					</div>
+					<p>不需要，在注冊系統中，您無需支付任何的注冊費用，交易過程中相關的商業稅或訂單费用将由平台支付。</p>
+				</div>
+				<!-- FAQ Item 3 -->
+				<div class="faq-item">
+					<div class="faq-item-header">
+						<i class="fas fa-question-circle"></i>
+						<h4>我需要提交哪些流程？</h4>
+					</div>
+					<p>請按照此處的指示提交。該系統允許您提交導遊服務的計劃，將會在3至5工作日內進行審核，您將可以進行導遊服務的訂單。</p>
+				</div>
+
+			
+			</div>
+			<!-- More Info Button -->
+			<a href="#" class="more-info-button">更多資訊</a>
+	</div>
+	<!-- ================> News Letter section start here <================== -->
+	<div class="newsletter padding--top padding--bottom bg__img" style="background: url(assets/images/bg-img/02.jpg)">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-8 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay=".5s">
+					<div class="section__header text-center">
+						<h2>追蹤旅程</h2>
+					</div>
+					<div class="newsletter__form">
+						<form action="#">
+							<input type="text" placeholder="輸入你的電子郵件">
+							<button type="submit" class="default__btn">訂閱我們</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ================> News Letter section end here <================== -->
+	<!-- All Needed JS -->
+	<script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+	<script src="assets/js/vendor/datepiker.js"></script>
+	<script src="assets/js/vendor/modernizr-3.11.2.min.js"></script>
+	<script src="assets/js/isotope.pkgd.min.js"></script>
+	<script src="assets/js/swiper.min.js"></script>
+	<script src="assets/js/wow.js"></script>
+	<script src="assets/js/lightcase.js"></script>
+	<script src="assets/js/jquery.countdown.min.js"></script>
+	<script src="assets/js/counterup.js"></script>
+	<script src="assets/js/waypoints.min.js"></script>
+	<script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
+	<script src="assets/js/plugins.js"></script>
+	<script src="assets/js/main.js"></script>
+
+
+	<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+	<script>
+		window.ga = function () {
+			ga.q.push(arguments)
+		};
+		ga.q = [];
+		ga.l = +new Date;
+		ga('create', 'UA-XXXXX-Y', 'auto');
+		ga('set', 'anonymizeIp', true);
+		ga('set', 'transport', 'beacon');
+		ga('send', 'pageview')
+
+		const video = document.getElementById("video");
+		const circlePlayButton = document.getElementById("circle-play-b");
+
+		function togglePlay() {
+			if (video.paused || video.ended) {
+				video.play();
+			} else {
+				video.pause();
+			}
+		}
+
+		circlePlayButton.addEventListener("click", togglePlay);
+		video.addEventListener("playing", function () {
+			circlePlayButton.style.opacity = 0;
+		});
+		video.addEventListener("pause", function () {
+			circlePlayButton.style.opacity = 1;
+		});
+
+	</script>
+	<script src="https://www.google-analytics.com/analytics.js" async></script>
+</body>

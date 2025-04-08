@@ -1,0 +1,46 @@
+.newsletter {
+    .section__header {
+        margin-bottom: 30px;
+        h2 {
+            margin-bottom: 0;
+        }
+    }
+    &__form {
+        @extend %mt-10;
+        form {
+            @extend %flex;
+            justify-content: space-between;
+            background: #22283C;
+            @extend %hidden;
+            @include add-prefix(border-radius, (4px));
+            @include breakpoint(max-sm) {
+                background: transparent;
+                justify-content: center;
+                padding-bottom: 20px;
+            }
+        }
+        input {
+            @extend %d-inline-block;
+            width: calc(100% - 180px);
+            color: $white-color;
+            @extend %border-none;
+            &::placeholder {
+                color: rgba($white-color, $alpha: .9);
+            }
+            @include breakpoint(max-sm) {
+                width: 100%;
+                margin-bottom: 15px;
+                background: #22283C;
+            }
+        }
+        button {
+            @extend %border-none;
+            @extend %outline-none;
+            @extend %d-inline-block;
+            @include add-prefix(border-radius, (0px));
+            @include breakpoint(max-sm) {
+                border-radius: 4px;
+            }
+        }
+    }
+}

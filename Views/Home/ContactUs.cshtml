@@ -1,0 +1,140 @@
+﻿@{
+	ViewData["Title"] = "Gtrippro";
+	Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+
+<body>
+	<div class="preloader">
+		<div class="preloader-inner">
+			<div class="preloader-icon">
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+	</div>
+	<!-- preloader ending here -->
+	<!-- scrollToTop start here -->
+	<a href="#" class="scrollToTop"><i class="fa-solid fa-angle-up"></i></a>
+	<!-- scrollToTop ending here -->
+	<!-- ================> Banner section start here <================== -->
+	<div class="pageheader bg__img" style="background-image: url(assets/images/bg-img/04.jpg);">
+		<div class="container">
+			<div class="pageheader__content text-center">
+				<h2>Contact us</h2>
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb justify-content-center">
+						<li class="breadcrumb-item active" aria-current="page">聯絡我們</li>
+					</ol>
+				</nav>
+			</div>
+		</div>
+	</div>
+	<!-- ================> Banner section end here <================== -->
+	<!-- ================> Contact section start here <================== -->
+	<div class="contact padding--bottom padding--top">
+		<div class="container">
+			<div class="section__wrapper">
+				<div class="contact">
+					<div class="row g-4">
+						<div class="col-lg-5 col-12">
+							<div class="contact__info">
+								<div class="contact__info--head mb-4 wow fadeInUp" data-wow-duration="0.4s">
+									<h4>聯絡資訊</h4>
+								</div>
+								<div class="contact__info--body">
+									<ul>
+										<li class=" wow fadeInUp" data-wow-duration="0.5s">
+											<div class="contact__info--left">
+												<i class="fas fa-map-marker-alt"></i>
+											</div>
+											<div class="contact__info--right">
+												<h5>公司地址</h5>
+												<p>1201 park street, Fifth Avenue</p>
+											</div>
+										</li>
+										<li class=" wow fadeInUp" data-wow-duration="0.5s">
+											<div class="contact__info--left">
+												<i class="fas fa-phone-volume"></i>
+											</div>
+											<div class="contact__info--right">
+												<h5>電話號碼</h5>
+												<p>+880123 456 789, +880123 456 789</p>
+											</div>
+										</li>
+										<li class=" wow fadeInUp" data-wow-duration="0.5s">
+											<div class="contact__info--left">
+												<i class="fas fa-envelope-open-text"></i>
+											</div>
+											<div class="contact__info--right">
+												<h5>電郵地址</h5>
+												<p>Info@gtrippro.com</p>
+											</div>
+										</li>
+@* 										<li class=" wow fadeInUp" data-wow-duration="0.5s">
+											<div class="contact__info--left">
+												<i class="fas fa-globe"></i>
+											</div>
+											<div class="contact__info--right">
+												<h5>Website address</h5>
+												<p>http://yoursitename.com</p>
+											</div>
+										</li> *@
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-7 col-12">
+							<div class="contact__form wow fadeInUp" data-wow-duration="0.5s">
+								<h4 class="mb-4">請隨時與我們聯繫。</h4>
+								<h6>在填寫下面的表格後，我們將盡快與您聯繫！</h6>
+								<form class="d-flex flex-wrap justify-content-between" action="contact.php" id="contact-form" method="POST">
+									<input type="text" placeholder="名稱" id="name" name="name" required="required">
+									<input type="text" placeholder="郵箱" id="email" name="email" required>
+									<input class="w-100" type="text" placeholder="主題" id="subject" name="subject" required>
+									<textarea placeholder="訊息" rows="5" name="message" id="message" required></textarea>
+									<button type="submit" class="default__btn"><span>提交</span></button>
+								</form>
+								<p class="form-message"></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ================> Contact section end here <================== -->
+	<!-- ================> News Letter section start here <================== -->
+	<div class="newsletter padding--top padding--bottom bg__img" style="background: url(assets/images/bg-img/02.jpg)">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-8 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay=".5s">
+					<div class="section__header text-center">
+						<h2>追蹤旅程</h2>
+					</div>
+					<div class="newsletter__form">
+						<form action="#">
+							<input type="text" placeholder="輸入你的電子郵件">
+							<button type="submit" class="default__btn">訂閱我們</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ================> News Letter section end here <================== -->
+
+	<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+	<script>
+		window.ga = function () {
+			ga.q.push(arguments)
+		};
+		ga.q = [];
+		ga.l = +new Date;
+		ga('create', 'UA-XXXXX-Y', 'auto');
+		ga('set', 'anonymizeIp', true);
+		ga('set', 'transport', 'beacon');
+		ga('send', 'pageview')
+	</script>
+	<script src="https://www.google-analytics.com/analytics.js" async></script>
+</body>

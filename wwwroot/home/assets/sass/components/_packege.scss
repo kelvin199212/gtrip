@@ -1,0 +1,253 @@
+.packege {
+    &__item {}
+    &__inner {
+        &:hover {
+            .packege {
+                &__thumb {
+                    img {
+                        @include add-prefix(transform, (scale(1.2)));
+                    }
+                    &--content {
+                        bottom: 15px;
+                    }
+                }
+                &__content {
+                    h5, h4 {
+                        color: $theme-color;
+                    }
+                }
+            }
+        }
+    }
+    &__thumb {
+        @extend %of-hidden;
+        @extend %p-rel;
+        @include add-prefix(border-radius, (14px));
+        @extend %mb-25;
+        a {
+            @extend %d-block;
+        }
+        img {
+            @extend %w-100;
+        }
+        &--content {
+            @extend %p-abs;
+            left: 15px;
+            bottom: -50%;
+            @include add-prefix(transition, (all .3s ease));
+            h2 {
+                margin-bottom: 5px;
+                @extend %white-color;
+            }
+            p {
+                margin-bottom: 0;
+                @extend %white-color;
+            }
+        }
+    }
+    &__content {
+        h5 {
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        h4 {
+            @extend %text-1;
+            @extend %mb-5;
+        }
+    }
+    &__rivew {
+        @extend %flex;
+        @extend %justify-between;
+        @extend %align-items-center;
+        .rating {
+            padding: 3.5px 8px;
+            background: $white-color;
+            box-shadow: 6px 6px 24px rgba(228, 226, 238, 0.8);
+            @include add-prefix(border-radius, (4px));
+            margin-right: 15px;
+            i {
+                margin-right: 1px;
+                color: $theme-color2;
+                font-size: 12px;
+            }
+            &__count {
+                color: $title-color;
+            }
+        }
+    }
+    &__price {
+        padding: 5px 10px;
+        background: $theme-color;
+        color: $white-color;
+        @include add-prefix(border-radius, (4px));
+        @include breakpoint(xl) {
+            @include breakpoint(max-xxl) {
+                margin-top: 20px;
+                display: block;
+            }
+        }
+    }
+    &__meta {
+        @extend %mb-15;
+        span {
+            margin-right: 10px;
+            i {
+                color: $theme-color;
+            }
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+        &--day {}
+    }
+    &.hotel {
+        .packege {
+            &__inner {
+                background: $white-color;
+                @extend %of-hidden;
+                box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.12);
+                @include add-prefix(border-radius, (14px));
+            }
+            &__thumb {
+                margin-bottom: 0;
+                @include add-prefix(border-radius, (0));
+            }
+            &__content {
+                padding: 15px 15px 20px;
+                h5 {
+                    margin-bottom: 10px;
+                    @extend %text-2;
+                }
+                p {
+                    margin-bottom: 15px;
+                    i {
+                        color: $theme-color;
+                        margin-right: 5px;
+                    }
+                }
+            }
+            &__meta {
+                // margin-bottom: 0;
+            }
+            &__rivew {
+                p {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+    &--liststyle {
+        .section__wrapper {
+            @extend %mt-10;
+        }
+        .packege {
+            &__inner {
+                @extend %flex;
+                @extend %align-items-center;
+            }
+            &__thumb {
+                @extend %w-100;
+                @include breakpoint(md) {
+                    width: 40%;
+                }
+                @include breakpoint(xl) {
+                    @include breakpoint(max-xxl) {
+                        width: 100%;
+                    }
+                }
+            }
+            &__content {
+                @extend %w-100;
+                @include breakpoint(md) {
+                    width: 60%;
+                    padding: 30px !important;
+                }
+                @include breakpoint(xl) {
+                    @include breakpoint(max-xxl) {
+                        width: 100%;
+                    }
+                }
+                h4 {
+                    @extend %text-2;
+                }
+            }
+            &__meta {
+                margin-bottom: 5px;
+            }
+            &__rivew {
+                margin-top: 15px;
+            }
+        }
+    }
+    &--style2 {
+        .packege {
+            &__inner {
+                &:hover {
+                    .packege {
+                        &__thumb {
+                            .feature__pakedge {
+                                background: $theme-color;
+                                color: $white-color;
+                            }
+                        }
+                    }
+                }
+            }
+            &__thumb {
+                margin-bottom: 0;
+            }
+            &__content {
+                background-color: $white-color;
+                @extend %p-15;
+                @extend %text-center;
+                margin-top: -40px;
+                z-index: 1;
+                @extend %p-rel;
+                margin-inline: 30px;
+                box-shadow: 0px 6px 24px #E4E2EE;
+                @include add-prefix(border-radius, (14px));
+                .packege__rivew .rating {
+                    box-shadow: none;
+                }
+            }
+        }
+    }
+    &--style3 {
+        .packege {
+            &__inner {
+                box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.12);
+                @include add-prefix(border-radius, (14px));
+                @extend %of-hidden;
+            }
+            &__thumb {
+                @extend %mb-0;
+                @include add-prefix(border-radius, (0));
+            }
+            &__content {
+                padding: 15px 15px 20px;
+                background: $white-color;
+                &--title {
+                    @extend %flex;
+                    @extend %justify-between;
+                    h5, h4 {
+                        @extend %mb-10;
+                    }
+                    .left {
+                        @extend %d-inline-block;
+                    }
+                    .right {
+                        @extend %d-inline-block;
+                    }
+                }
+            }
+            &__rivew {
+                .area {
+                    img {
+                        @extend %mr-10;
+                    }
+                }
+            }
+        }
+    }
+}
+

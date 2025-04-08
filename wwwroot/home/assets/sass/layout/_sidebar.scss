@@ -1,0 +1,166 @@
+.sidebar {
+    &__search {
+        @extend %p-rel;
+        @include add-prefix(border-radius, (14px));
+        @extend %of-hidden;
+        box-shadow: 0px 2px 8px rgba(202, 205, 219, 0.42);
+        input {
+            padding-left: 50px;
+            @extend %border-none;
+        }
+        button {
+            @extend %p-abs;
+            top: 0;
+            left: 0;
+            color: $desc-color;
+            border: none;
+            width: 50px;
+            height: 60px;
+            background: transparent;
+            padding-inline: 0;
+        }
+    }
+    &__catagory {
+        box-shadow: 0px 2px 8px rgba(202, 205, 219, 0.42);
+        padding: 20px;
+        @include add-prefix(border-radius, (14px));
+        &--area {}
+        &--title {
+            @extend %mb-15;
+            h4 {
+                font-weight: 600;
+            }
+        }
+        &--body {
+            ul {
+                li {
+                    padding-block: 10px;
+                    @extend %flex;
+                    @extend %justify-between;
+                    border-bottom: 1px solid rgba($border-color, $alpha: .99);
+                    &:last-child {
+                        border-bottom: none;
+                        padding-bottom: 0;
+                    }
+                    &:hover {
+                        a {
+                            color: $theme-color;
+                            padding-left: 10px;
+                        }
+                        span {
+                            color: $theme-color;
+                        }
+                    }
+                    a {
+                        text-transform: capitalize;
+                    }
+                    span {
+                        @include add-prefix(transition, (all .3s ease));
+                    }
+                }
+            }
+        }
+    }
+    &__post {
+        box-shadow: 0px 2px 8px rgba(202, 205, 219, 0.42);
+        padding: 20px;
+        @include add-prefix(border-radius, (14px));
+        &--title {
+            @extend %mb-15;
+            h4 {
+                font-weight: 600;
+            }
+        }
+        &--body {
+            ul {
+                li {
+                    @extend %flex;
+                    padding-block: 10px;
+                    &:last-child {
+                        padding-bottom: 0;
+                    }
+                    &:hover {
+                        .thumb {
+                            img {
+                                @include add-prefix(transform, (scale(1.2)));
+                            }
+                        }
+                        .content {
+                            h6 {
+                                color: $theme-color;
+                            }
+                        }
+                    }
+                    .thumb {
+                        width: 80px;
+                        @extend %of-hidden;
+                        @include add-prefix(border-radius, (4px));
+                        a {
+                            @extend %d-block;
+                        }
+                        img {
+                            width: 100%;
+                        }
+                    }
+                    .content {
+                        width: calc(100% - 80px);
+                        padding-left: 15px;
+                        h6 {
+                            @extend %text-2;
+                            @extend %mb-0;
+                            font-weight: 600;
+                        }
+                        p {
+                            @extend %mb-0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &__tag {
+        box-shadow: 0px 2px 8px rgba(202, 205, 219, 0.42);
+        padding: 20px;
+        @include add-prefix(border-radius, (14px));
+        &--title {
+            @extend %mb-15;
+            h4 {
+                font-weight: 600;
+            }
+        }
+        &--body {
+            ul {
+                @extend %flex;
+                li {
+                    @extend %d-inline-block;
+                    &:hover {
+                        a {
+                            background: $theme-color;
+                            color: $white-color;
+                        }
+                    }
+                    a {
+                        margin: 3px;
+                        padding: 5px 15px;
+                        color: #9DA1B4;
+                        background: #F3F3F3;
+                        font-weight: 500;
+                        @extend %d-inline-block;
+                        @include add-prefix(border-radius, (4px));
+                    }
+                }
+            }
+        }
+    }
+    &__offer {
+        &--thumb {
+            a {
+                @extend %d-block;
+            }
+            img {
+                @extend %w-100;
+                @include add-prefix(border-radius, (14px));
+            }
+        }
+    }
+}

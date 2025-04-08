@@ -1,0 +1,178 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+	ViewData["Title"] = "優惠券";
+}
+<div class="content-body default-height">
+    <div class="create-coupon">
+        <button id="addCouponBtn" class="btn btn-primary">新增優惠碼</button>
+    </div>
+
+    <div class="coupon-container">
+
+        <div class="coupon">
+            <div class="coupon-info">
+                <span class="amount">HKD25</span>
+                <span class="details">購買全過活動滿HK$500即享<br>HK$25折扣優惠 ...更多</span>
+            </div>
+            <div class="coupon-action">
+                <span class="coupon-code">BDAYJOY25</span>
+                <button class="redeem-btn">兌換</button>
+            </div>
+        </div>
+
+        <div class="coupon">
+            <div class="coupon-info">
+                <span class="amount">HKD65</span>
+                <span class="details">購買全過活動滿HK$1,200即享<br>HK$65折扣優惠 ...更多</span>
+            </div>
+            <div class="coupon-action">
+                <span class="coupon-code">BDAYJOY65</span>
+                <button class="redeem-btn">各額已滿</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Fillow_style
+{
+	<link href="~/Fillow/vendor/bootstrap-datepicker-master/css/bootstrap-datepicker.min.css" rel="stylesheet">
+	<link href="~/Fillow/vendor/lightgallery/css/lightgallery.min.css" rel="stylesheet">
+    <style>
+        .coupon-container {
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+        }
+
+            .coupon-container h1 {
+                font-size: 26px;
+                color: #4A148C; /* Darker purple */
+                margin-bottom: 15px;
+                font-weight: bold;
+            }
+
+            .coupon-container .highlight {
+                color: #BA68C8; /* Light purple for highlights */
+                font-weight: bold;
+            }
+
+            .coupon-container p {
+                font-size: 14px;
+                color: #666;
+                margin-bottom: 25px;
+            }
+
+        .coupon {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to right, #8E24AA, #BA68C8); /* Soft purple gradient */
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            color: white;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15); /* Softer shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .coupon:hover {
+                transform: scale(1.05); /* Subtle hover effect */
+                box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2); /* Increased shadow on hover */
+            }
+
+        .coupon-info {
+            text-align: left;
+        }
+
+            .coupon-info .amount {
+                font-size: 24px;
+                font-weight: bold;
+                margin-bottom: 8px;
+                letter-spacing: 1px;
+            }
+
+            .coupon-info .details {
+                font-size: 14px;
+                color: #f0e1ff; /* Lightened for better readability */
+            }
+
+        .coupon-action {
+            text-align: right;
+        }
+
+        .coupon-code {
+            font-size: 13px;
+            color: #fff;
+            background-color: #6A0DAD;
+            padding: 8px 12px;
+            border-radius: 10px;
+            display: block;
+            margin-bottom: 15px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .redeem-btn {
+            background-color: white;
+            color: #6A0DAD;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Button shadow */
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .redeem-btn:hover {
+                background-color: #EDE7F6; /* Light purple on hover */
+                box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Slightly larger shadow on hover */
+            }
+
+            .redeem-btn:disabled {
+                background-color: #ccc;
+                color: #666;
+                cursor: not-allowed;
+            }
+
+        .create-coupon {
+            position: absolute;
+            top: 90px;
+            right: 6%;
+        }
+
+            .create-coupon .btn {
+                padding: 10px 20px;
+                font-size: 16px;
+                border-radius: 5px;
+            }
+    </style>
+}
+
+@section Fillow_script
+    {
+	<!-- Required vendors -->
+	<script src="~/Fillow/vendor/global/global.min.js"></script>
+	<script src="~/Fillow/vendor/bootstrap-datepicker-master/js/bootstrap-datepicker.min.js"></script>
+	<script src="~/Fillow/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+	<script src="~/Fillow/vendor/select2/js/select2.full.min.js"></script>
+	<script src="~/Fillow/js/plugins-init/select2-init.js"></script>
+	<script src="~/Fillow/js/custom.min.js"></script>
+	<script src="~/Fillow/js/dlabnav-init.js"></script>
+	<script src="~/Fillow/js/demo.js"></script>
+	<script>
+		$(document).ready(function () {
+			$(".expand.handle").on("click", function () {
+				// Find the .cm-content-body within the same .filter container
+				var content = $(this).closest('.filter').find('.cm-content-body');
+
+				// Toggle the visibility of the content
+				content.slideToggle();
+
+				// Toggle the icon (fa-angle-down and fa-angle-up)
+				$(this).find('i').toggleClass('fa-angle-down fa-angle-up');
+			});
+		});
+	</script>
+}

@@ -1,0 +1,344 @@
+.blog {
+    &__item {}
+    &__inner {
+        @include add-prefix(border-radius, (14px));
+        @extend %of-hidden;
+        @include add-prefix(transition, (all .3s ease));
+        &:hover {
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.12);
+            .blog {
+                &__thumb {
+                    img {
+                        @include add-prefix(transform, (scale(1.2)));
+                    }
+                }
+                &__content {
+                    background: $white-color;
+                    h5 {
+                        color: $theme-color;
+                    }
+                }
+            }
+        }
+    }
+    &__thumb {
+        @extend %of-hidden;
+        a {
+            @extend %d-block;
+        }
+        img {
+            @extend %w-100;
+        }
+    }
+    &__content {
+        @extend %p-15;
+        background: #F9FBFF;
+        @include add-prefix(transition, (all .3s ease));
+        span {
+            @extend %mb-5;
+            @extend %d-block;
+        }
+        h5 {}
+    }
+    &__footer {
+        @extend %flex;
+        @extend %justify-between;
+        @extend %align-items-center;
+        &--comment {
+            i {
+                @extend %mr-5;
+            }
+        }
+        &--view {
+            i {
+                @extend %mr-5;
+            }
+        }
+    }
+    &--blogpage {
+        .blog {
+            &__inner {
+                overflow: visible;
+                &:hover {
+                    box-shadow: none;
+                    .blog {
+                        &__content {
+                            h3 {
+                                color: $theme-color;
+                            }
+                        }
+                    }
+                }
+            }
+            &__thumb {
+                @include add-prefix(border-radius, (14px 14px 0 0));
+            }
+            &__content {
+                @extend %p-30;
+                margin-top: -80px;
+                margin-inline: 15px;
+                z-index: 1;
+                @extend %p-rel;
+                background: $white-color;
+                box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+                @include add-prefix(border-radius, (14px));
+                h3 {
+                    @extend %mb-15;
+                    @extend %text-2;
+                }
+                p {
+                    line-height: 28px;
+                    @extend %mb-30;
+                }
+            }
+            &__meta {
+                @extend %flex;
+                @extend %mb-15;
+                span {
+                    @extend %mr-30;
+                    i {
+                        color: $theme-color;
+                        @extend %mr-5;
+                    }
+                    &:last-child {
+                        margin-right: 0;
+                    }
+                    a {
+                        font-weight: 400;
+                        color: $desc-color;
+                        &:hover {
+                            color: $theme-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &--single {
+        .blog {
+            &__inner {
+                &:hover {
+                    .blog {
+                        &__thumb {
+                            img {
+                                @include add-prefix(transform, (scale(1)));
+                            }
+                        }
+                        &__content {
+                            h3, h5 {
+                                color: $title-color;
+                            }
+                        }
+                    }
+                }
+            }
+            &__content {
+                img {
+                    @include add-prefix(border-radius, (14px));
+                }
+                blockquote {
+                    padding: 30px;
+                    background: $ash-color;
+                    @include add-prefix(border-radius, (14px));
+                    @extend %mt-30;
+                    @extend %text-center;
+                    h5 {
+                        @extend %mb-0;
+                        font-style: italic;
+                        color: #1F3347;
+                        font-weight: 500;
+                    }
+                }
+            }
+            &__meta {
+                span {
+                    i {
+                        color: $desc-color;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// comments
+.comments {
+    @extend %mt-30;
+    background: $white-color;
+    margin-inline: 15px;
+    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.06));
+    @include add-prefix(border-radius, (14px));
+    .comment-title {
+        @extend %p-30;
+        border-bottom: 1px solid rgba($title-color, $alpha: .1);
+        @include font-size(20px);
+    }
+    .comment-list {
+        @include breakpoint(max-sm) {
+            margin: 0;
+        }
+        .com-item {
+            @extend %p-30;
+            @extend %pb-0;
+        }
+        .comment {
+            .com-thumb {
+                height: 50px;
+                width: 50px;
+                @extend %hidden;
+                @extend %mr-30;
+                @extend %mb-15;
+                float: left;
+                @include border-radius(14px);
+                @include breakpoint(sm) {
+                    margin-bottom: 0;
+                }
+
+                @include breakpoint(md) {
+                    height: 80px;
+                    width: 80px;
+                }
+                img {
+                    @include border-radius(14px);
+                }
+            }
+
+            .com-content {
+                @extend %hidden;
+                @extend %pb-20;
+                @include breakpoint(max-sm) {
+                    width: 100%;
+                }
+
+                .com-title {
+                    @extend %mb-10;
+                    @extend %flex;
+                    @extend %justify-between;
+                    @extend %align-items-center;
+                    
+                    .com-title-meta {
+                        a {
+                            @extend %text-bold;
+                            @extend %mr-5;
+                            @include font-size(20px);
+                        }
+                        h6 {
+                            a {
+                                color: $black-color;
+                                @include transition($transition);
+
+                                &:hover {
+                                    color: $theme-color;
+                                }
+                            }
+                        }
+
+                        span {
+                            @extend %d-inline-block;
+                            @extend %mb-5;
+                        }
+                    }
+
+                    .reply {
+                        @include breakpoint(max-sm) {
+                            margin-bottom: 10px;
+                            display: inline-block;
+                        }
+
+                        .comment-reply-link {
+                            padding: 3px 16px;
+                            @extend %text-bold;
+                            @include transition($transition);
+
+                            &:hover {
+                                color: $theme-color;
+                                border-radius: 5px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .comment-list {
+                padding: 0 20px;
+                border-top: 1px solid rgba($title-color, $alpha: .1);
+
+                @include breakpoint(sm) {
+                    padding-left: 60px;
+                    padding-right: 30px;
+                }
+
+                .comment {
+                    list-style: none;
+                    overflow: hidden;
+                    padding-top: 30px;
+
+                    &:last-child {
+                        border: none;
+                        padding-bottom: 0px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// comment-respond
+.comment-respond {
+    @extend %mt-30;
+    margin-inline: 15px;
+    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.06));
+    background: $white-color;
+    @include add-prefix(border-radius, (14px));
+    h4 {
+        border-bottom: 1px solid rgba($title-color, $alpha: .10);
+        @extend %p-30;
+        @include font-size(20px);
+    }
+
+    .add-comment {
+        @extend %p-30;
+        .comment-form {
+            @extend %flex;
+            @extend %justify-between;
+
+            input[type="text"] {
+                padding: 12px 15px;
+                border-radius: 4px;
+                width: 100%;
+
+                @include breakpoint(sm) {
+                    width: calc(100% / 2 - 15px);
+                }
+            }
+
+            input,
+            textarea {
+                border: none;
+                outline: none;
+                margin-bottom: 30px;
+                border: 1px solid rgba($title-color, $alpha: .1);
+                color: $title-color;
+                &::placeholder {
+                    color: rgba($title-color, $alpha: .9);
+                }
+            }
+
+            textarea {
+                padding: 15px;
+                width: 100%;
+                border-radius: 4px;
+            }
+
+            .default__btn {
+                border: none;
+                outline: none;
+                margin-top: 10px;
+                @include border-radius(3px);
+                @extend %pointer;
+                line-height: 50px;
+            }
+        }
+    }
+}

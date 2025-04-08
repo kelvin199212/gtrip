@@ -1,0 +1,236 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+    ViewData["Title"] = "管理登入方式";
+}
+<div class="content-body default-height">
+<div class="login-container">
+    <h2>管理登入方式</h2>
+
+    <!-- Email & Phone -->
+    <div class="login-section">
+        <h3>電郵 & 電話號碼</h3>
+        <div class="login-row">
+            <div class="login-left">
+                <div class="login-icon login-email"></div>
+                <div class="login-info">
+                    <span class="login-title">電郵</span>
+                    <span class="login-details">bor*********@@gmail.com</span>
+                </div>
+            </div>
+            <div class="login-right">
+                <button class="login-btn-small">驗證</button>
+                <button class="login-btn-small">編輯</button>
+            </div>
+        </div>
+        <div class="login-row">
+            <div class="login-left">
+                <div class="login-icon login-phone"></div>
+                <div class="login-info">
+                    <span class="login-title">電話號碼</span>
+                </div>
+            </div>
+            <div class="login-right">
+                <button class="login-btn-small">連結</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Social Media -->
+    <div class="login-section">
+        <h3>社交媒體</h3>
+        <div class="login-row">
+            <div class="login-left">
+                <div class="login-icon login-google"></div>
+                <div class="login-info">
+                    <span class="login-title">Google</span>
+                    <span class="login-details">bor*********@@gmail.com</span>
+                </div>
+            </div>
+            <div class="login-right">
+                <button class="login-btn-small">解除連結</button>
+            </div>
+        </div>
+        <div class="login-row">
+            <div class="login-left">
+                <div class="login-icon login-facebook"></div>
+                <div class="login-info">
+                    <span class="login-title">Facebook</span>
+                </div>
+            </div>
+            <div class="login-right">
+                <button class="login-btn-small">連結</button>
+            </div>
+        </div>
+        <div class="login-row">
+            <div class="login-left">
+                <div class="login-icon login-apple"></div>
+                <div class="login-info">
+                    <span class="login-title">Apple</span>
+                </div>
+            </div>
+            <div class="login-right">
+                <button class="login-btn-small">連結</button>
+            </div>
+        </div>
+        <div class="login-row">
+            <div class="login-left">
+                <div class="login-icon login-wechat"></div>
+                <div class="login-info">
+                    <span class="login-title">WeChat</span>
+                </div>
+            </div>
+            <div class="login-right">
+                <button class="login-btn-small">連結</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div></div>
+
+@section Fillow_style
+{
+	<link href="~/Fillow/vendor/bootstrap-datepicker-master/css/bootstrap-datepicker.min.css" rel="stylesheet">
+	<link href="~/Fillow/vendor/lightgallery/css/lightgallery.min.css" rel="stylesheet">
+    <style>
+        .login-container {
+            width: 90%;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 18px;
+            color: #f05a28;
+            margin-bottom: 20px;
+        }
+
+        .login-section {
+            margin-bottom: 30px;
+        }
+
+        h3 {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .login-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+            .login-row:last-child {
+                border-bottom: none;
+            }
+
+        .login-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .login-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .login-email {
+            background-image: url('https://img.icons8.com/color/48/000000/gmail-new.png');
+        }
+
+        .login-phone {
+            background-image: url('https://img.icons8.com/color/48/000000/phone.png');
+        }
+
+        .login-google {
+            background-image: url('https://img.icons8.com/color/48/000000/google-logo.png');
+        }
+
+        .login-facebook {
+            background-image: url('https://img.icons8.com/color/48/000000/facebook-new.png');
+        }
+
+        .login-apple {
+            background-image: url('https://img.icons8.com/ios-filled/50/000000/mac-os.png');
+        }
+
+        .login-wechat {
+            background-image: url('https://img.icons8.com/color/48/000000/weixing.png');
+        }
+
+        .login-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-title {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .login-details {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .login-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .login-btn-small {
+            background-color: #886cc0;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-size: 12px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+            .login-btn-small:hover {
+                background-color: #d94d24;
+            }
+
+            .login-btn-small:disabled {
+                background-color: #ccc;
+                cursor: not-allowed;
+            }
+    </style>
+}
+
+@section Fillow_script
+    {
+	<!-- Required vendors -->
+	<script src="~/Fillow/vendor/global/global.min.js"></script>
+	<script src="~/Fillow/vendor/bootstrap-datepicker-master/js/bootstrap-datepicker.min.js"></script>
+	<script src="~/Fillow/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+	<script src="~/Fillow/vendor/select2/js/select2.full.min.js"></script>
+	<script src="~/Fillow/js/plugins-init/select2-init.js"></script>
+	<script src="~/Fillow/js/custom.min.js"></script>
+	<script src="~/Fillow/js/dlabnav-init.js"></script>
+	<script src="~/Fillow/js/demo.js"></script>
+	<script>
+		$(document).ready(function () {
+			$(".expand.handle").on("click", function () {
+				// Find the .cm-content-body within the same .filter container
+				var content = $(this).closest('.filter').find('.cm-content-body');
+
+				// Toggle the visibility of the content
+				content.slideToggle();
+
+				// Toggle the icon (fa-angle-down and fa-angle-up)
+				$(this).find('i').toggleClass('fa-angle-down fa-angle-up');
+			});
+		});
+	</script>
+}

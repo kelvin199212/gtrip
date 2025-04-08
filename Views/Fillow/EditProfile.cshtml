@@ -1,0 +1,192 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutFillow.cshtml";
+	ViewData["Title"] = "賬戶設置";
+}
+<div class="content-body default-height">
+	<div class="container-fluid">
+		<!-- row -->
+		<div class="row">
+			<div class="col-xl-3 col-lg-4">
+				<div class="clearfix">
+					<div class="card card-bx profile-card author-profile m-b30">
+						<div class="card-body">
+							<div class="p-5">
+								<div class="author-profile">
+									<div class="author-media">
+										<img src="~/Fillow/images/user.jpg" alt="">
+										<div class="upload-link" title="" data-toggle="tooltip" data-placement="right" data-original-title="update">
+											<input type="file" class="update-flie">
+											<i class="fa fa-camera"></i>
+										</div>
+									</div>
+									<div class="author-info">
+										<h6 class="title">小明</h6>
+										<span>中國</span>
+									</div>
+								</div>
+							</div>
+							<div class="info-list">
+								<ul>
+									<li><a href="@Url.Action("AppProfile","Fillow")">預覽個人頁面</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="card card-bx profile-card author-profile m-b30">
+						<div class="card-body">
+
+								<!-- Video Preview Section -->
+								<div class="video-preview" style="display: none; margin-top: 20px;">
+									<video id="video-player" controls style="width: 100%; max-width: 500px;">
+										Your browser does not support the video tag.
+									</video>
+								</div>
+								<div class="info-list">
+									<ul>
+										<!-- Trigger for video upload -->
+										<li>
+											<a href="javascript:void(0);" id="upload-video-link">上載個人介紹短片</a>
+											<input type="file" id="video-upload" accept="video/*" style="display: none;">
+										</li>
+									</ul>
+								</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="col-xl-9 col-lg-8">
+				<div class="card profile-card card-bx m-b30">
+					<div class="card-header">
+						<h6 class="title">賬戶設置</h6>
+					</div>
+					<form class="profile-form">
+						
+						<div class="card-body">
+							<h4>個人資訊</h4>
+							<div class="row">
+								<div class="col-sm-6 m-b30">
+									<label class="form-label">使用者名稱</label>
+									<input type="text" class="form-control" value="">
+								</div>
+								<div class="col-sm-6 m-b30">
+									<label class="form-label">電子郵件</label>
+									<input type="email" class="form-control" placeholder="">
+								</div>
+								<div class="col-sm-6 m-b30">
+									<label class="form-label">PayPal電子郵件</label>
+									<input type="email" class="form-control" value="">
+								</div>
+								<div class="col-sm-6 m-b30">
+									<label class="form-label">電話號碼</label>
+									<input type="text" class="form-control" value="">
+								</div>
+								<div class="col-sm-6 m-b30">
+									<label class="form-label">性別</label>
+									<select class="default-select form-control wide">
+										<option>男</option>
+										<option>女</option>
+									</select>
+
+								</div>
+								<div class="col-sm-6 m-b30">
+									<label class="form-label">出生日期</label>
+									<input type="text" class="form-control mb-3 mb-xl-0" placeholder="XXXX-XX-XX" id="datepicker">
+								</div>
+								<div class="col-sm-6 m-b30">
+									<label class="form-label">關於你自己</label>
+									<textarea type="text" class="form-control" value=""></textarea>
+								</div>
+							</div>
+					
+
+						<hr class="solid">
+
+						<h4>地點</h4>
+						<div class="row">
+						<div class="col-sm-6 m-b30">
+							<label class="form-label">本地機場</label>
+							<input type="text" class="form-control" value="">
+						</div>
+						<div class="col-sm-6 m-b30">
+							<label class="form-label">地址</label>
+							<input type="text" class="form-control" value="">
+						</div>
+						<div class="col-sm-6 m-b30">
+							<label class="form-label">城市</label>
+							<input type="text" class="form-control" value="">
+						</div>
+						<div class="col-sm-6 m-b30">
+							<label class="form-label">
+								州/省/地區
+							</label>
+							<input type="text" class="form-control" value="">
+						</div>
+						<div class="col-sm-6 m-b30">
+							<label class="form-label">郵政編碼/郵政編碼</label>
+							<input type="text" class="form-control" value="">
+						</div>
+						<div class="col-sm-6 m-b30">
+							<label class="form-label">國家</label>
+							<input type="text" class="form-control" value="">
+						</div>
+							</div>
+						<div class="card-footer">
+							<button class="btn btn-primary">更新</button>
+							<a href="@Url.Action("ForgotPassword","Fillow")" class="btn-link">忘記密碼?</a>
+						</div>
+					</form>
+				</div>
+			</div>
+			</div>
+		</div>
+		<!--**********************************
+			Footer start
+		***********************************-->
+		<!--**********************************
+			Footer end
+		***********************************-->
+	</div>
+</div>
+
+
+@section Fillow_style
+    {
+    <link href="~/Fillow/vendor/bootstrap-datepicker-master/css/bootstrap-datepicker.min.css" rel="stylesheet">
+}
+
+@section Fillow_script
+    {
+	<!-- Required vendors -->
+	<script src="~/Fillow/vendor/global/global.min.js"></script>
+	<script src="~/Fillow/vendor/bootstrap-datepicker-master/js/bootstrap-datepicker.min.js"></script>
+	<script src="~/Fillow/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+	<script src="~/Fillow/js/custom.min.js"></script>
+	<script src="~/Fillow/js/dlabnav-init.js"></script>
+	<script src="~/Fillow/js/demo.js"></script>
+	<script>
+
+		$(document).ready(function () {
+			// Trigger the file input when the "上載個人介紹短片" link is clicked
+			$('#upload-video-link').on('click', function () {
+				$('#video-upload').click();
+			});
+
+			// Handle video file selection and preview
+			$('#video-upload').on('change', function (event) {
+				var file = event.target.files[0];
+				if (file) {
+					// Create a URL for the selected video
+					var videoURL = URL.createObjectURL(file);
+
+					// Set the video source and show the preview section
+					$('#video-player').attr('src', videoURL);
+					$('.video-preview').show();
+				}
+			});
+		});
+
+	</script>
+}

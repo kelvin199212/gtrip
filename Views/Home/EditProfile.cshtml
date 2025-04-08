@@ -1,0 +1,321 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutFillow.cshtml";
+    ViewData["Title"] = "賬戶設置";
+}
+@model Fillow.Models.UserProfile
+
+<form id="verificationForm" class="form-valide-with-icon needs-validation" method="post" enctype="multipart/form-data" novalidate>
+<div class="content-body default-height">
+    <div class="container-fluid">
+        <!-- row -->
+        <div class="row">
+            <div class="col-xl-3 col-lg-4">
+                <div class="clearfix">
+                    <div class="card card-bx profile-card author-profile m-b30">
+                        <div class="card-body">
+                            <div class="p-5">
+                                <div class="author-profile">
+                                    <div class="author-media">
+                                        <img id="profile-picture-preview"
+                                             src="@((Model.ProfilePicturePath != null) ? Url.Content("../"+Model.ProfilePicturePath) : Url.Content("~/Fillow/images/user.jpg"))"
+                                             alt="Profile Picture" />
+                                        <div class="upload-link" title="" data-toggle="tooltip" data-placement="right" data-original-title="update">
+                                                <input type="file" id="profile-picture" class="form-control update-flie" name="ProfilePicture" accept="image/*">
+                                            <i class="fa fa-camera"></i>
+                                        </div>
+                                    </div>
+                                    <div class="author-info">
+                                        <h6 class="title">小明</h6>
+                                        <span>中國</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-list">
+                                <ul>
+                                    <li><a href="@Url.Action("AppProfile","Fillow")">預覽個人頁面</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="card card-bx profile-card author-profile m-b30">
+                        <div class="card-body">
+                            <!-- Video Preview Section -->
+                            <div class="video-preview">
+                                @if (Model.VideoIntroductionPath != null)
+                                {
+                                    <video id="video-preview" controls style="width: 100%; max-width: 500px;">
+                                        <source src="@Url.Content("../"+Model.VideoIntroductionPath)" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                }
+                                else
+                                {
+                                    <p style="padding: 20px;" id="no-video-text">沒有上傳影片</p>
+                                }
+                            </div>
+                            <div class="info-list">
+                                <ul>
+                                    <!-- Trigger for video upload -->
+                                    <li>
+                                        <a href="javascript:void(0);" id="upload-video-link">上傳</a>
+                                            <input type="file" id="video-upload" class="form-control" name="VideoIntroduction" accept="video/*">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-9 col-lg-8">
+                <div class="card profile-card card-bx m-b30">
+                    <div class="card-header">
+                        <h6 class="title">賬戶設置</h6>
+                    </div>
+                    <form class="profile-form needs-validation" method="post" novalidate>
+                        <div class="card-body">
+                            <h4>個人資訊</h4>
+                            <div class="row">
+                                <div class="col-sm-6 m-b30">
+                                    <label class="form-label" for="username" required>使用者名稱</label>
+                                    <span class="text-danger">*</span>
+                                    <input type="text" id="username" class="form-control" name="UserName" value="@Model.UserName" required>
+                                    <div class="invalid-feedback">
+                                        請輸入使用者名稱
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 m-b30">
+                                    <label class="form-label" for="email" required>電子郵件</label>
+                                    <span class="text-danger">*</span>
+                                    <input type="email" id="email" class="form-control" name="Email" value="@Model.Email" required>
+                                    <div class="invalid-feedback">
+                                        請輸入電子郵件
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 m-b30">
+                                    <label class="form-label" for="phone" required>電話號碼</label>
+                                    <span class="text-danger">*</span>
+                                    <input type="text" id="phone" class="form-control" name="PhoneNumber" value="@Model.PhoneNumber" required>
+                                    <div class="invalid-feedback">
+                                        請輸入電話號碼
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 m-b30">
+                                    <label class="form-label" for="gender" required>性別</label>
+                                    <select id="gender" class="default-select form-control wide" name="Gender">
+                                        <option value="男" selected="@((Model.Gender == "男") ? "selected" : "")">男</option>
+                                        <option value="女" selected="@((Model.Gender == "女") ? "selected" : "")">女</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-6 m-b30">
+                                    <label class="form-label" for="birthDate" required>出生日期</label>
+                                    <span class="text-danger">*</span>
+                                    <input type="date" id="birthDate" class="form-control mb-3 mb-xl-0" name="BirthDate" value="@Model.BirthDate?.ToString("yyyy-MM-dd")" required>
+                                    <div class="invalid-feedback">
+                                        請輸入出生日期
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 m-b30">
+                                    <label class="form-label" for="about" required>關於你自己</label>
+                                    <span class="text-danger">*</span>
+                                    <textarea id="about" class="form-control" name="About" required>@Model.About</textarea>
+                                    <div class="invalid-feedback">
+                                        請輸入關於
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="solid">
+
+                            <h4>地點</h4>
+                            <div class="row">
+                                <div class="col-sm-6 m-b30">
+                                    <label class="form-label" for="local-airport" required>本地機場</label>
+                                    <span class="text-danger">*</span>
+                                    <input type="text" id="local-airport" class="form-control" name="LocalAirport" value="@Model.LocalAirport" required>
+                                    <div class="invalid-feedback">
+                                        請輸入本地機場
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 m-b30">
+                                    <label class="form-label" for="address" required>地址</label>
+                                    <span class="text-danger">*</span>
+                                    <input type="text" id="address" class="form-control" name="Address" value="@Model.Address" required>
+                                    <div class="invalid-feedback">
+                                        請輸入地址
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 m-b30">
+                                    <label class="form-label" for="about" required>城市</label>
+                                    <span class="text-danger">*</span>
+                                    <input type="text" id="city" class="form-control" name="City" value="@Model.City" required>
+                                    <div class="invalid-feedback">
+                                        請輸入城市
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 m-b30">
+                                    <label class="form-label" for="state" required>州/省/地區</label>
+                                    <span class="text-danger">*</span>
+                                    <input type="text" id="state" class="form-control" name="State" value="@Model.State" required>
+                                    <div class="invalid-feedback">
+                                        請輸入州/省/地區
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 m-b30">
+                                    <label class="form-label" for="postal-code" required>郵政編碼/郵政編碼</label>
+                                    <input type="text" id="postal-code" class="form-control" name="PostalCode" value="@Model.PostalCode" required>
+                                    <div class="invalid-feedback">
+                                        請輸入郵政編碼/郵政編碼
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 m-b30">
+                                    <label class="form-label" for="country" required>國家</label>
+                                    <span class="text-danger">*</span>
+                                    <input type="text" id="country" class="form-control" name="Country" value="@Model.Country" required>
+                                    <div class="invalid-feedback">
+                                        請輸入國家
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary">更新</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+
+
+
+@section Fillow_style
+    {
+    <link href="~/Fillow/vendor/bootstrap-datepicker-master/css/bootstrap-datepicker.min.css" rel="stylesheet">
+}
+
+@section Fillow_script
+    {
+	<!-- Required vendors -->
+	<script src="~/Fillow/vendor/global/global.min.js"></script>
+	<script src="~/Fillow/vendor/bootstrap-datepicker-master/js/bootstrap-datepicker.min.js"></script>
+	<script src="~/Fillow/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+	<script src="~/Fillow/js/custom.min.js"></script>
+	<script src="~/Fillow/js/dlabnav-init.js"></script>
+	<script src="~/Fillow/js/demo.js"></script>
+    <script>
+            (function () {
+                'use strict'
+
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.needs-validation')
+
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms)
+                    .forEach(function (form) {
+                        form.addEventListener('submit', function (event) {
+                            event.preventDefault()
+                            event.stopPropagation()
+
+                            if (!form.checkValidity()) {
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                                form.classList.add('was-validated')
+                            } else {
+                       
+
+                            // Append form fields
+                            var formData = new FormData($('#verificationForm')[0]);
+
+                    
+
+                            // AJAX request to send form data
+                            $.ajax({
+                                url: '/api/UserProfile/EditProfile',
+                                type: 'POST',
+                                processData: false, // Do not process data
+                                contentType: false, // Do not set content type (let FormData handle it)
+                                data: formData,
+                                success: function (response) {
+                                    // Show SweetAlert on successful sign-up
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: '修改成功',
+                                        text: response.message,
+                                        timer: 2000, // Auto close after 2 seconds
+                                        showConfirmButton: false
+                                    }).then(() => {
+                                        // Redirect to another page after the alert is closed
+                                        window.location.href = '/Home/EditProfile'; // Replace with your desired URL
+                                    });
+                                },
+                                error: function (xhr) {
+                                    var errorMessage = xhr.responseJSON?.message || 'Something went wrong!';
+
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: errorMessage,
+                                        timer: 2000, // Auto close after 2 seconds
+                                        showConfirmButton: false
+                                    });
+                                }
+                            });
+
+                            }
+
+
+                        }, false)
+                    })
+            })();
+
+
+       
+    </script>
+    <script>
+        $(document).ready(function () {
+            // Function to preview image
+            function previewImage(input, previewElementId) {
+                const file = input.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        $(previewElementId).attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+
+            // Function to preview video
+            function previewVideo(input, videoElementId, noVideoTextId) {
+                const file = input.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        $(videoElementId).attr('src', e.target.result);
+                        $(videoElementId).show();
+                        $(noVideoTextId).hide();
+                        $(videoElementId)[0].load(); // Reload video source
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    $(videoElementId).hide();
+                    $(noVideoTextId).show();
+                }
+            }
+
+            // Event listener for profile picture change
+            $('#profile-picture').on('change', function (event) {
+                previewImage(event.target, '#profile-picture-preview');
+            });
+
+            // Event listener for video upload change
+            $('#video-upload').on('change', function (event) {
+                previewVideo(event.target, '#video-preview', '#no-video-text');
+            });
+        });
+    </script>
+
+}

@@ -1,0 +1,61 @@
+.gallery {
+    &__item {
+        &:hover {
+            .gallery {
+                &__thumb {
+                    img {
+                        @include add-prefix(transform, (scale(1.2)));
+                    }
+                    &::after {
+                        @include add-prefix(transform, (scaleY(1)));
+                    }
+                    &--content {
+                        bottom: 15px;
+                    }
+                }
+            }
+        }
+    }
+    &__thumb {
+        @extend %of-hidden;
+        @extend %p-rel;
+        @include add-prefix(border-radius, (14px));
+        img {
+            width: 100%;
+        }
+        &::after {
+            @extend %p-abs;
+            top: 0;
+            left: 0;
+            @extend %w-100;
+            @extend %h-100;
+            background: linear-gradient(180.11deg, rgba(0, 0, 0, 0) 1.15%, rgba(7, 7, 7, 0.9) 99.91%);
+            filter: drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.12));
+            transform-origin: bottom;
+            @include add-prefix(transition, (all .3s ease));
+            @include add-prefix(transform, (scaleY(0)));
+            @include add-prefix(border-radius, (14px));
+        }
+        &--content {
+            @extend %p-abs;
+            left: 15px;
+            bottom: -50%;
+            z-index: 1;
+            @include add-prefix(transition, (all .3s ease));
+            h3 {
+                @extend %mb-10;
+                @extend %white-color;
+            }
+            p {
+                @extend %mb-0;
+                @extend %white-color;
+                img {
+                    width: 25px;
+                    height: 25px;
+                    @extend %mr-5;
+                    @include add-prefix(border-radius, (100%));
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,149 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor Accessor
+<!--**********************************
+            Sidebar start
+        ***********************************-->
+<div class="dlabnav">
+    <div class="dlabnav-scroll">
+        <ul class="metismenu" id="menu">
+            <li>
+                <a href="@Url.Action("dashboard","Home")" aria-expanded="false">
+                    <i class="fas fa-home"></i>
+                    <span class="nav-text">銷售收入</span>
+                </a>
+            </li>
+            <li>
+                <a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                    <i class="fas fa-user"></i>
+                    <span class="nav-text">個人資料</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="@Url.Action("EditProfile","Home")">設定</a></li>
+             @*        <li><a href="@Url.Action("AppProfile","Home")">預覽個人頁面</a></li> *@
+                   
+
+                    @if (Accessor.HttpContext.Session.GetString("UserType") =="normal")
+                    {
+                        <li><a href="@Url.Action("Verification","Home")">驗證資料</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="@Url.Action("VerificationB","Home")">驗證資料</a></li>
+                    }
+                </ul>
+
+            </li>
+            <li>
+                <a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                    <i class="fas fa-plane"></i>
+                    <span class="nav-text">旅程</span>
+                </a>
+                <ul aria-expanded="false">
+                  @*   <li><a href="@Url.Action("Index","Home")">教學</a></li> *@
+                    <li><a href="@Url.Action("CreateTrip","Home")">建立旅程</a></li>
+                    <li><a href="@Url.Action("EditTrip","Home")">編輯旅程</a></li>
+                    <li><a href="@Url.Action("CreateOrder","Home")">添加旅程訂單</a></li>
+                 @*    <li><a href="@Url.Action("Kanban","Fillow")">提案旅程</a></li> *@
+                </ul>
+
+            </li>
+            <li>
+                <a class="has-arrow" href="javascript:void(0);" aria-expanded="false">
+                    <i class="fas fa-edit"></i>
+                    <span class="nav-text">你的訂單 <span class="badge badge-xs badge-danger ms-2">New</span></span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="@Url.Action("Content","Home")">訂單詳情</a></li>
+                    <li><a href="@Url.Action("CalendarPage","Home")">日曆</a></li>
+                </ul>
+            </li>
+@*             <li>
+                <a href="@Url.Action("message","Home")" aria-expanded="false">
+                    <i class="fas fa-comments"></i>
+                    <span class="nav-text">訊息</span>
+                </a>
+            </li> *@
+            <li>
+                <a href="@Url.Action("WithdrawalRequest","Home")" aria-expanded="false">
+                    <i class="fas fa-yen"></i>
+                    <span class="nav-text">提款申請</span>
+                </a>
+            </li>
+@*             <li>
+                <a href="@Url.Action("Widget","Home")" aria-expanded="false">
+                    <i class="fas fa-pencil"></i>
+                    <span class="nav-text">張貼文章</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Widget","Home")" aria-expanded="false">
+                    <i class="fas fa-question-circle"></i>
+                    <span class="nav-text">幫助中心</span>
+                </a>
+            </li> *@
+   
+        </ul>
+        <div class="side-bar-profile">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <div class="side-bar-profile-img">
+                    <img id="profileImage" src="" alt="">
+                </div>
+                <div class="profile-info1">
+                    <h5 id="username"></h5>
+                    <span id="email"></span>
+                </div>
+                <div class="profile-button">
+                    <i class="fas fa-caret-downd scale5 text-light"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>Gtrip © 2025 All Rights Reserved</p>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<script>
+    $.ajax({
+        url: '/api/UserProfile/GetVerificationData', // Ensure this endpoint is available in your backend
+        method: 'GET',
+        success: function (data) {
+            if (data) {
+                $('#profileImage').attr('src', '../Fillow/images/avatar/1.png');
+
+                // Update the username and email
+                $('#username').text(data.fullName || 'User');
+                $('#email').text(data.email || 'NIL');
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            $('#profileImage').attr('src', '../Fillow/images/avatar/1.png');
+
+            // Update the username and email
+            $('#username').text('沒認証賬號');
+            $('#email').text('NIL');
+            var url = "";
+            if ("@Accessor.HttpContext.Session.GetString("UserType")" == "normal") {
+                url = "../home/Verification";
+            } else {
+                url = "../home/VerificationB";
+            }
+
+            const targetUrl = new URL(url, window.location.origin).href;
+
+            if (window.location.href !== targetUrl) {
+                window.location.href = targetUrl;
+            } else {
+                console.log("Already on the Verification page.");
+            }
+        }
+    });
+
+</script>
+<!--**********************************
+    Sidebar end
+***********************************-->

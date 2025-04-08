@@ -1,0 +1,185 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewData["Title"] = "客人點數設定";
+}
+
+<div class="content-body default-height">
+    <div class="cardClass">
+        <div class="container">
+            <h2>客人點數設定</h2>
+
+            <!-- Add Points Button (Positioned at the top right) -->
+            <div class="add-points">
+                <button id="addPointsBtn" class="btn btn-primary">新增點數記錄</button>
+            </div>
+
+            <!-- Points Table -->
+            <table class="points-table">
+                <thead>
+                    <tr>
+                        <th>客人名稱</th>
+                        <th>點數餘額</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>王小明</td>
+                        <td>1500</td>
+                        <td>
+                            <button class="btn btn-success adjust-btn">調整點數</button>
+                            <button class="btn btn-danger delete-btn">刪除記錄</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>李大華</td>
+                        <td>2000</td>
+                        <td>
+                            <button class="btn btn-success adjust-btn">調整點數</button>
+                            <button class="btn btn-danger delete-btn">刪除記錄</button>
+                        </td>
+                    </tr>
+                    <!-- Additional rows can be dynamically added here -->
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+@section Fillow_style
+{
+    <style>
+        .cardClass {
+            background-color: white;
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        h2 {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .add-points {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .points-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+
+            .points-table th,
+            .points-table td {
+                border: 1px solid #ddd;
+                padding: 10px;
+                text-align: center;
+            }
+
+            .points-table th {
+                background-color: #f8f9fa;
+                font-weight: bold;
+            }
+
+        .btn {
+            padding: 5px 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            border: none;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+            border: none;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+}
+
+@section Fillow_script
+{
+    <script src="~/Fillow/vendor/global/global.min.js"></script>
+    <script src="~/Fillow/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+
+
+    <!-- counter -->
+    <script src="~/Fillow/vendor/counter/counter.min.js"></script>
+    <script src="~/Fillow/vendor/counter/waypoint.min.js"></script>
+
+    <!-- Apex Chart -->
+    <script src="~/Fillow/vendor/apexchart/apexchart.js"></script>
+    <script src="~/Fillow/vendor/chart-js/chart.bundle.min.js"></script>
+    <!-- Chart piety plugin files -->
+    <script src="~/Fillow/vendor/peity/jquery.peity.min.js"></script>
+    <!-- Dashboard 1 -->
+    <script src="~/Fillow/js/dashboard/dashboard-1.js"></script>
+
+    <script src="~/Fillow/vendor/owl-carousel/owl.carousel.js"></script>
+
+    <script src="~/Fillow/js/custom.min.js"></script>
+    <script src="~/Fillow/js/dlabnav-init.js"></script>
+    <script src="~/Fillow/js/demo.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Add new points record
+            $("#addPointsBtn").on("click", function () {
+                const newRow = `
+                            <tr>
+                                <td><input type="text" placeholder="客人名稱" class="form-control"></td>
+                                <td><input type="number" value="0" class="form-control"></td>
+                                <td>
+                                    <button class="btn btn-success save-btn">保存</button>
+                                    <button class="btn btn-danger delete-btn">刪除記錄</button>
+                                </td>
+                            </tr>
+                        `;
+                $(".points-table tbody").append(newRow);
+            });
+
+            // Adjust points
+            $(document).on("click", ".adjust-btn", function () {
+                let points = prompt("請輸入新的點數:");
+                if (points != null && !isNaN(points)) {
+                    $(this).closest("tr").find("td:nth-child(2)").text(points);
+                    alert("點數已更新！");
+                }
+            });
+
+            // Delete record
+            $(document).on("click", ".delete-btn", function () {
+                $(this).closest("tr").remove();
+            });
+
+            // Save new record
+            $(document).on("click", ".save-btn", function () {
+                alert("點數記錄已保存！");
+                // Add your save logic here
+            });
+        });
+    </script>
+}

@@ -1,0 +1,186 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewData["Title"] = "等級優惠設定";
+}
+
+<div class="content-body default-height">
+    <div class="cardClass">
+        <div class="container">
+            <h2>等級優惠設定</h2>
+
+            <!-- New Level Button (Positioned at the top right) -->
+            <div class="create-level">
+                <button id="addLevelBtn" class="btn btn-primary">新增等級</button>
+            </div>
+
+            <!-- Levels Table -->
+            <table class="levels-table">
+                <thead>
+                    <tr>
+                        <th>等級名稱</th>
+                        <th>優惠百分比 (%)</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>黃金會員</td>
+                        <td><input type="number" value="10" class="discount-input"></td>
+                        <td>
+                            <button class="btn btn-success save-btn">保存</button>
+                            <button class="btn btn-danger delete-btn">刪除</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>白金會員</td>
+                        <td><input type="number" value="15" class="discount-input"></td>
+                        <td>
+                            <button class="btn btn-success save-btn">保存</button>
+                            <button class="btn btn-danger delete-btn">刪除</button>
+                        </td>
+                    </tr>
+                    <!-- Additional rows can be dynamically added here -->
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+@section Fillow_style
+{
+    <style>
+        .cardClass {
+            background-color: white;
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        h2 {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .create-level {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .levels-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+
+            .levels-table th,
+            .levels-table td {
+                border: 1px solid #ddd;
+                padding: 10px;
+                text-align: center;
+            }
+
+            .levels-table th {
+                background-color: #f8f9fa;
+                font-weight: bold;
+            }
+
+        .discount-input {
+            width: 60px;
+            padding: 5px;
+            text-align: center;
+        }
+
+        .save-btn, .delete-btn {
+            margin: 0 5px;
+        }
+
+        .btn {
+            padding: 5px 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            border: none;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+            border: none;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+}
+
+@section Fillow_script
+{
+        <script src="~/Fillow/vendor/global/global.min.js"></script>
+        <script src="~/Fillow/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+
+
+        <!-- counter -->
+        <script src="~/Fillow/vendor/counter/counter.min.js"></script>
+        <script src="~/Fillow/vendor/counter/waypoint.min.js"></script>
+
+        <!-- Apex Chart -->
+        <script src="~/Fillow/vendor/apexchart/apexchart.js"></script>
+        <script src="~/Fillow/vendor/chart-js/chart.bundle.min.js"></script>
+        <!-- Chart piety plugin files -->
+        <script src="~/Fillow/vendor/peity/jquery.peity.min.js"></script>
+        <!-- Dashboard 1 -->
+        <script src="~/Fillow/js/dashboard/dashboard-1.js"></script>
+
+        <script src="~/Fillow/vendor/owl-carousel/owl.carousel.js"></script>
+
+        <script src="~/Fillow/js/custom.min.js"></script>
+        <script src="~/Fillow/js/dlabnav-init.js"></script>
+        <script src="~/Fillow/js/demo.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Add new level
+            $("#addLevelBtn").on("click", function () {
+                const newRow = `
+                            <tr>
+                                <td><input type="text" placeholder="等級名稱" class="form-control"></td>
+                                <td><input type="number" value="0" class="discount-input"></td>
+                                <td>
+                                    <button class="btn btn-success save-btn">保存</button>
+                                    <button class="btn btn-danger delete-btn">刪除</button>
+                                </td>
+                            </tr>
+                        `;
+                $(".levels-table tbody").append(newRow);
+            });
+
+            // Delete level
+            $(document).on("click", ".delete-btn", function () {
+                $(this).closest("tr").remove();
+            });
+
+            // Save level
+            $(document).on("click", ".save-btn", function () {
+                alert("優惠設定已保存！");
+                // Add your save logic here
+            });
+        });
+    </script>
+}

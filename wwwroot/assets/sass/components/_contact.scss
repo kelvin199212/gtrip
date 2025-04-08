@@ -1,0 +1,81 @@
+.contact {
+    &__info {
+        &--head {}
+        &--body {
+            ul {
+                li {
+                    @extend %flex;
+                    @extend %py-20;
+                    @extend %justify-between;
+                    &:last-child {
+                        padding-bottom: 0;
+                    }
+                }
+            }
+        }
+        &--left {
+            width: 70px;
+            height: 70px;
+            line-height: 70px;
+            color: $theme-color;
+            @extend %text-center;
+            @include font-size($fs-h4);
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            @include add-prefix(border-radius, (100%));
+            @include breakpoint(max-sm) {
+                margin-bottom: 15px;
+            }
+        }
+        &--right {
+            @extend %w-100;
+            @include breakpoint(sm) {
+                width: calc(100% - 100px);
+            }
+            h5 {
+                font-weight: 600;
+                @extend %mb-5;
+            }
+            p {
+                @extend %mb-0;
+            }
+        }
+    }
+    &__form {
+        form {
+            input, textarea {
+                box-shadow: 0px 6px 24px rgba(220, 220, 220, 0.42);
+                @extend %border-none;
+                @include add-prefix(border-radius, (4px));
+            }
+            input {
+                height: 50px;
+                margin-bottom: 30px;
+                @include breakpoint (sm) {
+                    width: calc(100% / 2 - 15px);
+                }
+            }
+            textarea {
+                margin-bottom: 35px;
+            }
+            button {
+                @extend %c-pointer;
+                &.default__btn {
+                    padding: 0px 30px;
+                    border: none;
+                    outline: none;
+                }
+            }
+        }
+    }
+}
+.form-message{
+    @extend %mt-30;
+    @extend %mb-0;
+    font-size: 14px;
+    &.success {
+        color: green;
+    }
+    &.error {
+        color: red;
+    }
+}

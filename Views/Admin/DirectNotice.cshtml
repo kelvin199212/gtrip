@@ -1,0 +1,191 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewData["Title"] = "即時通知客人";
+}
+
+<div class="content-body default-height">
+    <div class="cardClass">
+        <div class="container">
+
+            <!-- 客戶選擇區 -->
+            <div class="client-selection-section">
+                <label for="client-search">搜索客人：</label>
+                <input type="text" id="client-search" class="form-control" placeholder="輸入客人名稱或電話號碼" oninput="searchClients()">
+                <br>
+                <label for="select-all">
+                    <input type="checkbox" id="select-all"> 全選所有客人
+                </label>
+            </div>
+
+            <!-- 客人選擇的勾選框 -->
+            <div id="client-list">
+                <!-- 客戶列表會根據搜索結果動態生成 -->
+            </div>
+
+            <!-- 訊息區 -->
+            <div class="notification-section">
+                <label for="notification-message">輸入通知內容：</label>
+                <textarea id="notification-message" class="form-control" rows="5" placeholder="輸入您的訊息"></textarea>
+                <br>
+                <button id="send-notification-btn" class="btn btn-success">發送通知</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Fillow_style
+{
+    <style>
+        .cardClass {
+            background-color: white;
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .client-selection-section {
+            margin-bottom: 20px;
+        }
+
+            .client-selection-section input {
+                padding: 5px;
+                font-size: 14px;
+                width: 250px;
+            }
+
+        #client-list {
+            margin-top: 20px;
+        }
+
+        .client-checkbox {
+            margin-right: 10px;
+        }
+
+        .notification-section {
+            margin-top: 20px;
+        }
+
+            .notification-section textarea {
+                width: 100%;
+                padding: 10px;
+                font-size: 14px;
+                border-radius: 5px;
+                border: 1px solid #ddd;
+                margin-bottom: 10px;
+            }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+            border: none;
+        }
+
+        .btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+}
+
+@section Fillow_script
+{
+    <script src="~/Fillow/vendor/global/global.min.js"></script>
+    <script src="~/Fillow/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+
+
+    <!-- counter -->
+    <script src="~/Fillow/vendor/counter/counter.min.js"></script>
+    <script src="~/Fillow/vendor/counter/waypoint.min.js"></script>
+
+    <!-- Apex Chart -->
+    <script src="~/Fillow/vendor/apexchart/apexchart.js"></script>
+    <script src="~/Fillow/vendor/chart-js/chart.bundle.min.js"></script>
+    <!-- Chart piety plugin files -->
+    <script src="~/Fillow/vendor/peity/jquery.peity.min.js"></script>
+    <!-- Dashboard 1 -->
+    <script src="~/Fillow/js/dashboard/dashboard-1.js"></script>
+
+    <script src="~/Fillow/vendor/owl-carousel/owl.carousel.js"></script>
+
+    <script src="~/Fillow/js/custom.min.js"></script>
+    <script src="~/Fillow/js/dlabnav-init.js"></script>
+    <script src="~/Fillow/js/demo.js"></script>
+    <script>
+        $(document).ready(function () {
+            // 初始客戶資料 (模擬)
+            var clients = [
+                { name: "王小明", phone: "123456789", email: "xiaoming@example.com" },
+                { name: "李四", phone: "987654321", email: "lisi@example.com" },
+                { name: "張三", phone: "555123456", email: "zhangsan@example.com" },
+                { name: "王五", phone: "444987654", email: "wangwu@example.com" },
+                { name: "趙六", phone: "666000111", email: "zhaoliu@example.com" }
+            ];
+
+            // 渲染客戶列表
+            function renderClientList(filteredClients) {
+                var clientListHtml = '';
+                filteredClients.forEach(function (client, index) {
+                    clientListHtml += `
+                                <div class="client-item">
+                                    <input type="checkbox" class="client-checkbox" data-index="${index}">
+                                    <label>${client.name} - ${client.phone}</label>
+                                </div>
+                            `;
+                });
+                $("#client-list").html(clientListHtml);
+            }
+
+            // 搜索客戶
+            window.searchClients = function () {
+                var searchText = $("#client-search").val().toLowerCase();
+                var filteredClients = clients.filter(function (client) {
+                    return client.name.toLowerCase().includes(searchText) || client.phone.includes(searchText);
+                });
+                renderClientList(filteredClients);
+            }
+
+            // 全選 / 取消全選
+            $("#select-all").change(function () {
+                var isChecked = $(this).prop("checked");
+                $(".client-checkbox").prop("checked", isChecked);
+            });
+
+            // 發送通知
+            $("#send-notification-btn").click(function () {
+                var selectedClients = [];
+                $(".client-checkbox:checked").each(function () {
+                    var index = $(this).data("index");
+                    selectedClients.push(clients[index]);
+                });
+
+                var message = $("#notification-message").val();
+
+                if (selectedClients.length > 0 && message.trim() !== "") {
+                    // 這裡可以調用API或後端邏輯來發送通知
+                    alert("通知已發送給 " + selectedClients.length + " 位客人");
+                    console.log("發送通知的客戶:", selectedClients);
+                    console.log("通知內容:", message);
+                } else {
+                    alert("請選擇客人並輸入通知內容");
+                }
+            });
+
+            // 頁面載入後默認渲染所有客戶
+            renderClientList(clients);
+        });
+    </script>
+}

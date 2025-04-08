@@ -1,0 +1,62 @@
+.travel {
+    &__item {}
+    &__inner {
+        @extend %text-center;
+        &:hover {
+            .travel {
+                &__content {
+                    h6 {
+                        color: $theme-color;
+                    }
+                }
+            }
+        }
+    }
+    &__thumb {
+        @extend %mb-30;
+    }
+    &__content {}
+    &--single {
+        .travel {
+            &__item {}
+            &__inner {
+                text-align: left;
+                .comment-respond {
+                    box-shadow: 0px 0px 15px rgb(0 0 0 / 10%);
+                    filter: none;
+                }
+            }
+            &__thumb {
+                @extend %of-hidden;
+                @extend %mb-0;
+                @include add-prefix(border-radius,(14px));
+                img {
+                    @extend %w-100;
+                }
+            }
+            &__content {
+                padding: 30px;
+                margin-inline: 15px;
+                margin-top: -60px;
+                box-shadow: 0px 0px 15px rgb(0 0 0 / 10%);
+                background: $white-color;
+                z-index: 1;
+                @extend %p-rel;
+                @include add-prefix(border-radius, (14px));
+                p {
+                    line-height: 28px;
+                    @extend %mb-30;
+                }
+                blockquote {
+                    @extend %p-40;
+                    @extend %mt-30;
+                    background: $ash-color;
+                    @include add-prefix(border-radius, (14px));
+                    p {
+                        @include font-size(20px);
+                    }
+                }
+            }
+        }
+    }
+}

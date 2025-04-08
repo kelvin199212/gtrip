@@ -1,0 +1,16 @@
+.pageheader {
+    padding-block: 110px;
+    margin-top: 88px;
+    @include breakpoint(lg) {
+        margin-top: 94px;
+    }
+    &__content {
+        h2 {}
+        .breadcrumb {
+            li {
+                font-weight: 500;
+                a {}
+            }
+        }
+    }
+}

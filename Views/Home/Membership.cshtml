@@ -1,0 +1,367 @@
+﻿@{
+	ViewData["Title"] = "Gtrippro";
+	Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+    body {
+        background-color: #090f43;
+        color: #fff;
+    }
+
+    tr{
+        white-space: nowrap;
+    }
+
+    .ma-card {
+        background-color: #003076;
+        padding: 20px;
+        border-radius: 10px;
+        margin: auto;
+    }
+
+    .title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .desc {
+        font-size: 16px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .ma-grade {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end; /* Align to the bottom of the container */
+    }
+
+    .grade {
+        text-align: center;
+        padding: 10px;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-right: 10px; /* Space between levels */
+        color: #000;
+        flex-grow: 1; /* Allow all divs to grow equally in width */
+    }
+
+    /* Define heights, with 鑽石+級 being the tallest */
+    .type-silver {
+        background-color: #c0c0c0;
+        height: 70px; /* Shortest */
+    }
+
+    .type-gold {
+        background-color: #ffd700;
+        height: 90px;
+    }
+
+    .type-platinum {
+        background-color: #e5e4e2;
+        height: 110px;
+    }
+
+    .type-diamond {
+        background-color: #b9f2ff;
+        height: 130px;
+    }
+
+    .type-diamond-plus {
+        background-color: #00e5ff;
+        height: 150px; /* Tallest */
+        position: relative;
+    }
+
+    .diamond-plus {
+        color: #0050c7;
+        font-size: 40px;
+    }
+    .grade .name {
+        margin-top: 5px;
+    }
+
+    /* Styling for the "New" tag on the diamond-plus level */
+    .ma-tag {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background-color: #ff0000;
+        color: #fff;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-size: 12px;
+    }
+
+
+
+    .membership h2, .benefits h2, .upgrade-info h2, .faq h2 {
+        font-size: 2em;
+        margin-bottom: 20px;
+        text-align: center;
+        color:white;
+    }
+
+    .levels {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 40px;
+    }
+
+    .level {
+        background-color: #23368c;
+        padding: 20px;
+        border-radius: 10px;
+        font-size: 1.2em;
+        text-align: center;
+        width: 18%;
+    }
+
+    .benefit-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        margin-bottom: 40px;
+    }
+
+    .benefit {
+        background-color: #23368c;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+        .benefit img {
+            width: 60px;
+            margin-bottom: 10px;
+        }
+
+        .benefit p {
+            font-size: 1.1em;
+        }
+
+    .upgrade-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 40px;
+    }
+
+        .upgrade-table th, .upgrade-table td {
+            padding: 15px;
+            border: 1px solid #444;
+            text-align: center;
+        }
+
+        .upgrade-table th {
+            background-color: #23368c;
+            font-size: 1.2em;
+        }
+
+        .upgrade-table td {
+            background-color: #1a2e72;
+            font-size: 1.1em;
+        }
+
+    .faq-list {
+        margin-bottom: 40px;
+    }
+
+    details {
+        background-color: #23368c;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+    }
+
+    summary {
+        cursor: pointer;
+        font-size: 1.2em;
+    }
+
+    h2{
+    color:white;
+    }
+
+    .header--style2 .header__bar span{
+        background: black !important;
+    }
+
+</style>
+
+<body>
+	<!-- preloader start here -->
+	<div class="preloader">
+		<div class="preloader-inner">
+			<div class="preloader-icon">
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+	</div>
+
+    <div class="container">
+        <div class="pageheader bg__img">
+            <div style="text-align: center;">
+            <h1 style="color:white;">全新會員等級，盡享尊尚禮遇！</h1>
+                <img src="../assets/images/gtrip-member-diamond.png" alt="gtrip-member-diamond" width="500" height="100%">
+            </div>
+            <p style="color:white;">感謝您一直以來對 Trip.com 的支持！我們隆重宣布：Trip.com 獎賞計劃將於2024年10月全面升級。率先查看全新會員等級、星級精彩禮遇、還有更多驚喜！</p>
+        </div>
+
+
+        <section class="membership" style="margin-top: 50px;">
+            <h2 style="text-align: center;color:white;">全新會員等級</h2>
+            <div class="ma-card theme-dark card-new">
+                <div class="legend"></div>
+                <div class="topclass" style="display:flex;justify-content: center;">
+                <div class="title">鑽石+級</div>
+                    <i class="fas fa-gem diamond-plus" style="margin-left: 10px;"></i>
+                </div>
+                <div class="desc">
+                    我們隆重推出「鑽石+」會員等級！此全新等級為我們的忠實會員提供最優越的專屬獎賞和更全面的貼心支援，讓您的旅遊體驗更上一層樓。
+                </div>
+                <div class="ma-grade">
+                    <div class="grade type-silver">
+                        <i class="fas fa-trophy silver"></i>
+                        <span class="name">銀級</span>
+                    </div>
+                    <div class="grade type-gold">
+                        <i class="fas fa-star gold"></i>
+                        <span class="name">金級</span>
+                    </div>
+                    <div class="grade type-platinum">
+                        <i class="fas fa-medal platinum"></i>
+                        <span class="name">白金級</span>
+                    </div>
+                    <div class="grade type-diamond">
+                        <i class="fas fa-gem diamond"></i>
+                        <span class="name">鑽石級</span>
+                    </div>
+                    <div class="grade type-diamond-plus">
+                        <i class="fas fa-gem diamond-plus"></i>
+                        <span class="name">鑽石+級</span>
+                        <span class="ma-tag">新</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="benefits" style="margin-top: 100px;">
+            <h2>會員尊尚禮遇</h2>
+            <div class="benefit-grid">
+                <div class="benefit">
+                    <img src="icon1.png" alt="免費升級房間">
+                    <p>免費升級房間</p>
+                </div>
+                <div class="benefit">
+                    <img src="icon2.png" alt="免費全球 eSIM">
+                    <p>免費全球 eSIM 數據流量</p>
+                </div>
+                <div class="benefit">
+                    <img src="icon3.png" alt="轉換積分升級">
+                    <p>轉換積分升級</p>
+                </div>
+                <div class="benefit">
+                    <img src="icon4.png" alt="一站式兌換積分">
+                    <p>一站式兌換積分</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="upgrade-info" style="margin-top: 100px;">
+            <h2>如何升級</h2>
+            <table class="upgrade-table">
+                <thead>
+                    <tr>
+                        <th>等級</th>
+                        <th>金級</th>
+                        <th>白金級</th>
+                        <th>鑽石級</th>
+                        <th>尊尚白金</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>條件</td>
+                        <td>入住 7 晚 / 消費 USD 500</td>
+                        <td>入住 14 晚 / 消費 USD 1000</td>
+                        <td>入住 30 晚 / 消費 USD 3000</td>
+                        <td>邀請制</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="faq" style="margin-top: 100px;">
+            <h2>常見問題</h2>
+            <div class="faq-list">
+                <details style="margin-top:20px;">
+                    <summary>新會員等級的推出時程是怎樣？</summary>
+                    <p>新會員等級將於 2024 年 10 月推出...</p>
+                </details>
+                <details style="margin-top:20px;">
+                    <summary>新會員升級計劃，與舊的會員升級有何差異？</summary>
+                    <p>新的會員計劃提供了更多的禮遇和更清晰的等級制度。</p>
+                </details>
+                <!-- Add more FAQs here -->
+            </div>
+        </section>
+
+       
+    </div>
+
+	<!-- ================> News Letter section start here <================== -->
+	<div class="newsletter padding--top padding--bottom bg__img" style="background: url(assets/images/bg-img/02.jpg)">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-8 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay=".5s">
+					<div class="section__header text-center">
+						<h2>追蹤旅程</h2>
+					</div>
+					<div class="newsletter__form">
+						<form action="#">
+							<input type="text" placeholder="輸入你的電子郵件">
+							<button type="submit" class="default__btn">訂閱我們</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ================> News Letter section end here <================== -->
+	<!-- All Needed JS -->
+	<script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+	<script src="assets/js/vendor/datepiker.js"></script>
+	<script src="assets/js/vendor/modernizr-3.11.2.min.js"></script>
+	<script src="assets/js/isotope.pkgd.min.js"></script>
+	<script src="assets/js/swiper.min.js"></script>
+	<script src="assets/js/wow.js"></script>
+	<script src="assets/js/lightcase.js"></script>
+	<script src="assets/js/jquery.countdown.min.js"></script>
+	<script src="assets/js/counterup.js"></script>
+	<script src="assets/js/waypoints.min.js"></script>
+	<script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
+	<script src="assets/js/plugins.js"></script>
+	<script src="assets/js/main.js"></script>
+
+
+	<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+	<script>
+		window.ga = function () {
+			ga.q.push(arguments)
+		};
+		ga.q = [];
+		ga.l = +new Date;
+		ga('create', 'UA-XXXXX-Y', 'auto');
+		ga('set', 'anonymizeIp', true);
+		ga('set', 'transport', 'beacon');
+		ga('send', 'pageview')
+	</script>
+	<script src="https://www.google-analytics.com/analytics.js" async></script>
+</body>

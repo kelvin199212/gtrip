@@ -1,0 +1,170 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+    ViewData["Title"] = "通知設定";
+}
+<div class="content-body default-height">
+    <div class="notification-container">
+        <h2>通知的偏好設定</h2>
+        <p class="subtitle">你希望收到怎麼樣的通知？</p>
+
+        <!-- 更新與優惠 -->
+        <div class="notification-section">
+            <h3>更新與優惠</h3>
+            <p class="description">搶先接收Klook最新的活動、優惠碼、折扣及動向</p>
+            <div class="notification-option">
+                <label>
+                    <input type="checkbox" checked>
+                    <span>電郵</span>
+                </label>
+                <label>
+                    <input type="checkbox" checked>
+                    <span>短信</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- 提醒 -->
+        <div class="notification-section">
+            <h3>提醒</h3>
+            <p class="description">聚貼貼物重活動、付款、撰寫評價及推薦朋友專案訊</p>
+            <div class="notification-option">
+                <label>
+                    <input type="checkbox" checked>
+                    <span>電郵</span>
+                </label>
+                <label>
+                    <input type="checkbox" checked>
+                    <span>短信</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- 帳戶通知 -->
+        <div class="notification-section">
+            <h3>帳戶通知</h3>
+            <p class="description">接收重要通知，如訂單摘要、憑證及活動取消</p>
+            <div class="notification-option">
+                <label>
+                    <input type="checkbox" disabled>
+                    <span>電郵</span>
+                </label>
+                <label>
+                    <input type="checkbox" checked>
+                    <span>短信</span>
+                </label>
+            </div>
+        </div>
+        <div class="submit-section">
+            <button class="submit-btn">保存設定</button>
+        </div>
+    </div>
+</div>
+
+@section Fillow_style
+{
+	<link href="~/Fillow/vendor/bootstrap-datepicker-master/css/bootstrap-datepicker.min.css" rel="stylesheet">
+	<link href="~/Fillow/vendor/lightgallery/css/lightgallery.min.css" rel="stylesheet">
+    <style>
+        .notification-container {
+            width: 90%;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 50px auto;
+        }
+
+        h2 {
+            font-size: 20px;
+            color: #f05a28;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        .notification-section {
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .description {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .notification-option {
+            display: flex;
+            gap: 20px;
+            margin-top: 5px;
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #333;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 5px;
+            width: 16px;
+            height: 16px;
+        }
+
+            input[type="checkbox"]:disabled {
+                background-color: #ccc;
+            }
+
+        .submit-btn {
+            background-color: #886cc0;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .submit-btn:hover {
+                background-color: #907fb2;
+            }
+    </style>
+}
+
+@section Fillow_script
+    {
+	<!-- Required vendors -->
+	<script src="~/Fillow/vendor/global/global.min.js"></script>
+	<script src="~/Fillow/vendor/bootstrap-datepicker-master/js/bootstrap-datepicker.min.js"></script>
+	<script src="~/Fillow/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+	<script src="~/Fillow/vendor/select2/js/select2.full.min.js"></script>
+	<script src="~/Fillow/js/plugins-init/select2-init.js"></script>
+	<script src="~/Fillow/js/custom.min.js"></script>
+	<script src="~/Fillow/js/dlabnav-init.js"></script>
+	<script src="~/Fillow/js/demo.js"></script>
+	<script>
+		$(document).ready(function () {
+			$(".expand.handle").on("click", function () {
+				// Find the .cm-content-body within the same .filter container
+				var content = $(this).closest('.filter').find('.cm-content-body');
+
+				// Toggle the visibility of the content
+				content.slideToggle();
+
+				// Toggle the icon (fa-angle-down and fa-angle-up)
+				$(this).find('i').toggleClass('fa-angle-down fa-angle-up');
+			});
+		});
+	</script>
+}

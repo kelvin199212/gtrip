@@ -1,0 +1,97 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the footer of the site/application.
+// -----------------------------------------------------------------------------
+.footer {
+    &__top {
+        padding-block: 65px;
+        
+        h5 {
+            @extend %mb-20;
+            font-weight: 600;
+        }
+        &--about {
+            img {
+                @extend %mb-15;
+            }
+            p {
+                @extend %mb-30;
+            }
+            h5 {
+                @extend %mb-10;
+                font-weight: 600;
+            }
+            ul {
+                @extend %flex;
+                li {
+                    a {
+                        @extend %d-inline-block;
+                        @extend %pr-15;
+                    }
+                }
+            }
+        }
+        &--tour {
+            ul {
+                li {
+                    margin-block: 5px;
+                    a {
+                        padding-block: 5px;
+                    }
+                }
+            }
+        }
+        &--contact {
+            ul {
+                li {
+                    margin-block: 15px;
+                    @extend %flex;
+                    @extend %align-items-center;
+                    @include breakpoint(sm) {
+                        max-width: 75%;
+                    }
+                    i {
+                        width: 16px;
+                        margin-inline: auto;
+                    }
+                    span {
+                        width: calc(100% - 16px);
+                        padding-left: 15px;
+                    }
+                }
+            }
+        }
+        &--gallery {
+            ul {
+                @extend %flex;
+                li {
+                    @extend %p-5;
+                    width: calc(100% / 3);
+                    &:hover {
+                        img {
+                            @include add-prefix(transform, (scale(1.2)));
+                        }
+                    }
+                    a {
+                        @extend %d-block;
+                        @extend %of-hidden;
+                        @include add-prefix(border-radius, (4px));
+                    }
+                    img {
+                        @extend %w-100;
+                    }
+                }
+            }
+        }
+    }
+    &__bottom {
+        padding-block: 30px;
+        background: $ash-color;
+        p {
+            @extend %mb-0;
+            color: $title-color;
+            a {
+                text-decoration: underline;
+            }
+        }
+    }
+}

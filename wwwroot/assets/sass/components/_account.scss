@@ -1,0 +1,198 @@
+.account {
+    &__area {
+        max-width: 380px;
+        margin-inline: auto;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        @include add-prefix(border-radius, (14px));
+        form {
+            padding: 0 40px 40px;
+        }
+    }
+    &__top {
+        @extend %flex;
+        justify-content: center;
+        @extend %mb-40;
+        @extend %border-none;
+        li {
+            width: 50%;
+        }
+        a {
+            @extend %d-block;
+            @extend %text-center;
+            padding: 15px 30px;
+            &.active {
+                background: $theme-color;
+                color: $white-color;
+                @include add-prefix(border-radius, (0 14px 0 14px));
+            }
+        }
+    }
+    &__social {
+        ul {
+            li {
+                margin-bottom: 15px;
+                a {
+                    border: 1px solid transparent;
+                    @extend %d-block;
+                    @extend %p-rel;
+                    @extend %of-hidden;
+                    @include add-prefix(border-radius, (4px));
+                    &.facebook {
+                        border-color: $facebook;
+                        i {
+                            background: $facebook;
+                        }
+                        &::after {
+                            background: $facebook;
+                        }
+                    }
+                    &.google {
+                        border-color: $google;
+                        i {
+                            background: $google;
+                        }
+                        &::after {
+                            background: $google;
+                        }
+                    }
+                    &:hover {
+                        color: $white-color;
+                        i {
+                            border-color: rgba($white-color, $alpha: .1);
+                        }
+                        &::after {
+                            @include add-prefix(transform, (scaleX(1)));
+                        }
+                    }
+                    
+                    &::after {
+                        @extend %p-abs;
+                        @extend %w-100;
+                        @extend %h-100;
+                        top: 0;
+                        left: 0;
+                        transform-origin: left;
+                        z-index: -1;
+                        @include add-prefix(transform, (scaleX(0)));
+                        @include add-prefix(transition, (all .3s ease));
+                    }
+                    i {
+                        width: 50px;
+                        height: 50px;
+                        line-height: 50px;
+                        @extend %text-center;
+                        color: $white-color;
+                        @extend %mr-15;
+                        border-right: 1px solid transparent;
+                    }
+                }
+            }
+        }
+    }
+    &__divaed {
+        @extend %p-rel;
+        margin-block: 30px;
+        &::after {
+            @extend %pos-center;
+            width: 100%;
+            height: 1px;
+            background: $border-color;
+        }
+        &::before {
+            width: 60px;
+            height: 60px;
+            background: $white-color;
+            z-index: 1;
+            @extend %pos-center;
+            @include add-prefix(border-radius, (100%));
+        }
+        p {
+            @extend %mb-0;
+            @include font-size(18px);
+            @extend %p-rel;
+            z-index: 1;
+        }
+    }
+    &__lists {}
+    &__list {
+        @extend %p-rel;
+        @extend %mb-15;
+        &--icon {
+            @extend %p-abs;
+            left: 15px;
+            top: 50%;
+            color: $theme-color;
+            @include add-prefix(transform, (translateY(-50%)));
+        }
+        input {
+            padding-left: 45px;
+        }
+    }
+    &__another {
+        p {
+            @extend %text-center;
+            @extend %mb-0;
+            a {
+                color: $title-color;
+                &:hover {
+                    color: $theme-color;
+                }
+            }
+        }
+        .default__btn {
+            @extend %d-block;
+            @extend %w-100;
+            @extend %border-none;
+            margin-block: 20px;
+        }
+    }
+
+
+    &--signup {
+        .account {
+            &__top {
+                li {
+                    a {
+                        &.active {
+                            @include add-prefix(border-radius, (14px 0 14px 0));
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &--forgetpassword {
+        .account {
+            &__area {
+                padding-top: 40px;
+                p {
+                    margin-bottom: 30px;
+                }
+                h4 {
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+    &--faq {
+        .account {
+            &__area {
+                max-width: 700px;
+                padding: 30px;
+                .accordion {
+                    .accordion-button {
+                        @extend %border-none;
+                        box-shadow: none;
+                        padding-block: 20px;
+                    }
+                }
+            }
+            &__top {
+                li {
+                    width: auto;
+                    @extend %d-inline-block;
+                }
+            }
+        }
+    }
+}

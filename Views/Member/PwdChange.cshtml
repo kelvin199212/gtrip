@@ -1,0 +1,158 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+    ViewData["Title"] = "重設密碼";
+}
+<div class="content-body default-height">
+    <div class="container">
+        <h1>重設密碼</h1>
+        <form id="reset-password-form" onsubmit="return validateForm()">
+            <!-- New Password -->
+            <div class="form-group">
+                <label for="old-password">舊密碼</label>
+                <input type="password" id="old-password" name="old-password" placeholder="輸入舊密碼" required>
+                <p class="error-message" id="password-error">密碼長度必須至少為 8 個字符</p>
+            </div>
+            <!-- New Password -->
+            <div class="form-group">
+                <label for="new-password">新密碼</label>
+                <input type="password" id="new-password" name="new-password" placeholder="輸入新密碼" required>
+                <p class="error-message" id="password-error">密碼長度必須至少為 8 個字符</p>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="form-group">
+                <label for="confirm-password">確認新密碼</label>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="再次輸入密碼" required>
+                <p class="error-message" id="confirm-error">密碼不一致，請重新確認</p>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <button type="submit" class="submit-btn">重設密碼</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+@section Fillow_style
+{
+	<link href="~/Fillow/vendor/bootstrap-datepicker-master/css/bootstrap-datepicker.min.css" rel="stylesheet">
+	<link href="~/Fillow/vendor/lightgallery/css/lightgallery.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 400px;
+            margin: 60px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #4A148C;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        label {
+            font-size: 14px;
+            color: #555;
+        }
+
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+            input[type="password"]:focus {
+                border-color: #6A0DAD;
+            }
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+            display: none;
+        }
+
+        .submit-btn {
+            background-color: #6A0DAD;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+            .submit-btn:hover {
+                background-color: #4A148C;
+            }
+    </style>
+}
+
+@section Fillow_script
+    {
+	<!-- Required vendors -->
+	<script src="~/Fillow/vendor/global/global.min.js"></script>
+	<script src="~/Fillow/vendor/bootstrap-datepicker-master/js/bootstrap-datepicker.min.js"></script>
+	<script src="~/Fillow/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+	<script src="~/Fillow/vendor/select2/js/select2.full.min.js"></script>
+	<script src="~/Fillow/js/plugins-init/select2-init.js"></script>
+	<script src="~/Fillow/js/custom.min.js"></script>
+	<script src="~/Fillow/js/dlabnav-init.js"></script>
+	<script src="~/Fillow/js/demo.js"></script>
+	<script>
+		$(document).ready(function () {
+			$(".expand.handle").on("click", function () {
+				// Find the .cm-content-body within the same .filter container
+				var content = $(this).closest('.filter').find('.cm-content-body');
+
+				// Toggle the visibility of the content
+				content.slideToggle();
+
+				// Toggle the icon (fa-angle-down and fa-angle-up)
+				$(this).find('i').toggleClass('fa-angle-down fa-angle-up');
+			});
+		});
+	</script>
+    <script>
+     function validateForm() {
+        // Get password inputs
+        const newPassword = document.getElementById("new-password").value;
+        const confirmPassword = document.getElementById("confirm-password").value;
+        let isValid = true;
+
+        // Reset error messages
+        document.getElementById("password-error").style.display = "none";
+        document.getElementById("confirm-error").style.display = "none";
+
+        // Check password length
+        if (newPassword.length < 8) {
+            document.getElementById("password-error").style.display = "block";
+            isValid = false;
+        }
+
+        // Check if passwords match
+        if (newPassword !== confirmPassword) {
+            document.getElementById("confirm-error").style.display = "block";
+            isValid = false;
+        }
+
+        return isValid; // return false will prevent form submission if validation fails
+    }
+</script>
+}

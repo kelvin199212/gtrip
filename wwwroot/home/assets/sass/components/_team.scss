@@ -1,0 +1,174 @@
+.team {
+    &__item {}
+    &__inner {
+        &:hover {
+            .team {
+                &__thumb {
+                    img {
+                        @include add-prefix(transform, (scale(1.2)));
+                    }
+                }
+                &__content {
+                    h5 {
+                        color: $theme-color;
+                    }
+                }
+            }
+        }
+    }
+    &__thumb {
+        @extend %of-hidden;
+        @include add-prefix(border-radius, (14px));
+        a {
+            @extend %d-block;
+        }
+        img {
+            @extend %w-100;
+        }
+    }
+    &__content {
+        @extend %p-20;
+        background: $white-color;
+        box-shadow: 0px 6px 24px #E4E2EE;
+        margin-top: -40px;
+        margin-inline: 20px;
+        z-index: 1;
+        @extend %p-rel;
+        @include add-prefix(border-radius, (14px));
+        h5 {
+            @extend %mb-0;
+        }
+        p {
+            @extend %mb-10;
+        }
+    }
+    &--style2 {
+        .team {
+            &__inner {
+                @extend %p-rel;
+                @extend %of-hidden;
+                &:hover {
+                    .team {
+                        &__content {
+                            bottom: 0;
+                        }
+                    }
+                }
+            }
+            &__content {
+                @extend %p-abs;
+                bottom: -50%;
+                left: 0;
+                transform-origin: bottom;
+                @extend %w-100;
+                margin-inline: 0;
+                @include add-prefix(transition, (all .3s ease));
+                @include add-prefix(border-radius, (14px 14px 0 0));
+            }
+        }
+    }
+    &--single {
+        .team {
+            &__item {
+                @extend %justify-between;
+            }
+            &__inner {
+                &:hover {
+                    .team {
+                        &__thumb {
+                            img {
+                                @include add-prefix(transform, (scale(1)));
+                            }
+                        }
+                    }
+                }
+            }
+            &__thumb {
+                @extend %w-100;
+                box-shadow: 0px 2px 4px 3px rgba(83, 61, 82, 0.06);
+                @include breakpoint(xl) {
+                    width: calc(50% - 25px);
+                }
+                img {
+                    @extend %h-100;
+                }
+            }
+            &__content {
+                @extend %w-100;
+                padding: 30px;
+                @include breakpoint(xl) {
+                    width: calc(50% - 15px);
+                    margin-top: 0;
+                }
+                .title {
+                    margin-bottom: 3px;
+                    @extend %text-capitalize;
+                }
+                .subtitle {
+                    line-height: 38px;
+                    margin-bottom: 0;
+                }
+                .ratting {
+                    @extend %d-block;
+                    @extend %mb-10;
+                    i {
+                        @extend %theme-color;
+                        font-size: $fs-base;
+                    }
+                }
+                p {
+                    margin-bottom: 7px;
+                    line-height: 1.5;
+                    &.ins-dege {
+                        @extend %mb-5;
+                    }
+                    &.ins-desc {
+                        margin-bottom: 20px;
+                    }
+                }
+                ul {
+                    li {
+                        padding-block: 8px;
+                        @extend %p-0;
+                        align-items: center;
+                        span {
+                            @extend %rel;
+                            @extend %d-inline-block;
+                            &.list-name {
+                                width: calc(100px);
+                                @include breakpoint(sm) {
+                                    width: calc(115px);
+                                }
+                            }
+                        }
+                        .list-attr {
+                            width: calc(100% - 115px);
+                            @extend %rel;
+                            &::after, &::before {
+                                @extend %abs;
+                                width: 2px;
+                                height: 2px;
+                                background: $desc-color;
+                                left: -10px;
+                            }
+                            &::after {
+                                top: 15px;
+                            }
+                            &::before{
+                                top: 10px;
+                            }
+                        }
+                        .social__share {
+                            li {
+                                padding: 0;
+                                a {
+                                    margin: 3px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

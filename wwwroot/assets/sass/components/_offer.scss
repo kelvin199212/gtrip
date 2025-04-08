@@ -1,0 +1,27 @@
+.offer {
+    &__thumb {
+        @include breakpoint(xxl) {
+            img {
+                max-width: none;
+                margin-left: -300px;
+            }
+        }
+    }
+    &__content {
+        p {
+            margin-bottom: 30px;
+        }
+        .btn-group {
+            margin-bottom: 30px;
+            @include breakpoint(max-sm) {
+                display: inherit;
+                a {
+                    margin-bottom: 15px;
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+}

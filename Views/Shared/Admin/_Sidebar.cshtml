@@ -1,0 +1,136 @@
+﻿<!--**********************************
+            Sidebar start
+        ***********************************-->
+<div class="dlabnav">
+    <div class="dlabnav-scroll">
+        <ul class="metismenu" id="menu">
+            <li>
+                <a href="@Url.Action("Index","Admin")" aria-expanded="false">
+                    <i class="fas fa-home"></i>
+                    <span class="nav-text">主頁</span>
+                </a>
+            </li>
+            <li>
+                <a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                    <i class="fas fa-user"></i>
+                    <span class="nav-text">客人</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="@Url.Action("memberList","Admin")">會員列表</a></li>
+                    <li><a href="@Url.Action("bookedList","Admin")">旅遊團須處理客人</a></li>
+                    <li>
+                        <a href="@Url.Action("pointPage","Admin")">
+                            客人點數設定
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("levelDiscount","Admin")">
+                            等級優惠設定
+                        </a>
+                    </li>
+                </ul>
+
+            </li>
+            <li>
+                <a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                    <i class="fas fa-plane"></i>
+                    <span class="nav-text">旅遊團</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="@Url.Action("bookedTour","Admin")">已接受預約</a></li>
+                    <li><a href="@Url.Action("waitForApprovalTour","Admin")">待審批旅行團</a></li>
+                    <li><a href="@Url.Action("CreateTrip","Admin")">新增旅遊團</a></li>
+                    <li>
+                        <a href="@Url.Action("CategoryTour","Admin")">
+                            團分類設定
+                        </a>
+                    </li>
+                    <li><a href="@Url.Action("ProposalTour","Admin")">提案</a></li>
+                </ul>
+
+            </li>
+            <li>
+                <a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                    <i class="fas fa-edit"></i>
+                    <span class="nav-text">導遊設定</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="@Url.Action("partnerPage","Admin")">會員列表</a></li>
+                    <li><a href="@Url.Action("PaymentFromPartner","Admin")">導遊提款申請</a></li>
+                </ul>
+
+            </li>
+            <li>
+                <a href="@Url.Action("EmailTemplate","Admin")" aria-expanded="false">
+                    <i class="fas fa-comments"></i>
+                    <span class="nav-text">
+                        電郵模版設定
+                    </span>
+                </a>
+            </li>
+
+            <li>
+                <a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                    <i class="fas fa-yen"></i>
+                    <span class="nav-text">通知設定</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="@Url.Action("DirectNotice","Admin")">即時通知客人</a></li>
+                    <li><a href="@Url.Action("AutoNotice","Admin")">自動通知</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                    <i class="fas fa-yen"></i>
+                    <span class="nav-text">銷售設定</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="@Url.Action("Stripe","Admin")">Stripe</a></li>
+                    <li><a href="@Url.Action("Paypal","Admin")">Paypal</a></li>
+                    <li><a href="@Url.Action("Alipay","Admin")">支付寶</a></li>
+                    <li><a href="@Url.Action("Wechat","Admin")">微信</a></li>
+                    <li>
+                        <a href="@Url.Action("MoneyTransfer","Admin")">
+                            銀行轉賬
+                        </a>
+                    </li>
+                    <li><a href="@Url.Action("#","Admin")">付款連結</a></li>
+                    <li><a href="@Url.Action("DiscountCode","Admin")">優惠碼設定</a></li>
+                </ul>
+            </li>
+           
+   
+        </ul>
+        <div class="side-bar-profile">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <div class="side-bar-profile-img">
+                    <img src="~/Fillow/images/user.jpg" alt="">
+                </div>
+                <div class="profile-info1">
+                    <h5>Admin</h5>
+                    <span>admin.gtrip.com</span>
+                </div>
+                <div class="profile-button">
+                    <i class="fas fa-caret-downd scale5 text-light"></i>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between mb-2 progress-info">
+                <span class="fs-12"><i class="fas fa-star text-orange me-2"></i>Task Progress</span>
+                <span class="fs-12">20/45</span>
+            </div>
+            <div class="progress default-progress">
+                <div class="progress-bar bg-gradientf progress-animated" style="width: 45%; height:8px;" role="progressbar">
+                    <span class="sr-only">45% Complete</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>Copyright 2025. All Rights Reserved by Gtrip</p>
+        </div>
+    </div>
+</div>
+<!--**********************************
+    Sidebar end
+***********************************-->
